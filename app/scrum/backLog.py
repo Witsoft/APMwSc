@@ -64,7 +64,23 @@ class backLog(object):
                     db.session.commit()
                     return True
     
-    
+    def deleteDescription(self, dName):
+        '''Permite eliminar una a descripción de la tabla'''
+        if (type(dName) != str):
+            return False
+        else:
+            long_dName = len(dName)
+            if ((long_dName > const_maxDescription) or (long_dName < const_minDescription)):
+                return False
+            else:
+                aName = self.findDescription(dName)
+                if (aName == []):
+                    return False
+                else:
+                    for i in aName:    
+                        db.session.delete(i)
+                        db.session.commit()
+                    return True
                     
                     
                     
