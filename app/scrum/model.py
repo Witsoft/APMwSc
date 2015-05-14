@@ -70,6 +70,24 @@ class clsUser(db.Model):
     def __repr__(self):
         '''Representacion en string del nombre de Usuario'''
         return '<username %r, email %r>' % (self.username, self.email)
+       
+class clsBackLog(db.Model):
+	'''Clase que define el modelo BackLog'''
+	
+	__tablename__ =  'backLog'
+	id_backLog = db.Column(db.Integer,primary_key = True, index = True)	
+	BL_nombre = db.Column(db.String(140))
+	obj_backLog = db.relationship('clsObjetive',backref='objetivo',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	act_backLog = db.relationship('clsActor',backref='actor',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	#db.relationship('clsUser',backref='role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
+	
+	def __init__(self, BL_nombre):
+		'''Constructor del modelo BackLog'''
+		self.id_BL_nombre = id_BL_nombre
+		
+	def __repr__(self):
+		'''Representacion en string del nombre del BakcLog'''
+		return '<id_backLog %r, BL_nombre %r>' % (self.id_backLog, self.BL_nombre)
 
 migrate = Migrate(app, db)
 manager = Manager(app)
