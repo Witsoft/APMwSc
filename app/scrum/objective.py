@@ -50,8 +50,24 @@ class objective(object):
                     aObj.descObject = newDescObject
                     db.session.commit()
                     return True
-        return False        
-                    
+        return False     
+    
+       
+    def deleteObjective(self, descObjective):
+        '''Permite eliminar un objetivo de acuerdo a su descripcion'''
+        
+        checkDesc    = type(descObjective) == str  
+        checkDescLen = const_minDescObj <= len(descObjective) <= const_maxDescObj
+        
+        if checkDesc and checkDescLen:
+            aObj = self.searchObjective(descObjective)
+            if aObj != []:  
+                for i in aObj:    
+                    db.session.delete(i)          
+                db.session.commit()
+                return True
+        return False 
+
            
 
 # Fin Clase Objective
