@@ -39,9 +39,8 @@ class clsRole(db.Model):
     #CheckConstraint(namerole in ('Product Owner','Scrum Master', 'Team member'), name='check_namerole')
       
    
-    def __init__(self, idrole, namerole):
+    def __init__(self, namerole):
         '''Constructor del modelo Role'''
-        self.idrole   = idrole
         self.namerole = namerole
 
     def __repr__(self):
@@ -78,4 +77,3 @@ manager.add_command('db', MigrateCommand)
 
 #db.drop_all()   # Borramos la base de datos
 db.create_all() # Creamos la base de datos
-

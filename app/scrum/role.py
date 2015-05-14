@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.model import *
+from model import *
 
 # Declaracion de constantes.
-minIdrole   = 0
 maxNameRole = 50
+minNameRole = 1
+
 roles       = ['Product Owner', 'Scrum Master', 'Team Member']
 
 
@@ -16,17 +17,16 @@ class role(object):
         arole = clsRole.query.all()
         return (arole == [])
 
-    def insertRole(self,idrole,namerole):
+    def insertRole(self,namerole):
         '''Permite insertar un role'''
-        arole = clsRole.query.filter_by(idrole=idrole).all()
+        arole = clsRole.query.filter_by(namerole = namerole).all()
         if (arole == []):
-            new_role = clsRole(idrole = idrole, namerole = namerole)
+            new_role = clsRole(namerole = namerole)
             if  type(namerole) != str:
                 return False
             else:
                 long_namerole=len(new_role.namerole)
-                if (type(idrole) == str or new_role.idrole == None or new_role.idrole <= minIdrole \
-                        or new_role.namerole == '' or long_namerole > maxNameRole or new_role.namerole not in roles):
+                if long_namerole < minNameRole or long_namerole > maxNameRole or new_role.namerole not in roles:
                     return False
                 else:
                     db.session.add(new_role)
@@ -34,26 +34,33 @@ class role(object):
                     return True
         else:
             return False
-    
-    def updateRole(self,idrole,namerole):
-        '''Permite actualizar un role'''
-        if namerole == None:
-            return False
-        else:
-            arole = clsRole(idrole = idrole, namerole = namerole)
-            if (type(idrole) != int or idrole == None or len(namerole)<=minIdrole \
-                or namerole == '' or len(namerole) > maxNameRole or arole.namerole not in roles):
-                return False
-            else:
-                rolel = clsRole.query.filter_by(idrole=idrole).all()                
-                if rolel == []:
-                    return False
-                else:
-                    role1 = clsRole.query.filter_by(idrole=idrole).first()
-                    role1.namerole = namerole
-                    db.session.commit()
-                    return True
-                   
+
+    def findNameRole(self, namerole):
+        """Permite buscar un elemento en la base de datos"""
+        if type(namerole) == str:
+            if len(namerole) >= minNameRole and len(namerole) <= maxNameRole:
+                found = clsRole.query.filter_by(namerole=namerole).all()
+                return found
+        return([])
+                
+    def updateRole(self, name, newNameRole):
+        """Permite modificar un nombre de la clase role"""
+        validname    = (type(name) == str)
+        validnewname = (type(newNameRole) == str)  
+        if ((validname) and (validnewname)):
+            if (((name == 'Product Owner') or (name == 'Scrum Master') or(name == 'Team Member')) and ((newNameRole == 'Product Owner') or (newNameRole == 'Scrum Master') or(newNameRole == 'Team Member'))):
+                lengthname    = minNameRole <= len(name) <= maxNameRole
+                lengthnewname = minNameRole <= len(newNameRole) <= maxNameRole
+                if ((lengthname) and (lengthnewname)):
+                    found1 = self.findNameRole(name)
+                    found2 = self.findNameRole(newNameRole)
+                    if (found1 != []) and (found2 == []):
+                        update_role = clsRole.query.filter_by(namerole = name).first()
+                        update_role.namerole = newNameRole
+                        db.session.commit()
+                        return True
+        return False                   
+                
     def searchRole(self,idrole): 
         '''Permite buscar un role dado su id'''
         if (idrole == '') or (idrole == None) or idrole <=0 or type(idrole) != int:
@@ -64,7 +71,7 @@ class role(object):
            
     def deleteRole(self,idrole):
         '''Permite eliminar un role dado su id'''
-        if (idrole == '') or (idrole == None) or idrole <=0 or type(idrole) != int:
+        if (type(idrole) != int) or idrole <=0:
             return False
         else:
             arole = clsRole.query.filter_by(idrole=idrole).all()
