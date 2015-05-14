@@ -83,7 +83,7 @@ class clsBackLog(db.Model):
 	
 	def __init__(self, BL_name):
 		'''Constructor del modelo BackLog'''
-		self.id_BL_nombre = BL_name
+		self.BL_name = BL_name
 		
 	def __repr__(self):
 		'''Representacion en string del nombre del BakcLog'''
@@ -94,6 +94,6 @@ manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)
 
-#db.drop_all()   # Borramos la base de datos
+db.drop_all()   # Borramos la base de datos
 db.create_all() # Creamos la base de datos
 

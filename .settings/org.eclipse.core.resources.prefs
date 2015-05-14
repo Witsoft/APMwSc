@@ -6,4 +6,5 @@ encoding//app/scrum/actor.py=utf-8
 encoding//app/scrum/backLog.py=utf-8
 encoding//app/scrum/ident.py=utf-8
 encoding//app/scrum/model.py=utf-8
+encoding//app/scrum/testing/testBackLog.py=utf-8
 encoding//app/scrum/user.py=utf-8
