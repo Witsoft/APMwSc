@@ -28,7 +28,7 @@ def AIdentificar():
             isValid = logPass.check_password(encriptPassword, newPassword)
 
             if isValid:
-                res = results[1]
+                res = results[0]
             else:
                 res = results[3]
         else:

@@ -8,10 +8,12 @@ objetivo = Blueprint('objetivo', __name__)
 def ACrearObjetivo():
     #POST/PUT parameters
     params = request.get_json()
-    results = [{'label':'/VProducto', 'msg':['Actor creado']}, {'label':'/VCrearObjetivo', 'msg':['Error al crear objetivo']}, ]
+    results = [{'label':'/VProducto', 'msg':['Objetivo creado']}, {'label':'/VCrearObjetivo', 'msg':['Error al crear objetivo']}, ]
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
-
+    
+    #newDescription = params
+    #oObject = clsObjective()
     idPila = 1
     res['label'] = res['label'] + '/' + str(idPila)
 
