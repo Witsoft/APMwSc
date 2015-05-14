@@ -3,7 +3,6 @@ from flask           import request, session, Blueprint, json
 from app.scrum.role  import *
 from app.scrum.user  import *
 from app.scrum.login import *
-from app.scrum.backLog import *
 
 ident = Blueprint('ident', __name__)
 
