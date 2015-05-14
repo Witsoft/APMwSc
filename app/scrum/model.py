@@ -70,6 +70,26 @@ class clsUser(db.Model):
     def __repr__(self):
         '''Representacion en string del nombre de Usuario'''
         return '<username %r, email %r>' % (self.username, self.email)
+       
+# Declaracion del modelo Objective
+class clsObjective(db.Model):
+    '''Clase que define el modelo Objective'''
+
+    __tablename__  = 'objectives'
+    idobjective    = db.Column(db.Integer, primary_key=True)
+    descObjective  = db.Column(db.String(140), unique=True)
+    id_backlog     = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+    
+   
+    def __init__(self, descObjective, id_backlog):
+        '''Constructor del modelo Objective'''
+        self.descObjective = descObjective
+        self.id_backlog    = id_backlog
+
+    def __repr__(self):
+        '''Respresentación en string de la descripción del Objective'''
+        return '<Id %r>, <Descripcion %r>' %(self.idobjective, self.descObjective)
+
 
 migrate = Migrate(app, db)
 manager = Manager(app)
