@@ -56,11 +56,11 @@ def ARegistrar():
         oRole   = role()
         isEmpty = oRole.emptyTable()
         if isEmpty:
-            result = oRole.insertRole('Product Owner')
+            result = oRole.insertRole(1,'Product Owner')
             if result: print('Se guardo role Product Owner.')
-            result = oRole.insertRole('Scrum Master')
+            result = oRole.insertRole(2,'Scrum Master')
             if result: print('Se guardo role Scrum Master.')
-            result = oRole.insertRole('Team Member')
+            result = oRole.insertRole(3,'Team Member')
             if result: print('Se guardo role Team Member.')
             
 
@@ -81,19 +81,16 @@ def ARegistrar():
         checkNewUser      = oUser.isFound(newUser)
         checkNewEmail     = oUser.findEmail(newEmail)
         checkNewPassword  = login.validPassword(newPassword)
+        
+
+
         encriptPassword   = login.encript(newPassword)
 
-        print ("usuario: " + str(checkNewUser))
-        print ("password: " +  str(checkNewPassword))
-        print ("email: " + str(checkNewEmail))
-        
-        if (not checkNewUser) and checkNewPassword and (not checkNewEmail):
-            result = oUser.insertUser(newName,newUser,encriptPassword,newEmail,1)
-            if result: 
-                print('Se registro satisfactoriamente el Usuario')
-            res = results[0]
-        else:
-            res = results[1]
+
+        result = oUser.insertUser(newName,newUser,encriptPassword,newEmail,1)
+        if result: 
+            print('Se registro satisfactoriamente el Usuario')
+        res = results[0]
     else:
         res = results[1]
     #Action code ends here
