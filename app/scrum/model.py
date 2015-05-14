@@ -28,24 +28,29 @@ db = SQLAlchemy(app)
 
 # Descripcion de la Base de Datos.
 
-# Declaracion del modelo Role
-class clsRole(db.Model):
-    '''Clase que define el modelo Role'''
+# Declaracion del modelo actor
+class clsActors(db.Model):
+    '''Clase que define el modelo actor'''
 
-    __tablename__ = 'roles'
-    idrole    = db.Column(db.Integer, primary_key=True)
-    namerole  = db.Column(db.String(50), unique=True)
-    user_role = db.relationship('clsUser',backref='role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-    #CheckConstraint(namerole in ('Product Owner','Scrum Master', 'Team member'), name='check_namerole')
+    __tablename__ = 'actors'
+    idactor    = db.Column(db.Integer, primary_key=True)
+    nameactor  = db.Column(db.String(50), unique=True)
+    actordescription = db.Column(db.String(140))
+    id_pila = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+    user_actor = db.relationship('clsUser',backref='actor',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+    
+    #CheckConstraint(nameactor in ('Product Owner','Scrum Master', 'Team member'), name='check_nameactor')
       
    
-    def __init__(self, namerole):
-        '''Constructor del modelo Role'''
-        self.namerole = namerole
+    def __init__(self, nameactor,actordescription,id_pila):
+        '''Constructor del modelo actor'''
+        self.nameactor = nameactor
+        self.actordescription = actordescription
+        self.id_pila = id_pila
 
     def __repr__(self):
-        '''Respresentacion en string del nombre del Role'''
-        return '<Role %r>' % self.namerole
+        '''Respresentacion en string del nombre del actor'''
+        return '<actor %r>' % self.nameactor
 
 
 class clsUser(db.Model):
@@ -56,15 +61,15 @@ class clsUser(db.Model):
     username = db.Column(db.String(16), primary_key = True, index = True)
     password = db.Column(db.String(200))
     email    = db.Column(db.String(30), unique = True )
-    id_role  = db.Column(db.Integer, db.ForeignKey('roles.idrole'))
+    id_actor  = db.Column(db.Integer, db.ForeignKey('actors.idactor'))
 
-    def __init__(self, fullname, username, password, email, idrole):
+    def __init__(self, fullname, username, password, email, idactors):
         '''Constructor del modelo usuario'''
         self.fullname = fullname
         self.username = username
         self.password = password
         self.email    = email
-        self.idrole   = idrole
+        self.idactors   = idactors
    
     def __repr__(self):
         '''Representacion en string del nombre de Usuario'''

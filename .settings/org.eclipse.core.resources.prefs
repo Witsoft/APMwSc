@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
+encoding//app/scrum/actor.py=utf-8
+encoding//app/scrum/actors.py=utf-8
 encoding//app/scrum/ident.py=utf-8
 encoding//app/scrum/model.py=utf-8
-encoding//app/scrum/role.py=utf-8
 encoding//app/scrum/user.py=utf-8
