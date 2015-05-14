@@ -46,7 +46,25 @@ class backLog(object):
                     db.session.commit()
                     return True
 
- 
+    def modifyDescription(self, dName, new_dName):   
+        '''Permite actualizar los valores de una Descripcion'''    
+        if ((type(new_dName) != str) or (type(dName) != str)):
+            return False
+        else:
+            aName = self.findDescription(dName)
+            if (aName == []):
+                return False
+            else:
+                new_dName = clsBackLog(BL_name = new_dName)
+                long_dName = len(new_dName.BL_name)
+                if ((long_dName > const_maxDescription) or (long_dName < const_minDescription)):
+                    return False
+                else:
+                    aName.BL_name = new_dName
+                    db.session.commit()
+                    return True
+    
+    
                     
                     
                     
