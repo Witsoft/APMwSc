@@ -78,7 +78,7 @@ class clsBackLog(db.Model):
 	id_backLog = db.Column(db.Integer,primary_key = True, index = True)	
 	BL_nombre = db.Column(db.String(140))
 	obj_backLog = db.relationship('clsObjetive',backref='objetivo',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-	act_backLog = db.relationship('clsActor',backref='actor',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	act_backLog = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	#db.relationship('clsUser',backref='role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
 	
 	def __init__(self, BL_nombre):
