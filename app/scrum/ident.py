@@ -28,7 +28,7 @@ def AIdentificar():
             isValid = logPass.check_password(encriptPassword, newPassword)
 
             if isValid:
-                res = results[0]
+                res = results[1]
             else:
                 res = results[3]
         else:
@@ -81,16 +81,19 @@ def ARegistrar():
         checkNewUser      = oUser.isFound(newUser)
         checkNewEmail     = oUser.findEmail(newEmail)
         checkNewPassword  = login.validPassword(newPassword)
-        
-
-
         encriptPassword   = login.encript(newPassword)
 
-
-        result = oUser.insertUser(newName,newUser,encriptPassword,newEmail,1)
-        if result: 
-            print('Se registro satisfactoriamente el Usuario')
-        res = results[0]
+        print ("usuario: " + str(checkNewUser))
+        print ("password: " +  str(checkNewPassword))
+        print ("email: " + str(checkNewEmail))
+        
+        if (not checkNewUser) and checkNewPassword and (not checkNewEmail):
+            result = oUser.insertUser(newName,newUser,encriptPassword,newEmail,1)
+            if result: 
+                print('Se registro satisfactoriamente el Usuario')
+            res = results[0]
+        else:
+            res = results[1]
     else:
         res = results[1]
     #Action code ends here

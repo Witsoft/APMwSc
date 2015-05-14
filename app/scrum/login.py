@@ -22,7 +22,10 @@ class clsLogin(object):
         olength_password=self.length_password(password)        
         if olength_password>=8 and olength_password<=16:
             validPassword = re.search(self.expressionRegular,password) 
-            return validPassword
+            if validPassword:
+                return True
+            else:
+                return False
 
 
 
