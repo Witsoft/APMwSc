@@ -56,7 +56,7 @@ class clsUser(db.Model):
     fullname = db.Column(db.String(50))
     username = db.Column(db.String(16), primary_key = True, index = True)
     password = db.Column(db.String(200))
-    email    = db.Column(db.String(30), unique = True )
+    email    = db.Column(db.String(30), unique = True)
     id_role  = db.Column(db.Integer, db.ForeignKey('roles.idrole'))
 
     def __init__(self, fullname, username, password, email, idrole):
@@ -76,18 +76,18 @@ class clsBackLog(db.Model):
 	
 	__tablename__ =  'backLog'
 	id_backLog = db.Column(db.Integer,primary_key = True, index = True)	
-	BL_nombre = db.Column(db.String(140))
-	obj_backLog = db.relationship('clsObjetive',backref='objetivo',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	BL_name = db.Column(db.String(140), unique = True)
+	obj_backLog = db.relationship('clsObjetive',backref='objetive',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	act_backLog = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	#db.relationship('clsUser',backref='role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
 	
-	def __init__(self, BL_nombre):
+	def __init__(self, BL_name):
 		'''Constructor del modelo BackLog'''
-		self.id_BL_nombre = id_BL_nombre
+		self.id_BL_nombre = BL_name
 		
 	def __repr__(self):
 		'''Representacion en string del nombre del BakcLog'''
-		return '<id_backLog %r, BL_nombre %r>' % (self.id_backLog, self.BL_nombre)
+		return '<id_backLog %r, BL_nombre %r>' % (self.id_backLog, self.BL_name)
 
 migrate = Migrate(app, db)
 manager = Manager(app)
