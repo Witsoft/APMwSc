@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-. 
 
 from model import *
+from backLog   import *
 
 # Declaracion de constantes.
 const_minIdBacklog = 1

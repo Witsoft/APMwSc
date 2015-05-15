@@ -102,9 +102,10 @@ class clsBackLog(db.Model):
 	act_backLog = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	#db.relationship('clsUser',backref='role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
 
-	def __init__(self, BL_name):
+	def __init__(self, BL_name, BL_description):
 		'''Constructor del modelo BackLog'''
-		self.BL_name = BL_name
+		self.BL_name        = BL_name
+		self.BL_description = BL_description
 		
 	def __repr__(self):
 		'''Representacion en string del nombre del BakcLog'''
