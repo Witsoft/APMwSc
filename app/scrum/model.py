@@ -35,17 +35,14 @@ class clsRole(db.Model):
     __tablename__ = 'roles'
     idrole    = db.Column(db.Integer, primary_key=True)
     namerole  = db.Column(db.String(50), unique=True)
-    roledescription = db.Column(db.String(140))
-    id_pila = db.Column(db.Integer)
     user_role = db.relationship('clsUser',backref='role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
     #CheckConstraint(namerole in ('Product Owner','Scrum Master', 'Team member'), name='check_namerole')
       
    
-    def __init__(self, namerole,roledescription,id_pila):
+    def __init__(self, idrole, namerole):
         '''Constructor del modelo Role'''
+        self.idrole   = idrole
         self.namerole = namerole
-        self.roledescription = roledescription
-        self.id_pila = id_pila
 
     def __repr__(self):
         '''Respresentacion en string del nombre del Role'''
@@ -120,9 +117,4 @@ manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
 db.drop_all()   # Borramos la base de datos
-<<<<<<< HEAD
 db.create_all() # Creamos la base de datos
-=======
-db.create_all() # Creamos la base de datos
-
->>>>>>> refs/remotes/origin/General_Integration
