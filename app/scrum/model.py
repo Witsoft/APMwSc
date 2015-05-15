@@ -72,7 +72,7 @@ class clsUser(db.Model):
         return '<username %r, email %r>' % (self.username, self.email)
 
 
-# Declaracion del modelo Objective
+# Declaracion del modelo Accions
 class clsAccions(db.Model):
     '''Clase que define el modelo Accion'''
 
