@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.model import *
+from model import *
 
 # Declaracion de constantes.
 maxNameRole = 50
