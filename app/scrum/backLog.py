@@ -24,8 +24,8 @@ class backLog(object):
             if ((long_dName >const_maxName) or (long_dName < const_minName)):
                 return []
             else:
-                dUser = clsUser.query.filter_by(BL_name = dName).all()
-                return dUser
+                dBackLog = clsBackLog.query.filter_by(BL_name = dName).all()
+                return dBackLog
         
     def insertBackLog(self, dName, description):
         '''Permite insertar una descripción'''

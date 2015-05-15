@@ -81,10 +81,10 @@ class clsObjective(db.Model):
     id_backlog     = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
     
    
-    def __init__(self, descObjective, id_backlog):
+    def __init__(self, descObjective, id_backLog):
         '''Constructor del modelo Objective'''
         self.descObjective = descObjective
-        self.id_backlog    = id_backlog
+        self.id_backLog    = id_backLog
 
     def __repr__(self):
         '''Respresentación en string de la descripción del Objective'''
@@ -95,16 +95,17 @@ class clsBackLog(db.Model):
 	'''Clase que define el modelo BackLog'''
 	
 	__tablename__ =  'backLog'
-	id_backLog = db.Column(db.Integer,primary_key = True, index = True)	
-	BL_name = db.Column(db.String(50), unique = True)
+	id_backLog     = db.Column(db.Integer,primary_key = True, index = True)	
+	BL_name        = db.Column(db.String(50), unique = True)
 	BL_description = db.Column(db.String(140))
-	obj_backLog = db.relationship('clsObjetive',backref='objetive',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-	act_backLog = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	obj_backLog    = db.relationship('clsObjective',backref='objective',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	#act_backLog    = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	#db.relationship('clsUser',backref='role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
 
-	def __init__(self, BL_name):
+	def __init__(self, BL_name, BL_description):
 		'''Constructor del modelo BackLog'''
-		self.BL_name = BL_name
+		self.BL_name        = BL_name
+		self.BL_description = BL_description
 		
 	def __repr__(self):
 		'''Representacion en string del nombre del BakcLog'''
@@ -115,6 +116,6 @@ manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)
 
-#db.drop_all()   # Borramos la base de datos
+db.drop_all()   # Borramos la base de datos
 db.create_all() # Creamos la base de datos
 
