@@ -96,10 +96,12 @@ class clsBackLog(db.Model):
 	
 	__tablename__ =  'backLog'
 	id_backLog = db.Column(db.Integer,primary_key = True, index = True)	
-	BL_name = db.Column(db.String(140), unique = True)
-	obj_backLog = db.relationship('clsObjective',backref='objective',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-	#act_backLog = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-	
+	BL_name = db.Column(db.String(50), unique = True)
+	BL_description = db.Column(db.String(140))
+	obj_backLog = db.relationship('clsObjetive',backref='objetive',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	act_backLog = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	#db.relationship('clsUser',backref='role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
+
 	def __init__(self, BL_name):
 		'''Constructor del modelo BackLog'''
 		self.BL_name = BL_name

@@ -8,41 +8,45 @@ from model import *
 # Declaracion de constantes.
 const_maxDescription = 140
 const_minDescription = 1
+const_maxName = 50
+const_minName = 1
 
 
 class backLog(object):
     '''Clase que permite (completar)'''
     
-    def findDescription(self,dName):
+    def findName(self,dName):
         '''Permite buscar un nombre'''
         if (type(dName) != str):
             return []
         else:
             long_dName = len(dName)
-            if ((long_dName >const_maxDescription) or (long_dName < const_minDescription)):
+            if ((long_dName >const_maxName) or (long_dName < const_minName)):
                 return []
             else:
                 dUser = clsUser.query.filter_by(BL_name = dName).all()
                 return dUser
         
-    def insertDescription(self, dName):
+    def insertBackLog(self, dName, description):
         '''Permite insertar una descripción'''
         
-        if (type(dName) != str):
+        if (type(dName) != str or type(description) != str ):
             return False
         else:
-            new_dName = clsBackLog(BL_name = dName)
-            long_dName = len(new_dName.BL_name)
+            new_prod = clsBackLog(BL_name = dName, BL_description = description)
+            long_dName = len(new_prod.BL_name)
+            long_description = len(new_prod.BL_description)
             
-            if  ((long_dName > const_maxDescription) or (long_dName < const_minDescription)):
+            if  ((long_description > const_maxDescription) or (long_description < const_minDescription)\
+                or (long_dName > const_maxName) or (long_dName < const_minName)) :
                 return False
             else:
                 #dNameAux = clsBackLog.query.filter_by(BL_name = dName).all()
-                dNAmeAux = self.findDescription(dName);
+                dNameAux = self.findName(dName);
                 if (dNameAux != []):
                     return False
                 else:
-                    db.session.add(new_dName)
+                    db.session.add(new_prod)
                     db.session.commit()
                     return True
 
@@ -51,29 +55,48 @@ class backLog(object):
         if ((type(new_dName) != str) or (type(dName) != str)):
             return False
         else:
-            aName = self.findDescription(dName)
+            aName = self.findName(dName)
             if (aName == []):
                 return False
             else:
                 new_dName = clsBackLog(BL_name = new_dName)
                 long_dName = len(new_dName.BL_name)
-                if ((long_dName > const_maxDescription) or (long_dName < const_minDescription)):
+                if ((long_dName > const_maxName) or (long_dName < const_minName)):
                     return False
                 else:
                     aName.BL_name = new_dName
                     db.session.commit()
                     return True
-    
-    def deleteDescription(self, dName):
-        '''Permite eliminar una a descripción de la tabla'''
-        if (type(dName) != str):
+
+    def modifyName(self, Name, new_description):   
+        '''Permite actualizar los valores de una Descripcion'''    
+        if ((type(new_description) != str) or (type(Name) != str)):
             return False
         else:
-            long_dName = len(dName)
-            if ((long_dName > const_maxDescription) or (long_dName < const_minDescription)):
+            aName = self.findName(Name)
+            if (aName == []):
                 return False
             else:
-                aName = self.findDescription(dName)
+                new_mod = clsBackLog(BL_name = Name, BL_description = new_description)
+                long_description = len(new_mod.BL_description)
+                if ((long_description > const_maxDescription) or (long_description < const_minDescription)):
+                    return False
+                else:
+                    aName.BL_description = new_description
+                    db.session.commit()
+                    return True
+
+    
+    def deleteProduct(self, Name):
+        '''Permite eliminar una a descripción de la tabla'''
+        if (type(Name) != str):
+            return False
+        else:
+            long_Name = len(Name)
+            if ((long_Name > const_maxName)or(long_Name < const_minName)):
+                return False
+            else:
+                aName = self.findName(Name)
                 if (aName == []):
                     return False
                 else:
