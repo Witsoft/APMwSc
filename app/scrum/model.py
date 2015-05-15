@@ -71,6 +71,27 @@ class clsUser(db.Model):
         '''Representacion en string del nombre de Usuario'''
         return '<username %r, email %r>' % (self.username, self.email)
 
+
+# Declaracion del modelo Objective
+class clsAccions(db.Model):
+    '''Clase que define el modelo Accion'''
+
+    __tablename__  = 'accions'
+    idaccion    = db.Column(db.Integer, primary_key=True)
+    acciondescription  = db.Column(db.String(140), unique=True)
+    id_backLog     = db.Column(db.Integer) # db.ForeignKey('backLog.id_backLog'))
+    
+   
+    def __init__(self,  acciondescription, id_backlog):
+        '''Constructor del modelo Accion'''
+        self.acciondescription = acciondescription
+        self.id_backlog    = id_backlog
+
+    def __repr__(self):
+        '''Respresentación en string de la descripción de la accion'''
+        return '<Id %r>, <Descripcion %r>' %(self.idaccion, self.acciondescription)
+
+
 migrate = Migrate(app, db)
 manager = Manager(app)
 
