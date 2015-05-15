@@ -5,275 +5,280 @@ Created on 7/05/2015
          Sahid Reyes
 '''
 import sys
-import unittest
 sys.path.append('../app/scrum')
-from model import * 
+import unittest
+
 from role import *
 
 class clsRoleTester(unittest.TestCase):
+# -*- coding: utf-8 -*-. 
 
-    #CASOS DE PRUEBA FUNCION INSERTROLE
+# Ruta que permite utilizar el módulo model.py
+
     
-    # Caso Frontera
-    # Se verifica una entrada válida para funcion insert role inexistente
-    def test1RoleInsert(self):
-        role1 = role()
-        self.assertTrue(role1.insertRole(idrole = 1,namerole = 'Product Owner'))
+    #############################################      
+    #       Suite de Pruebas para Insert        #
+    #############################################
     
-    #Caso Frontera
-    # Se verifica una entrada inválida para funcion insert role    
-    def test2RoleInsertFalse(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = 1,namerole = 'Product Owner'))
-    
-    #Caso Malicia
-    # Se verifica una entrada de idrole vacia
-    def test3RoleInsertNotidrole(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = None, namerole = 'Scrum Master'))
-    
-    #Caso Frontera externa
-    # Se verifica una entrada inválida con idrole igual a 0
-    def test4RoleInsertidrole0(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = 0,namerole = 'Team member'))
-    
-    #Caso Fronetra 
-    # Se verifica una entrada válida muy grande
-    def test5RoleInsertidrole(self):
-        role1 = role()
-        self.assertTrue(role1.insertRole(idrole = (2**31)-1,namerole = 'Scrum Master'))
-    
-    #Caso ESquina
-    # Se verifica una entrada inválida con namerole invalido
-    def tesdt6RoleInsertNamerolInvalid(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = 587,namerole = 'Computacion'))
-    
-    #Caso Malicia
-    # Se verifica una entrada inválida con namerole vacio
-    def test7RoleInsertNotNamerole(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = 587,namerole = ''))
-    
-    #Caso Frontera Externa
-    # Se verifica una entrada inválida de 51 caracteres pero namerole invalido
-    def test8RoleInsertNameroleChar51(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = 300,namerole = 'Departamento de Informacion y Tecnologia Computacio'))
-    
-    #Caso frontera
-    # Se verifica una entrada inválida de 50 caracteres pero namerole invalidoe
-    def test9RoleInsertNameroleChar50(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = 301,namerole = 'Departamento de Informacion y Tecnologia Computaci'))
-    
-    #Caso Frontera interna
-    # Se verifica una entrada inválida de 49 caracteres pero namerole invalidoe
-    def test_10RoleInsertNameroleChar49(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = 302,namerole = 'Departamento de Informacion y Tecnologia Computac'))
-    
-    #Caso Malicia
-    # Se verifica una entrada inválida con idrole negativo y namerole invalido
-    def test_11RoleInsertNegative(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = -566,namerole = 'mecanica'))
-    
-    #Caso esquina
-    # Se verifica una entrada inválida de 1 caracter
-    def test_12RoleInsertminchar(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = 1,namerole = 'x'))
-    
-    #caso malicia
-    # Se verifica una entrada inválida con idrole y namerole vacios   
-    def test_13RoleInsertNoparam(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = '' ,namerole = ''))
-    
-    #caso esquina
-    # Se verifica una entrada id role muy grande válida con namerole invalido
-    def test_14RoleInsertmax(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = (2**31) ,namerole = 'Departamento de Informacion & Tecnologia Computaci'))
-    
-    #caso esquina
-    #Se verifica una entrada idrole muy grande y namerole valido 
-    def test_15RoleInsertmax(self):
-        role1 = role()
-        self.assertTrue(role1.insertRole(idrole = (2**31) ,namerole = 'Team member'))
-    
-    #caso malicia   
-    #Se verifica una entrada idrole None y namerole vacio 
-    def test_16RoleInsertNoparamId(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = None ,namerole = ''))
-    
-    #caso malicia
-    #Se verifica una entrada idrole None y namerole con entero    
-    def test_17RoleInsertNoparam(self):
-        role1 = role()
-        self.assertFalse(role1.insertRole(idrole = None ,namerole = 30))
-    
-    ###########################################################################
-    
-    #CASOS DE PRUEBA FUNCION SEARCHROLE
-    
-    #Caso Frontera
-    #Se verifica una entrada valida para funcion searchRole inexistente 
-    def test_18searchRole(self):
-        role1 = role()
-        self.assertNotEqual([],role1.searchRole(idrole = 1))
-    
-    #Caso Frontera
-    def test_19searchRoleidrolebig(self):
-        role1 = role()
-        self.assertNotEqual([],role1.searchRole(idrole = (2**31)-1))     
-    
-    #Caso Malicia
-    def test_20seacrhRoleidroleNoInt(self):
-        role1 = role()
-        self.assertEqual([],role1.searchRole(idrole = ''))
-    
-    #Caso Malicia
-    def test_21seacrhRoleidroleNoParam(self):
-        role1 = role()
-        self.assertEqual([],role1.searchRole(idrole = None))        
-    
-    #Caso Malicia
-    def test_22seacrhRoleidrole0(self):
-        role1 = role()
-        self.assertEqual([],role1.searchRole(idrole = 0))
-    
-    #Caso Malicia
-    def test_23seacrhRoleidrolenegative(self):
-        role1 = role()
-        self.assertEqual([],role1.searchRole(idrole = -8))       
-    
-    #####################################################################
-    
-    
-    #CASOS DE PRUEBA FUNCION UPDATEROLE
-    
-    #caso Frontera
-    def test_23_1updateRoleTrue(self):
-        role1 = role()
-        self.assertTrue(role1.updateRole(idrole = 1, namerole = 'Product Owner'))
-        
-    #caso Frontera
-    def test_23_2updateRoleFalse(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = 2, namerole = 'Team member'))
-   
+    # Caso Inicial
  
-    #caso Frontera        
-    def test_23_3updateRole49(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = 1, namerole = 'Departamento de Informacion & Tecnologia en Compu'))
-    
-    #caso Frontera
-    def test_23_4updateRole50(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = 1, namerole = 'Departamento de ingieniria de computacion y techno'))
-    
-    #caso Frontera
-    def test_23_5updateRole51(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = 1, namerole = 'departamento of InformacIon & Tecnologia computacio'))
-    
-    #caso Frontera            
-    def test_23_6updateRoleNoChar(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = 1, namerole = ''))
-    
-    #caso Malicia
-    def test_23_6updateRoleNone(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = 1, namerole = None))
-    
-    #caso Malicia
-    def test_23_7updateRoleNoidNoname(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = 0, namerole = ''))
-    
-    #caso Malicia
-    def test_23_8updateRoleNoparam(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = None, namerole = ''))
-    
-    #caso Frontera        
-    def test_23_9updateRole49(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = 1, namerole = 'Departamento de Informacion & Tecnologia en Compu'))
-    
-    #caso Frontera
-    def test_23_10updateRole50(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = 1, namerole = 'Departamento de ingieniria de computacion y techno'))
-    
-    #caso Frontera
-    def test_23_11updateRole51(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = 1, namerole = 'departamento of InformacIon & Tecnologia computacio'))
-    
-    #caso Frontera            
-    def test_23_12updateRoleNoChar(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = 1, namerole = ''))
-    
-    #caso Malicia
-    def test_23_13updateRoleNone(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = 1, namerole = None))
-    
-    #caso Malicia
-    def test_23_14updateRoleNoidNoname(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = 0, namerole = ''))
-    
-    #caso Malicia
-    def test_23_15updateRoleNoparam(self):
-        role1 = role()
-        self.assertFalse(role1.updateRole(idrole = None, namerole = ''))
-    
-   
-   
+     # Prueba 1
+     def test1InsertExists(self):
+         role1 = role()
+         role1.insertRole('Product Owner','description',1)    
+     
+     # Casos Normales
+           
+     # Prueba 2 
+     
+     def test2InsertElement(self):
+         role1   = role()
+         result = role1.insertRole('Team Member')
+         self.assertTrue(result)
+'''                     
+     # Prueba 3
+     def test3InsertRepeatedElement(self):
+         role1   = role()
+         result = role1.insertRole('Team Member')
+         self.assertFalse(result, "Elemento insertado.")
+           
+     # Casos Fronteras
+      
+     # Prueba 4
+     def test4InsertLongName50(self):
+         role1   = role()
+         result = role1.insertRole('Team MemberTeam MemberTeam MemberTeam MemberTeam M')
+         self.assertFalse(result)
+      
+     # Prueba 5
+     def test5InsertLongName51(self):
+         role1   = role()
+         result = role1.insertRole('Team MemberTeam MemberTeam MemberTeam MemberTeam Me') 
+         self.assertFalse(result, "Elemento insertado.")
+              
+     # Prueba 6
+     def test6InsertShortName0(self):
+         role1   = role()
+         result = role1.insertRole('')
+         self.assertFalse(result, "Elemento insertado.") 
+              
+     # Prueba 7
+     def test7InsertLongName1(self):
+         role1   = role()
+         result = role1.insertRole('T')
+         self.assertFalse(result)
+          
+     # Casos Maliciosos
+      
+     # Prueba 8
+     def test8InsertNotString(self):
+         role1   = role()
+         result = role1.insertRole(1254)
+         self.assertFalse(result,"Elemento insertado.")
+ 
+     # Prueba 9
+     def test9InsertNoneString(self):
+         role1   = role()
+         result = role1.insertRole(None)
+         self.assertFalse(result,"No válido.")
+     #############################################      
+     #       Suite de Pruebas para FindName      #
+     #############################################
+     
+     # Caso Inicial
+     
+     # Prueba 10 
+     def test_10FindNameExists(self):
+         role1   = role()
+         role1.findNameRole('Product Owner')
+            
+     # Casos Fronteras
+     
+     # Prueba 11
+     def test_11FindNameEmpty(self):
+         role1   = role()
+         result = role1.findNameRole('')
+         self.assertFalse(result, "Expresión válida.")
+           
+     # Prueba 12
+     def test_12FindNameShortName1(self):
+         role1   = role()
+         result = role1.findNameRole('T')
+         self.assertEqual(result,[],"Elemento no encontrado")
+      
+     # Prueba 13
+     def test_13FindNameLongName50(self):
+         role1   = role()
+         result = role1.findNameRole('Team MemberTeam MemberTeam MemberTeam MemberTeam M')
+         self.assertEqual(result,[],"Elemento no encontrado")
+           
+     # Prueba 14
+     def test_14FindNameLongName51(self):
+         role1   = role()
+         result = role1.findNameRole('Team MemberTeam MemberTeam MemberTeam MemberTeam Me') 
+         self.assertFalse(result, "Cadena no válida")
+         
+     # Casos Maliciosos
+     
+     # Prueba 15
+     def test_15FindNameNotString(self):
+         role1   = role()
+         result = role1.findNameRole(1254)
+         self.assertFalse(result,"Elemento Insertado") 
+      
+     # Prueba 16
+     def test_16FindNameNoneString(self):
+         role1   = role()
+         result = role1.findNameRole(None)
+         self.assertFalse(result,"Válido")         
+     
+     #############################################      
+     #       Suite de Pruebas para ModifyName    #
+     #############################################   
+     
+     # Caso Inicial
+     
+     # Prueba 23
+     def test_23ModifyNameExists(self):
+         role1   = role()
+         role1.updateRole('Product Owner','Scrum Master')
+          
+     # Casos Normales
+     
+     # Prueba 24
+     def test_24ModifyName(self):
+         role1   = role()
+         result = role1.updateRole('Scrum Master','Product Owner')
+         self.assertTrue(result)
+          
+     # Casos Fronteras
+      
+     # Prueba 25
+     def test_25ModifyNameLeftLen1(self):
+         role1   = role()
+         result = role1.updateRole('T','Team Member')
+         self.assertFalse(result)
+     
+     # Prueba 26         
+     def test_26ModifyNameRightLen1(self):
+         role1   = role()
+         result = role1.updateRole('Team Member','T')
+         self.assertFalse(result)
 
-    ######################################################################        
-    #CASOS DE PRUEBA FUNCION DELETEROLE
-    
-    #Caso Frontera
-    def test_24deleteRoleTrue(self):
-        role1 = role()
-        self.assertTrue(role1.deleteRole(idrole = 1))  
-    
-    #Caso Frontera
-    def test_25deleteRoleFalse(self):
-        role1 = role()
-        self.assertFalse(role1.deleteRole(idrole = 1))  
-    
-    #Caso Frontera
-    def test_26deleteRoleidrolebig(self):
-        role1 = role()
-        self.assertTrue(role1.deleteRole(idrole = (2**31)-1))     
-    
-    #Caso Malicia
-    def test_27deleteRoleidroleNoInt(self):
-        role1 = role()
-        self.assertFalse(role1.deleteRole(idrole = ''))
-    
-    #Caso Malicia
-    def test_28deleteRoleidroleNoParam(self):
-        role1 = role()
-        self.assertFalse(role1.deleteRole(idrole = None))        
-    
-    #Caso Malicia
-    def test_29deleteRoleidrole0(self):
-        role1 = role()
-        self.assertFalse(role1.deleteRole(idrole = 0))
-    
-    #Caso Malicia
-    def test_30deleteRoleidrolenegative(self):
-        role1 = role()
-        self.assertFalse(role1.deleteRole(idrole = -8))   
+     # Prueba 27         
+     def test_27ModifyNameRightLen50(self):
+         role1   = role()
+         result = role1.updateRole('Scrum Master',50*'T')
+         self.assertFalse(result)
+         
+     # Prueba 28
+     def test_28ModifyNameLeftLen50(self):
+         role1   = role()
+         result = role1.updateRole(50*'T','M')
+         self.assertFalse(result)
+
+     # Casos Esquinas
+     
+     # Prueba 29
+     def test_29ModifyNameLeftLen1RightLen50(self):
+         role1   = role()
+         result = role1.updateRole('M',25*'Us')
+         self.assertFalse(result) 
+
+     # Prueba 30
+     def test_30ModifyNameLeftLen50RightLen50(self):
+         role1   = role()
+         result = role1.updateRole(25*'Us', 25*'Ma')
+         self.assertFalse(result) 
+ 
+     # Prueba 31
+     def test_31ModifyNameLeftLen50RightLen1(self):
+         role1   = role()
+         result = role1.updateRole(25*'Ma','M')
+         self.assertFalse(result) 
+ 
+     # Prueba 32
+     def test_32ModifyNameLeftLen1RightLen1(self):
+         role1   = role()
+         result = role1.updateRole('M','U')
+         self.assertFalse(result) 
+ 
+     # Casos Maliciosos
+          
+     # Prueba 33
+     def test_33ModifySameName(self):
+         role1   = role()
+         result = role1.updateRole('Master','Master')
+         self.assertFalse(result,"Modificación Válida")
+          
+     # Prueba 34
+     def test_34ModifyNameLeftLen0RightLen51(self):
+         role1   = role()
+         result = role1.updateRole('',25*'Pi' + 'p')
+         self.assertFalse(result, "Modificación válida") 
+ 
+     # Prueba 35
+     def test_35ModifyNameLeftLen51RightLen51(self):
+         role1   = role()
+         result = role1.updateRole(25*'Pi' + "p",25*'Ma' + 's')
+         self.assertFalse(result, "Modificación Válida") 
+ 
+     # Prueba 36
+     def test_36ModifyNameLeftLen51RightLen0(self):
+         role1   = role()
+         result = role1.updateRole(25*'Ma'+ 's','')
+         self.assertFalse(result, "Modificación válida") 
+ 
+     # Prueba 37
+     def test_37ModifyNameLeftNoneRightValidString(self):
+         role1   = role()
+         result = role1.updateRole(None,'Juana la Iguana')
+         self.assertFalse(result,"Modificación válida") 
+          
+     # Prueba 38
+     def test_38ModifyNameLeftValidStringRightNone(self):
+         role1   = role()
+         result = role1.updateRole("Juana la Iguana",None)
+         self.assertFalse(result, "Modificación válida") 
+          
+     #############################################      
+     #       Suite de Pruebas para DeleteId      #
+     #############################################   
+ 
+     # Caso Inicial
+     
+     # Prueba 39
+     def test_39DeleteIdExists(self):
+         role1   = role()
+         role1.deleteRole(4)
+
+     # Casos Normales
+ 
+     # Prueba 40
+     def test_40DeleteId(self):
+         role1   = role()
+         result = role1.deleteRole(2)
+         self.assertTrue(result)
+          
+     # Casos Fronteras
+     
+     # Prueba 41
+     def test_41DeleteId1(self):
+         role1   = role()
+         result = role1.deleteRole(1)
+         self.assertTrue(result)
+ 
+     # Casos Maliciosos
+ 
+     # Prueba 42
+     def test_42DeleteIdMin0(self):
+         role1   = role()
+         result = role1.deleteRole(0)
+         self.assertFalse(result,"Id no válido")
+ 
+     # Prueba 43
+     def test_43DeleteIdNotInteger(self):
+         role1   = role()
+         result = role1.deleteRole('AldJos')
+         self.assertFalse(result, "Es válida")
+'''
