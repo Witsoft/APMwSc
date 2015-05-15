@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-. 
 
-import model
+from model import *
 
 # Declaracion de constantes.
 const_minIdBacklog = 1
@@ -20,8 +20,9 @@ class objective(object):
         checkDescLen = const_minDescObj <= len(descObjective) <= const_maxDescObj
         
         if checkDesc and checkId_BL and checkIdMin and checkDescLen:
-            aObj = clsRole.query.filter_by(id_backlog = id_backlog).all()
+            #aObj = backLog.query.filter_by(id_backlog = id_backlog).all()
             if aObj != []:
+                print(aObj)
                 new_objetive = clsObjective(descObjective = descObjective,id_backlog = id_backlog)
                 db.session.add(new_objective)
                 db.session.commit()
