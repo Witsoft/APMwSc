@@ -42,9 +42,11 @@ class accions(object):
            
         typedescription = (type(acciondescription) == str)
         typeNewdescription = (type(newDescription) == str)
-        if (typedescription and typeid):
+        
+        if (typedescription and typeNewdescription):
             long_acciondescription = minAccionDescription <= len(acciondescription) <= maxAccionDescription
             long_newDescription = minAccionDescription <= len(newDescription) <= maxAccionDescription
+            
             if (long_acciondescription and long_newDescription):
                 foundAccion = self.searchAccion(acciondescription)
                 foundNew = self.searchAccion(newDescription)
@@ -56,19 +58,24 @@ class accions(object):
         return False
     
        
-    def deleteAccion(self, idaccion):
+    def deleteAccion(self, acciondescription):
         '''Permite eliminar una accion segun su id'''
         
-        typeid = (type(idaccion) == int)
-        if typeid and idaccion >= minId:
-            foundid = clsAccions.query.filter_by(idaccion = idaccion).all()
-            if foundid != []:
-                oAccion = clsAccions.query.filter_by(idaccion = idaccion).first()
-                for i in oAccion:    
-                    db.session.delete(i)          
-                db.session.commit()
-                return True
+        typedescription = (type(acciondescription) == str)
+        
+        
+        if typedescription:
+            Len_description = minAccionDescription <= len(acciondescription) <= maxAccionDescription
+            if Len_description:
+                foundid = clsAccions.query.filter_by(acciondescription = acciondescription).all()
+                if foundid != []:
+                    oAccion = clsAccions.query.filter_by(acciondescription = acciondescription).all()
+                    for i in oAccion:    
+                        db.session.delete(i)          
+                    db.session.commit()
+                    return True
         return False 
 
            
 # Fin Clase Accion
+
