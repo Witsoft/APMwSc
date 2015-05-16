@@ -30,9 +30,9 @@ class role(object):
             long_namerole = minNameRole <= len(namerole) <= maxNameRole
             long_roledescription = minRoleDescription <= len(roledescription) <= maxRoleDescription
             if (long_namerole and long_roledescription and (namerole in roles)):
-                #backLog = clsbackLog.query.filter_by(id_backLog = id_pila).all()
+                backLog = clsBackLog.query.filter_by(id_backLog = id_pila).all()
                 arole = clsRole.query.filter_by(namerole = namerole).all()
-                if (arole == []): #and (backLog != [])):
+                if ((arole == []) and (backLog != [])):
                     new_role = clsRole(namerole = namerole,roledescription = roledescription,id_pila = id_pila)
                     db.session.add(new_role)
                     db.session.commit()
@@ -62,8 +62,9 @@ class role(object):
             long_roledescription = minRoleDescription <= len(newDescription) <= maxRoleDescription
             if (long_namerole and long_newNameRole and long_roledescription and (namerole in roles) and (newNameRole in roles)):    
                 foundnamerole = self.findNameRole(namerole)
-                foundnewrole  = self.findNameRole(newNameRole)    
+                foundnewrole  = self.findNameRole(newNameRole)
                 if (foundnamerole != []) and (foundnewrole == []):
+                    
                     update_role = clsRole.query.filter_by(namerole = namerole).first()
                     update_role.namerole = newNameRole
                     update_role.roledescription = newDescription
@@ -77,9 +78,8 @@ class role(object):
         if ((type(idrole) == int) and idrole >= minId):
             arole = clsRole.query.filter_by(idrole=idrole).all()
             if (arole != []):
-                tupla = clsRole.query.filter_by(idrole=idrole).first()
-                for i in tupla:    
-                    db.session.delete(i)
+                tupla = clsRole.query.filter_by(idrole=idrole).first()    
+                db.session.delete(tupla)
                 db.session.commit()
                 return True
         return False
