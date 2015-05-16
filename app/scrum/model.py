@@ -36,7 +36,7 @@ class clsRole(db.Model):
     idrole    = db.Column(db.Integer, primary_key=True)
     namerole  = db.Column(db.String(50), unique=True)
     roledescription = db.Column(db.String(140))
-    id_pila = db.Column(db.Integer)
+    id_pila = db.Column(db.Integer,db.ForeignKey('backLog.id_backLog'))
     user_role = db.relationship('clsUser',backref='role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
     #CheckConstraint(namerole in ('Product Owner','Scrum Master', 'Team member'), name='check_namerole')
       
