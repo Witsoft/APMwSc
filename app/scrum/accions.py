@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.model import *
+from model   import *
+from backLog import *
+
 
 # Declaracion de constantes.
 minId = 1
@@ -15,14 +17,16 @@ class accions(object):
                    
         typedescription = (type(acciondescription) == str)
         typeid = (type(id_backLog) == int)
+        
         if (typedescription and typeid):
             long_acciondescription = minAccionDescription <= len(acciondescription) <= maxAccionDescription
+            
             if long_acciondescription:
-                #backLog = clsbackLog.query.filter_by(id_backLog = id_backLog).all()
+                obackLog = clsBackLog.query.filter_by(id_backLog = id_backLog).all()
                 oaccion = clsAccions.query.filter_by(acciondescription = acciondescription).all()
-                if (oaccion == []): #and (backLog != [])):
+                if (obackLog != []) and (oaccion == []):
                     new_accion = clsAccions(acciondescription = acciondescription,id_backLog = id_backLog)
-                    db.session.add(new_role)
+                    db.session.add(new_accion)
                     db.session.commit()
                     return True
         return False
