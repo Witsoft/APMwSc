@@ -1,9 +1,14 @@
-import unittest
+# -*- coding: utf-8 -*-. 
 
+'''
+Created on 15/05/2015
+'''
+
+import unittest
 import os
 import sys
 
-# Ruta que permite utilizar el módulo py
+# Ruta que permite utilizar el módulo objective.py
 sys.path.append('../app/scrum')
 
 from objective import *
@@ -12,320 +17,319 @@ from backLog   import *
 class TestObjective(unittest.TestCase):
     
     #############################################      
-    #       Suite de Pruebas para Objective     #
+    #   Suite de Pruebas para insertObjective   #
     #############################################
     
     # Caso Inicial
  
      # Prueba 1
-     def test1InsertExists(self):
-         newBL = clsBackLog('Taxi Seguro','Permite reservar un taxi.')
-         session.add(newBL)
-         session.commit()
-         
-#          
-#          aObj = objective()
-#          aObj.insertObjective('Permite autenticar.',1)    
-     
-     # Casos Normales
-           
-     # Prueba 2 
+     def test1InsertObjectiveExists(self):
+         # Insercion de producto en la tabla pila.
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aObj = objective()
+         aObj.insertObjective('Permite reservar un taxi.',1)
       
-#      def test2InsertElement(self):
-#          aObj = objective()
-#          aObj = aObj.insertObjective('Permite autenticar un usuario.',1)
-#          self.assertTrue(aObj)
-#                      
-#      # Prueba 3
-#      def test3InsertRepeatedElement(self):
-#          role   = clsRole()
-#          result = role.insertRole('Team Member')
-#          self.assertFalse(result, "Elemento insertado.")
-#            
-#      # Casos Fronteras
-#       
-#      # Prueba 4
-#      def test4InsertLongName50(self):
-#          role   = clsRole()
-#          result = role.insertRole('Team MemberTeam MemberTeam MemberTeam MemberTeam M')
-#          self.assertFalse(result)
-#       
-#      # Prueba 5
-#      def test5InsertLongName51(self):
-#          role   = clsRole()
-#          result = role.insertRole('Team MemberTeam MemberTeam MemberTeam MemberTeam Me') 
-#          self.assertFalse(result, "Elemento insertado.")
-#               
-#      # Prueba 6
-#      def test6InsertShortName0(self):
-#          role   = clsRole()
-#          result = role.insertRole('')
-#          self.assertFalse(result, "Elemento insertado.") 
-#               
-#      # Prueba 7
-#      def test7InsertLongName1(self):
-#          role   = clsRole()
-#          result = role.insertRole('T')
-#          self.assertFalse(result)
-#           
-#      # Casos Maliciosos
-#       
-#      # Prueba 8
-#      def test8InsertNotString(self):
-#          role   = clsRole()
-#          result = role.insertRole(1254)
-#          self.assertFalse(result,"Elemento insertado.")
-#  
-#      # Prueba 9
-#      def test9InsertNoneString(self):
-#          role   = clsRole()
-#          result = role.insertRole(None)
-#          self.assertFalse(result,"No válido.")
-#         
-#      #############################################      
-#      #       Suite de Pruebas para FindName      #
-#      #############################################
-#      
-#      # Caso Inicial
-#      
-#      # Prueba 10 
-#      def test_10FindNameExists(self):
-#          role   = clsRole()
-#          role.findNameRole('Product Owner')
-#             
-#      # Casos Fronteras
-#      
-#      # Prueba 11
-#      def test_11FindNameEmpty(self):
-#          role   = clsRole()
-#          result = role.findNameRole('')
-#          self.assertFalse(result, "Expresión válida.")
-#            
-#      # Prueba 12
-#      def test_12FindNameShortName1(self):
-#          role   = clsRole()
-#          result = role.findNameRole('T')
-#          self.assertEqual(result,[],"Elemento no encontrado")
-#       
-#      # Prueba 13
-#      def test_13FindNameLongName50(self):
-#          role   = clsRole()
-#          result = role.findNameRole('Team MemberTeam MemberTeam MemberTeam MemberTeam M')
-#          self.assertEqual(result,[],"Elemento no encontrado")
-#            
-#      # Prueba 14
-#      def test_14FindNameLongName51(self):
-#          role   = clsRole()
-#          result = role.findNameRole('Team MemberTeam MemberTeam MemberTeam MemberTeam Me') 
-#          self.assertFalse(result, "Cadena no válida")
-#          
-#      # Casos Maliciosos
-#      
-#      # Prueba 15
-#      def test_15FindNameNotString(self):
-#          role   = clsRole()
-#          result = role.findNameRole(1254)
-#          self.assertFalse(result,"Elemento Insertado") 
-#       
-#      # Prueba 16
-#      def test_16FindNameNoneString(self):
-#          role   = clsRole()
-#          result = role.findNameRole(None)
-#          self.assertFalse(result,"Válido") 
-#                     
-#      #############################################      
-#      #       Suite de Pruebas para FindId        #
-#      #############################################  
-#  
-#      # Caso Inicial
-#     
-#      # Prueba 17
-#      def test_17FindIdExists(self):
-#          role   = clsRole()
-#          role.findIdRole(2)
-#           
-#      # Casos Normales
-#      
-#      # Prueba 18
-#      def test_18FindIdValidId(self):
-#          role   = clsRole()
-#          result = role.findIdRole(2)
-#          self.assertTrue(result)
-#           
-#      # Casos Fronteras
-#       
-#      # Prueba 19
-#      def test_19FindIdMinValue(self):
-#          role   = clsRole()
-#          result = role.findIdRole(1)
-#          self.assertTrue(result)
-#       
-#      # Casos Maliciosos
-#       
-#      # Caso 20
-#      def test_20FindIdMinId0(self):
-#          role   = clsRole()
-#          result = role.findIdRole(0)
-#          self.assertEqual(result,[],"Es válido")
-#           
-#      # Prueba 21
-#      def test_21FindIdNotInteger(self):
-#          role   = clsRole()
-#          result = role.findIdRole('AldJos')
-#          self.assertFalse(result, "Es válida")
-# 
-#      # Prueba 22
-#      def test_22InsertNoneString(self):
-#          role   = clsRole()
-#          result = role.findIdRole(None)
-#          self.assertFalse(result,"Válido")
-#  
-#      #############################################      
-#      #       Suite de Pruebas para ModifyName    #
-#      #############################################   
-#      
-#      # Caso Inicial
-#      
-#      # Prueba 23
-#      def test_23ModifyNameExists(self):
-#          role   = clsRole()
-#          role.modifyNameRole('Product Owner','Scrum Master')
-#           
-#      # Casos Normales
-#      
-#      # Prueba 24
-#      def test_24ModifyName(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole('Scrum Master','Product Owner')
-#          self.assertTrue(result)
-#           
-#      # Casos Fronteras
-#       
-#      # Prueba 25
-#      def test_25ModifyNameLeftLen1(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole('T','Team Member')
-#          self.assertFalse(result)
-#      
-#      # Prueba 26         
-#      def test_26ModifyNameRightLen1(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole('Team Member','T')
-#          self.assertFalse(result)
-# 
-#      # Prueba 27         
-#      def test_27ModifyNameRightLen50(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole('Scrum Master',50*'T')
-#          self.assertFalse(result)
-#          
-#      # Prueba 28
-#      def test_28ModifyNameLeftLen50(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole(50*'T','M')
-#          self.assertFalse(result)
-# 
-#      # Casos Esquinas
-#      
-#      # Prueba 29
-#      def test_29ModifyNameLeftLen1RightLen50(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole('M',25*'Us')
-#          self.assertFalse(result) 
-# 
-#      # Prueba 30
-#      def test_30ModifyNameLeftLen50RightLen50(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole(25*'Us', 25*'Ma')
-#          self.assertFalse(result) 
-#  
-#      # Prueba 31
-#      def test_31ModifyNameLeftLen50RightLen1(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole(25*'Ma','M')
-#          self.assertFalse(result) 
-#  
-#      # Prueba 32
-#      def test_32ModifyNameLeftLen1RightLen1(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole('M','U')
-#          self.assertFalse(result) 
-#  
-#      # Casos Maliciosos
-#           
-#      # Prueba 33
-#      def test_33ModifySameName(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole('Master','Master')
-#          self.assertFalse(result,"Modificación Válida")
-#           
-#      # Prueba 34
-#      def test_34ModifyNameLeftLen0RightLen51(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole('',25*'Pi' + 'p')
-#          self.assertFalse(result, "Modificación válida") 
-#  
-#      # Prueba 35
-#      def test_35ModifyNameLeftLen51RightLen51(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole(25*'Pi' + "p",25*'Ma' + 's')
-#          self.assertFalse(result, "Modificación Válida") 
-#  
-#      # Prueba 36
-#      def test_36ModifyNameLeftLen51RightLen0(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole(25*'Ma'+ 's','')
-#          self.assertFalse(result, "Modificación válida") 
-#  
-#      # Prueba 37
-#      def test_37ModifyNameLeftNoneRightValidString(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole(None,'Juana la Iguana')
-#          self.assertFalse(result,"Modificación válida") 
-#           
-#      # Prueba 38
-#      def test_38ModifyNameLeftValidStringRightNone(self):
-#          role   = clsRole()
-#          result = role.modifyNameRole("Juana la Iguana",None)
-#          self.assertFalse(result, "Modificación válida") 
-#           
-#      #############################################      
-#      #       Suite de Pruebas para DeleteId      #
-#      #############################################   
-#  
-#      # Caso Inicial
-#      
-#      # Prueba 39
-#      def test_39DeleteIdExists(self):
-#          role   = clsRole()
-#          role.deleteIdRole(4)
-# 
-#      # Casos Normales
-#  
-#      # Prueba 40
-#      def test_40DeleteId(self):
-#          role   = clsRole()
-#          result = role.deleteIdRole(2)
-#          self.assertTrue(result)
-#           
-#      # Casos Fronteras
-#      
-#      # Prueba 41
-#      def test_41DeleteId1(self):
-#          role   = clsRole()
-#          result = role.deleteIdRole(1)
-#          self.assertTrue(result)
-#  
-#      # Casos Maliciosos
-#  
-#      # Prueba 42
-#      def test_42DeleteIdMin0(self):
-#          role   = clsRole()
-#          result = role.deleteIdRole(0)
-#          self.assertFalse(result,"Id no válido")
-#  
-#      # Prueba 43
-#      def test_43DeleteIdNotInteger(self):
-#          role   = clsRole()
-#          result = role.deleteIdRole('AldJos')
-#          self.assertFalse(result, "Es válida")
+         
+    # Casos Normales
+           
+     # Prueba 2     
+     def test2InsertObjectiveElement(self):
+         aObj   = objective()
+         result = aObj.insertObjective('Permite elegir.',1)
+         self.assertTrue(result)
+                     
+     # Prueba 3
+     def test3InsertRepeatedElement(self):
+         aObj   = objective()
+         result = aObj.insertObjective('Permite elegir.',1)
+         self.assertFalse(result)
+      
+         
+    # Casos Fronteras
+    
+     # Prueba 4
+     def test4InsertObjectiveShortDesc0(self):
+         aObj   = objective()
+         result = aObj.insertObjective('',1)
+         self.assertFalse(result)
+         
+     # Prueba 5
+     def test5InsertObjectiveLongDesc1(self):
+         aObj   = objective()
+         result = aObj.insertObjective('P',1)
+         self.assertTrue(result)
+      
+     # Prueba 6
+     def test6InsertObjectiveLongDesc140(self):
+         aObj   = objective()
+         result = aObj.insertObjective('Producto que permite, a traves de una aplicacion movil,'+
+                                       'hacer reservaciones de taxis desde cualquier lugar'+
+                                       ' que estes y sin importar la hora .',1)
+         self.assertTrue(result)
+         
+     # Prueba 7
+     def test7InsertObjectiveLongDesc141(self):
+         aObj   = objective()
+         result = aObj.insertObjective('Producto que permite, a traves de una aplicacion movil,'+
+                                       'hacer reservaciones de taxis desde cualquier lugar'+
+                                       ' que estes y sin importar la hora .2',1)
+         self.assertFalse(result)
+         
+         
+    # Casos Maliciosos
+      
+     # Prueba 8
+     def test8InsertNotString(self):
+         aObj   = objective()
+         result = aObj.insertObjective(1254,1)
+         self.assertFalse(result,"Objetivo agregado.")
+ 
+     # Prueba 9
+     def test9InsertNoneString(self):
+         aObj   = objective()
+         result = aObj.insertObjective(None,1)
+         self.assertFalse(result,"Objetivo agregado.")
+        
+    
+     #############################################      
+     #   Suite de Pruebas para searchObjective   #
+     #############################################
+     
+     # Caso Inicial
+     
+     # Prueba 10 
+     def test_10searchObjectiveExists(self):
+         aObj = objective()
+         aObj.searchObjective('Permite reservar un taxi')
+               
+               
+     # Casos Fronteras
+     
+     # Prueba 11
+     def test_11searchObjectiveShortDesc0(self):
+         aObj   = objective()
+         result = aObj.searchObjective('')
+         self.assertFalse(result, "Objetivo Encontrado.")
+           
+     # Prueba 12
+     def test_12searchObjectiveShortDesc1(self):
+         aObj   = objective()
+         result = aObj.searchObjective('P')
+         self.assertNotEqual(result,[],"Objetivo no encontrado")
+      
+     # Prueba 13
+     def test_13searchObjectiveShortDesc140(self):
+         aObj   = objective()
+         result = aObj.searchObjective('Producto que permite, a traves de una aplicacion movil,'+
+                                       'hacer reservaciones de taxis desde cualquier lugar'+
+                                       ' que estes y sin importar la hora .')
+         self.assertNotEqual(result,[],"Objetivo no encontrado")
+           
+     # Prueba 14
+     def test_14searchObjectiveShortDesc141(self):
+         aObj   = objective()
+         result = aObj.searchObjective('Producto que permite, a traves de una aplicacion movil,'+
+                                       'hacer reservaciones de taxis desde cualquier lugar'+
+                                       ' que estes y sin importar la hora .2')
+         self.assertFalse(result, "Objetivo Encontrado.")
+         
+         
+     # Casos Maliciosos
+     
+     # Prueba 15
+     def test_15searchObjectiveNotString(self):
+         aObj   = objective()
+         result = aObj.searchObjective(1245)
+         self.assertFalse(result, "Objetivo Encontrado.")
+      
+     # Prueba 16
+     def test_16FindNameNoneString(self):
+         aObj   = objective()
+         result = aObj.searchObjective(None)
+         self.assertFalse(result,"Objetivo Encontrado.") 
+                    
+     #############################################      
+     #   Suite de Pruebas para updateObjective   #
+     #############################################  
+ 
+     # Caso Inicial
+    
+     # Prueba 17
+     def test_17UpdateObjectiveExists(self):
+         aObj   = objective()
+         aObj.updateObjective('Permite reservar un taxi.','Permite reservar un taxi o varios.')      
+         
+    # Casos Normales
+           
+     # Prueba 18   
+     def test_18UpdateObjectiveDesc(self):
+         aObj   = objective()
+         result = aObj.updateObjective('Permite elegir.','Permite obtener.')
+         self.assertTrue(result)
+                     
+     # Prueba 19
+     def test_19UpdateRepeatedDesc(self):
+         aObj   = objective()
+         result = aObj.updateObjective('Permite obtener.','Permite reservar un taxi o varios.')
+         self.assertFalse(result)
+
+    # Casos Fronteras
+     
+     # Prueba 20
+     def test_20UpdateObjectiveShortDesc0(self):
+         aObj   = objective()
+         result = aObj.updateObjective('','Permite obtener.')
+         self.assertFalse(result)
+         
+     # Prueba 21    
+     def test_21UpdateObjectiveShortNewDesc0(self):
+         aObj   = objective()
+         result = aObj.updateObjective('Permite obtener.','')
+         self.assertFalse(result)
+             
+     # Prueba 22
+     def test_22UpdateObjectiveShortDesc1(self):
+         aObj   = objective()
+         result = aObj.updateObjective('P','Permite modificar.')
+         self.assertTrue(result)
+         
+     # Prueba 23
+     def test_23UpdateObjectiveShortNewDesc1(self):
+         aObj   = objective()
+         result = aObj.updateObjective('Permite modificar.','U')
+         self.assertTrue(result)
+            
+     # Prueba 24
+     def test_24UpdateObjectiveLongDesc140(self):
+         aObj   = objective()
+         result = aObj.updateObjective('Producto que permite, a traves de una aplicacion movil,'+
+                                       'hacer reservaciones de taxis desde cualquier lugar'+
+                                       ' que estes y sin importar la hora .','Permite eliminar.')
+         self.assertTrue(result)
+         
+     # Prueba 25
+     def test_25UpdateObjectiveLongNewDesc140(self):
+         aObj   = objective()
+         result = aObj.updateObjective('Permite eliminar.','Producto que permite, a traves de una aplicacion movil,'+
+                                       'hacer reservaciones de taxis desde cualquier lugar'+
+                                       ' que estes y sin importar la hora .')
+         self.assertTrue(result)         
+               
+     # Prueba 26
+     def test_26UpdateObjectiveLongDesc141(self):
+         aObj   = objective()
+         result = aObj.updateObjective('Producto que permite, a traves de una aplicacion movil,'+
+                                       'hacer reservaciones de taxis desde cualquier lugar'+
+                                       ' que estes y sin importar la hora .2','Permite verificar.')
+         self.assertFalse(result)
+         
+     # Prueba 27
+     def test_27UpdateObjectiveLongNewDesc141(self):
+         aObj   = objective()
+         result = aObj.updateObjective('Permite verificar.','Producto que permite, a traves de una aplicacion movil,'+
+                                       'hacer reservaciones de taxis desde cualquier lugar'+
+                                       ' que estes y sin importar la hora .2')
+         self.assertFalse(result)   
+         
+    # Casos Esquina
+    
+     # Prueba 28    
+     def test_28UpdateObjectiveBothDesc0(self):
+         aObj   = objective()
+         result = aObj.updateObjective('','')
+         self.assertFalse(result)
+         
+     # Prueba 29
+     def test_29UpdateObjectiveBothDesc141(self):
+         aObj   = objective()
+         result = aObj.updateObjective('Producto que permite, a traves de una aplicacion movil,'+
+                                       'hacer reservaciones de taxis desde cualquier lugar'+
+                                       ' que estes y sin importar la hora .2','Producto que permite,'+
+                                       ' a traves de una aplicacion movil,'+
+                                       'hacer reservaciones de taxis desde cualquier lugar'+
+                                       ' que estes y sin importar la hora .2')
+         self.assertFalse(result)           
+          
+    # Casos Maliciosos
+       
+     # Prueba 30
+     def test_30UpdateNotString(self):
+         aObj   = objective()
+         result = aObj.updateObjective(1254,199262)
+         self.assertFalse(result)
+  
+     # Prueba 31
+     def test_31UpdateNoneString(self):
+         aObj   = objective()
+         result = aObj.updateObjective(None,None)
+         self.assertFalse(result)
+  
+    #############################################      
+    #   Suite de Pruebas para deleteObjective   #
+    #############################################
+    
+    # Caso Inicial
+ 
+     # Prueba 32
+     def test_32DeleteObjectiveElement(self):
+         aObj   = objective()
+         aObj.insertObjective('Permite intercambiar informacion.',1)
+         result = aObj.deleteObjective('Permite intercambiar informacion.')
+         self.assertTrue(result)
+                      
+     # Prueba 33
+     def test_33DeleteElementNotExist(self):
+         aObj   = objective()
+         result = aObj.deleteObjective('Permite elegir los actores.')
+         self.assertFalse(result)
+       
+    # Casos Fronteras
+     
+     # Prueba 34
+     def test_34DeleteObjectiveShortDesc0(self):
+         aObj   = objective()
+         result = aObj.deleteObjective('')
+         self.assertFalse(result)
+          
+     # Prueba 35
+     def test_35DeleteObjectiveShortDesc1(self):
+         aObj   = objective()
+         result = aObj.deleteObjective('U')
+         self.assertTrue(result)
+       
+     # Prueba 36
+     def test_36DeleteObjectiveLongDesc140(self):
+         aObj   = objective()
+         result = aObj.deleteObjective('Producto que permite, a traves de una aplicacion movil,'+
+                                       'hacer reservaciones de taxis desde cualquier lugar'+
+                                       ' que estes y sin importar la hora .')
+         self.assertTrue(result)
+          
+     # Prueba 37
+     def test_37DeleteObjectiveLongDesc141(self):
+         aObj   = objective()
+         aObj.insertObjective('Producto que permite, a traves de una aplicacion movil,'+
+                              'hacer reservaciones de taxis desde cualquier lugar'+
+                              ' que estes y sin importar la hora .3',1)
+         result = aObj.deleteObjective('Producto que permite, a traves de una aplicacion movil,'+
+                                       'hacer reservaciones de taxis desde cualquier lugar'+
+                                       ' que estes y sin importar la hora .3')
+         self.assertFalse(result)
+          
+          
+    # Casos Maliciosos
+       
+     # Prueba 38
+     def test_38DeleteNotString(self):
+         aObj   = objective()
+         result = aObj.deleteObjective(1254)
+         self.assertFalse(result)
+   
+    # Prueba 39
+     def test_39DeleteNoneString(self):
+         aObj   = objective()
+         result = aObj.deleteObjective(None)
+         self.assertFalse(result)
+          
+      
