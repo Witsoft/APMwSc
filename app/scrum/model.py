@@ -35,19 +35,21 @@ class clsRole(db.Model):
     __tablename__ = 'roles'
     idrole    = db.Column(db.Integer, primary_key=True)
     namerole  = db.Column(db.String(50), unique=True)
+    roledescription = db.Column(db.String(140))
+    id_pila = db.Column(db.Integer,db.ForeignKey('backLog.id_backLog'))
     user_role = db.relationship('clsUser',backref='role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
     #CheckConstraint(namerole in ('Product Owner','Scrum Master', 'Team member'), name='check_namerole')
       
    
-    def __init__(self, idrole, namerole):
+    def __init__(self, namerole,roledescription,id_pila):
         '''Constructor del modelo Role'''
-        self.idrole   = idrole
         self.namerole = namerole
+        self.roledescription = roledescription
+        self.id_pila = id_pila
 
     def __repr__(self):
         '''Respresentacion en string del nombre del Role'''
         return '<Role %r>' % self.namerole
-
 
 class clsUser(db.Model):
     '''Clase que define el modelo Usuario'''
@@ -56,7 +58,7 @@ class clsUser(db.Model):
     fullname = db.Column(db.String(50))
     username = db.Column(db.String(16), primary_key = True, index = True)
     password = db.Column(db.String(200))
-    email    = db.Column(db.String(30), unique = True )
+    email    = db.Column(db.String(30), unique = True)
     id_role  = db.Column(db.Integer, db.ForeignKey('roles.idrole'))
 
     def __init__(self, fullname, username, password, email, idrole):
@@ -70,6 +72,67 @@ class clsUser(db.Model):
     def __repr__(self):
         '''Representacion en string del nombre de Usuario'''
         return '<username %r, email %r>' % (self.username, self.email)
+       
+# Declaracion del modelo Objective
+class clsObjective(db.Model):
+    '''Clase que define el modelo Objective'''
+
+    __tablename__  = 'objectives'
+    idobjective    = db.Column(db.Integer, primary_key=True)
+    descObjective  = db.Column(db.String(140), unique=True)
+    id_backlog     = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+    
+   
+    def __init__(self, descObjective, id_backLog):
+        '''Constructor del modelo Objective'''
+        self.descObjective = descObjective
+        self.id_backLog    = id_backLog
+
+    def __repr__(self):
+        '''Respresentación en string de la descripción del Objective'''
+        return '<Id %r>, <Descripcion %r>' %(self.idobjective, self.descObjective)
+
+
+# Declaracion del modelo Accions
+class clsAccions(db.Model):
+    '''Clase que define el modelo Accion'''
+
+    __tablename__  = 'accions'
+    idaccion    = db.Column(db.Integer, primary_key=True)
+    acciondescription  = db.Column(db.String(140), unique=True)
+    id_backLog     = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+    
+   
+    def __init__(self,  acciondescription, id_backLog):
+        '''Constructor del modelo Accion'''
+        self.acciondescription = acciondescription
+        self.id_backLog    = id_backLog
+
+    def __repr__(self):
+        '''Respresentación en string de la descripción de la accion'''
+        return '<Id %r>, <Descripcion %r>' %(self.idaccion, self.acciondescription)
+
+
+class clsBackLog(db.Model):
+	'''Clase que define el modelo BackLog'''
+	
+	__tablename__ =  'backLog'
+	id_backLog     = db.Column(db.Integer,primary_key = True, index = True)	
+	BL_name        = db.Column(db.String(50), unique = True)
+	BL_description = db.Column(db.String(140))
+	obj_backLog    = db.relationship('clsObjective',backref='objective',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+#	act_backLog    = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	acc_backLog    = db.relationship('clsAccions',backref='accions',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
+
+	def __init__(self, BL_name, BL_description):
+		'''Constructor del modelo BackLog'''
+		self.BL_name        = BL_name
+		self.BL_description = BL_description
+		
+	def __repr__(self):
+		'''Representacion en string del nombre del BakcLog'''
+		return '<id_backLog %r, BL_nombre %r>' % (self.id_backLog, self.BL_name)
+
 
 migrate = Migrate(app, db)
 manager = Manager(app)
@@ -78,4 +141,3 @@ manager.add_command('db', MigrateCommand)
 
 #db.drop_all()   # Borramos la base de datos
 db.create_all() # Creamos la base de datos
-

@@ -1,9 +1,19 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=refs/remotes/origin/General_Integration
 eclipse.preferences.version=1
-<<<<<<< HEAD
-encoding//app/scrum/ident.py=utf-8
-=======
+encoding//app/scrum/accion.py=utf-8
+encoding//app/scrum/accions.py=utf-8
 encoding//app/scrum/actor.py=utf-8
+encoding//app/scrum/backLog.py=utf-8
 encoding//app/scrum/ident.py=utf-8
+encoding//app/scrum/mast.py=utf-8
 encoding//app/scrum/model.py=utf-8
+encoding//app/scrum/objective.py=utf-8
+encoding//app/scrum/objetivo.py=utf-8
+encoding//app/scrum/prod.py=utf-8
+encoding//app/scrum/role.py=utf-8
 encoding//app/scrum/user.py=utf-8
->>>>>>> refs/remotes/origin/Fix_Register
+encoding//testing/testAccions.py=utf-8
+encoding//testing/testBackLog.py=utf-8
+encoding//testing/testObjective.py=utf-8

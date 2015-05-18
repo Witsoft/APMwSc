@@ -3,8 +3,12 @@
 from app.scrum.model import *
 
 # Declaracion de constantes.
-minIdrole   = 0
 maxNameRole = 50
+minNameRole = 1
+minRoleDescription = 1
+maxRoleDescription = 140
+minId = 1
+
 roles       = ['Product Owner', 'Scrum Master', 'Team Member']
 
 
@@ -16,64 +20,68 @@ class role(object):
         arole = clsRole.query.all()
         return (arole == [])
 
-    def insertRole(self,idrole,namerole):
+    def insertRole(self,namerole,roledescription, id_pila):
         '''Permite insertar un role'''
-        arole = clsRole.query.filter_by(idrole=idrole).all()
-        if (arole == []):
-            new_role = clsRole(idrole = idrole, namerole = namerole)
-            if  type(namerole) != str:
-                return False
-            else:
-                long_namerole=len(new_role.namerole)
-                if (type(idrole) == str or new_role.idrole == None or new_role.idrole <= minIdrole \
-                        or new_role.namerole == '' or long_namerole > maxNameRole or new_role.namerole not in roles):
-                    return False
-                else:
+
+        typename = (type(namerole) == str)
+        typedescription = (type(roledescription) == str)
+        typeid = (type(id_pila) == int)
+        if (typename and typedescription and typeid):
+            long_namerole = minNameRole <= len(namerole) <= maxNameRole
+            long_roledescription = minRoleDescription <= len(roledescription) <= maxRoleDescription
+            if (long_namerole and long_roledescription and (namerole in roles)):
+                backLog = clsBackLog.query.filter_by(id_backLog = id_pila).all()
+                arole = clsRole.query.filter_by(namerole = namerole).all()
+                if ((arole == []) and (backLog != [])):
+                    new_role = clsRole(namerole = namerole,roledescription = roledescription,id_pila = id_pila)
                     db.session.add(new_role)
                     db.session.commit()
                     return True
-        else:
-            return False
+        return False
+
+
+    def findNameRole(self, namerole):
+        """Permite buscar un elemento en la base de datos"""
+        if type(namerole) == str:
+            if len(namerole) >= minNameRole and len(namerole) <= maxNameRole:
+                found = clsRole.query.filter_by(namerole=namerole).all()
+                return found
+        return([])
+                
+
+    def updateRole(self, namerole, newNameRole, newDescription):
+        """Permite modificar un nombre de la clase role"""
     
-    def updateRole(self,idrole,namerole):
-        '''Permite actualizar un role'''
-        if namerole == None:
-            return False
-        else:
-            arole = clsRole(idrole = idrole, namerole = namerole)
-            if (type(idrole) != int or idrole == None or len(namerole)<=minIdrole \
-                or namerole == '' or len(namerole) > maxNameRole or arole.namerole not in roles):
-                return False
-            else:
-                rolel = clsRole.query.filter_by(idrole=idrole).all()                
-                if rolel == []:
-                    return False
-                else:
-                    role1 = clsRole.query.filter_by(idrole=idrole).first()
-                    role1.namerole = namerole
+        typename = (type(namerole) == str)
+        typenewrole = (type(newNameRole) == str)
+        typedescription = (type(newDescription) == str)
+    
+        if (typename and typedescription and typenewrole):
+            long_namerole = minNameRole <= len(namerole) <= maxNameRole
+            long_newNameRole = minNameRole <= len(newNameRole) <= maxNameRole
+            long_roledescription = minRoleDescription <= len(newDescription) <= maxRoleDescription
+            if (long_namerole and long_newNameRole and long_roledescription and (namerole in roles) and (newNameRole in roles)):    
+                foundnamerole = self.findNameRole(namerole)
+                foundnewrole  = self.findNameRole(newNameRole)
+                if (foundnamerole != []) and (foundnewrole == []):
+                    
+                    update_role = clsRole.query.filter_by(namerole = namerole).first()
+                    update_role.namerole = newNameRole
+                    update_role.roledescription = newDescription
                     db.session.commit()
                     return True
-                   
-    def searchRole(self,idrole): 
-        '''Permite buscar un role dado su id'''
-        if (idrole == '') or (idrole == None) or idrole <=0 or type(idrole) != int:
-            return []
-        else:
-            role1 = clsRole.query.filter_by(idrole=idrole).all()
-            return role1
+        return False   
+
            
     def deleteRole(self,idrole):
         '''Permite eliminar un role dado su id'''
-        if (idrole == '') or (idrole == None) or idrole <=0 or type(idrole) != int:
-            return False
-        else:
+        if ((type(idrole) == int) and idrole >= minId):
             arole = clsRole.query.filter_by(idrole=idrole).all()
-            if arole == []:
-                return False
-            else:
-                for i in arole:    
-                    db.session.delete(i)
+            if (arole != []):
+                tupla = clsRole.query.filter_by(idrole=idrole).first()    
+                db.session.delete(tupla)
                 db.session.commit()
                 return True
-
+        return False
+    
 # Fin Clase Role

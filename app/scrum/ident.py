@@ -28,7 +28,7 @@ def AIdentificar():
             isValid = logPass.check_password(encriptPassword, newPassword)
 
             if isValid:
-                res = results[1]
+                res = results[0]
             else:
                 res = results[3]
         else:
@@ -56,11 +56,11 @@ def ARegistrar():
         oRole   = role()
         isEmpty = oRole.emptyTable()
         if isEmpty:
-            result = oRole.insertRole(1,'Product Owner')
+            result = oRole.insertRole('Product Owner','producto',1)
             if result: print('Se guardo role Product Owner.')
-            result = oRole.insertRole(2,'Scrum Master')
+            result = oRole.insertRole('Scrum Master','scrum',1)
             if result: print('Se guardo role Scrum Master.')
-            result = oRole.insertRole(3,'Team Member')
+            result = oRole.insertRole('Team Member','team',1)
             if result: print('Se guardo role Team Member.')
             
 
