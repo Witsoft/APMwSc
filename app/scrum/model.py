@@ -93,6 +93,26 @@ class clsObjective(db.Model):
         return '<Id %r>, <Descripcion %r>' %(self.idobjective, self.descObjective)
 
 
+# Declaracion del modelo Accions
+class clsAccions(db.Model):
+    '''Clase que define el modelo Accion'''
+
+    __tablename__  = 'accions'
+    idaccion    = db.Column(db.Integer, primary_key=True)
+    acciondescription  = db.Column(db.String(140), unique=True)
+    id_backLog     = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+    
+   
+    def __init__(self,  acciondescription, id_backLog):
+        '''Constructor del modelo Accion'''
+        self.acciondescription = acciondescription
+        self.id_backLog    = id_backLog
+
+    def __repr__(self):
+        '''Respresentación en string de la descripción de la accion'''
+        return '<Id %r>, <Descripcion %r>' %(self.idaccion, self.acciondescription)
+
+
 class clsBackLog(db.Model):
 	'''Clase que define el modelo BackLog'''
 	
@@ -101,8 +121,8 @@ class clsBackLog(db.Model):
 	BL_name        = db.Column(db.String(50), unique = True)
 	BL_description = db.Column(db.String(140))
 	obj_backLog    = db.relationship('clsObjective',backref='objective',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-	#act_backLog    = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-	#db.relationship('clsUser',backref='role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
+#	act_backLog    = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	acc_backLog    = db.relationship('clsAccions',backref='accions',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
 
 	def __init__(self, BL_name, BL_description):
 		'''Constructor del modelo BackLog'''
@@ -112,6 +132,7 @@ class clsBackLog(db.Model):
 	def __repr__(self):
 		'''Representacion en string del nombre del BakcLog'''
 		return '<id_backLog %r, BL_nombre %r>' % (self.id_backLog, self.BL_name)
+
 
 migrate = Migrate(app, db)
 manager = Manager(app)
