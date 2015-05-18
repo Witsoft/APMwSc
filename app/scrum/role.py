@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.model import *
+from model import *
+from app.scrum.backLog import *
 
 # Declaracion de constantes.
 maxNameRole = 50
@@ -22,7 +23,6 @@ class role(object):
 
     def insertRole(self,namerole,roledescription, id_pila):
         '''Permite insertar un role'''
-
         typename = (type(namerole) == str)
         typedescription = (type(roledescription) == str)
         typeid = (type(id_pila) == int)

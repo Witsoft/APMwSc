@@ -14,6 +14,7 @@ sys.path.append('../app/scrum')
 from objective import *
 from backLog   import * 
 
+
 class TestObjective(unittest.TestCase):
     
     #############################################      
@@ -29,7 +30,7 @@ class TestObjective(unittest.TestCase):
          aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          aObj = objective()
          aObj.insertObjective('Permite reservar un taxi.',1)
-      
+        
          
     # Casos Normales
            
@@ -38,12 +39,15 @@ class TestObjective(unittest.TestCase):
          aObj   = objective()
          result = aObj.insertObjective('Permite elegir.',1)
          self.assertTrue(result)
+         aObj.deleteObjective('Permite elegir')
+         
                      
      # Prueba 3
      def test3InsertRepeatedElement(self):
          aObj   = objective()
          result = aObj.insertObjective('Permite elegir.',1)
-         self.assertFalse(result)
+         result1 = aObj.insertObjective('Permite elegir.',1)
+         self.assertFalse(result1)
       
          
     # Casos Fronteras

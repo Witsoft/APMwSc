@@ -5,9 +5,12 @@ Created on 7/05/2015
          Sahid Reyes
 '''
 import sys
-sys.path.append('../app/scrum')
+import os
 import unittest
 
+# Ruta que permite utilizar el módulo objective.py
+sys.path.append('../app/scrum')
+from backLog   import * 
 from role import *
 
 class clsRoleTester(unittest.TestCase):
@@ -227,10 +230,10 @@ class clsRoleTester(unittest.TestCase):
      # Casos Normales
      
      # Prueba 30
-     def test_30UpdateRole(self):
-         role1   = role()
-         result = role1.updateRole('Scrum Master','Product Owner','Nueva Descripcion')
-         self.assertFalse(result)
+ #    def test_30UpdateRole(self):
+ #        role1   = role()
+ #        result = role1.updateRole('Scrum Master','Product Owner','Nueva Descripcion')
+ #        self.assertFalse(result)
           
      # Casos Fronteras
       

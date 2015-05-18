@@ -8,9 +8,9 @@ import unittest
 import os
 import sys
 
-# Ruta que permite utilizar el módulo py
-sys.path.append('../')
-
+# Ruta que permite utilizar el módulo objective.py
+sys.path.append('../app/scrum')
+from model import *
 from backLog import *
 
 class TestclsBackLog(unittest.TestCase):
@@ -23,24 +23,25 @@ class TestclsBackLog(unittest.TestCase):
     
     # Prueba 1
     def test1InsertExists(self):
-        newBL = clsBackLog("Toyota Corola")
-        session.add(newBL)
-        session.commit()
-        
-        newBL = clsBackLog("Pizza")
-        session.add(newBL)
-        session.commit()
+        newBL = clsBackLog("Toyota Corola","Automotriz")
+        db.session.add(newBL)
+        db.session.commit()
 
-        newBL = clsBackLog("Taxi Hotel")
-        session.add(newBL)
-        session.commit()
         
-        newBL = clsBackLog("Entrada cine")
-        session.add(newBL)
-        session.commit()
+        newBL = clsBackLog("Pizza","Restaurante")
+        db.session.add(newBL)
+        db.session.commit()
 
-        newBL = clsBackLog("Celular")
-        session.add(newBL)
-        session.commit()
+        newBL = clsBackLog("Taxi Hotel","Hoteleria")
+        db.session.add(newBL)
+        db.session.commit()
+        
+        newBL = clsBackLog("Entrada cine","Cines")
+        db.session.add(newBL)
+        db.session.commit()
+
+        newBL = clsBackLog("Celular","Operadoras Moviles")
+        db.session.add(newBL)
+        db.session.commit()
         
     
