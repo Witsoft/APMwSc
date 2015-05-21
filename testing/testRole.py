@@ -1,20 +1,10 @@
-'''
-Created on 7/05/2015
+# -*- coding: utf-8 -*-. 
 
-@author: Jose Barrientos
-         Sahid Reyes
-'''
-import sys
-import os
 import unittest
 
-# Ruta que permite utilizar el módulo objective.py
-sys.path.append('../app/scrum')
-from backLog   import * 
-from role import *
+from roleDummy import *
 
 class clsRoleTester(unittest.TestCase):
-# -*- coding: utf-8 -*-. 
 
 # Ruta que permite utilizar el módulo model.py
 
@@ -27,6 +17,8 @@ class clsRoleTester(unittest.TestCase):
  
      # Prueba 1
      def test1InsertExists(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1 = role()
          role1.insertRole('Product Owner','description',1)    
      
@@ -229,11 +221,11 @@ class clsRoleTester(unittest.TestCase):
    
      # Casos Normales
      
-     # Prueba 30
- #    def test_30UpdateRole(self):
- #        role1   = role()
- #        result = role1.updateRole('Scrum Master','Product Owner','Nueva Descripcion')
- #        self.assertFalse(result)
+     #Prueba 30
+     def test_30UpdateRole(self):
+        role1   = role()
+        result = role1.updateRole('Scrum Master','Product Owner','Nueva Descripcion')
+        self.assertFalse(result)
           
      # Casos Fronteras
       

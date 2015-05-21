@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-. 
-'''
-Fecha:    14/05/2015.
-'''
 
 import unittest
 
 import os
 import sys
 
-# Ruta que permite utilizar el módulo objective.py
-sys.path.append('../app/scrum')
-from model import *
-from backLog import *
+from modelDummy   import *
+from backLogDummy import *
 
 class TestclsBackLog(unittest.TestCase):
     
