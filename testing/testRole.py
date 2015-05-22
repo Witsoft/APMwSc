@@ -21,12 +21,14 @@ class clsRoleTester(unittest.TestCase):
          aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1 = role()
          role1.insertRole('Product Owner','description',1)    
-     
+         
      # Casos Normales
            
      # Prueba 2 
     
      def test2InsertElement(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole('Team Member','Lo que sea',1)
          self.assertTrue(result)
@@ -43,12 +45,16 @@ class clsRoleTester(unittest.TestCase):
       
      # Prueba 4
      def test4InsertLongName50(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole('Team MemberTeam MemberTeam MemberTeam MemberTeam M','Mucha longitud',1)
          self.assertTrue(result)
       
       # Prueba 5
      def test5InsertLongName51(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole('Team MemberTeam MemberTeam MemberTeam MemberTeam Me','Maximo de longitud mas uno',1) 
          self.assertFalse(result, "Elemento insertado.")
@@ -56,36 +62,48 @@ class clsRoleTester(unittest.TestCase):
              
      # Prueba 6
      def test6InsertShortName0(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole('','Vacio',1)
          self.assertFalse(result, "Elemento insertado.") 
               
      # Prueba 7
      def test7InsertLongName1(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole('T','Una sola letra',1)
          self.assertTrue(result)
 
     # Prueba 8
      def test8InsertDescriptionLong1(self):
-        role1 = role()
-        result = role1.insertRole('Scrum M','o',1)
-        self.assertTrue(result)
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi') 
+         role1 = role()
+         result = role1.insertRole('Scrum M','o',1)
+         self.assertTrue(result)
 
      # Prueba 9
      def test9InsertDescriptionLong140(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole('Member', 70*'La',1)
          self.assertTrue(result)
 
     # Prueba 10
      def test_10InsertDescriptionLong0(self):
-        role1 = role()
-        result = role1.insertRole('Role','',1)
-        self.assertFalse(result)
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         role1 = role()
+         result = role1.insertRole('Role','',1)
+         self.assertFalse(result)
 
      # Prueba 11
      def test_11InsertDescriptionLong141(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole('Team', 70*'La' + 'a',1)
          self.assertFalse(result)
@@ -94,63 +112,83 @@ class clsRoleTester(unittest.TestCase):
     
      # Prueba 12
      def test_12InsertMinLong(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1 = role()
          result = role1.insertRole('S','D',1)
          self.assertTrue(result)
          
      # Prueba 13
      def test_13InsertMaxLong(self):
-        role1 = role()
-        result = role1.insertRole(25*'me', 70*'Lo',1)
-        self.assertTrue(result)
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         role1 = role()
+         result = role1.insertRole(25*'me', 70*'Lo',1)
+         self.assertTrue(result)
         
      # Prueba 14
      def test_14InsertRoleLong0DescriptionLong0(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1 = role()
          result = role1.insertRole('','',1)
          self.assertFalse(result)
 
      # Prueba 15
      def test_15InsertRoleLong51DescriptionLong141(self):
-        role1 = role()
-        result = role1.insertRole(25*'ma' + 'p', 70*'Lo' + 'l',1)
-        self.assertFalse(result)
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         role1 = role()
+         result = role1.insertRole(25*'ma' + 'p', 70*'Lo' + 'l',1)
+         self.assertFalse(result)
          
 
      # Casos Maliciosos
       
      # Prueba 16
      def test_16InsertNotRoleString(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole(1254,'Un numero en vez de string',1)
          self.assertFalse(result,"Elemento insertado.")
     
      # Prueba 17
      def test_17InsertRoleNoneString(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole(None,'Nombre vacio',1)
          self.assertFalse(result,"No válido.")
          
      # Prueba 18
      def test_18InsertDescriptionNoneString(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole('Team Member',None,1)
          self.assertFalse(result,"No válido.")
 
      # Prueba 19
      def test_19InsertNotIDInteger(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole('Nuevo Role','Nombre cualquiera','Cancion')
          self.assertFalse(result,"No válido.")
          
      # Prueba 20
      def test_20InsertRoleDescriptionIdNone(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole(None,None,None)
          self.assertFalse(result,"No válido.")
 
      # Prueba 21
      def test_21InsertId0(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole('Rolenuevo','Nombre variable',0)
          self.assertFalse(result,"No válido.")
@@ -166,6 +204,8 @@ class clsRoleTester(unittest.TestCase):
      
      # Prueba 22 
      def test_22FindNameExists(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('Nuevo Product Owner','descripcion',1)
          role1.findNameRole('Nuevo Product Owner')
@@ -175,12 +215,16 @@ class clsRoleTester(unittest.TestCase):
      
      # Prueba 23
      def test_23FindNameEmpty(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.findNameRole('')
          self.assertFalse(result, "Expresión inválida.")
            
      # Prueba 24
      def test_24FindNameShortName1(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('Nuevo T','Desc',1)
          result = role1.findNameRole('Nuevo T')
@@ -188,6 +232,8 @@ class clsRoleTester(unittest.TestCase):
       
      # Prueba 25
      def test_25FindNameLongName50(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('Team Scrum Team MemberTeam MemberTeam MemberScrumS','Nuevo',1)
          result = role1.findNameRole('Team Scrum Team MemberTeam MemberTeam MemberScrumS')
@@ -195,6 +241,8 @@ class clsRoleTester(unittest.TestCase):
            
      # Prueba 26
      def test_26FindNameLongName51(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('Team Scrum Team MemberTeam MemberTeam MemberScrumST','caracteres',1)
          result = role1.findNameRole('Team Scrum Team MemberTeam MemberTeam MemberScrumST') 
@@ -204,6 +252,8 @@ class clsRoleTester(unittest.TestCase):
      
      # Prueba 27
      def test_27FindNameNotString(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.insertRole(1254,'numeros',1)
          result = role1.findNameRole(1254)
@@ -211,6 +261,8 @@ class clsRoleTester(unittest.TestCase):
       
      # Prueba 28
      def test_28FindNameNoneString(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole(None,'nada',1)
          result = role1.findNameRole(None)
@@ -224,6 +276,8 @@ class clsRoleTester(unittest.TestCase):
      
      # Prueba 29
      def test_29UpdateRoleExists(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('Dueño de producto','Nueva descripcion',1)
          role1.updateRole('Dueño de producto','Cliente','Descripcion reciente')
@@ -232,15 +286,19 @@ class clsRoleTester(unittest.TestCase):
      
      #Prueba 30
      def test_30UpdateRole(self):
-        role1   = role()
-        role1.insertRole('Maestro Scrum','scrum master',1)
-        result = role1.updateRole('Maestro Scrum','Un nuevo maestro','Nueva Descripcion')
-        self.assertTrue(result)
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         role1   = role()
+         role1.insertRole('Maestro Scrum','scrum master',1)
+         result = role1.updateRole('Maestro Scrum','Un nuevo maestro','Nueva Descripcion')
+         self.assertTrue(result)
           
      # Casos Fronteras
       
      # Prueba 31
      def test_31UpdateRoleLeftLen1(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('X','X',1)
          result = role1.updateRole('X','roleX','New Description')
@@ -249,6 +307,8 @@ class clsRoleTester(unittest.TestCase):
      
      # Prueba 32         
      def test_32UpdateRoleRightLen1(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('roleZ','Z',1)
          result = role1.updateRole('roleZ','Z','Nueva Descripción')
@@ -257,6 +317,8 @@ class clsRoleTester(unittest.TestCase):
 
      # Prueba 33         
      def test_33UpdateRoleRightLen50(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('UnNuevoRole','role',1)
          result = role1.updateRole('UnNuevoRole',50*'R','Nueva Descripcion')
@@ -264,6 +326,8 @@ class clsRoleTester(unittest.TestCase):
          
      # Prueba 34
      def test_34UpdateRoleLeftLen50(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole(50*'A','soloA',1)
          result = role1.updateRole(50*'A','M', 'New Description')
@@ -271,6 +335,8 @@ class clsRoleTester(unittest.TestCase):
 
      # Prueba 35
      def test_35UpdateRoleDescriptionLen1(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('Arole','Description for a',1)
          result = role1.updateRole('Arole','Brole', 'N')
@@ -278,6 +344,8 @@ class clsRoleTester(unittest.TestCase):
 
      # Prueba 36
      def test_36UpdateRoleDescriptionLen140(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('pro role','pro description',1)
          result = role1.updateRole('pro role','simple role', 70* 'Nw')
@@ -285,6 +353,8 @@ class clsRoleTester(unittest.TestCase):
          
     # Prueba 37
      def test_37UpdateRoleDescriptionLen0(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('role non description','some description',1)
          result = role1.updateRole('role non description','role description', '')
@@ -292,6 +362,8 @@ class clsRoleTester(unittest.TestCase):
 
      # Prueba 38         
      def test_38UpdateRoleRightLen51(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('any new role','a new description',1)
          result = role1.updateRole('any new role',50*'P' + 'a','Nueva Descripcion')
@@ -299,6 +371,8 @@ class clsRoleTester(unittest.TestCase):
 
      # Prueba 39         
      def test_39UpdateRoleLeftLen51(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole(25*'Sc' + 'a','description',1)
          result = role1.updateRole(25*'Sc' + 'a','cS','Nueva Descripcion')
@@ -308,6 +382,8 @@ class clsRoleTester(unittest.TestCase):
      
      # Prueba 40
      def test_40UpdateRoleLeftLen1RightLen50(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('O','new',1)
          result = role1.updateRole('O',25*'Pq','Description')
@@ -315,6 +391,8 @@ class clsRoleTester(unittest.TestCase):
 
      # Prueba 41
      def test_41UpdateRoleLeftLen50RightLen50(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole(25*'Us','x',1)
          result = role1.updateRole(25*'Us', 25*'Ma','Description')
@@ -322,6 +400,8 @@ class clsRoleTester(unittest.TestCase):
  
      # Prueba 42
      def test_42UpdateRoleLeftLen50RightLen1(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole(25*'LL','l',1)
          result = role1.updateRole(25*'LL','E','Descripciones')
@@ -329,6 +409,8 @@ class clsRoleTester(unittest.TestCase):
  
      # Prueba 43
      def test_43UpdateRoleLeftLen1RightLen1(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('V','new v',1)
          result = role1.updateRole('V','G','Nueva Descripcion')
@@ -336,6 +418,8 @@ class clsRoleTester(unittest.TestCase):
  
      # Prueba 44
      def test_44UpdateRoleLeftLen1RightLen50Description1(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('J','j',1)
          result = role1.updateRole('J',25*'fr','a')
@@ -343,6 +427,8 @@ class clsRoleTester(unittest.TestCase):
 
      # Prueba 45
      def test_45UpdateRoleLeftLen1RightLen50Description140(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('k','K',1)
          result = role1.updateRole('k',25*'gb',70*'mo')
@@ -350,6 +436,8 @@ class clsRoleTester(unittest.TestCase):
 
      # Prueba 46
      def test_46UpdateRoleLeftLen50RightLen50Description140(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole(25*'li','li',1)
          result = role1.updateRole(25*'li', 25*'IL',70*'de')
@@ -357,6 +445,8 @@ class clsRoleTester(unittest.TestCase):
 
      # Prueba 47
      def test_47UpdateRoleLeftLen1RightLen1Description1(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('s','t',1)
          result = role1.updateRole('s','t','d')
@@ -364,6 +454,8 @@ class clsRoleTester(unittest.TestCase):
 
      # Prueba 48
      def test_48UpdateRoleLeftLen51RightLen51Description141(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole(25*'se','es',1)
          result = role1.updateRole(25*'se' + 'a',25*'lo'+ 'b',70*'de' + 'a')
@@ -373,6 +465,8 @@ class clsRoleTester(unittest.TestCase):
           
      # Prueba 49
      def test_49UpdateRoleLeftLen0RightLen51Description0(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('','d',1)
          result = role1.updateRole('',25*'Pi' + 'p','')
@@ -380,6 +474,8 @@ class clsRoleTester(unittest.TestCase):
   
      # Prueba 50
      def test_50UpdateRoleLeftLen51RightLen0Description0(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole(25*'Ma'+ 's','g',1)
          result = role1.updateRole(25*'Ma'+ 's','','')
@@ -387,6 +483,8 @@ class clsRoleTester(unittest.TestCase):
  
      # Prueba 51
      def test_51UpdateRoleLeftNoneRightValidString(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole(None,'nada',1)
          result = role1.updateRole(None,'Juana la Iguana','Description')
@@ -394,6 +492,8 @@ class clsRoleTester(unittest.TestCase):
          
      # Prueba 52
      def test_52UpdateRoleLeftValidStringRightNone(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('Juana la Iguana','j',1)
          result = role1.updateRole('Juana la Iguana',None,'Nueva Descripcion')
@@ -401,6 +501,8 @@ class clsRoleTester(unittest.TestCase):
           
      # Prueba 53
      def test_53UpdateRoleLeftValidStringRightDescriptionNone(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('nuevorolenuevo','x',1)
          result = role1.updateRole('nuevorolenuevo','ROLEPerson',None)
@@ -408,6 +510,8 @@ class clsRoleTester(unittest.TestCase):
          
      # Prueba 54
      def test_54UpdateRoleNone(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole(None,'nada',1)
          result = role1.updateRole(None,None,None)
@@ -415,6 +519,8 @@ class clsRoleTester(unittest.TestCase):
           
      # Prueba 55
      def test_55UpdateRoleLeft0Right0Description0(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.insertRole('','nada',1)
          result = role1.updateRole('','','')
@@ -429,6 +535,8 @@ class clsRoleTester(unittest.TestCase):
      
      # Prueba 56
      def test_56DeleteIdExists(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          role1.deleteRole(4)
 
@@ -436,6 +544,8 @@ class clsRoleTester(unittest.TestCase):
  
      # Prueba 57
      def test_57DeleteId(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.deleteRole(2)
          self.assertTrue(result)
@@ -444,6 +554,8 @@ class clsRoleTester(unittest.TestCase):
      
      # Prueba 58
      def test_58DeleteId1(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.deleteRole(1)
          self.assertTrue(result)
@@ -452,12 +564,16 @@ class clsRoleTester(unittest.TestCase):
  
      # Prueba 59
      def test_59DeleteIdMin0(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.deleteRole(0)
          self.assertFalse(result,"Id no válido")
  
      # Prueba 60
      def test_60DeleteIdNotInteger(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
          role1   = role()
          result = role1.deleteRole('AldJos')
          self.assertFalse(result, "Es válida")

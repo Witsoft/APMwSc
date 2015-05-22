@@ -6,53 +6,68 @@ from userDummy import *
 
 class clsUserTester(unittest.TestCase):
     
-    #CASOS DE PRUEBA FUNCION INSERTUSER
+    # CASOS DE PRUEBA FUNCION INSERTUSER
 
-    #caso frontera
-    def test1UserInsertTrue(self):
-        user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sah', username = 'ehfah',password = 'al', email = '@ls', iddpt = 1, idrole = 1))
+    # Caso frontera
+    def testUserInsertTrue(self):
+        user1  = user()
+        result = user1.insertUser(fullname = 'sah', username = 'ehfah',password = 'al', email = '@ls', iddpt = 1, idrole = 1)
+        self.assertTrue(result)
+        user1.deleteUser('ehfah')
      
-    #caso frontera
-    def test2UserInsertFalse(self):
-        user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'sah', username = 'ehfah',password = 'al', email = '@ls', iddpt = 1, idrole = 1))
+    # Caso frontera
+    def testUserInsertFalse(self):
+        user1  = user()
+        result = user1.insertUser(fullname = 'sah', username = 'ehfah',password = 'al', email = '@ls', iddpt = 1, idrole = 1)
+        self.assertFalse(result)
+        
+    # Caso frontera externa
+    def testUserInsertNoUser(self):
+        user1  = user()
+        result = user1.insertUser(fullname = 'sah', username = '',password = 'al', email = '@?lds', iddpt = 1, idrole = 1)
+        self.assertFalse(result)
       
-    #caso frontera externa
-    def test3UserInsertNoUser(self):
-        user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'sah', username = '',password = 'al', email = '@?lds', iddpt = 1, idrole = 1))
-      
-    #caso frontera interna 
-    def test4UserInsert1char(self):
-        user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sahid', username = 'a',password = '12234', email = 'xxx@gmail.com', iddpt = 1, idrole = 1))
+    # Caso frontera interna 
+    def testUserInsert1char(self):
+        user1  = user()
+        result = user1.insertUser(fullname = 'sahid', username = 'a',password = '12234', email = 'xxx@gmail.com', iddpt = 1, idrole = 1)
+        self.assertTrue(result)
+        user1.deleteUser('a')
           
-    #caso frontera Externa 
-    def test5UserInsert17char(self):
-        user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'sahid', username = 'jksjdfdj vkjdfuhf',password = '12234', email = 'xxx@gmail.com', iddpt = 1, idrole = 1))
+    # Caso frontera Externa 
+    def testUserInsert17char(self):
+        user1  = user()
+        result = user1.insertUser(fullname = 'sahid', username = 'jksjdfdj vkjdfuhf',password = '12234', email = 'xxx@gmail.com', iddpt = 1, idrole = 1)
+        self.assertFalse(result)
+        
+    # Caso frontera Externa 
+    def testUserInsert16char(self):
+        user1  = user()
+        result = user1.insertUser(fullname = 'sahid', username = 'jksjdfdjvkjdfuhf',password = '12234', email = 'yzyyxxx@gmail.com', iddpt = 1, idrole = 1)
+        self.assertTrue(result)
+        user1.deleteUser('jksjdfdjvkjdfuhf')
       
-    #caso frontera Externa 
-    def test6_0UserInsert16char(self):
-        user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sahid', username = 'jksjdfdjvkjdfuhf',password = '12234', email = 'yzyyxxx@gmail.com', iddpt = 1, idrole = 1))
-      
-    #caso frontera Externa 
-    def test6_1UserInsert15char(self):
-        user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sahid', username = 'wjfr9olpsmfkreo',password = '12234', email = 'xfeexx@fgmail.com', iddpt = 1, idrole = 1)) 
+    # Caso frontera Externa 
+    def testUserInsert15char(self):
+        user1  = user()
+        result = user1.insertUser(fullname = 'sahid', username = 'wjfr9olpsmfkreo',password = '12234', email = 'xfeexx@fgmail.com', iddpt = 1, idrole = 1)
+        self.assertTrue(result) 
+        user1.deleteUser('wjfr9olpsmfkreo')
+        
+    # Caso frontera
+    def testUserInsert8char(self):
+        user1  = user()
+        result = user1.insertUser(fullname = 'sahid', username = 'wiekfprm',password = '12234', email = 'yffe@ldv.gmail.com', iddpt = 1, idrole = 1)
+        self.assertTrue(result)
+        user1.deleteUser('wiekfprm')
           
-    #caso frontera
-    def test6_2UserInsert8char(self):
-        user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sahid', username = 'wiekfprm',password = '12234', email = 'yffe@ldv.gmail.com', iddpt = 1, idrole = 1))
-          
-    #caso frontera Externa 
-    def test6UserInserFullnamet51char(self):
-        user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'sahid Patricia Reyes Valencia kjhdj kjhvjfdbhjdcmkd', username = 'jksjdfdj vkjdfuhf',password = '12234', email = 'xxx@gmail.com', iddpt = 1, idrole = 1))
-      
+    # Caso frontera Externa 
+    def testUserInserFullnamet51char(self):
+        user1  = user()
+        result = user1.insertUser(fullname = 'sahid Patricia Reyes Valencia kjhdj kjhvjfdbhjdcmkd', username = 'jksjdfdj vkjdfuhf',password = '12234', email = 'xxx@gmail.com', iddpt = 1, idrole = 1)
+        self.assertFalse(result)
+
+'''      
     #caso frontera
     def test7UserInserFullnamet50char(self):
         user1 = user()
@@ -330,4 +345,5 @@ class clsUserTester(unittest.TestCase):
     #caso Malicia
     def test_48UserDeleteNoChar(self):
         user1 = user()
-        self.assertFalse(user1.deleteUser(username = '')) 
+        self.assertFalse(user1.deleteUser(username = ''))
+'''         
