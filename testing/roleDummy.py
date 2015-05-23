@@ -69,16 +69,19 @@ class role(object):
                     return True
         return False   
 
-           
-    def deleteRole(self,idrole):
-        '''Permite eliminar un role dado su id'''
-        if ((type(idrole) == int) and idrole >= minId):
-            arole = clsRole.query.filter_by(idrole=idrole).all()
-            if (arole != []):
-                tupla = clsRole.query.filter_by(idrole=idrole).first()    
-                db.session.delete(tupla)
-                db.session.commit()
-                return True
+    def deleteRole(self,namerole):
+        '''Permite eliminar un role dado su nombre'''
+
+        name = (type(namerole) == str)        
+        if (name):
+            long_namerole = minNameRole <= len(namerole) <= maxNameRole 
+            if (long_namerole):
+                arole = clsRole.query.filter_by(namerole=namerole).all()
+                if (arole != []):
+                    tupla = clsRole.query.filter_by(namerole=namerole).first()    
+                    db.session.delete(tupla)
+                    db.session.commit()
+                    return True
         return False
     
 # Fin Clase Role
