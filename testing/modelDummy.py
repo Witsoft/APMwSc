@@ -60,7 +60,7 @@ class clsUser(db.Model):
     username = db.Column(db.String(16), primary_key = True, index = True)
     password = db.Column(db.String(200))
     email    = db.Column(db.String(30), unique = True)
-    id_role  = db.Column(db.Integer, db.ForeignKey('roles.idrole'))
+    idrole  = db.Column(db.Integer, db.ForeignKey('roles.idrole'))
 
     def __init__(self, fullname, username, password, email, idrole):
         '''Constructor del modelo usuario'''

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-. 
 
-from model import *
+from app.scrum.model import *
 from app.scrum.backLog import *
 
 # Declaracion de constantes.
@@ -9,9 +9,6 @@ minNameRole = 1
 minRoleDescription = 1
 maxRoleDescription = 140
 minId = 1
-
-roles       = ['Product Owner', 'Scrum Master', 'Team Member']
-
 
 class role(object):
     '''Clase que permite manejar los Roles de manera persistente'''
@@ -29,7 +26,7 @@ class role(object):
         if (typename and typedescription and typeid):
             long_namerole = minNameRole <= len(namerole) <= maxNameRole
             long_roledescription = minRoleDescription <= len(roledescription) <= maxRoleDescription
-            if (long_namerole and long_roledescription and (namerole in roles)):
+            if (long_namerole and long_roledescription):
                 backLog = clsBackLog.query.filter_by(id_backLog = id_pila).all()
                 arole = clsRole.query.filter_by(namerole = namerole).all()
                 if ((arole == []) and (backLog != [])):
@@ -60,7 +57,7 @@ class role(object):
             long_namerole = minNameRole <= len(namerole) <= maxNameRole
             long_newNameRole = minNameRole <= len(newNameRole) <= maxNameRole
             long_roledescription = minRoleDescription <= len(newDescription) <= maxRoleDescription
-            if (long_namerole and long_newNameRole and long_roledescription and (namerole in roles) and (newNameRole in roles)):    
+            if (long_namerole and long_newNameRole and long_roledescription):    
                 foundnamerole = self.findNameRole(namerole)
                 foundnewrole  = self.findNameRole(newNameRole)
                 if (foundnamerole != []) and (foundnewrole == []):
@@ -71,17 +68,20 @@ class role(object):
                     db.session.commit()
                     return True
         return False   
+    
+    def deleteRole(self,namerole):
+        '''Permite eliminar un role dado su nombre'''
 
-           
-    def deleteRole(self,idrole):
-        '''Permite eliminar un role dado su id'''
-        if ((type(idrole) == int) and idrole >= minId):
-            arole = clsRole.query.filter_by(idrole=idrole).all()
-            if (arole != []):
-                tupla = clsRole.query.filter_by(idrole=idrole).first()    
-                db.session.delete(tupla)
-                db.session.commit()
-                return True
+        name = (type(namerole) == str)        
+        if (name):
+            long_namerole = minNameRole <= len(namerole) <= maxNameRole 
+            if (long_namerole):
+                arole = clsRole.query.filter_by(namerole=namerole).all()
+                if (arole != []):
+                    tupla = clsRole.query.filter_by(namerole=namerole).first()    
+                    db.session.delete(tupla)
+                    db.session.commit()
+                    return True
         return False
     
 # Fin Clase Role
