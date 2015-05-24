@@ -139,13 +139,14 @@ class clsUserHistory(db.Model):
 	'''Clase que define el modelo de tabla UserHistory'''
 	__tablename__ = 'userHistory'
 	id_userHistory   = db.Column(db.Integer, unique = True, index = True)
-	cod_userHistory  = db.Column(db.String(10), Primary_key = True, index = True) 
+	cod_userHistory  = db.Column(db.String(10), primary_key = True, index = True) 
 	type_userHistory = db.Column(db.String(11))
 	id_backLog       = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
 	
 	def __init__(self,cod_userHistory,type_userHistory):
 		self.cod_userHistory  = cod_userHistory
 		self.type_userHistory = type_userHistory
+		self.id_backLog = id_backLog
 		
 	def __repr__(self):
 		'''Representacion en string de la Historia de Usuario'''

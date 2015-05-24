@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.backLog import *
+from modelDummy   import *
+from backLogDummy import *
 
 # Declaracion de constantes
 arrayType = ['obligatorio', 'opcional']
@@ -19,9 +20,9 @@ class userHistory(object):
             
             if tipo_userhistory:
                 obackLog = clsBackLog.query.filter_by(id_backLog = id_backLog).all()
-                ohistory = clsUserHistory.query.filter_by(type_userHistory = type_userHistory).all()
+                ohistory = clsUserHistory.query.filter_by(cod_userHistory = cod_userHistory).all()
                 if (obackLog != []) and (ohistory == []):
-                    new_history = clsUserHistory(type_userHistory = type_userHistory,id_backLog = id_backLog)
+                    new_history = clsUserHistory(cod_userHistory = cod_userHistory, type_userHistory = type_userHistory,id_backLog = id_backLog)
                     db.session.add(new_history)
                     db.session.commit()
                     return True
