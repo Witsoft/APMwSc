@@ -109,3 +109,10 @@ class backLog(object):
             return found
         return([])              
                    
+    def accionsAsociatedToProduct(self,accionId):
+        ''' Permite obtener una lista de las acciones asociados a una pila de Producto'''
+        checkTypeId = type(accionId) == int    
+        if checkTypeId: 
+            found = clsAccions.query.filter_by(id_backLog=accionId).all()
+            return found
+        return([])  

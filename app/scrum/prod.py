@@ -2,6 +2,7 @@
 from flask             import request, session, Blueprint, json
 from app.scrum.backLog import *
 
+
 prod = Blueprint('prod', __name__)
 
 
@@ -69,9 +70,10 @@ def VProducto():
     
     oBackLog   = backLog()
     actorsList = oBackLog.actorsAsociatedToProduct(1)
-
+    accionList = oBackLog.accionsAsociatedToProduct(1)
+    
     res['data3'] = [{'idActor':act.idrole,'descripcion':act.roledescription}for act in actorsList]
-    res['data5'] = [{'idAccion':1, 'descripcion':'Accion 1'}, {'idAccion':2, 'descripcion':'Accion 2'}, {'idAccion':3, 'descripcion':'Accion 3'}, {'idAccion':4, 'descripcion':'Accion 4'}, ]
+    res['data5'] = [{'idAccion':acc.idaccion, 'descripcion':acc.acciondescription}for acc in accionList]
     res['data7'] = [{'idObjetivo':1, 'descripcion':'Objetivo 1'}, {'idObjetivo':2, 'descripcion':'Objetivo 2'}, {'idObjetivo':3, 'descripcion':'Objetivo 3'}, {'idObjetivo':4, 'descripcion':'Objetivo 4'}, {'idObjetivo':5, 'descripcion':'Objetivo 5'},  ]
     res['idPila'] = idPila    
 
