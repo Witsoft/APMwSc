@@ -5,329 +5,861 @@ import unittest
 from userDummy import *
 
 class clsUserTester(unittest.TestCase):
-    
-    #CASOS DE PRUEBA FUNCION INSERTUSER
 
+     ##########################################      
+     #   Suite de Pruebas para InsertUser     #
+     ##########################################
+      
+    def testUserInsertExist(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sah','ehfah','al', '@ls', 1)
+        user1.deleteUser('ehfah')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+   
+    # Caso frontera
+    def testUserInsertTrue(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sah','ehfahw','alir893b1', '@ls', 1)
+        self.assertTrue(result)
+        user1.deleteUser('ehfahw')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
+        
+    # Caso frontera
+    def testUserInsertFalse(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sah', 'ehfah','al', '@ls', 1)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
+    # Caso frontera externa
+    def testUserInsertNoUser(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sah', '','al', '@?lds', 1)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+   
+         
+    # Caso frontera interna 
+    def testUserInsert1char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sahid', 'a','1223478364', 'xxx@gmail.com', 1)
+        self.assertTrue(result)
+        user1.deleteUser('a')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')  
+   
+    # Caso frontera Externa 
+    def testUserInsert17char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sahid', 'jksjdfdj vkjdfuhf','12234', 'xxx@gmail.com', 1)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+   
+           
+    # Caso frontera Externa 
+    def testUserInsert16char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sahid', 'jksjdfdjvkjdfuhf','122346768', 'yzyyxxx@gmail.com', 1)
+        self.assertTrue(result)
+        user1.deleteUser('jksjdfdjvkjdfuhf')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
+    # Caso frontera Externa 
+    def testUserInsert15char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sahid', 'wjfr9olpsmfkreo','1225676834', 'xfeexx@fgmail.com', 1)
+        self.assertTrue(result) 
+        user1.deleteUser('wjfr9olpsmfkreo')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
+    # Caso frontera
+    def testUserInsert8char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sahid', 'wiekfprm','1223463637', 'yffe@ldv.gmail.com', 1)
+        self.assertTrue(result)
+        user1.deleteUser('wiekfprm')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+             
+    # Caso frontera Externa 
+    def testUserInserFullnamet51char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sahid Patricia Reyes Valencia kjhdj kjhvjfdbhjdcmkd', 'jksjdfdj vkjdfuhf','12234', 'xxx@gmail.com', 1)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+   
+         
     #caso frontera
-    def test1UserInsertTrue(self):
+    def testUserInserFullnamet50char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sah', username = 'ehfah',password = 'al', email = '@ls', iddpt = 1, idrole = 1))
-     
-    #caso frontera
-    def test2UserInsertFalse(self):
-        user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'sah', username = 'ehfah',password = 'al', email = '@ls', iddpt = 1, idrole = 1))
-      
-    #caso frontera externa
-    def test3UserInsertNoUser(self):
-        user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'sah', username = '',password = 'al', email = '@?lds', iddpt = 1, idrole = 1))
-      
-    #caso frontera interna 
-    def test4UserInsert1char(self):
-        user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sahid', username = 'a',password = '12234', email = 'xxx@gmail.com', iddpt = 1, idrole = 1))
-          
-    #caso frontera Externa 
-    def test5UserInsert17char(self):
-        user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'sahid', username = 'jksjdfdj vkjdfuhf',password = '12234', email = 'xxx@gmail.com', iddpt = 1, idrole = 1))
-      
-    #caso frontera Externa 
-    def test6_0UserInsert16char(self):
-        user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sahid', username = 'jksjdfdjvkjdfuhf',password = '12234', email = 'yzyyxxx@gmail.com', iddpt = 1, idrole = 1))
-      
-    #caso frontera Externa 
-    def test6_1UserInsert15char(self):
-        user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sahid', username = 'wjfr9olpsmfkreo',password = '12234', email = 'xfeexx@fgmail.com', iddpt = 1, idrole = 1)) 
-          
-    #caso frontera
-    def test6_2UserInsert8char(self):
-        user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sahid', username = 'wiekfprm',password = '12234', email = 'yffe@ldv.gmail.com', iddpt = 1, idrole = 1))
-          
-    #caso frontera Externa 
-    def test6UserInserFullnamet51char(self):
-        user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'sahid Patricia Reyes Valencia kjhdj kjhvjfdbhjdcmkd', username = 'jksjdfdj vkjdfuhf',password = '12234', email = 'xxx@gmail.com', iddpt = 1, idrole = 1))
-      
-    #caso frontera
-    def test7UserInserFullnamet50char(self):
-        user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sahid Patricia Reyes Valencia kjhdj kjhvjfdbhjdcmk', username = 'jksjdfdj__',password = '12234', email = 'xx__x@gmail.com', iddpt = 1, idrole = 1))   
-      
+        role1.insertRole('Product Owner','description',1)
+        result =  user1.insertUser('sahid Patricia Reyes Valencia kjhdj kjhvjfdbhjdcmk', 'jksjdfdj__','1223485953', 'xx__x@gmail.com', 1)
+        self.assertTrue(result)
+        user1.deleteUser('jksjdfdj__') 
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')      
+         
+         
     #caso frontera Interna 
-    def test8UserInserFullnamet49char(self):
+    def testUserInserFullnamet49char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sahid Patricia Reyes Valencia jhdj kjhvjfdbhjdcmkd', username = 'jpvkjdfuhf',password = '12234', email = 'xyyy@gmail.com', iddpt = 1, idrole = 1))
-      
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sahid Patricia Reyes Valencia jhdj kjhvjfdbhjdcmkd', 'jpvkjdfuhf','8475312234', 'xyyy@gmail.com', 1)
+        self.assertTrue(result)
+        user1.deleteUser('jpvkjdfuhf') 
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+         
     #caso frontera Externa 
-    def test9UserInserFullnamet25char(self):
+    def testUserInserFullnamet25char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'Patricia Reyes Valencia25', username = 'patkjdfuhf',password = '12234', email = 'patx@gmail.com', iddpt = 1, idrole = 1))
-      
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('Patricia Reyes Valencia25', 'patkjdfuhf','1223467843', 'patx@gmail.com', 1)
+        self.assertTrue(result)
+        user1.deleteUser('patkjdfuhf')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
     #caso frontera Externa 
     def test9_0UserInserNoFullname(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.insertUser(fullname = '', username = 'patkjdfuhf',password = '12234', email = 'patx@gmail.com', iddpt = 1, idrole = 1))
-      
-       #caso frontera Externa 
-    def test9_1UserInserFullnamet1char(self):
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('', 'patkjdfuhf','12234', 'patx@gmail.com', 1)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+   
+    #caso frontera Externa 
+    def testUserInserFullnamet1char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'P', username = 'patkfhf_1',password = '12234', email = 'paddtx@gmail.com', iddpt = 1, idrole = 1))
-      
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('P', 'patkfhf_1','122374834', 'paddtx@gmail.com', 1)
+        self.assertTrue(result)
+        user1.deleteUser('patkfhf_1')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
     #caso frontera Externa
-    def test_10UserInsertEmail31char(self):
+    def testUserInsertEmail31char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'sahid Patricia', username = 'tdd ',password = '12d234', email = '10-10603-10-10916ing@ldc.usb.ve', iddpt = 1, idrole = 1))
-  
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sahid Patricia', 'tdd ','12d234', '10-10603-10-10916ing@ldc.usb.ve', 1)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
     #caso frontera Externa
-    def test_11UserInsertNoEmail(self):
+    def testUserInsertNoEmail(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'sahid Patricia', username = 'tdd ',password = '12d234', email = '', iddpt = 1, idrole = 1))
-       
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sahid Patricia', 'tdd ','12d234', '', 1)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
     #caso frontera Interna
-    def test_12UserInsertEmail1char(self):
+    def testUserInsertEmail1char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sahid Patricia', username = 'tdd_1 ',password = '12d234', email = '@', iddpt = 1, idrole = 1))
-        
-      #caso frontera Interna
-    def test_13UserInsertEmail30char(self):
-         user1 = user()
-         self.assertTrue(user1.insertUser(fullname = 'sahid Patricia', username = 'tdd_2',password = '12d234', email = '123167890patricia_v@gmail.com', iddpt = 1, idrole = 1))
-        
-      #caso frontera Interna
-    def test_14UserInsertEmail29char(self):
-         user1 = user()
-         self.assertTrue(user1.insertUser(fullname = 'sahid Patricia', username = 'tdd_3',password = '12d234', email = '123167890patriciav@gmail.com', iddpt = 1, idrole = 1))
-       
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sahid Patricia', 'tdd_1 ','12d2345678', '@', 1)
+        self.assertTrue(result)
+        user1.deleteUser('tdd_1')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')        
+         
+    #caso frontera Interna
+    def testUserInsertEmail30char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sahid Patricia', 'tdd_2','12d2356784', '123167890patricia_v@gmail.com', 1)
+        self.assertTrue(result)
+        user1.deleteUser('tdd_2')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
+    #caso frontera Interna
+    def testUserInsertEmail29char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sahid Patricia', 'tdd_3','12d2343434', '123167890patriciav@gmail.com', 1)
+        self.assertTrue(result)
+        user1.deleteUser('tdd_3')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
      #caso frontera externa
-    def test_15UserInsertPassword17(self):
-         user1 = user()
-         self.assertFalse(user1.insertUser(fullname = 'pat', username = 'ehfer_23',password = '12316789qwertyuai', email = '2@ls', iddpt = 1, idrole = 1))
-       
+    def testUserInsertPassword17(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('pat', 'ehfer_23','12316789qwertyuai', '2@ls', 1)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+   
     #caso frontera externa
-    def test_16UserInsertNoPassword(self):
+    def testUserInsertNoPassword(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'sah', username = 'ehfadh_2',password = '', email = '3@ls', iddpt = 1, idrole = 1))
-       
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sah', 'ehfadh_2','', '3@ls', 1)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+          
     #caso frontera interna
-    def test_17UserInsertPassword15(self):
+    def testUserInsertPassword15(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sah', username = 'ehf_1',password = 'eifko09olpedft5', email = 'po@rls', iddpt = 1, idrole = 1))
-       
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sah', 'ehf_1','eifko09olpedft5', 'po@rls', 1)
+        self.assertTrue(result)
+        user1.deleteUser('ehf_1')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+          
     #caso frontera interna
-    def test_18UserInsertPassword1(self):
+    def testUserInsertPassword8(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sr', username = 'er3r_1',password = '1', email = 'desm@ld.s', iddpt = 1, idrole = 1))
-       
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sr', 'er3r_1','12345678', 'desm@ld.s', 1)
+        self.assertTrue(result)
+        user1.deleteUser('er3r_1')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+          
     #caso frontera
-    def test_19UserInsertPasword16(self):
+    def testUserInsertPasword16(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sah', username = 'frkfe_1',password = 'qiejdp0t4jmds21l', email = 'fefef_t@l.ss', iddpt = 1, idrole = 1))
-       
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sah', 'frkfe_1','qiejdp0t4jmds21l', 'fefef_t@l.ss', 1)
+        self.assertTrue(result)
+        user1.deleteUser('frkfe_1')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
     #caso frontera
-    def test_20UserInsertPassword8(self):
+    def testUserInsertPassword8(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertTrue(user1.insertUser(fullname = 'sah', username = 'lowdn',password = 'kdiopw34', email = 'efmefm@l.c', iddpt = 1, idrole = 1))
-       
-    #Caso Malicia5
-    def test_21UserInsertiddptChar(self):
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sah', 'lowdn','kdiopw34', 'efmefm@l.c', 1)
+        self.assertTrue(result)
+        user1.deleteUser('lowdn')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
+    #Caso Malicia
+    def testUserInsertidroleChar(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'sahid', username = 'a',password = '12234', email = 'xxx@gmail.com', iddpt = 'a', idrole = 'b'))
-                  
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('sahid', 'a','12234', 'xxx@gmail.com','b')
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
     #caso malicia
-    def test_22UserInsertNochar(self):
+    def testUserInsertNochar(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.insertUser(fullname = '', username = '',password = '', email = '', iddpt = None, idrole = None))
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('', '','', '', None)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
        
     #caso malicia   
-    def test_22_1UserInsertNoParam(self):
+    def testUserInsertNoParam(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.insertUser(fullname = None, username = None,password = None, email = None, iddpt = None, idrole = None))
- 
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser(None, None,None, None,None)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
     #caso Frontera
-    def test_22_2UserInsertNoDpt(self):
+    def testUserInsertNoRole(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'srgfer', username = 'pw74b_r',password = 'efoewfwe1', email = 'tarea@hot.com', iddpt = 75, idrole = 1))
-
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('srgfer', 'pw74b_r','efoewfwe1', 'tarea@hot.com', None)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+   
     #caso Frontera
-    def test_22_3UserInsertNoRole(self):
+    def testUserInsertNoRole(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'utdf R', username = 'olpo',password = 'efefefr3', email = 'nonemail@,mail.cpom', iddpt = 1, idrole = 80))
-    
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('utdf R', 'olpo','efefefr3', 'nonemail@,mail.cpom', 80)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+           
     #Caso esquina
-    def test_22_4UserInsertNoForeign(self):
+    def testUserInsertNoForeign(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.insertUser(fullname = 'fiee0 ee', username = 'q84-g0gs',password = 'wdwd94', email = 'ffjfor@w.pol', iddpt = 60, idrole = 60))
-
-    ##################################################################################
-       
-    #CASOS DE PRUEBA SEARCHUSER
-       
-    #Caso Frontera
-    def test_23searchUserTrue(self):
-        user1 = user()
-        self.assertNotEqual([],user1.searchUser(username = 'ehfah'))
-           
-    #Caso Frontera 
-    def test_24searchUser1Char(self):
-        user1 = user()
-        self.assertNotEqual([],user1.searchUser(username = 'a'))
-       
-    #Caso Frontera
-    def test_25searchUser16Char(self):
-        user1 = user()
-        self.assertNotEqual([],user1.searchUser(username = 'jksjdfdjvkjdfuhf'))
-       
-    #Caso Frontera externa
-    def test_26SearchUserNotChar(self): 
-        user1 = user()
-        self.assertEqual([],user1.searchUser(username = ''))
-       
-    #Caso Frontera externa
-    def test_27searchUser17Char(self):
-       user1 = user()
-       self.assertEqual([],user1.searchUser(username = 'jksjdfdj vkjdfuhf'))
-          
-    #Caso Esquina
-    def test_28searchUserNotInsert(self):
-        user1 = user()
-        self.assertEqual([],user1.searchUser(username = 'PatriciaValencia'))
-           
-    #Caso INtermedio
-    def test_29searchUser8Char(self):
-        user1 = user()
-        self.assertNotEqual([],user1.searchUser(username = 'wiekfprm'))
-      
-    #caso Malicia 
-    def test_29_1searchUserNoChar(self):
-        user1 = user()
-        self.assertEqual([],user1.searchUser(username = ''))
-          
-    def test_29_2searchUserNoParam(self):
-        user1 = user()
-        self.assertEqual([],user1.searchUser(username = None))
-     
-    ###############################################################################################    
-   
-     #CASOS DE PRUEBA FUNCION UPDATEUSER
-       
-    def test_30updateUserTrue(self):
-        user1 = user()
-        self.assertTrue(user1.updateUser(new_fullname = 'xd', username = 'ehfah',new_password = 'ldowqeq', new_email = 'o123ifhweief@ef', new_iddpt = 1, new_idrole = 1))
-   
-    def test_31_1updateUserFalse(self):
-         user1 = user()
-         self.assertFalse(user1.updateUser(new_fullname = None, username = 'ehfah',new_password = 'ldowqeq', new_email = 'oifhweiofw', new_iddpt = 1, new_idrole = 1))
-   
-    def test_32_2updateUserTrue(self):
-         user1 = user()
-         self.assertFalse(user1.updateUser(new_fullname = 'y', username = 'ehfah',new_password = None, new_email = 'oieeniofefw', new_iddpt = 1, new_idrole = 1))
-       
-    def test_33_3updateUserTrue(self):
-        user1 = user()
-        self.assertFalse(user1.updateUser(new_fullname = 'loq', username = 'ehfah',new_password = 'ldowqeq', new_email = '', new_iddpt = 1, new_idrole = 1))
-                            
-    def test_34_4updateUserTrue(self):
-        user1 = user()
-        self.assertTrue(user1.updateUser(new_fullname = 'loq', username = 'ehfah',new_password = '123167891012wd', new_email = 'fwfwfe', new_iddpt = 1, new_idrole = 1))
-   
-    def test_35_5updateUserTrue(self):
-        user1 = user()
-        self.assertFalse(user1.updateUser(new_fullname = 'lfoq', username = 'ehfah',new_password = '1231612wd', new_email = 'fwfefwfe', new_iddpt =5000, new_idrole = 4000))
-   
-    def test_35_6updateUserNoId(self):
-        user1 = user()
-        self.assertFalse(user1.updateUser(new_fullname = 'lfoq', username = 'ehfah',new_password = '1231612wd', new_email = 'fwf@2efwfe', new_iddpt =5000, new_idrole = 1))
+        role1.insertRole('Product Owner','description',1)
+        result = user1.insertUser('fiee0 ee', 'q84-g0gs','wdwd94', 'ffjfor@w.pol',  60)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
   
-    def test_35_7updateUserNoRole(self):
-        user1 = user()
-        self.assertFalse(user1.updateUser(new_fullname = 'lfoq', username = 'ehfah',new_password = '1231612wd', new_email = 'fwfe!_fwfe', new_iddpt =1, new_idrole = 4000)) 
-    
-    def test_35_8updateUserChar(self):
-        user1 = user()
-        self.assertFalse(user1.updateUser(new_fullname = 'lfoq', username = 'ehfah',new_password = '1231612wd', new_email = 'fwfe@fwfe', new_iddpt =1, new_idrole = 'a'))    
-    
-    def test_35_9updateUserNoUser(self):
-        user1 = user()
-        self.assertFalse(user1.updateUser(new_fullname = 'lfoq', username = None,new_password = '1231612wd', new_email = 'fwf@@efwfe', new_iddpt =1, new_idrole = 1))
-    
-    def test_36_1updateUserBlancs(self):
-        user1 = user()
-        self.assertFalse(user1.updateUser(new_fullname = '', username = '',new_password = '', new_email = '', new_iddpt = None, new_idrole = None))
-    
-    def test_36_2updateUserNoParam(self):
-        user1 = user()
-        self.assertFalse(user1.updateUser(new_fullname = None, username = None, new_password = None, new_email = None, new_iddpt =None, new_idrole = None))
-    
-    def test_36_3updateUserNoChange(self):
-        user1 = user()
-        self.assertFalse(user1.updateUser(new_fullname = None, username = 'ehfah',new_password = None, new_email = None, new_iddpt = None, new_idrole = None))
-    
-    def test_36_4updateUsermaxchar(self):
-        user1 = user()
-        self.assertTrue(user1.updateUser(new_fullname = 'mas cincuenta caracteres en el nombre con espacios', username = 'ehfah',new_password = 'condieciseischar', new_email = 'cuenta30charpara@prueba.usb.ve', new_iddpt =1, new_idrole = 1))
-
-    def test_36_5updateUserFronteraExt(self):
-        user1 = user()
-        self.assertFalse(user1.updateUser(new_fullname = 'mas cincuenta caracteres en el nombre con espacios_', username = 'ehfah',new_password = 'condieci_seischar', new_email = 'cuenta30charpara@_prueba.usb.ve', new_iddpt =1, new_idrole = 1))
-    
-    def test_36_6updateUserFronteraInt(self):
-        user1 = user()
-        self.assertTrue(user1.updateUser(new_fullname = 'mas cincuenta caracteres en el nombre con espacio', username = 'ehfah',new_password = 'condieciseischa', new_email = 'cuenta30charpar@prueba.usb.ve', new_iddpt =1, new_idrole = 1))
-    
-    def test_36_7updateUserNotfound(self):
-        user1 = user()
-        self.assertFalse(user1.updateUser(new_fullname = 'mas cincuenta caracteres ', username = 'prueba_admin',new_password = 'condieciseischar', new_email = 'cuentanueva@prueba.usb.ve', new_iddpt =1, new_idrole = 1))
-    
-    
-    ################################################################################################
-    #CASOS DE PRUEBA FUNCION DELETEUSER
-        
+  
+     ##########################################      
+     #   Suite de Pruebas para searchUser     #
+     ##########################################
+      
     #Caso Frontera
-    def test_40UserDeleteTrue(self):
+    def testsearchUserExist(self):
         user1 = user()
-        self.assertTrue(user1.deleteUser(username = 'wiekfprm'))
+        result = user1.searchUser('ehfah')
+  
+    #Caso Frontera
+    def testsearchUserTrue(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser('nombre','ehfah','12345678','ef@fg.com',1)
+        result = user1.searchUser('ehfah')
+        self.assertNotEqual([],result)
+        user1.deleteUser('ehfah')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+             
+    #Caso Frontera 
+    def testsearchUser1Char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser('nombreA','a','12345678','a@g.com',1)
+        result = user1.searchUser('a')
+        self.assertNotEqual([],result)
+        user1.deleteUser('a')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+     
+    #Caso Frontera
+    def testsearchUser16Char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser('new uswer','jksjdfdjvkjdfuhf','12345678','nuevo@.com',1)
+        result = user1.searchUser('jksjdfdjvkjdfuhf')
+        self.assertNotEqual([],result)
+        user1.deleteUser('new uswer')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+  
+    #Caso Frontera externa
+    def testSearchUserNotChar(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.searchUser('') 
+        self.assertEqual([],result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+      
+    #Caso Frontera externa
+    def testsearchUser17Char(self):
+  
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser('fullname','jksjdfdj vkjdfuhf','12345678','email@',1)
+        result = user1.searchUser('jksjdfdj vkjdfuhf')
+        self.assertEqual([],result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+  
+    #Caso Esquina
+    def testsearchUserNotInsert(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.searchUser('PatriciaValencia')
+        self.assertEqual([],result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+  
+    #Caso Intermedio
+    def testsearchUser8Char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser('fullname','wiekfprm','123456784','eail@nuevo',1)
+        result = user1.searchUser('wiekfprm')
+        self.assertNotEqual([],result)
+        user1.deleteUser('wiekfprm')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+  
+    #caso Malicia 
+    def testsearchUserNoChar(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.searchUser('')
+        self.assertEqual([],result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+            
+    def testsearchUserNoParam(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        result = user1.searchUser(None)
+        self.assertEqual([],result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+  
+      
+ 
+ 
+     ##########################################      
+     #   Suite de Pruebas para UpdateUser     #
+     ##########################################
+ 
+        
+    def testupdateUserTrue(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         role1 = role()
+         user1 = user()
+         role1.insertRole('Product Owner','description',1)
+         user1.insertUser('loquesea','ehfah','12345678','cosa',1)
+         result = user1.updateUser('xd', 'ehfah','ldowqeq', 'o123ifhweief@ef',1)
+         self.assertTrue(result)
+         user1.deleteUser('ehfah')
+         role1.deleteRole('Product Owner')
+         aBackLog.deleteProduct('Taxi seguro.')
+ 
+    def testupdateUserFalse(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         role1 = role()
+         user1 = user()
+         role1.insertRole('Product Owner','description',1)
+         user1.insertUser('valido', 'ehfah', 'ldowf4r42q', 'oifhwe@fw', 1)
+         result = user1.updateUser(None, 'ehfah', 'ldowqeq', 'oifhweiofw',  1)
+         self.assertFalse(result)
+         user1.deleteUser('ehfah')
+         role1.deleteRole('Product Owner')
+         aBackLog.deleteProduct('Taxi seguro.')
+    
+    def testupdateUserNonepass(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         role1 = role()
+         user1 = user()
+         role1.insertRole('Product Owner','description',1)
+         user1.insertUser('yloqdd', 'ehfah', '123456789', 'oieeniofefw',  1)
+         result = user1.updateUser('y', 'ehfah', None, 'oieeniofefw',  1)
+         self.assertFalse(result)
+         user1.deleteUser('ehfah')
+         role1.deleteRole('Product Owner')
+         aBackLog.deleteProduct('Taxi seguro.')
+        
+    def testupdateUserNonedescription(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         role1 = role()
+         user1 = user()
+         role1.insertRole('Product Owner','description',1)
+         user1.insertUser('loqwew', 'ehfah', 'ldoee22wqeq', 'nuevoemaild', 1)
+         result = user1.updateUser('loq', 'ehfah', 'ldowqeq', '', 1)
+         self.assertFalse(result)
+         user1.deleteUser('ehfah')
+         role1.deleteRole('Product Owner')
+         aBackLog.deleteProduct('Taxi seguro.')
+                             
+    def testupdateUserIntermedio(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser('loer3q', 'ehfah', '123163r378012wd', 'frrwfwfe', 1)
+        result = user1.updateUser('loq', 'ehfah', '123167891012wd', 'fwfwfe', 1)
+        self.assertTrue(result)
+        user1.deleteUser('ehfah')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+    
+    def testupdateUserNorole(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.updateUser( 'lfoqefe', 'ehfah', '12312331wd', 'fw3rfe', 1)
+        result = user1.updateUser( 'lfoq', 'ehfah', '1231612wd', 'fwfefwfe', 4000)
+        self.assertFalse(result)
+        user1.deleteUser('ehfah')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+ 
+    def testupdateUserChar(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        self.assertFalse(user1.updateUser( 'lfoq', 'ehfah', '1231612wd', 'fwfe@fwfe',  'a'))
+        user1.deleteUser('ehfah')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')    
+     
+    def testupdateUserNoUser(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.updateUser( 'lfoqeffe', 'ehfah', '123161efef2wd', 'fwf@@efeffwfe', 1)
+        result = user1.updateUser( 'lfoq', None, '1231612wd', 'fwf@@efwfe',  1)
+        self.assertFalse(result)
+        user1.deleteUser('ehfah')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+     
+    def testupdateUserBlancs(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
+        result = user1.updateUser( '', '', '', '', None)
+        self.assertFalse(result)
+        user1.deleteUser('ehfah')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+     
+    def testupdateUserNoParam(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
+        result = user1.updateUser( None, None,  None, None, None)
+        self.assertFalse(result)
+        user1.deleteUser('ehfah')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+     
+    def testupdateUserNoChange(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
+        result = user1.updateUser( None, 'ehfah', None, None, None)
+        self.assertFalse(result)
+        user1.deleteUser('ehfah')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+     
+    def testupdateUsermaxchar(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
+        result = user1.updateUser('mas cincuenta caracteres en el nombre con espacios','ehfah','condieciseischar','cuenta30charpara@prueba.usb.ve', 1)
+        self.assertTrue(result)
+        user1.deleteUser('ehfah')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+ 
+    def testupdateUserFronteraExt(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
+        result = user1.updateUser('mas cincuenta caracteres en el nombre con espacios_','ehfah','condieci_seischar','cuenta30charpara@_prueba.usb.ve',1)
+        self.assertFalse(result)
+        user1.deleteUser('ehfah')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+     
+    def testupdateUserFronteraInt(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
+        result = user1.updateUser('mas cincuenta caracteres en el nombre con espacio','ehfah','condieciseischa','cuenta30charpar@prueba.usb.ve',1)
+        self.assertTrue(result)
+        user1.deleteUser('ehfah')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+     
+    def testupdateUserNotfound(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
+        result = user1.updateUser( 'mas cincuenta caracteres ', 'prueba_admin', 'condieciseischar', 'cuentanueva@prueba.usb.ve', 1)
+        self.assertFalse(result)
+        user1.deleteUser('ehfah')
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
+     
+    
+     ##########################################      
+     #   Suite de Pruebas para DeleteUser     #
+     ##########################################
+     
+    #Caso Frontera
+    def testUserDeleteExist(self):
+        user1 = user()
+        user1.deleteUser('ehfah')
+
+    #Caso Frontera
+    def testUserDeleteTrue(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
+        user1 = user()
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser('urown','wiekfprm','1234322249','email@nee',1)
+        result = user1.deleteUser('wiekfprm')
+        self.assertTrue(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
       
     #caso Frontera     
-    def test_41UserDeleteFalse(self):
+    def testUserDeleteFalse(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.deleteUser(username = 'wiekfprm'))
+        role1.insertRole('Product Owner','description',1)
+        result = user1.deleteUser('wiekfprm')
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
       
     #caso malicia    
-    def test_42UserDeleteNoUser(self):
+    def testUserDeleteNoUser(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.deleteUser(username = ''))
+        role1.insertRole('Product Owner','description',1)
+        result = user1.deleteUser('')
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
       
     #caso frontera Interna 
-    def test_43UserDelete1char(self):
+    def testUserDelete1char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertTrue(user1.deleteUser(username = 'a'))
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser('nombrea','a','passworda12','emaila',1)
+        result = user1.deleteUser('a')
+        self.assertTrue(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
       
     #caso frontera     
-    def test_44UserDelete16char(self):
+    def testUserDelete16char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertTrue(user1.deleteUser(username = 'jksjdfdjvkjdfuhf'))
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser('nombre','jksjdfdjvkjdfuhf','1234567890','emaildwd@',1)
+        result = user1.deleteUser('jksjdfdjvkjdfuhf')
+        self.assertTrue(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
               
     #Caso frontera Externa        
-    def test_45UserDelete17char(self):
+    def testUserDelete17char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.deleteUser(username = 'jksjdfdj vkjdfuhf'))
+        role1.insertRole('Product Owner','description',1)
+        result = user1.deleteUser('jksjdfdj vkjdfuhf')
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
               
     #caso frontera Interna 
-    def test_46UserDelete15char(self):
+    def testUserDelete15char(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertTrue(user1.deleteUser(username = 'wjfr9olpsmfkreo')) 
+        role1.insertRole('Product Owner','description',1)
+        user1.insertUser('nombre','wjfr9olpsmfkreo','1234567890','emailen',1)
+        result = user1.deleteUser('wjfr9olpsmfkreo')
+        self.assertTrue(result) 
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')
       
     #caso Malicia
-    def test_47UserDeleteNoParam(self):
+    def testUserDeleteNoParam(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.deleteUser(username = None))     
+        role1.insertRole('Product Owner','description',1)
+        result = user1.deleteUser(None)
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')     
      
     #caso Malicia
-    def test_48UserDeleteNoChar(self):
+    def testUserDeleteNoChar(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        role1 = role()
         user1 = user()
-        self.assertFalse(user1.deleteUser(username = '')) 
+        role1.insertRole('Product Owner','description',1)
+        result = user1.deleteUser('')
+        self.assertFalse(result)
+        role1.deleteRole('Product Owner')
+        aBackLog.deleteProduct('Taxi seguro.')  
