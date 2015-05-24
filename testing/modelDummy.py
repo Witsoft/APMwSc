@@ -150,7 +150,7 @@ class clsUserHistory(db.Model):
 		
 	def __repr__(self):
 		'''Representacion en string de la Historia de Usuario'''
-		return '<cod_userHistory %r, type_userHistory %r>' % (self.cod_userHistory, self.type_userHistory)
+		return '<cod_userHistory %r, type_userHistory %r, id_backLog %r>' % (self.cod_userHistory, self.type_userHistory, self.id_backLog)
 	
 	
 migrate = Migrate(app, db)
