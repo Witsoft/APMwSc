@@ -7,6 +7,7 @@ from flask                 import Flask
 from flask.ext.migrate     import Migrate, MigrateCommand
 from flask.ext.sqlalchemy  import SQLAlchemy
 from flask.ext.script      import Manager
+from sqlalchemy.sql.schema import PrimaryKeyConstraint
 #from sqlalchemy.sql.schema import CheckConstraint
 
 
@@ -120,8 +121,9 @@ class clsBackLog(db.Model):
 	BL_name        = db.Column(db.String(50), unique = True)
 	BL_description = db.Column(db.String(140))
 	obj_backLog    = db.relationship('clsObjective',backref='objective',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-#	act_backLog    = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	act_backLog    = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	acc_backLog    = db.relationship('clsAccions',backref='accions',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
+	usrHis_backLog = db.relationship('clsUserHistory',backref='userHistory',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 
 	def __init__(self, BL_name, BL_description):
 		'''Constructor del modelo BackLog'''
@@ -131,8 +133,25 @@ class clsBackLog(db.Model):
 	def __repr__(self):
 		'''Representacion en string del nombre del BakcLog'''
 		return '<id_backLog %r, BL_nombre %r>' % (self.id_backLog, self.BL_name)
+	
 
-
+class clsUserHistory(db.Model):
+	'''Clase que define el modelo de tabla UserHistory'''
+	__tablename__ = 'userHistory'
+	id_userHistory   = db.Column(db.Integer, unique = True, index = True)
+	cod_userHistory  = db.Column(db.String(10), Primary_key = True, index = True) 
+	type_userHistory = db.Column(db.String(11))
+	id_backLog       = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+	
+	def __init__(self,cod_userHistory,type_userHistory):
+		self.cod_userHistory  = cod_userHistory
+		self.type_userHistory = type_userHistory
+		
+	def __repr__(self):
+		'''Representacion en string de la Historia de Usuario'''
+		return '<cod_userHistory %r, type_userHistory %r>' % (self.cod_userHistory, self.type_userHistory)
+	
+	
 migrate = Migrate(app, db)
 manager = Manager(app)
 
