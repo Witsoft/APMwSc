@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.model import *
+from modelDummy import *
+from roleDummy  import *
 
 # Declaracion de constantes.
 const_maxUser     = 16
 const_maxFullname = 50
-const_maxPassword = 200
+const_maxPassword = 16
 const_maxEmail    = 30
 const_min_long    = 1
+const_min_password = 8
 
 class user(object):
     '''Clase que permite manejar usuarios de manera persistente'''
@@ -38,31 +40,29 @@ class user(object):
 
     def insertUser(self, fullname, username, password, email, idrole):
         '''Permite insertar un usuario en la tabla'''
-        if (type(fullname) != str or type(username) != str or type(password) != str or type(email) != str or\
-             type(idrole) != int):
-            return False
-        else:
-            auser = clsUser.query.filter_by(username=username).all()
-            if auser == []:
-                new_user = clsUser(fullname = fullname, username = username, password = password, email =email, idrole = idrole)
-                longUser = len(new_user.username)
-                longFullname = len(new_user.fullname)
-                longPassword = len(new_user.password)
-                longEmail = len(new_user.email)
-                if  (longUser >const_maxUser or longFullname > const_maxFullname or longPassword > const_maxPassword \
-                     or longEmail>const_maxEmail or longEmail<const_min_long or longPassword<const_min_long or longUser<const_min_long\
-                     or longFullname< const_min_long):
-                    return False
-                else:
-                    role1 = clsRole.query.filter_by(idrole = idrole).all()
-                    if (role1 == []):
-                        return False
-                    else:
-                        db.session.add(new_user)
-                        db.session.commit()
-                        return True
-            else:
-                return False
+        
+        typefname = (type(fullname) == str) 
+        typeuser = (type(username) == str) 
+        typepassword = (type(password) == str)
+        typemail =(type(email) == str) 
+        typerole = (type(idrole) == int)
+        
+        if (typefname and typeuser and typepassword and typemail and typerole):
+            
+            longUser = const_min_long <= len(username) <= const_maxUser
+            longFullname = const_min_long <= len(fullname) <= const_maxFullname
+            longPassword = const_min_password <= len(password) <= const_maxPassword
+            longEmail = const_min_long <= len(email) <= const_maxEmail 
+            
+            if (longUser and longFullname and longPassword and longEmail):
+                auser = clsUser.query.filter_by(username=username).all()
+                role1 = clsRole.query.filter_by(idrole = idrole).all()
+                if ((auser == []) and (role1 != [])):
+                    new_user = clsUser(fullname = fullname, username = username, password = password, email =email, idrole = idrole)
+                    db.session.add(new_user)
+                    db.session.commit()
+                    return True
+        return False
         
     def updateUser(self, new_fullname, username, new_password, new_email, new_idrole):   
         '''Permite actualizar los valores de un usuario'''    

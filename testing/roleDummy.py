@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.model import *
-from app.scrum.backLog import *
+from modelDummy   import *
+from backLogDummy import *
 
 # Declaracion de constantes.
 maxNameRole = 50
@@ -68,7 +68,7 @@ class role(object):
                     db.session.commit()
                     return True
         return False   
-    
+
     def deleteRole(self,namerole):
         '''Permite eliminar un role dado su nombre'''
 
