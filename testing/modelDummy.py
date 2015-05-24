@@ -143,7 +143,7 @@ class clsUserHistory(db.Model):
 	type_userHistory = db.Column(db.String(11))
 	id_backLog       = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
 	
-	def __init__(self,cod_userHistory,type_userHistory):
+	def __init__(self,cod_userHistory,type_userHistory,id_backLog):
 		self.cod_userHistory  = cod_userHistory
 		self.type_userHistory = type_userHistory
 		self.id_backLog = id_backLog
