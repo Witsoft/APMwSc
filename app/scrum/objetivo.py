@@ -1,39 +1,21 @@
 # -*- coding: utf-8 -*-
-
-#Agregando proyect root
-
-import sys
-import os
-dir = os.path.abspath(os.path.join(os.path.abspath(__file__), '../../..'))
-sys.path.append(dir)
-
-#Dependencias flask
 from flask import request, session, Blueprint, json
-from sqlalchemy import create_engine
-from sqlalchemy.engine.url import URL
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.sql.expression import text
 
-#Definicion de blueprint y bd
 objetivo = Blueprint('objetivo', __name__)
-from base import *
 
 
 @objetivo.route('/objetivo/ACrearObjetivo', methods=['POST'])
 def ACrearObjetivo():
     #POST/PUT parameters
     params = request.get_json()
-    results = [{'label':'/VProducto', 'msg':['Objetivo creado']}, {'label':'/VCrearObjetivo', 'msg':['Error al crear objetivo']}, ]
+    results = [{'label':'/VProducto', 'msg':['Actor creado']}, {'label':'/VCrearObjetivo', 'msg':['Error al crear objetivo']}, ]
     res = results[0]
-    
-    #Action code goes here, res should be a list with a label and a message  
-    idPila = str(session['idPila'])
-    session.pop('idPila', None)
-    objetivo = objective()
-    objetivo.insertObjective(descObjective = params['descripcion'], id_backlog = idPila)
+    #Action code goes here, res should be a list with a label and a message
+
+    idPila = 1
     res['label'] = res['label'] + '/' + str(idPila)
+
     #Action code ends here
-    
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -49,14 +31,12 @@ def AModifObjetivo():
     params = request.get_json()
     results = [{'label':'/VProducto', 'msg':['Objetivo actualizado']}, {'label':'/VObjetivo', 'msg':['Error al modificar objetivo']}, ]
     res = results[0]
-    
     #Action code goes here, res should be a list with a label and a message
-    idPila = int(request.args.get('idPila', 1))
-    objetivo = objective()
-    objetivo.updateObjective(params['descripcion'])
+
+    idPila = 1
     res['label'] = res['label'] + '/' + str(idPila)
+
     #Action code ends here
-    
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -71,12 +51,12 @@ def VCrearObjetivo():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
-        
     #Action code goes here, res should be a JSON structure
-    params = request.get_json()    
-    session['idPila'] = request.args['idPila']
+
+    #Datos de prueba
+    res['idPila'] = 1
+
     #Action code ends here
-    
     return json.dumps(res)
 
 
@@ -86,19 +66,11 @@ def VObjetivo():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
-        
-    #Action code goes here, res should be a JSON structure     
-    objetivo = objective()
+    #Action code goes here, res should be a JSON structure
 
-    idPila = int(request.args.get('idPila', 1))
-    #objs = objetivo.listarObjetivos()
-    #res['fObjetivo'] = objs[idProducto-1]
-    #idObjetivo=idPila
-
-    #res['idPila'] = 1 
+    res['idPila'] = 1 
 
     #Action code ends here
-    
     return json.dumps(res)
 
 

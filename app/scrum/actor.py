@@ -67,6 +67,8 @@ def VCrearActor():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    #Datos de prueba
+    res['idPila'] = 1
 
     #Action code ends here
     return json.dumps(res)

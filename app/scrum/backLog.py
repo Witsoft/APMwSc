@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-. 
-'''
-Fecha:    14/05/2015.
-'''
 
-from model import *
+from app.scrum.model import *
 
 # Declaracion de constantes.
 const_maxDescription = 140
@@ -41,7 +38,6 @@ class backLog(object):
                 or (long_dName > const_maxName) or (long_dName < const_minName)) :
                 return False
             else:
-                #dNameAux = clsBackLog.query.filter_by(BL_name = dName).all()
                 dNameAux = self.findName(dName);
                 if (dNameAux != []):
                     return False
@@ -104,10 +100,12 @@ class backLog(object):
                         db.session.delete(i)
                         db.session.commit()
                     return True
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+
+    def actorsAsociatedToProduct(self,productId):
+        ''' Permite obtener una lista de los Actores asociados a una pila de Producto'''
+        checkTypeId = type(productId) == int    
+        if checkTypeId: 
+            found = clsRole.query.filter_by(id_pila=productId).all()
+            return found
+        return([])              
+                   

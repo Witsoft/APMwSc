@@ -33,14 +33,13 @@ class clsRole(db.Model):
     '''Clase que define el modelo Role'''
 
     __tablename__ = 'roles'
-    idrole    = db.Column(db.Integer, primary_key=True)
-    namerole  = db.Column(db.String(50), unique=True)
+    idrole          = db.Column(db.Integer, primary_key=True)
+    namerole        = db.Column(db.String(50), unique=True)
     roledescription = db.Column(db.String(140))
-    id_pila = db.Column(db.Integer,db.ForeignKey('backLog.id_backLog'))
-    user_role = db.relationship('clsUser',backref='role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+    id_pila         = db.Column(db.Integer,db.ForeignKey('backLog.id_backLog'))
+    user_role       = db.relationship('clsUser',backref='role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
     #CheckConstraint(namerole in ('Product Owner','Scrum Master', 'Team member'), name='check_namerole')
       
-   
     def __init__(self, namerole,roledescription,id_pila):
         '''Constructor del modelo Role'''
         self.namerole = namerole
