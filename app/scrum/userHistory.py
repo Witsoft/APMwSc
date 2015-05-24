@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.backLog import *
+from modelDummy   import *
+from backLogDummy import *
 
 # Declaracion de constantes
 arrayType = ['obligatorio', 'opcional']
@@ -10,7 +11,7 @@ const_max_cod = 10
 class userHistory(object):
     '''Clase que permite manejar las historias de manera persistente'''
 
-    def insertUserHistory(self,cod_userHistory, type_userHistory, id_backLog):
+    def insertUserHistory(self,cod_userHistory,type_userHistory,id_backLog):
         '''Permite insertar una Historia'''
         
         leng_cod_userHistory = len(cod_userHistory) <= const_max_cod           
@@ -23,7 +24,7 @@ class userHistory(object):
                 obackLog = clsBackLog.query.filter_by(id_backLog = id_backLog).all()
                 ohistory = clsUserHistory.query.filter_by(type_userHistory = type_userHistory).all()
                 if (obackLog != []) and (ohistory == []):
-                    new_history = clsUserHistory(type_userHistory = type_userHistory,id_backLog = id_backLog)
+                    new_history = clsUserHistory(cod_userHistory = cod_userHistory,type_userHistory = type_userHistory,id_backLog = id_backLog)
                     db.session.add(new_history)
                     db.session.commit()
                     return True
