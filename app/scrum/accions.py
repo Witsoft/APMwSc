@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-. 
 
-from model   import *
-from backLog import *
+from app.scrum.backLog import *
 
 
 # Declaracion de constantes.
