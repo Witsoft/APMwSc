@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-. 
 
-from model   import *
-from backLog import *
+from app.scrum.backLog import *
 
 # Declaracion de constantes.
 const_minIdBacklog = 1
@@ -27,7 +26,7 @@ class objective(object):
                 aObj     = self.searchObjective(descObjective)
 
                 if (aBackLog != []) and (aObj == []) :
-                    new_objective = clsObjective(descObjective = descObjective,id_backLog = id_backLog)
+                    new_objective = clsObjective(descObjective, id_backLog)
                     db.session.add(new_objective)
                     db.session.commit()
                     return True

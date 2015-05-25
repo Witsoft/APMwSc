@@ -44,11 +44,11 @@ class user(object):
         else:
             auser = clsUser.query.filter_by(username=username).all()
             if auser == []:
-                new_user = clsUser(fullname = fullname, username = username, password = password, email =email, idrole = idrole)
-                longUser = len(new_user.username)
+                new_user     = clsUser(fullname = fullname, username = username, password = password, email =email, idrole = idrole)
+                longUser     = len(new_user.username)
                 longFullname = len(new_user.fullname)
                 longPassword = len(new_user.password)
-                longEmail = len(new_user.email)
+                longEmail    = len(new_user.email)
                 if  (longUser >const_maxUser or longFullname > const_maxFullname or longPassword > const_maxPassword \
                      or longEmail>const_maxEmail or longEmail<const_min_long or longPassword<const_min_long or longUser<const_min_long\
                      or longFullname< const_min_long):
