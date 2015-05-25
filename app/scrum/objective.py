@@ -26,7 +26,7 @@ class objective(object):
                 aObj     = self.searchObjective(descObjective)
 
                 if (aBackLog != []) and (aObj == []) :
-                    new_objective = clsObjective(descObjective = descObjective,id_backLog = id_backLog)
+                    new_objective = clsObjective(descObjective, id_backLog)
                     db.session.add(new_objective)
                     db.session.commit()
                     return True
