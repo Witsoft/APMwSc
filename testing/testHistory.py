@@ -139,7 +139,7 @@ class TestHistory(unittest.TestCase):
         aBackLog.deleteProduct('Taxi seguro.')
         
         
- #############################################      
+    #############################################      
     #   Suite de Pruebas para searchUserHistory #
     #############################################
     
