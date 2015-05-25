@@ -118,21 +118,19 @@ class clsBackLog(db.Model):
 	
 	__tablename__ =  'backLog'
 	id_backLog     = db.Column(db.Integer,primary_key = True, index = True)	
-	BL_name        = db.Column(db.String(50), unique = True)
-	BL_description = db.Column(db.String(140))
+	BL_description = db.Column(db.String(140),unique = True)
 	obj_backLog    = db.relationship('clsObjective',backref='objective',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-	act_backLog    = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	act_backLog    = db.relationship('clsRole',backref='roles',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	acc_backLog    = db.relationship('clsAccions',backref='accions',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
 	usrHis_backLog = db.relationship('clsUserHistory',backref='userHistory',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 
-	def __init__(self, BL_name, BL_description):
+	def __init__(self, BL_description):
 		'''Constructor del modelo BackLog'''
-		self.BL_name        = BL_name
 		self.BL_description = BL_description
 		
 	def __repr__(self):
 		'''Representacion en string del nombre del BakcLog'''
-		return '<id_backLog %r, BL_nombre %r>' % (self.id_backLog, self.BL_name)
+		return '<id_backLog %r, BL_descripcion %r>' % (self.id_backLog, self.BL_description)
 	
 
 class clsUserHistory(db.Model):

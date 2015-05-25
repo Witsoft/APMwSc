@@ -10,11 +10,18 @@ def ACrearProducto():
     #POST/PUT parameters
     params  = request.get_json()
     results = [{'label':'/VProductos', 'msg':['Producto creado']}, {'label':'/VCrearProducto', 'msg':['Error al crear producto']}, ]
-    res     = results[0]
-    #Action code goes here, res should be a list with a label and a message
-
-
-    #Action code ends here
+    
+    prodDesc = params['descripcion']
+    
+    oBackLog = backLog()
+    result   = oBackLog.insertBackLog(prodDesc)
+    
+    if result:
+        res = results[0]
+    else:
+        res = results[1]
+    
+    
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -87,12 +94,11 @@ def VProductos():
         res['actor']=session['actor']
 
     # Obtenemos la lista de productos.
-    productList = clsBackLog.query.all()
-    # Como hasta ahora hay un solo producto.
-    productId   = productList[0].id_backLog
-    productName = productList[0].BL_name      
+    productList = clsBackLog.query.all()  
+    for prod in productList:
+        print(prod.id_backLog,prod.BL_description)
 
-    res['data0'] = [{'idPila':productId, 'nombre':productName}]
+    res['data0'] = [{'idPila':prod.id_backLog,'nombre':prod.BL_description}for prod in productList]
 
     return json.dumps(res)
 

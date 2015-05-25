@@ -5,41 +5,39 @@ from app.scrum.model import *
 # Declaracion de constantes.
 const_maxDescription = 140
 const_minDescription = 1
-const_maxName = 50
-const_minName = 1
-
 
 class backLog(object):
     '''Clase que permite (completar)'''
     
-    def findName(self,dName):
-        '''Permite buscar un nombre'''
-        if (type(dName) != str):
+    def findDescription(self,dDescription):
+        '''Permite buscar una descripcion'''
+        
+        checkTypeDesc = (type(dDescription)) != str
+        if checkTypeDesc:
             return []
         else:
-            long_dName = len(dName)
-            if ((long_dName >const_maxName) or (long_dName < const_minName)):
+            long_dDescription = len(dDescription)
+            if ((long_dDescription >const_maxDescription) or (long_dDescription < const_minDescription)):
                 return []
             else:
-                dBackLog = clsBackLog.query.filter_by(BL_name = dName).all()
+                dBackLog = clsBackLog.query.filter_by(BL_description = dDescription).all()
                 return dBackLog
         
-    def insertBackLog(self, dName, description):
+    def insertBackLog(self,description):
         '''Permite insertar una descripción'''
         
-        if (type(dName) != str or type(description) != str ):
+        checkTypeDesc = (type(description)) != str
+        if checkTypeDesc:
             return False
         else:
-            new_prod = clsBackLog(BL_name = dName, BL_description = description)
-            long_dName = len(new_prod.BL_name)
+            new_prod = clsBackLog(BL_description = description)
             long_description = len(new_prod.BL_description)
             
-            if  ((long_description > const_maxDescription) or (long_description < const_minDescription)\
-                or (long_dName > const_maxName) or (long_dName < const_minName)) :
+            if  ((long_description > const_maxDescription) or (long_description < const_minDescription)):
                 return False
             else:
-                dNameAux = self.findName(dName);
-                if (dNameAux != []):
+                dDescAux = self.findDescription(description);
+                if (dDescAux != []):
                     return False
                 else:
                     db.session.add(new_prod)
