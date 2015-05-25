@@ -109,3 +109,10 @@ class backLog(object):
             return found
         return([])              
                    
+    def objectivesAsociatedToProduct(self,objectiveId):
+        ''' Permite obtener una lista de los Objetivos asociados a una pila de Producto'''
+        checkTypeId = type(objectiveId) == int    
+        if checkTypeId: 
+            found = clsObjective.query.filter_by(id_backlog=objectiveId).all()
+            return found
+        return([])                                 
