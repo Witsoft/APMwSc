@@ -48,23 +48,23 @@ def AModifAccion():
     res = results[0]
     idPila = 1
     #Action code goes here, res should be a list with a label and a message
-'''
-    if request.method == 'POST':
 
+#     if request.method == 'POST':
+# 
+# 
+#         DescriptionList = clsAccions.query.filter_by(id_backLog = idPila).all() 
+#         oldDescription = DescriptionList[0]
+#         oAccion = accions()
+#         newDescription = params['descripcion']
+#         result = oAccion.updateAccion(oldDescription,newDescription)
+#         if result:
+#             print("Se actualizó satisfactoriamente la acción")
+#             res = results[0]
+#         else:
+#             res = results[1]
+#     else:
+#             res = results[1]
 
-        DescriptionList = clsAccions.query.filter_by(id_backLog = idPila).all() 
-        oldDescription = DescriptionList[0]
-        oAccion = accions()
-        newDescription = params['descripcion']
-        result = oAccion.updateAccion(oldDescription,newDescription)
-        if result:
-            print("Se actualizó satisfactoriamente la acción")
-            res = results[0]
-        else:
-            res = results[1]
-    else:
-            res = results[1]
-'''
     res['label'] = res['label'] + '/' + str(idPila)
 
 
