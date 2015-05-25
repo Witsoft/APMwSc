@@ -43,16 +43,16 @@ class userHistory(object):
         return ([])
     
     
-    def deleteUserHistory(self, type_userHistory):
+    def deleteUserHistory(self, cod_userHistory):
         '''Permite eliminar una historia segun su id'''
         
-        typeUD = (type(type_userHistory) == str)  
+        typeUD = (type(cod_userHistory) == str)  
         if typeUD:
-            Len_UD = minuserHistory <= len(type_userHistory) <= maxuserHistory
+            Len_UD = minuserHistory <= len(cod_userHistory) <= maxuserHistory
             if Len_UD:
-                foundid = clsUserHistory.query.filter_by(type_userHistory = type_userHistory).all()
+                foundid = clsUserHistory.query.filter_by(cod_userHistory = cod_userHistory).all()
                 if foundid != []:
-                    oHistory = clsUserHistory.query.filter_by(type_userHistory = type_userHistory).all()
+                    oHistory = clsUserHistory.query.filter_by(cod_userHistory = cod_userHistory).all()
                     for i in oHistory:    
                         db.session.delete(i)          
                     db.session.commit()
