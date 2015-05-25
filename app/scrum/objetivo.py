@@ -22,9 +22,7 @@ def ACrearObjetivo():
         oObjective = objective()
         newDescription = params['descripcion']
         result = oObjective.insertObjective(newDescription,1)
-        print(oObjective)
-        print(newDescription)
-        print("\n")
+
         if result:
             print("Se registró satisfactoriamente el objetivo")
             res = results[0]
@@ -35,14 +33,6 @@ def ACrearObjetivo():
 
     idPila = 1
     res['label'] = res['label'] + '/' + str(idPila)
-
-    #Action code ends here
-    if "actor" in res:
-        if res['actor'] is None:
-            session.pop("actor", None)
-        else:
-            session['actor'] = res['actor']
-    return json.dumps(res)
 
     #Action code ends here
     
@@ -100,7 +90,10 @@ def VCrearObjetivo():
         res['actor']=session['actor']
    
     #Action code goes here, res should be a JSON structure
-    #params = request.get_json()    
+    #params = request.get_json() 
+    
+    #Datos de prueba
+    res['idPila'] = 1   
 
     #Action code ends here
     return json.dumps(res)

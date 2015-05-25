@@ -85,11 +85,11 @@ class clsObjective(db.Model):
     def __init__(self, descObjective, id_backLog):
         '''Constructor del modelo Objective'''
         self.descObjective = descObjective
-        self.id_backLog    = id_backLog
+        self.id_backlog    = id_backLog
 
     def __repr__(self):
         '''Respresentación en string de la descripción del Objective'''
-        return '<Id %r>, <Descripcion %r>' %(self.idobjective, self.descObjective)
+        return '<Id %r>, <Descripcion %r>, <Id_backlog %r>' %(self.idobjective, self.descObjective, self.id_backlog)
 
 
 # Declaracion del modelo Accions

@@ -70,10 +70,12 @@ def VProducto():
     oBackLog   = backLog()
     actorsList = oBackLog.actorsAsociatedToProduct(1)
     objectList = oBackLog.objectivesAsociatedToProduct(1)
+    
 
     res['data3'] = [{'idActor':act.idrole,'descripcion':act.roledescription}for act in actorsList]
     res['data5'] = [{'idAccion':1, 'descripcion':'Accion 1'}, {'idAccion':2, 'descripcion':'Accion 2'}, {'idAccion':3, 'descripcion':'Accion 3'}, {'idAccion':4, 'descripcion':'Accion 4'}, ]
-    res['data7'] = [{'idObjetivo':obj.idobjective, 'descripcion':obj.desObjective} for obj in objectList]
+    res['data7'] = [{'idObjetivo':obj.idobjective, 'descripcion':obj.descObjective} for obj in objectList]
+    
     res['idPila'] = idPila    
 
     #Action code ends here

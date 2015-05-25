@@ -20,6 +20,7 @@ def AIdentificar():
         # Buscamos el usuario en la base de datos
         userLogin   = oUser.searchUser(newUser)
 
+
         if userLogin:
             encriptPassword = userLogin[0].password
             # Creamos instancia de la clase login
