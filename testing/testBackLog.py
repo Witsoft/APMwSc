@@ -18,24 +18,24 @@ class TestclsBackLog(unittest.TestCase):
     
     # Prueba 1
     def test1InsertExists(self):
-        newBL = clsBackLog("Toyota Corola","Automotriz")
+        newBL = clsBackLog("Toyota Corola")
         db.session.add(newBL)
         db.session.commit()
 
         
-        newBL = clsBackLog("Pizza","Restaurante")
+        newBL = clsBackLog("Restaurante")
         db.session.add(newBL)
         db.session.commit()
 
-        newBL = clsBackLog("Taxi Hotel","Hoteleria")
+        newBL = clsBackLog("Hoteleria")
         db.session.add(newBL)
         db.session.commit()
         
-        newBL = clsBackLog("Entrada cine","Cines")
+        newBL = clsBackLog("Cines")
         db.session.add(newBL)
         db.session.commit()
 
-        newBL = clsBackLog("Celular","Operadoras Moviles")
+        newBL = clsBackLog("Celular")
         db.session.add(newBL)
         db.session.commit()
         
