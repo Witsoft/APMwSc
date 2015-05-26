@@ -9,9 +9,6 @@ minRoleDescription = 1
 maxRoleDescription = 140
 minId = 1
 
-roles       = ['Product Owner', 'Scrum Master', 'Team Member']
-
-
 class role(object):
     '''Clase que permite manejar los Roles de manera persistente'''
     
@@ -28,7 +25,9 @@ class role(object):
         if (typename and typedescription and typeid):
             long_namerole        = minNameRole <= len(namerole) <= maxNameRole
             long_roledescription = minRoleDescription <= len(roledescription) <= maxRoleDescription
-            if (long_namerole and long_roledescription and (namerole in roles)):               
+            
+            if long_namerole and long_roledescription: 
+                print('Entree en segundo')              
                 backLog = clsBackLog.query.filter_by(id_backLog = id_pila).all()     
                 arole   = clsRole.query.filter_by(namerole = namerole).all()
                 if ((arole == []) and (backLog != [])):

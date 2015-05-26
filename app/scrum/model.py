@@ -7,6 +7,7 @@ from flask                 import Flask
 from flask.ext.migrate     import Migrate, MigrateCommand
 from flask.ext.sqlalchemy  import SQLAlchemy
 from flask.ext.script      import Manager
+from sqlalchemy.sql.schema import PrimaryKeyConstraint
 #from sqlalchemy.sql.schema import CheckConstraint
 
 
@@ -85,11 +86,11 @@ class clsObjective(db.Model):
     def __init__(self, descObjective, id_backLog):
         '''Constructor del modelo Objective'''
         self.descObjective = descObjective
-        self.id_backLog    = id_backLog
+        self.id_backlog    = id_backLog
 
     def __repr__(self):
         '''Respresentación en string de la descripción del Objective'''
-        return '<Id %r>, <Descripcion %r>' %(self.idobjective, self.descObjective)
+        return '<Id %r>, <Descripcion %r>, <Id_backlog %r>' %(self.idobjective, self.descObjective, self.id_backlog)
 
 
 # Declaracion del modelo Accions
@@ -117,22 +118,39 @@ class clsBackLog(db.Model):
 	
 	__tablename__ =  'backLog'
 	id_backLog     = db.Column(db.Integer,primary_key = True, index = True)	
-	BL_name        = db.Column(db.String(50), unique = True)
-	BL_description = db.Column(db.String(140))
+	BL_description = db.Column(db.String(140),unique = True)
 	obj_backLog    = db.relationship('clsObjective',backref='objective',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-#	act_backLog    = db.relationship('clsActor',backref='actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	act_backLog    = db.relationship('clsRole',backref='roles',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	acc_backLog    = db.relationship('clsAccions',backref='accions',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
+	usrHis_backLog = db.relationship('clsUserHistory',backref='userHistory',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 
-	def __init__(self, BL_name, BL_description):
+	def __init__(self, BL_description):
 		'''Constructor del modelo BackLog'''
-		self.BL_name        = BL_name
 		self.BL_description = BL_description
 		
 	def __repr__(self):
 		'''Representacion en string del nombre del BakcLog'''
-		return '<id_backLog %r, BL_nombre %r>' % (self.id_backLog, self.BL_name)
+		return '<id_backLog %r, BL_descripcion %r>' % (self.id_backLog, self.BL_description)
+	
 
-
+class clsUserHistory(db.Model):
+	'''Clase que define el modelo de tabla UserHistory'''
+	__tablename__ = 'userHistory'
+	id_userHistory   = db.Column(db.Integer, unique = True, index = True)
+	cod_userHistory  = db.Column(db.String(10), primary_key = True, index = True) 
+	type_userHistory = db.Column(db.String(11))
+	id_backLog       = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+	
+	def __init__(self,cod_userHistory,type_userHistory,id_backLog):
+		self.cod_userHistory  = cod_userHistory
+		self.type_userHistory = type_userHistory
+		self.id_backLog = id_backLog
+		
+	def __repr__(self):
+		'''Representacion en string de la Historia de Usuario'''
+		return '<cod_userHistory %r, type_userHistory %r>' % (self.cod_userHistory, self.type_userHistory)
+	
+	
 migrate = Migrate(app, db)
 manager = Manager(app)
 
