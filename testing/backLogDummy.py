@@ -31,18 +31,14 @@ class backLog(object):
             return False
         else:
             new_prod = clsBackLog(BL_description = description)
-            long_description = len(new_prod.BL_description)
-            
-            if  ((long_description > const_maxDescription) or (long_description < const_minDescription)):
-                return False
-            else:
+            long_description = (const_maxDescription >= len(new_prod.BL_description) >= const_minDescription)
+            if  (long_description):
                 dDescAux = self.findDescription(description);
-                if (dDescAux != []):
-                    return False
-                else:
+                if (dDescAux == []):
                     db.session.add(new_prod)
                     db.session.commit()
                     return True
+            return False
 
     def modifyDescription(self, description, new_description):   
         '''Permite actualizar los valores de una Descripcion'''    
@@ -65,11 +61,11 @@ class backLog(object):
         if (type(description) != str):
             return False
         else:
-            long_description =  (const_mindescription > len(description) > const_maxdescription)
+            long_description =  (const_minDescription > len(description) > const_maxDescription)
             if long_description:
                 return False
             else:
-                adescription = self.finddescription(description)
+                adescription = self.findDescription(description)
                 if (adescription == []):
                     return False
                 else:
