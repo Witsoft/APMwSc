@@ -2,7 +2,6 @@
 <<<<<<<=HEAD
 >>>>>>>=refs/remotes/origin/General_Integration
 eclipse.preferences.version=1
-encoding//app/scrum/accion.py=utf-8
 encoding//app/scrum/accions.py=utf-8
 encoding//app/scrum/actor.py=utf-8
 encoding//app/scrum/backLog.py=utf-8
@@ -21,6 +20,7 @@ encoding//testing/objectiveDummy.py=utf-8
 encoding//testing/roleDummy.py=utf-8
 encoding//testing/testAccions.py=utf-8
 encoding//testing/testBackLog.py=utf-8
+encoding//testing/testHistory.py=utf-8
 encoding//testing/testLogin.py=utf-8
 encoding//testing/testObjective.py=utf-8
 encoding//testing/testRole.py=utf-8
