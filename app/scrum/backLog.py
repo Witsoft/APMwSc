@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-. 
 
 from app.scrum.model import *
-from lxml.html._diffcommand import description
 
 # Declaracion de constantes.
 const_maxDescription = 140

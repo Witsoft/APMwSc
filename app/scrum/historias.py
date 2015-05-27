@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask import request, session, Blueprint, json
+from flask             import request, session, Blueprint, json
+from app.scrum.backLog import *
 
 historias = Blueprint('historias', __name__)
 
@@ -88,21 +89,16 @@ def VHistoria():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
-    #Action code goes here, res should be a JSON structure
+    
+    oBacklog      = backLog() 
+    actorList     = oBacklog.actorsAsociatedToProduct(1)
+    accionList    = oBacklog.accionsAsociatedToProduct(1)
+    objectiveList = oBacklog.objectivesAsociatedToProduct(1)
 
     #Ejemplo de relleno de listas para selectrores
-    res['fHistoria_opcionesActores'] = [
-      {'key':1,'value':'Actor1'},
-      {'key':2,'value':'Actor2'},
-      {'key':3,'value':'Actor3'}]
-    res['fHistoria_opcionesAcciones'] = [
-      {'key':1,'value':'Acccion1'},
-      {'key':2,'value':'Acccion2'},
-      {'key':3,'value':'Acccion3'}]
-    res['fHistoria_opcionesObjetivos'] = [
-      {'key':1,'value':'Objetivo1'},
-      {'key':2,'value':'Objetivo2'},
-      {'key':3,'value':'Objetivo3'}]
+    res['fHistoria_opcionesActores'] = [{'key':act.idrole,'value':act.roledescription}for act in actorList]
+    res['fHistoria_opcionesAcciones'] = [{'key':acc.idaccion,'value':acc.acciondescription}for acc in accionList]
+    res['fHistoria_opcionesObjetivos'] = [{'key':obj.idobjective,'value':obj.descObjective}for obj in objectiveList]
     res['fHistoria_opcionesHistorias'] = [
       {'key':0,'value':'Ninguna'},
       {'key':1,'value':'Historia1'},
@@ -115,7 +111,6 @@ def VHistoria():
        'actor':1, 'accion':2, 'objetivo':3, 'tipo':1} 
     res['idPila'] = 1
 
-    #Action code ends here
     return json.dumps(res)
 
 
