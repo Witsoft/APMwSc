@@ -21,7 +21,7 @@ class TestclsBackLog(unittest.TestCase):
         aBackLog = backLog()
         aBackLog.insertBackLog('Permite localizar un taxi')
         aBackLog.findDescription('Permite localizar un taxi')
-        aBackLog.deleteProduct('Reservar un taxi.')   
+        aBackLog.deleteProduct('Permite localizar un taxi')   
         
        # Casos Normales
        
@@ -113,14 +113,14 @@ class TestclsBackLog(unittest.TestCase):
      #############################################
      
        # Caso Inicial
- 
+    
      # Prueba 9
     def testInserBackLogExists(self):
          aBackLog = backLog()
          aBackLog.insertBackLog('Taxi seguro.')
          aBackLog.deleteProduct('Reservar un taxi.')  
          
-    # Casos Normales
+    # Casos Normal
     
     # Prueba 10
     def testInsertBackLogElement(self):
@@ -128,5 +128,50 @@ class TestclsBackLog(unittest.TestCase):
         result = aBackLog.insertBackLog('Permite localizar un taxi')
         self.assertTrue(result)
         aBackLog.deleteProduct('Permite localizar un taxi')
-  
-                         
+    
+
+     #Casos Frontera
+    
+    # Prueba 11   
+    def testInsertBackLoglong140(self):
+        aBackLog = backLog()
+        result = aBackLog.insertBackLog(140*'a')
+        self.assertTrue(result)
+        aBackLog.deleteProduct(140*'a')
+    
+    # Prueba 12    
+    def testInsertBackloglong141(self):    
+        aBackLog = backLog()
+        result = aBackLog.insertBackLog(140*'a' + 'b')
+        self.assertFalse(result)
+        aBackLog.deleteProduct(140*'a' + 'b')
+    
+    # Prueba 13
+    def testInsertBackloglong1(self):    
+        aBackLog = backLog()
+        result = aBackLog.insertBackLog('a')
+        self.assertTrue(result)
+        aBackLog.deleteProduct('a')
+        
+    # Prueba 14
+    def testInsertBackloglong0(self):    
+        aBackLog = backLog()
+        result = aBackLog.insertBackLog('')
+        self.assertFalse(result)
+        aBackLog.deleteProduct('')
+    
+     #Casos Malicia
+    
+    # Prueba 15   
+    def testInsertBacklogNone(self):    
+        aBackLog = backLog()
+        result = aBackLog.insertBackLog(None)
+        self.assertFalse(result)
+        aBackLog.deleteProduct(None)
+        
+    # Prueba 16    
+    def testInsertBacklogNoString(self):    
+        aBackLog = backLog()
+        result = aBackLog.insertBackLog(140)
+        self.assertFalse(result)
+        aBackLog.deleteProduct(140)                                 
