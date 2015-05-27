@@ -174,4 +174,86 @@ class TestclsBackLog(unittest.TestCase):
         aBackLog = backLog()
         result = aBackLog.insertBackLog(140)
         self.assertFalse(result)
-        aBackLog.deleteProduct(140)                                 
+        aBackLog.deleteProduct(140)                     
+        
+     #############################################      
+     #   Suite de Pruebas para deleteProduct  #
+     #############################################
+     
+    # Caso Inicial
+      # Prueba 17
+    def testDeleteProductExists(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.')
+        # Inicio de la prueba.
+        aBackLog.deleteProduct('Taxi seguro.')
+       
+           # Casos Normales
+  
+    # Prueba 18
+    def testDeleteProduct(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Permite localizar un taxi')
+        # Inicio de la prueba.
+        result = aBackLog.deleteProduct('Permite localizar un taxi')
+        self.assertTrue(result)
+        
+    # Prueba 19      
+    def testDeleteProductNoExist(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Reservar un taxi')
+        # Inicio de la prueba.
+        result = aBackLog.deleteProduct('Taxi seguro.')
+        self.assertFalse(result)
+       
+        # Casos Fronteras
+      
+    # Prueba 20
+    def testDeleteProductString1(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('T')
+        # Inicio de la prueba.
+        result = aBackLog.deleteProduct('T')
+        self.assertTrue(result)
+        
+    # Prueba 21
+    def testDeleteProductString140(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro que permite localizar un taxi a ' +
+                                'cualquier hora del dia, para poder dirigirse a '+
+                                'cualquier lugar de la ciudad sin problemas ni lim')
+        # Inicio de la prueba.
+        result = aBackLog.deleteProduct('Taxi seguro que permite localizar un taxi a ' +
+                                'cualquier hora del dia, para poder dirigirse a '+
+                                'cualquier lugar de la ciudad sin problemas ni lim')
+        self.assertTrue(result)
+       
+    # Casos Maliciosos
+  
+    # Prueba 22
+    def testDeleteProductInvalid(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.')
+        # Inicio de la prueba.
+        result = aBackLog.deleteProduct('')
+        self.assertFalse(result,"Id no válido")
+        aBackLog.deleteProduct('Taxi seguro.')
+       
+    # Prueba 23
+    def testDeleteProductNotString(self):
+       aBackLog = backLog()
+       aBackLog.insertBackLog('Permite localizar un taxi')
+       # Inicio de la prueba.
+       result = aBackLog.deleteProduct(12345)
+       self.assertFalse(result,"Id no válido")
+       aBackLog.deleteProduct('Permite localizar un taxi')
+      
+
+
+
+       
+
+       
+
+       
+                  
