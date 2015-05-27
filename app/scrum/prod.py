@@ -87,6 +87,10 @@ def VProducto():
     
 
     res['idPila'] = idPila    
+    
+    #result   = clsBackLog.query.filter_by(id_backLog = idPila).first()
+    
+    #res['fPila'] = {'idPila':idPila, 'descripcion':result.BL_description}
 
     #Action code ends here
     return json.dumps(res)

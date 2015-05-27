@@ -46,8 +46,22 @@ def AModifAccion():
     params = request.get_json()
     results = [{'label':'/VProducto', 'msg':['Acción actualizada']}, {'label':'/VAccion', 'msg':['Error al modificar acción']}, ]
     res = results[0]
-    idPila = 1
-    #Action code goes here, res should be a list with a label and a message
+    idPila = 1    
+    
+    #Action code goes here, res should be a list with a label and a message    
+    
+    
+    newdescription = params['descripcion']
+    print (params)
+    idAccion = params['idAccion']  #Obtenemos el id de la accion
+    print('id Accion: ',idAccion)
+
+    oAccion = accions()
+    result   = clsAccions.query.filter_by(idaccion = idAccion).first()  #Conseguimos el producto a modificar
+    print('accion: ',result)
+    oAccion.updateAccion(result.acciondescription, newdescription) #Modificamos la acción      
+
+
 
 #     if request.method == 'POST':
 # 
@@ -84,9 +98,10 @@ def VAccion():
     if "actor" in session:
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
-
+    idAccion = request.args.get('idAccion')
+    result   = clsAccions.query.filter_by(idaccion = idAccion).first()
     res['idPila'] = 1 
-
+    res['fAccion'] = {'idAccion':idAccion, 'descripcion':result.acciondescription}
     #Action code ends here
     return json.dumps(res)
 

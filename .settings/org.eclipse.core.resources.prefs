@@ -2,9 +2,11 @@
 <<<<<<<=HEAD
 >>>>>>>=refs/remotes/origin/General_Integration
 eclipse.preferences.version=1
+encoding//app/scrum/accion.py=utf-8
 encoding//app/scrum/accions.py=utf-8
 encoding//app/scrum/actor.py=utf-8
 encoding//app/scrum/backLog.py=utf-8
+encoding//app/scrum/dev.py=utf-8
 encoding//app/scrum/ident.py=utf-8
 encoding//app/scrum/mast.py=utf-8
 encoding//app/scrum/model.py=utf-8
