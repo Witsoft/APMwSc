@@ -57,7 +57,18 @@ class objective(object):
                         aObj[0].descObjective = newDescObjective
                         db.session.commit()
                         return True
-        return False     
+        return False  
+    
+    def updateObjectiveReferenceToHistory(self, idObjective, ref_idUserHistory):
+        '''Permite actualizar la referencia a la historia de usuario a la cual pertenece el objetivo'''
+        result = clsUserHistory.query.filter_by(id_userHistory = ref_idUserHistory).all()
+        
+        if (result != []):
+            oObjective = clsObjective.query.filter_by(idobjective = idObjective).first()
+            oObjective.id_userHistory = ref_idUserHistory
+            db.session.commit()
+            return True
+        return False   
     
        
     def deleteObjective(self, descObjective):

@@ -8,7 +8,7 @@ from flask.ext.migrate     import Migrate, MigrateCommand
 from flask.ext.sqlalchemy  import SQLAlchemy
 from flask.ext.script      import Manager
 from sqlalchemy.sql.schema import PrimaryKeyConstraint
-#from sqlalchemy.sql.schema import CheckConstraint
+ 
 
 
 # Conexion con la base de datos.
@@ -115,7 +115,7 @@ class clsAccions(db.Model):
 
     def __repr__(self):
         '''Respresentación en string de la descripción de la accion'''
-        return '<Id %r>, <Descripcion %r>' %(self.idaccion, self.acciondescription)
+        return '<Id %r>, <Descripcion %r>, <Ref_userHistory %r>' %(self.idaccion, self.acciondescription,self.id_userHistory)
 
 
 class clsBackLog(db.Model):
@@ -140,26 +140,27 @@ class clsBackLog(db.Model):
 
 class clsUserHistory(db.Model):
 	'''Clase que define el modelo de tabla UserHistory'''
+	
 	__tablename__ = 'userHistory'
-	id_userHistory     = db.Column(db.Integer, unique = True, index = True)
-	cod_userHistory    = db.Column(db.String(10), primary_key = True, index = True) 
-	type_userHistory   = db.Column(db.String(11))
+	id_userHistory     = db.Column(db.Integer, primary_key = True, index = True)
+	cod_userHistory    = db.Column(db.String(10),unique = True , index = True) 
+	type_userHistory   = db.Column(db.Integer)
 	id_backLog         = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
 	#id_History         = db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'),nullable = True) 
 	act_userHistory    = db.relationship('clsRole',backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")
 	obj_userHistory    = db.relationship('clsObjective',backref = 'userHistory',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	acc_userHistory    = db.relationship('clsAccions',backref = 'userHistory',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-	#usrHis_userHistory = db.relationship('clsUserHistory',backref = db.backref("userHistory", remote_side=id), lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	
 	
 	def __init__(self,cod_userHistory,type_userHistory,id_backLog):#,id_userHistory = None):
 		self.cod_userHistory  = cod_userHistory
 		self.type_userHistory = type_userHistory
 		self.id_backLog       = id_backLog
-		self.id_History       = id_userHistory
+		#self.id_History       = id_userHistory
 		
 	def __repr__(self):
 		'''Representacion en string de la Historia de Usuario'''
-		return '<cod_userHistory %r, type_userHistory %r>' % (self.cod_userHistory, self.type_userHistory)
+		return '<cod_userHistory %r>' % (self.cod_userHistory)
 	
 	
 migrate = Migrate(app, db)

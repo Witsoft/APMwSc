@@ -4,10 +4,11 @@ from modelDummy   import *
 from backLogDummy import *
 
 # Declaracion de constantes
-arrayType = ['obligatorio', 'opcional']
+arrayType = ['Obligatorio', 'Opcional']
 minuserHistory = 1
 maxuserHistory = 140
 const_max_cod = 11
+const_min_cod = 1
 
 class userHistory(object):
     '''Clase que permite manejar las historias de manera persistente'''
@@ -16,7 +17,7 @@ class userHistory(object):
         '''Permite insertar una Historia'''
         
         if (type(cod_userHistory) == str):
-            leng_cod_userHistory = len(cod_userHistory) <= const_max_cod           
+            leng_cod_userHistory = const_min_cod <= len(cod_userHistory) <= const_max_cod           
             typeid = (type(id_backLog) == int)
             
             if (leng_cod_userHistory and typeid):
@@ -60,4 +61,4 @@ class userHistory(object):
         return False 
 
            
-# Fin Clase Accion
+# Fin Clase userHistory
