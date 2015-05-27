@@ -51,7 +51,7 @@ class clsRole(db.Model):
 
     def __repr__(self):
         '''Respresentacion en string del nombre del Role'''
-        return '<Role %r, Descripcion %r>' %(self.namerole, self.roledescription)
+        return '<Id_Objetivo %r>, <Descripcion %r>, <Id_backlog %r>, <Id_%r>' %(self.namerole, self.roledescription, self.id_pila, self.id_userHistory)
 
 class clsUser(db.Model):
     '''Clase que define el modelo Usuario'''
@@ -93,7 +93,7 @@ class clsObjective(db.Model):
 
     def __repr__(self):
         '''Respresentación en string de la descripción del Objective'''
-        return '<Id %r>, <Descripcion %r>, <Id_backlog %r>,<Id_>' %(self.idobjective, self.descObjective, self.id_backlog, self.id_userHistory)
+        return '<Id_Objetivo %r>, <Descripcion %r>, <Id_backlog %r>, <Id_%r>' %(self.idobjective, self.descObjective, self.id_backlog, self.id_userHistory)
 
 
 # Declaracion del modelo Accions
@@ -115,7 +115,7 @@ class clsAccions(db.Model):
 
     def __repr__(self):
         '''Respresentación en string de la descripción de la accion'''
-        return '<Id %r>, <Descripcion %r>, <Ref_userHistory %r>' %(self.idaccion, self.acciondescription,self.id_userHistory)
+        return '<Id_Accions %r>, <Descripcion %r>, <Id_backlog %r>, <Ref_userHistory %r>' %(self.idaccion, self.acciondescription, self.id_backLog, self.id_userHistory)
 
 
 class clsBackLog(db.Model):

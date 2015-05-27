@@ -56,6 +56,29 @@ class userHistory(object):
                     db.session.commit()
                     return True
         return False 
-
-           
+    
+    def actorsAsociatedToUserHistory(self,userHistoryId):
+        ''' Permite obtener una lista de los Actores asociados a una historia de usuario'''
+        checkTypeId = type(userHistoryId) == int    
+        if checkTypeId: 
+            found = clsRole.query.filter_by(id_userHistory = userHistoryId).all()
+            return found
+        return([])
+    
+    def objectivesAsociatedToUserHistory(self,userHistoryId):
+        ''' Permite obtener una lista de los Actores asociados a una historia de usuario'''
+        checkTypeId = type(userHistoryId) == int    
+        if checkTypeId: 
+            found = clsObjective.query.filter_by(id_userHistory = userHistoryId).all()
+            return found
+        return([])    
+    
+    def accionsAsociatedToUserHistory(self,userHistoryId):
+        ''' Permite obtener una lista de los Actores asociados a una historia de usuario'''
+        checkTypeId = type(userHistoryId) == int    
+        if checkTypeId: 
+            found = clsAccions.query.filter_by(id_userHistory = userHistoryId).all()
+            return found
+        return([])
+          
 # Fin Clase userHistory

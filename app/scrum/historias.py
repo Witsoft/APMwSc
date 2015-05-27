@@ -14,7 +14,7 @@ def ACrearHistoria():
     #POST/PUT parameters
     params = request.get_json()
     results = [{'label':'/VHistorias', 'msg':['Historia creada']}, {'label':'/VCrearHistoria', 'msg':['Error al crear historia']}, ]
-    res = results[0]
+    
     # Extraemos los parametros.
     idActor     = params['actores']
     idType      = params['tipo']
@@ -37,10 +37,14 @@ def ACrearHistoria():
         oObjective = objective()
 
         resultUpdateAccion   = oAccion.updateAccionReferenceToHistory(idAccion,idVarInsert)
-        #resultUpdateActor    = oActor.updateRoleReferenceToHistory(idActor,idVarInsert)
-        #resultUpdateObjetivo = oObjective.updateObjectiveReferenceToHistory(idObjective,idVarInsert)
+
+        for id in idActor:
+            resultUpdateActor    = oActor.updateRoleReferenceToHistory(id,idVarInsert)
         
-        if resultUpdateAccion:# and resultUpdateActor and resultUpdateObjective:
+        for id in idObjective:
+            resultUpdateObjective = oObjective.updateObjectiveReferenceToHistory(id,idVarInsert)
+        
+        if resultUpdateAccion and resultUpdateActor and resultUpdateObjective:
            res = results[0]
         else:
            res = results[1]       
@@ -96,9 +100,7 @@ def VCrearHistoria():
     res['fHistoria_opcionesAcciones'] = [{'key':acc.idaccion,'value':acc.acciondescription}for acc in accionList]
     res['fHistoria_opcionesObjetivos'] = [{'key':obj.idobjective,'value':obj.descObjective}for obj in objectiveList]
     res['fHistoria_opcionesHistorias'] = [{'key':hist.id_userHistory,'value':hist.cod_userHistory}for hist in historyList]
-    res['fHistoria_opcionesTiposHistoria'] = [
-      {'key':1,'value':'Opcional'},
-      {'key':2,'value':'Obligatoria'}]
+    res['fHistoria_opcionesTiposHistoria'] = [{'key':1,'value':'Opcional'},{'key':2,'value':'Obligatoria'}]
     res['fHistoria'] = {'super':0}
     res['idPila'] = 1
 
@@ -147,16 +149,22 @@ def VHistoria():
 def VHistorias():
     res = {}
     if "actor" in session:
-        res['actor']=session['actor']
-    #Action code goes here, res should be a JSON structure
-
-    #Datos de prueba
-    res['idPila'] = 1
-    res['data0'] = [
-      {'idHistoria':1, 'enunciado':'En tanto que picho podría tomar agua para saciar mi sed'}]
+        res['actor'] = session['actor']
     
-
-    #Action code ends here
+    
+    oBacklog          = backLog() 
+    oUserHistory      = userHistory()
+    userHistoriesList = oBacklog.userHistoryAsociatedToProduct(1)  
+    
+    for hist in userHistoriesList:
+        result1 = oUserHistory.actorsAsociatedToUserHistory(hist.id_userHistory)
+        result2 = oUserHistory.objectivesAsociatedToUserHistory(hist.id_userHistory)
+        result3 = oUserHistory.accionsAsociatedToUserHistory(hist.id_userHistory)
+        print('Historia: ' + str(hist.cod_userHistory) + ' Actores: ' + str(result1) +' Accion: ' + str(result2) + ' Objetivos: ' + str(result3) + '\n')
+           
+    res['idPila']  = 1
+    res['data0']   = [{'idHistoria':1, 'enunciado':'En tanto '}] 
+    
     return json.dumps(res)
 
 
