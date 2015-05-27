@@ -7,6 +7,9 @@ import sys
 
 from modelDummy   import *
 from backLogDummy import *
+from roleDummy import *
+from accionsDummy import *
+from objectiveDummy import *
 
 class TestclsBackLog(unittest.TestCase):
     
@@ -248,12 +251,242 @@ class TestclsBackLog(unittest.TestCase):
        self.assertFalse(result,"Id no válido")
        aBackLog.deleteProduct('Permite localizar un taxi')
       
+        
+     ####################################################      
+     #   Suite de Pruebas para actorsAsociatedToProduct #
+     ####################################################  
+    
+    # Casos Frontera
+    
+    # Prueba 24    
+    def testActorAsociatedBackLogExists(self):
+        aBackLog = backLog()
+        arole = role()
+        aBackLog.insertBackLog('Taxi Seguro')
+        arole.insertRole('Role1','nuevo role1',1)
+        arole.insertRole('Role2','nuevo role2',2)
+        result = aBackLog.actorsAsociatedToProduct(1)
+        arole.deleteRole('Role1')
+        arole.deleteRole('Role2')
+        aBackLog.deleteProduct('Taxi Seguro')     
+                                       
+    # Prueba 25
+    def testActorAsociatedBackLogTrue(self):
+        aBackLog = backLog()
+        arole = role()
+        aBackLog.insertBackLog('Taxi Seguro')
+        arole.insertRole('Role1','nuevo role1',1)
+        arole.insertRole('Role2','nuevo role2',1)
+        result = aBackLog.actorsAsociatedToProduct(1)
+        self.assertNotEqual([],result)
+        arole.deleteRole('Role1')
+        arole.deleteRole('Role2')
+        aBackLog.deleteProduct('Taxi Seguro')                                        
+               
+    # Prueba 26                                   
+    def testActorAsociatedBackLogFalse(self):
+        aBackLog = backLog()
+        arole = role()
+        aBackLog.insertBackLog('Taxi Seguro')
+        arole.insertRole('Role1','nuevo role1',1)
+        arole.insertRole('Role2','nuevo role2',2)
+        result = aBackLog.actorsAsociatedToProduct(3)
+        self.assertEqual([],result)
+        arole.deleteRole('Role1')
+        aBackLog.deleteProduct('Taxi Seguro')
 
+    # Casos Malicia
+    
+    # Prueba 27
+    def testActorAsociatedBackLogNoRole(self):
+        aBackLog = backLog()
+        arole = role()
+        aBackLog.insertBackLog('Taxi Seguro')
+        arole.insertRole('Role1',None,1)
+        result = aBackLog.actorsAsociatedToProduct(1)
+        self.assertEqual([],result)
+        aBackLog.deleteProduct('Taxi Seguro')
+        
+    # Prueba 28    
+    def testActorAsociatedBackLogNoneId(self):
+        aBackLog = backLog()
+        arole = role()
+        aBackLog.insertBackLog('Taxi Seguro')
+        arole.insertRole('Role1','nuevo role1',1)
+        arole.insertRole('Role2','nuevo role2',2)
+        result = aBackLog.actorsAsociatedToProduct(None)
+        self.assertEqual([],result)
+        arole.deleteRole('Role1')
+        aBackLog.deleteProduct('Taxi Seguro')
+        
+    # Prueba 29    
+    def testActorAsociatedBackLogString(self):
+        aBackLog = backLog()
+        arole = role()
+        aBackLog.insertBackLog('Taxi Seguro')
+        arole.insertRole('Role1','nuevo role1',1)
+        arole.insertRole('Role2','nuevo role2',2)
+        result = aBackLog.actorsAsociatedToProduct('')
+        self.assertEqual([],result)
+        arole.deleteRole('Role1')
+        aBackLog.deleteProduct('Taxi Seguro')
 
+        
+     ####################################################      
+     #   Suite de Pruebas para accionAsociatedToProduct #
+     ####################################################  
+    
+    # Casos Frontera
+    
+    # Prueba 30    
+    def testAccionAsociatedBackLogExists(self):
+        aBackLog = backLog()
+        oAccion = accions()
+        aBackLog.insertBackLog('Taxi Seguro')
+        oAccion.insertAccion('nuevo accions1',1)
+        oAccion.insertAccion('nuevo accions2',2)
+        result = aBackLog.accionsAsociatedToProduct(1)
+        oAccion.deleteAccion('nuevo accions1')
+        oAccion.deleteAccion('nuevo accions2')
+        aBackLog.deleteProduct('Taxi Seguro')     
+    
+    # Prueba 31                                   
+    def testAccionAsociatedBackLogTrue(self):
+        aBackLog = backLog()
+        oAccion = accions()
+        aBackLog.insertBackLog('Taxi Seguro')
+        oAccion.insertAccion('nuevo accions1',1)
+        oAccion.insertAccion('nuevo accions2',1)
+        result = aBackLog.accionsAsociatedToProduct(1)
+        self.assertNotEqual([],result)
+        oAccion.deleteAccion('nuevo accions1')
+        oAccion.deleteAccion('nuevo accions2')
+        aBackLog.deleteProduct('Taxi Seguro')                                        
+               
+    # Prueba 32                                   
+    def testAccionAsociatedBackLogFalse(self):
+        aBackLog = backLog()
+        oAccion = accions()
+        aBackLog.insertBackLog('Taxi Seguro')
+        oAccion.insertAccion('nuevo accions1',1)
+        oAccion.insertAccion('nuevo accions2',2)
+        result = aBackLog.accionsAsociatedToProduct(3)
+        self.assertEqual([],result)
+        oAccion.deleteAccion('nuevo accions1')
+        aBackLog.deleteProduct('Taxi Seguro')
 
-       
+    # Casos Malicia
+    
+    # Prueba 33
+    def testAccionAsociatedBackLogNoAccion(self):
+        aBackLog = backLog()
+        oAccion = accions()
+        aBackLog.insertBackLog('Taxi Seguro')
+        oAccion.insertAccion(None,1)
+        result = aBackLog.accionsAsociatedToProduct(1)
+        self.assertEqual([],result)
+        aBackLog.deleteProduct('Taxi Seguro')
+        
+    # Prueba 34    
+    def testAccionAsociatedBackLogNoneId(self):
+        aBackLog = backLog()
+        oAccion = accions()
+        aBackLog.insertBackLog('Taxi Seguro')
+        oAccion.insertAccion('nuevo accions1',1)
+        oAccion.insertAccion('nuevo accions2',2)
+        result = aBackLog.accionsAsociatedToProduct(None)
+        self.assertEqual([],result)
+        oAccion.deleteAccion('nuevo accions1')
+        aBackLog.deleteProduct('Taxi Seguro')
+     
+    # Prueba 35    
+    def testAccionAsociatedBackLogString(self):
+        aBackLog = backLog()
+        oAccion = accions()
+        aBackLog.insertBackLog('Taxi Seguro')
+        oAccion.insertAccion('nuevo accions1',1)
+        oAccion.insertAccion('nuevo accions2',2)
+        result = aBackLog.accionsAsociatedToProduct('')
+        self.assertEqual([],result)
+        oAccion.deleteAccion('nuevo accions1')
+        aBackLog.deleteProduct('Taxi Seguro')
 
-       
+        
+     ####################################################      
+     #   Suite de Pruebas para objectiveAsociatedToProduct #
+     ####################################################  
+    
+    # Casos Frontera
+    
+    # Prueba 36    
+    def testObjectiveAsociatedBackLogExists(self):
+        aBackLog = backLog()
+        oObjective = objective()
+        aBackLog.insertBackLog('Taxi Seguro')
+        oObjective.insertObjective('nuevo objectives1',1)
+        oObjective.insertObjective('nuevo objectives2',2)
+        result = aBackLog.objectivesAsociatedToProduct(1)
+        oObjective.deleteObjective('nuevo objectives1')
+        oObjective.deleteObjective('nuevo objectives2')
+        aBackLog.deleteProduct('Taxi Seguro')     
+               
+    # Prueba 37                                   
+    def testObjectiveAsociatedBackLogTrue(self):
+        aBackLog = backLog()
+        oObjective = objective()
+        aBackLog.insertBackLog('Taxi Seguro')
+        oObjective.insertObjective('nuevo objectives1',1)
+        oObjective.insertObjective('nuevo objectives2',1)
+        result = aBackLog.objectivesAsociatedToProduct(1)
+        self.assertNotEqual([],result)
+        oObjective.deleteObjective('nuevo objectives1')
+        oObjective.deleteObjective('nuevo objectives2')
+        aBackLog.deleteProduct('Taxi Seguro')                                        
+               
+    # Prueba 38                                   
+    def testObjectiveAsociatedBackLogFalse(self):
+        aBackLog = backLog()
+        oObjective = objective()
+        aBackLog.insertBackLog('Taxi Seguro')
+        oObjective.insertObjective('nuevo objectives1',1)
+        oObjective.insertObjective('nuevo objectives2',2)
+        result = aBackLog.objectivesAsociatedToProduct(3)
+        self.assertEqual([],result)
+        oObjective.deleteObjective('nuevo objectives1')
+        aBackLog.deleteProduct('Taxi Seguro')
 
-       
-                  
+    # Casos Malicia
+    
+    # Prueba 39
+    def testObjectiveAsociatedBackLogNoObjective(self):
+        aBackLog = backLog()
+        oObjective = objective()
+        aBackLog.insertBackLog('Taxi Seguro')
+        oObjective.insertObjective(None,1)
+        result = aBackLog.objectivesAsociatedToProduct(1)
+        self.assertEqual([],result)
+        aBackLog.deleteProduct('Taxi Seguro')
+        
+    # Prueba 40    
+    def testObjectiveAsociatedBackLogNoneId(self):
+        aBackLog = backLog()
+        oObjective = objective()
+        aBackLog.insertBackLog('Taxi Seguro')
+        oObjective.insertObjective('nuevo objectives1',1)
+        oObjective.insertObjective('nuevo objectives2',2)
+        result = aBackLog.objectivesAsociatedToProduct(None)
+        self.assertEqual([],result)
+        oObjective.deleteObjective('nuevo objectives1')
+        aBackLog.deleteProduct('Taxi Seguro')
+    
+    # Prueba 41    
+    def testObjectiveAsociatedBackLogString(self):
+        aBackLog = backLog()
+        oObjective = objective()
+        aBackLog.insertBackLog('Taxi Seguro')
+        oObjective.insertObjective('nuevo objectives1',1)
+        oObjective.insertObjective('nuevo objectives2',2)
+        result = aBackLog.objectivesAsociatedToProduct('')
+        self.assertEqual([],result)
+        oObjective.deleteObjective('nuevo objectives1')
+        aBackLog.deleteProduct('Taxi Seguro')              
