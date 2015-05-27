@@ -42,10 +42,10 @@ def AModifProducto():
 
     newdescription = params['descripcion']
 
-    id = request.args.get('id','1') #Obtenemos el id del producto
+    idPila = params['idPila'] #Obtenemos el id del producto
 
     oBackLog = backLog()
-    result   = clsBackLog.query.filter_by(id_backLog = id).first()  #Conseguimos el producto a modificar
+    result   = clsBackLog.query.filter_by(id_backLog = idPila).first()  #Conseguimos el producto a modificar
     oBackLog.modifyDescription(result.BL_description, newdescription) #Modificamos el producto      
 
     #Action code ends here
@@ -92,8 +92,13 @@ def VProducto():
     res['data5'] = [{'idAccion':acc.idaccion, 'descripcion':acc.acciondescription}for acc in accionList]
     res['data7'] = [{'idObjetivo':obj.idobjective, 'descripcion':obj.descObjective} for obj in objectList]
     
-
     res['idPila'] = idPila    
+
+    result   = clsBackLog.query.filter_by(id_backLog = idPila).first()
+    
+    res['fPila'] = {'idPila':idPila,'descripcion':result.BL_description}
+
+
 
     #Action code ends here
     return json.dumps(res)
