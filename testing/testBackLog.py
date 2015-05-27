@@ -250,6 +250,109 @@ class TestclsBackLog(unittest.TestCase):
        result = aBackLog.deleteProduct(12345)
        self.assertFalse(result,"Id no válido")
        aBackLog.deleteProduct('Permite localizar un taxi')
+         
+       
+    #############################################      
+     #   Suite de Pruebas para modifyDescription  #
+     #############################################  
+     
+    # Caso Inicial
+    
+      # Prueba 24
+    def testmodifyDescriptionExists(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.')
+        # Inicio de la prueba.   
+        aBackLog.modifyDescription('Taxi seguro.','reservar un taxi o varios.')
+        aBackLog.deleteProduct('reservar un taxi o varios.')  
+        
+    # Casos Normales
+    
+    # Prueba 25 
+    def testmodifyDescription(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Permite localizar un taxi')
+         # Inicio de la prueba.
+         result = aBackLog.modifyDescription('Permite localizar un taxi','Atención las 24 horas del día')
+         self.assertTrue(result)
+         aBackLog.deleteProduct('Atención las 24 horas del día')
+
+    # Prueba 26 
+    def testmodifyDescriptionNotExist(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi Seguro')
+         # Inicio de la prueba.
+        result = aBackLog.modifyDescription('Llegar lo mas pronto posible','Ir comodo y seguro')
+        self.assertFalse(result)
+        aBackLog.deleteProduct('Taxi Seguro')
+        
+    # Casos Fronteras
+       
+    # Prueba 27
+    def testmodifyDescriptionRigthLen1(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('A')
+        # Inicio de la prueba.
+        result = aBackLog.modifyDescription('A','Buscar al cliente donde esté')
+        self.assertTrue(result)
+        aBackLog.deleteProduct('Buscar al cliente donde esté')
+        
+    # Prueba 28
+    def testmodifyDescriptionLeftLen1(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Buscar al cliente donde esté')
+        # Inicio de la prueba.
+        result = aBackLog.modifyDescription('Buscar al cliente donde esté','A')
+        self.assertTrue(result)
+        aBackLog.deleteProduct('Buscar al cliente donde esté')
+        
+    # Prueba 29        
+    def testmodifyDescriptionRightLen140(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Atención las 24 horas del día')
+        # Inicio de la prueba.
+        result = aBackLog.modifyDescription('Atención las 24 horas del día',140*'T')
+        self.assertTrue(result)    
+        aBackLog.deleteProduct(140*'T')
+        
+    # Prueba 30
+    def testmodifyDescriptionLeftLen140(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog(140*'T')
+        # Inicio de la prueba.
+        result = aBackLog.modifyDescription(140*'T','Atención las 24 horas del día')
+        self.assertTrue(result)
+        aBackLog.deleteProduct('Atención las 24 horas del día')
+
+    # Casos Maliciosos
+    
+    # Prueba 31
+    def testmodifyDescriptionSameName(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Reservar un taxi.')
+        # Inicio de la prueba.
+        result = aBackLog.modifyDescription('Reservar un taxi.','Reservar un taxi.')
+        self.assertTrue(result,"Modificación Válida")
+        aBackLog.deleteProduct('Reservar un taxi.')
+        
+   # Prueba 32
+    def testmodifyDescriptionLeftLen0RightLen141(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('')
+        # Inicio de la prueba.
+        result = aBackLog.modifyDescription('','Llamar al centro de atencion de servicios de taxis a '+
+                                      'cualquier hora del dia, para poder dirigirse a '+
+                                      'cualquier lugar de la ciudad sin problems')
+        self.assertFalse(result, "Modificación válida")
+        
+    # Prueba 33
+    def testmodifyDescriptionLeftValidStringRightNone(self):
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Reservar un taxi.')
+        # Inicio de la prueba.
+        result = aBackLog.modifyDescription('Reservar un taxi.',None)
+        self.assertFalse(result, "Modificación válida") 
+        aBackLog.deleteProduct('Reservar un taxi.')    
       
         
      ####################################################      
@@ -258,7 +361,7 @@ class TestclsBackLog(unittest.TestCase):
     
     # Casos Frontera
     
-    # Prueba 24    
+    # Prueba 34    
     def testActorAsociatedBackLogExists(self):
         aBackLog = backLog()
         arole = role()
@@ -270,7 +373,7 @@ class TestclsBackLog(unittest.TestCase):
         arole.deleteRole('Role2')
         aBackLog.deleteProduct('Taxi Seguro')     
                                        
-    # Prueba 25
+    # Prueba 35
     def testActorAsociatedBackLogTrue(self):
         aBackLog = backLog()
         arole = role()
@@ -283,7 +386,7 @@ class TestclsBackLog(unittest.TestCase):
         arole.deleteRole('Role2')
         aBackLog.deleteProduct('Taxi Seguro')                                        
                
-    # Prueba 26                                   
+    # Prueba 36                                   
     def testActorAsociatedBackLogFalse(self):
         aBackLog = backLog()
         arole = role()
@@ -297,7 +400,7 @@ class TestclsBackLog(unittest.TestCase):
 
     # Casos Malicia
     
-    # Prueba 27
+    # Prueba 37
     def testActorAsociatedBackLogNoRole(self):
         aBackLog = backLog()
         arole = role()
@@ -307,7 +410,7 @@ class TestclsBackLog(unittest.TestCase):
         self.assertEqual([],result)
         aBackLog.deleteProduct('Taxi Seguro')
         
-    # Prueba 28    
+    # Prueba 38    
     def testActorAsociatedBackLogNoneId(self):
         aBackLog = backLog()
         arole = role()
@@ -319,7 +422,7 @@ class TestclsBackLog(unittest.TestCase):
         arole.deleteRole('Role1')
         aBackLog.deleteProduct('Taxi Seguro')
         
-    # Prueba 29    
+    # Prueba 39    
     def testActorAsociatedBackLogString(self):
         aBackLog = backLog()
         arole = role()
@@ -338,7 +441,7 @@ class TestclsBackLog(unittest.TestCase):
     
     # Casos Frontera
     
-    # Prueba 30    
+    # Prueba 40    
     def testAccionAsociatedBackLogExists(self):
         aBackLog = backLog()
         oAccion = accions()
@@ -350,7 +453,7 @@ class TestclsBackLog(unittest.TestCase):
         oAccion.deleteAccion('nuevo accions2')
         aBackLog.deleteProduct('Taxi Seguro')     
     
-    # Prueba 31                                   
+    # Prueba 41                                   
     def testAccionAsociatedBackLogTrue(self):
         aBackLog = backLog()
         oAccion = accions()
@@ -363,7 +466,7 @@ class TestclsBackLog(unittest.TestCase):
         oAccion.deleteAccion('nuevo accions2')
         aBackLog.deleteProduct('Taxi Seguro')                                        
                
-    # Prueba 32                                   
+    # Prueba 42                                   
     def testAccionAsociatedBackLogFalse(self):
         aBackLog = backLog()
         oAccion = accions()
@@ -377,7 +480,7 @@ class TestclsBackLog(unittest.TestCase):
 
     # Casos Malicia
     
-    # Prueba 33
+    # Prueba 43
     def testAccionAsociatedBackLogNoAccion(self):
         aBackLog = backLog()
         oAccion = accions()
@@ -387,7 +490,7 @@ class TestclsBackLog(unittest.TestCase):
         self.assertEqual([],result)
         aBackLog.deleteProduct('Taxi Seguro')
         
-    # Prueba 34    
+    # Prueba 44    
     def testAccionAsociatedBackLogNoneId(self):
         aBackLog = backLog()
         oAccion = accions()
@@ -399,7 +502,7 @@ class TestclsBackLog(unittest.TestCase):
         oAccion.deleteAccion('nuevo accions1')
         aBackLog.deleteProduct('Taxi Seguro')
      
-    # Prueba 35    
+    # Prueba 45    
     def testAccionAsociatedBackLogString(self):
         aBackLog = backLog()
         oAccion = accions()
@@ -418,7 +521,7 @@ class TestclsBackLog(unittest.TestCase):
     
     # Casos Frontera
     
-    # Prueba 36    
+    # Prueba 46    
     def testObjectiveAsociatedBackLogExists(self):
         aBackLog = backLog()
         oObjective = objective()
@@ -430,7 +533,7 @@ class TestclsBackLog(unittest.TestCase):
         oObjective.deleteObjective('nuevo objectives2')
         aBackLog.deleteProduct('Taxi Seguro')     
                
-    # Prueba 37                                   
+    # Prueba 47                                   
     def testObjectiveAsociatedBackLogTrue(self):
         aBackLog = backLog()
         oObjective = objective()
@@ -443,7 +546,7 @@ class TestclsBackLog(unittest.TestCase):
         oObjective.deleteObjective('nuevo objectives2')
         aBackLog.deleteProduct('Taxi Seguro')                                        
                
-    # Prueba 38                                   
+    # Prueba 48                                   
     def testObjectiveAsociatedBackLogFalse(self):
         aBackLog = backLog()
         oObjective = objective()
@@ -457,7 +560,7 @@ class TestclsBackLog(unittest.TestCase):
 
     # Casos Malicia
     
-    # Prueba 39
+    # Prueba 49
     def testObjectiveAsociatedBackLogNoObjective(self):
         aBackLog = backLog()
         oObjective = objective()
@@ -467,7 +570,7 @@ class TestclsBackLog(unittest.TestCase):
         self.assertEqual([],result)
         aBackLog.deleteProduct('Taxi Seguro')
         
-    # Prueba 40    
+    # Prueba 50    
     def testObjectiveAsociatedBackLogNoneId(self):
         aBackLog = backLog()
         oObjective = objective()
@@ -479,7 +582,7 @@ class TestclsBackLog(unittest.TestCase):
         oObjective.deleteObjective('nuevo objectives1')
         aBackLog.deleteProduct('Taxi Seguro')
     
-    # Prueba 41    
+    # Prueba 51    
     def testObjectiveAsociatedBackLogString(self):
         aBackLog = backLog()
         oObjective = objective()

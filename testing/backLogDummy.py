@@ -46,7 +46,7 @@ class backLog(object):
         typenew_d   = (type(new_description) == str) 
         type_d      = (type(description) == str)
         if (type_d and typenew_d):
-            long_d = const_minDescription <= len(new_d.BL_description) <= const_maxDescription
+            long_d = const_minDescription <= len(new_description) <= const_maxDescription
             if long_d:
                 aDescription = self.findDescription(description)
                 if (aDescription != []):
