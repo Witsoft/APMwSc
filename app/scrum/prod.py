@@ -40,6 +40,13 @@ def AModifProducto():
     res     = results[0]
     #Action code goes here, res should be a list with a label and a message
 
+    newdescription = params['descripcion']
+
+    id = request.args.get('id','1') #Obtenemos el id del producto
+
+    oBackLog = backLog()
+    result   = clsBackLog.query.filter_by(id_backLog = id).first()  #Conseguimos el producto a modificar
+    oBackLog.modifyDescription(result.BL_description, newdescription) #Modificamos el producto      
 
     #Action code ends here
     if "actor" in res:
