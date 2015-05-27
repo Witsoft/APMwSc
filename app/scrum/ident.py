@@ -57,7 +57,7 @@ def ARegistrar():
 
         isEmpty  = oRole.emptyTable()
         if isEmpty:
-            result1 = oBackLog.insertBackLog('Taxi Seguro','Permite pedir un taxi.')
+            result1 = oBackLog.insertBackLog('Taxi Seguro')
             result2 = oRole.insertRole('Product Owner','Encargado de las decisiones de diseno del producto.',1)
             result3 = oRole.insertRole('Scrum Master','Encargado de orientar y ayudar al equipo desarrollador del producto.',1)
             result  = oRole.insertRole('Team Member','Equipo encargado del desarrollo del producto.',1)

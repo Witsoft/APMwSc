@@ -134,7 +134,25 @@ class clsBackLog(db.Model):
 		'''Representacion en string del nombre del BakcLog'''
 		return '<id_backLog %r, BL_nombre %r>' % (self.id_backLog, self.BL_name)
 
-
+class clsUserHistory(db.Model):
+	'''Clase que define el modelo de tabla UserHistory'''
+	
+	__tablename__ = 'userHistory'
+	id_userHistory   = db.Column(db.Integer, unique = True, index = True)
+	cod_userHistory  = db.Column(db.String(11), primary_key = True, index = True) 
+	type_userHistory = db.Column(db.String(11))
+	id_backLog       = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+	
+	def __init__(self,cod_userHistory,type_userHistory,id_backLog):
+		self.cod_userHistory  = cod_userHistory
+		self.type_userHistory = type_userHistory
+		self.id_backLog = id_backLog
+		
+	def __repr__(self):
+		'''Representacion en string de la Historia de Usuario'''
+		return '<cod_userHistory %r, type_userHistory %r, id_backLog %r>' % (self.cod_userHistory, self.type_userHistory, self.id_backLog)
+	
+	
 migrate = Migrate(app, db)
 manager = Manager(app)
 
