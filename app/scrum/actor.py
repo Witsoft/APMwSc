@@ -40,15 +40,12 @@ def AModifActor():
     idPila   = 1
     
     # Action code goes here
-    print(params)
-    idActor     = params['idActor'] #Obetenemos el id del actor
+    idActor     = params['idActor'] #Obtenemos el id del actor
     newNameRole = params['nombre']
     newDescRole = params['descripcion'] 
     
-    actorNombre   = clsRole.query.filter_by(idrole = idActor).first() #Conseguimos el actor a modificar
-    
+    actorNombre   = clsRole.query.filter_by(idrole = idActor).first() #Conseguimos el actor a modificar  
     oRole  = role()
-    print('nombre:%r nuevoNombre:%r nuevaDesc:%r',actorNombre.namerole, newNameRole, newDescRole)
     result = oRole.updateRole(actorNombre.namerole, newNameRole, newDescRole)    #Modfificamos el actor deseado
     
     if result:
