@@ -16,7 +16,7 @@ class TestObjective(unittest.TestCase):
      def testInsertObjectiveExists(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj = objective()
          aObj.insertObjective('Permite reservar un taxi.',1)
@@ -31,7 +31,7 @@ class TestObjective(unittest.TestCase):
      def testInsertObjectiveElement(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          result = aObj.insertObjective('Permite elegir.',1)
@@ -45,7 +45,7 @@ class TestObjective(unittest.TestCase):
      def testInsertRepeatedElement(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj    = objective()
          result  = aObj.insertObjective('Permite seleccionar.',1)
@@ -62,7 +62,7 @@ class TestObjective(unittest.TestCase):
      def testInsertObjectiveShortDesc0(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          result = aObj.insertObjective('',1)
@@ -74,7 +74,7 @@ class TestObjective(unittest.TestCase):
      def testInsertObjectiveLongDesc1(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          result = aObj.insertObjective('P',1)
@@ -87,7 +87,7 @@ class TestObjective(unittest.TestCase):
      def testInsertObjectiveLongDesc140(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          result = aObj.insertObjective('Producto que permite, a traves de una aplicacion movil,'+
@@ -104,7 +104,7 @@ class TestObjective(unittest.TestCase):
      def testInsertObjectiveLongDesc141(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          result = aObj.insertObjective('Producto que permite, a traves de una aplicacion movil,'+
@@ -121,7 +121,7 @@ class TestObjective(unittest.TestCase):
      def testInsertNotString(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          result = aObj.insertObjective(1254,1)
@@ -133,7 +133,7 @@ class TestObjective(unittest.TestCase):
      def testInsertNoneString(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          result = aObj.insertObjective(None,1)
@@ -152,7 +152,7 @@ class TestObjective(unittest.TestCase):
      def testSearchObjectiveExists(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj = objective()
          aObj.insertObjective('Permite reservar un taxi.',1)
@@ -167,7 +167,7 @@ class TestObjective(unittest.TestCase):
      def testSearchObjectiveShortDesc0(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.         
          aObj   = objective()
          aObj.insertObjective('',1)
@@ -180,7 +180,7 @@ class TestObjective(unittest.TestCase):
      def testSearchObjectiveShortDesc1(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.         
          aObj   = objective()
          aObj.insertObjective('P',1)
@@ -194,7 +194,7 @@ class TestObjective(unittest.TestCase):
      def testSearchObjectiveShortDesc140(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.   
          aObj   = objective()
          aObj.insertObjective('Producto que permite, a traves de una aplicacion movil,'+
@@ -214,7 +214,7 @@ class TestObjective(unittest.TestCase):
      def testSearchObjectiveShortDesc141(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.   
          aObj   = objective()
          aObj.insertObjective('Producto que permite, a traves de una aplicacion movil,'+
@@ -234,7 +234,7 @@ class TestObjective(unittest.TestCase):
      def testSearchObjectiveNotString(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.   
          aObj   = objective()
          aObj.insertObjective(1245,1)
@@ -247,7 +247,7 @@ class TestObjective(unittest.TestCase):
      def testFindNameNoneString(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.  
          aObj   = objective()
          aObj.insertObjective(None,1)
@@ -266,7 +266,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateObjectiveExists(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj = objective()
          aObj.insertObjective('Permite reservar un taxi.',1)
@@ -281,7 +281,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateObjectiveDesc(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj   = objective()
          aObj.insertObjective('Permite elegir.',1)
@@ -295,7 +295,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateRepeatedDesc(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj   = objective()
          aObj.insertObjective('Permite obtener.',1)
@@ -311,7 +311,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateObjectiveShortDesc0(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj   = objective()
          aObj.insertObjective('',1)
@@ -324,7 +324,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateObjectiveShortNewDesc0(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj   = objective()
          aObj.insertObjective('Permite obtener.',1)
@@ -338,7 +338,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateObjectiveShortDesc1(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj   = objective()
          aObj.insertObjective('P',1)
@@ -352,7 +352,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateObjectiveShortNewDesc1(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj   = objective()
          aObj.insertObjective('Permite modificar.',1)
@@ -366,7 +366,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateObjectiveLongDesc140(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj   = objective()
          aObj.insertObjective('Producto que permite, a traves de una aplicacion movil,'+
@@ -384,7 +384,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateObjectiveLongNewDesc140(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj   = objective()
          aObj.insertObjective('Permite eliminar.',1)
@@ -402,7 +402,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateObjectiveLongDesc141(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj   = objective()
          aObj.insertObjective('Producto que permite, a traves de una aplicacion movil,'+
@@ -419,7 +419,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateObjectiveLongNewDesc141(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj   = objective()
          aObj.insertObjective('Permite verificar.',1)
@@ -436,7 +436,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateObjectiveBothDesc0(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj   = objective()
          aObj.insertObjective('',1)
@@ -449,7 +449,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateObjectiveBothDesc141(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj   = objective()
          aObj.insertObjective('Producto que permite, a traves de una aplicacion movil,'+
@@ -471,7 +471,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateNotString(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aObj   = objective()
          aObj.insertObjective(1254,1)
@@ -484,7 +484,7 @@ class TestObjective(unittest.TestCase):
      def testUpdateNoneString(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          aObj.insertObjective(None,1)
@@ -503,7 +503,7 @@ class TestObjective(unittest.TestCase):
      def testDeleteObjectiveElement(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          aObj.insertObjective('Permite intercambiar informacion.',1)
@@ -516,7 +516,7 @@ class TestObjective(unittest.TestCase):
      def testDeleteElementNotExist(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          result = aObj.deleteObjective('Permite elegir los actores.')
@@ -530,7 +530,7 @@ class TestObjective(unittest.TestCase):
      def testDeleteObjectiveShortDesc0(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          aObj.insertObjective('',1)
@@ -543,7 +543,7 @@ class TestObjective(unittest.TestCase):
      def testDeleteObjectiveShortDesc1(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          aObj.insertObjective('U',1)
@@ -556,7 +556,7 @@ class TestObjective(unittest.TestCase):
      def testDeleteObjectiveLongDesc140(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          aObj.insertObjective('Producto que permite, a traves de una aplicacion movil,'+
@@ -573,7 +573,7 @@ class TestObjective(unittest.TestCase):
      def testDeleteObjectiveLongDesc141(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          aObj.insertObjective('Producto que permite, a traves de una aplicacion movil,'+
@@ -593,7 +593,7 @@ class TestObjective(unittest.TestCase):
      def test_38DeleteNotString(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          aObj.insertObjective(1254,1)
@@ -606,7 +606,7 @@ class TestObjective(unittest.TestCase):
      def test_39DeleteNoneString(self):
          # Insercion de producto en la tabla pila.
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aObj   = objective()
          aObj.insertObjective(None,1)
