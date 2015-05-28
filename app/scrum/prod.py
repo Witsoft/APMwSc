@@ -40,6 +40,13 @@ def AModifProducto():
     res     = results[0]
     #Action code goes here, res should be a list with a label and a message
 
+    newdescription = params['descripcion']
+
+    idPila = params['idPila'] #Obtenemos el id del producto
+
+    oBackLog = backLog()
+    result   = clsBackLog.query.filter_by(id_backLog = idPila).first()  #Conseguimos el producto a modificar
+    oBackLog.modifyDescription(result.BL_description, newdescription) #Modificamos el producto      
 
     #Action code ends here
     if "actor" in res:
@@ -85,8 +92,13 @@ def VProducto():
     res['data5'] = [{'idAccion':acc.idaccion, 'descripcion':acc.acciondescription}for acc in accionList]
     res['data7'] = [{'idObjetivo':obj.idobjective, 'descripcion':obj.descObjective} for obj in objectList]
     
-
     res['idPila'] = idPila    
+
+    result   = clsBackLog.query.filter_by(id_backLog = idPila).first()
+    
+    res['fPila'] = {'idPila':idPila,'descripcion':result.BL_description}
+
+
 
     #Action code ends here
     return json.dumps(res)
