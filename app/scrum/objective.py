@@ -36,6 +36,11 @@ class objective(object):
         '''Permite buscar objetivos por su descripcion'''
         aObj = clsObjective.query.filter_by(descObjective = descObjective).all()
         return aObj
+    
+    def searchIdObjective(self, IdObjective):
+        '''Permite buscar objetivos por su id'''
+        aObj = clsObjective.query.filter_by(idobjective = IdObjective).all()
+        return aObj
             
     def updateObjective(self, descObjective, newDescObjective):
         '''Permite actualizar la descripcion de un objetivo'''

@@ -35,6 +35,11 @@ class accions(object):
         '''Permite buscar acciones por su descripcion'''
         oAccion = clsAccions.query.filter_by(acciondescription = acciondescription).all()
         return oAccion
+    
+    def searchIdAccion(self, idaccion):
+        '''Permite buscar acciones por su id'''
+        oAccion = clsAccions.query.filter_by(idaccion  = idaccion).all()
+        return oAccion
             
     def updateAccion(self, acciondescription,newDescription):
         '''Permite actualizar la descripcion de una accion'''
@@ -87,4 +92,3 @@ class accions(object):
 
            
 # Fin Clase Accion
-
