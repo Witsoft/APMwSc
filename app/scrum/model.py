@@ -173,9 +173,9 @@ class clsRolesUserHistory(db.Model):
 	ref_idrole         = db.Column(db.Integer, db.ForeignKey('roles.idrole'))
 	ref_idUserHistory  = db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'))
 	
-	def __init__(self, ref_idrole, idUserHistory):
+	def __init__(self, ref_idrole, ref_idUserHistory):
 		self.ref_idrole        = ref_idrole
-		self.ref_idUserHistory = idUserHistory
+		self.ref_idUserHistory = ref_idUserHistory
 		
 	def __repr__(self):
 		'''Representacion en string de los id's a los roles y sus historias'''

@@ -40,8 +40,7 @@ def ACrearHistoria():
         for idact in idActor:
             insertedAct  = oActUserHist.insertActorAsociatedInUserHistory(idact,idInserted)
         
-        
-        if insertedObj: #insertedAct and insertedObj:
+        if insertedAct and insertedObj:
             res = results[0]  
             res['label'] = res['label'] + '/1'
         else:
@@ -168,68 +167,53 @@ def VHistorias():
     if "actor" in session:
         res['actor'] = session['actor']
     
-    
-#     
-#     
-#     oBacklog          = backLog() 
-#     oUserHistory      = userHistory()
-#     userHistoriesList = oBacklog.userHistoryAsociatedToProduct(1)  
-#     
-#     #####################################################3
-#     for hist in userHistoriesList:
-#         result1 = oUserHistory.actorsAsociatedToUserHistory(hist.id_userHistory)
-#         result2 = oUserHistory.objectivesAsociatedToUserHistory(hist.id_userHistory)
-#         result3 = oUserHistory.accionsAsociatedToUserHistory(hist.id_userHistory)
-#         print('Historia: ' + str(hist.cod_userHistory) + ' Actores: ' + str(result1) +' Accion: ' + str(result2) + ' Objetivos: ' + str(result3) + '\n')
-#            
-#     
-#     #######################################################
-#     
-#     userHistories = []
-#     options       = {1:'podria ',2:'puede '}
-#     for hist in userHistoriesList:
-#         historyDict   = {}
-#         
-#         historyDict['idHistory'] = hist.id_userHistory
-#         
-#         actorsList    = oUserHistory.actorsAsociatedToUserHistory(hist.id_userHistory)
-#         missingActors = len(actorsList)
-#         actorsString  = ''
-#         for act in actorsList:
-#             actorsString = actorsString + ' ' + str(act.namerole) + ' '
-#             if missingActors != 1:
-#                 actorsString = actorsString + ','    
-#         historyDict['actors'] = actorsString.lower()
-#         
-#         accionsList = oUserHistory.accionsAsociatedToUserHistory(hist.id_userHistory)
-#         historyDict['accions'] = ' ' + options[1] + str(accionsList[0].acciondescription).lower() + ' ' 
-#         
-#         objectivesList    = oUserHistory.objectivesAsociatedToUserHistory(hist.id_userHistory)
-#         missingObjectives = len(objectivesList)
-#         objectivesString  = ''
-#         for obj in objectivesList:
-#             objectivesString = objectivesString + ' ' + str(obj.descObjective)
-#             if missingObjectives != 1:
-#                 objectivesString = ' ' + objectivesString + ','  
-#             elif missingObjectives == 1: 
-#                 objectivesString = objectivesString + '.'  
-#         historyDict['objectives'] = objectivesString.lower()
-#             
-#         userHistories.append(historyDict)
-#        
-#         print(userHistories)
-#            
-#     res['idPila']  = 1
-#     res['data0']   = [{'idHistoria':hist['idHistory'], 'enunciado':'En tanto' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories] 
+    oRole             = role()
+    oAccion           = accions()
+    oObjective        = objective()
+    oBacklog          = backLog() 
+    oUserHistory      = userHistory()
+    oActUserHist      = actorsUserHistory()
+    oObjUserHIst      = objectivesUserHistory()
+    userHistoriesList = oBacklog.userHistoryAsociatedToProduct(1)  
+         
+    userHistories = []
+    options       = {1:'podria ',2:'puede '}
+    for hist in userHistoriesList:
+        historyDict   = {}
+         
+        historyDict['idHistory'] = hist.id_userHistory
+         
+        idActorsList  = oActUserHist.idActorsAsociatedToUserHistory(hist.id_userHistory)
+        missingActors = len(idActorsList)
+        actorsString  = ''
+        
+        for act in idActorsList:
+            result       = oRole.findIdRole(act)
+            actorsString = actorsString + ' ' + str(result[0].namerole) + ' '
+            if missingActors != 1:
+                actorsString = actorsString + ','    
+        historyDict['actors'] = actorsString.lower()
+
+        idAccions = oUserHistory.accionsAsociatedToUserHistory(hist.id_userHistory)
+        result    = oAccion.searchIdAccion(idAccions[0].ref_idaccion)
+        historyDict['accions'] = ' ' + options[1] + str(result[0].acciondescription).lower() + ' ' 
+         
+        idObjectivesList  = oObjUserHIst.idObjectivesAsociatedToUserHistory(hist.id_userHistory)
+        missingObjectives = len(idObjectivesList)
+        objectivesString  = ''
+        
+        for obj in idObjectivesList: 
+            result           = oObjective.searchIdObjective(obj)
+            objectivesString = objectivesString + ' ' + str(result[0].descObjective)
+            if missingObjectives != 1:
+                objectivesString = ' ' + objectivesString + ','  
+            elif missingObjectives == 1: 
+                objectivesString = objectivesString + '.'  
+        historyDict['objectives'] = objectivesString.lower()
+             
+        userHistories.append(historyDict)
+
     res['idPila']  = 1
-    res['data0']   = [{'idHistoria':1, 'enunciado':'En tanto'}]
+    res['data0']   = [{'idHistoria':hist['idHistory'], 'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]
     return json.dumps(res)
 
-
-
-
-
-#Use case code starts here
-
-
-#Use case code ends here

@@ -37,6 +37,7 @@ class userHistory(object):
                         db.session.commit()
                         return True
         return False
+    
         
     def searchUserHistory(self,cod_userHistory):
         typecod = (type(cod_userHistory) == str)
@@ -47,44 +48,13 @@ class userHistory(object):
                 return found
         return ([])
      
-#     def deleteUserHistory(self, cod_userHistory):
-#         '''Permite eliminar una historia segun su id'''
-#         
-#         typeUD = (type(cod_userHistory) == str)  
-#         if typeUD:
-#             Len_UD = const_min_cod <= len(cod_userHistory) <= const_max_cod
-#             if Len_UD:
-#                 foundid = clsUserHistory.query.filter_by(cod_userHistory = cod_userHistory).all()
-#                 if foundid != []:
-#                     oHistory = clsUserHistory.query.filter_by(cod_userHistory = cod_userHistory).all()
-#                     for i in oHistory:    
-#                         db.session.delete(i)          
-#                     db.session.commit()
-#                     return True
-#         return False 
-#     
-#     def actorsAsociatedToUserHistory(self,userHistoryId):
-#         ''' Permite obtener una lista de los Actores asociados a una historia de usuario'''
-#         checkTypeId = type(userHistoryId) == int    
-#         if checkTypeId: 
-#             found = clsRole.query.filter_by(id_userHistory = userHistoryId).all()
-#             return found
-#         return([])
-#     
-#     def objectivesAsociatedToUserHistory(self,userHistoryId):
-#         ''' Permite obtener una lista de los Actores asociados a una historia de usuario'''
-#         checkTypeId = type(userHistoryId) == int    
-#         if checkTypeId: 
-#             found = clsObjective.query.filter_by(id_userHistory = userHistoryId).all()
-#             return found
-#         return([])    
-#     
-#     def accionsAsociatedToUserHistory(self,userHistoryId):
-#         ''' Permite obtener una lista de los Actores asociados a una historia de usuario'''
-#         checkTypeId = type(userHistoryId) == int    
-#         if checkTypeId: 
-#             found = clsAccions.query.filter_by(id_userHistory = userHistoryId).all()
-#             return found
-#         return([])
-#           
-# # Fin Clase userHistory
+
+    def accionsAsociatedToUserHistory(self,userHistoryId):
+        ''' Permite obtener una lista de los Acciones asociados a una historia de usuario'''
+        checkTypeId = type(userHistoryId) == int and userHistoryId >= const_min_id
+        if checkTypeId: 
+            found = clsUserHistory.query.filter_by(id_userHistory = userHistoryId).all()
+            return found
+        return([])
+           
+# Fin Clase userHistory

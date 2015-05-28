@@ -45,6 +45,14 @@ class role(object):
                 found = clsRole.query.filter_by(namerole=namerole).all()
                 return found
         return([])
+    
+    def findIdRole(self, idrole):
+        """Permite buscar un elemento en la base de datos por su id"""
+        checkIdRole = type(idrole) == int and idrole >= minId
+        if checkIdRole:
+                found = clsRole.query.filter_by(idrole=idrole).all()
+                return found
+        return([])
                 
 
     def updateRole(self, namerole, newNameRole, newDescription):
