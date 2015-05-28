@@ -12,6 +12,18 @@ arrayType = [1,2]
 
 class userHistory(object):
     '''Clase que permite manejar las historias de manera persistente'''
+    
+    def getAllUserHistoryId(self, id_backlog):
+        checkIdBacklog = (type(id_backlog) == int)
+        if checkIdBacklog:
+            checkLengIdBacklog = (id_backlog >= const_min_id)
+            if checkLengIdBacklog:
+                existIdBacklog = clsBackLog.query.filter_by(id_backLog = id_backlog).first()
+                if existIdBacklog != []:
+                    found = clsUserHistory.query.filter_by(id_backLog = id_backlog).all()
+                    return found
+        return ([])
+        
 
     def insertUserHistory(self,cod_userHistory,id_History,type_accion,id_Accion,id_backLog):
         '''Permite insertar una Historia de usuario'''
