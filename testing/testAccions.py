@@ -19,23 +19,23 @@ class TestAccions(unittest.TestCase):
          aAcc = accions()
          aAcc.insertAccion('Reservar un taxi.',1)
          aAcc.deleteAccion('Reservar un taxi.')
-         aBackLog.deleteProduct('Reservar un taxi.')        
+         aBackLog.deleteProduct('Taxi seguro.')        
     # Casos Normales
     
     # Prueba 2
      def testInsertAccionElement(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Permite localizar un taxi')
         aAcc   = accions()
         result = aAcc.insertAccion('Permite elegir.',1)
         self.assertTrue(result)
         aAcc.deleteAccion('Permite elegir')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aBackLog.deleteProduct('Permite localizar un taxi')
                  
     # Prueba 3
      def testInsertAccionRepeatedElement(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         aAcc   = accions()
         result = aAcc.insertAccion('Permite elegir.',1)
         result1 = aAcc.insertAccion('Permite elegir.',1)
@@ -48,7 +48,7 @@ class TestAccions(unittest.TestCase):
      # Prueba 4
      def test4InsertAccionShortDesc0(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aAcc   = accions()
          result = aAcc.insertAccion('',1)
@@ -59,7 +59,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 5
      def testInsertAccionLongDesc1(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aAcc   = accions()
          result = aAcc.insertAccion('A',1)
@@ -70,7 +70,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 6
      def test6InsertAccionLongDesc140(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          aAcc   = accions()
          result = aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
                                       'cualquier hora del dia, para poder dirigirse a '+
@@ -84,7 +84,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 7
      def testInsertObjectiveLongDesc141(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aAcc   = accions()
          result = aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
@@ -96,7 +96,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 8
      def testInsertAccionIdBackLogInvalid(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          aAcc   = accions()
          result  =aAcc.insertAccion('Movlizarme desde mi casa',0)
          self.assertFalse(result)
@@ -108,7 +108,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 9
      def testInsertAccionIdBackLogNoExists(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aAcc   = accions()
          result  =aAcc.insertAccion('Trasladarse rápido',2)
@@ -119,7 +119,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 10
      def testInsertAccionLongDesc140AndIdBackLogNoExists(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aAcc   = accions()
          result = aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
@@ -133,7 +133,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 11
      def testInsertNotString(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aAcc   = accions()
          result = aAcc.insertAccion(4350,1)
@@ -143,7 +143,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 12
      def testInsertNoneString(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aAcc   = accions()
          result = aAcc.insertAccion(None,1)
@@ -160,7 +160,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 13 
      def testsearchAccionExists(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aAcc = accions()
          aAcc.insertAccion('Permite reservar un taxi',1)
@@ -171,7 +171,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 14
      def testsearchAccionShortDesc0(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.        
          aAcc   = accions()
          aAcc.insertAccion('',1)
@@ -182,7 +182,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 15
      def test_15searchAccionShortDesc1(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba
         aAcc   = accions()
         aAcc.insertAccion('A',1)
@@ -194,7 +194,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 16
      def testsearchAccionShortDesc140(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
@@ -212,7 +212,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 17
      def testsearchAccionShortDesc141(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aAcc   = accions()
          aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
@@ -228,7 +228,7 @@ class TestAccions(unittest.TestCase):
     # Caso Normal
      def testsearchAccionDescNotExist(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
         aAcc   = accions()
         result = aAcc.searchAccion('Comunicarse via correo electronico')
@@ -241,7 +241,7 @@ class TestAccions(unittest.TestCase):
      # Prueba 19
      def testsearchAccionNotString(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba. 
          aAcc   = accions()
          aAcc.insertAccion(4350,1)
@@ -253,7 +253,7 @@ class TestAccions(unittest.TestCase):
       
      def testFindNameNoneString(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.   
          aAcc   = accions()
          result = aAcc.searchAccion(None)
@@ -268,7 +268,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 21
      def testupdateAccionExists(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.   
         aAcc   = accions()
         aAcc.insertAccion('reservar un taxi.',1)
@@ -279,7 +279,7 @@ class TestAccions(unittest.TestCase):
      
      def testupdateAccionDesc(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aAcc   = accions()
          aAcc.insertAccion('Permite elegir.',1)
@@ -290,7 +290,7 @@ class TestAccions(unittest.TestCase):
           
      def testupdateAccionDescNOtExist(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
         aAcc = accions()
         result = aAcc.updateAccion('Llegar lo mas pronto posible','Ir comodo y seguro')
@@ -302,7 +302,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 24
      def testupdateAccionLeftLen1(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('A',1)
@@ -314,7 +314,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 25
      def testupdateAccionLeftLen1(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('Buscar al cliente donde esté',1)
@@ -326,7 +326,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 26         
      def testupdateAccionRightLen140(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('Atención las 24 horas del día',1)
@@ -338,7 +338,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 27
      def testupdateAccionLeftLen140(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion(140*'T',1)
@@ -352,7 +352,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 28
      def testupdateAccionLeftLen1RightLen140(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('A',1)
@@ -364,7 +364,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 29
      def testupdateAccionLeftLen140RightLen140(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.
          aAcc   = accions()
          aAcc.insertAccion(140*'Us',1)
@@ -376,7 +376,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 30
      def testupdateAccionLeftLen140RightLen1(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
@@ -392,7 +392,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 31
      def testupdateAccionLeftLen1RightLen1(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('X',1)
@@ -406,7 +406,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 32
      def testupdateSameName(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('Reservar un taxi.',1)
@@ -418,7 +418,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 33
      def testupdateAccionLeftLen0RightLen141(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('',1)
@@ -432,7 +432,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 34
      def testupdateAccionLeftLen141RightLen141(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
@@ -450,7 +450,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 35
      def testupdateAccionLeftLen141RightLen0(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
@@ -468,7 +468,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 36
      def testupdateAccionLeftNoneRightValidString(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         result = aAcc.updateAccion(None,'Comunicarse via correo electronico')
@@ -478,7 +478,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 37
      def testupdateAccionLeftValidStringRightNone(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('Reservar un taxi.',1)
@@ -496,7 +496,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 38
      def testDeleteAccionExists(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('Reservar un Taxi',1)
@@ -508,7 +508,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 39
      def testDeleteAccion(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('U')
@@ -519,7 +519,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 40      
      def testDeleteAccion(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('yyy',1)
@@ -533,7 +533,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 41
      def testDeleteAccion1(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('A',1)
@@ -546,7 +546,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 42
      def testDeleteAccionInvalid(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         result = aAcc.deleteAccion('')
@@ -556,7 +556,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 43
      def testDeleteAccionNotString(self):
        aBackLog = backLog()
-       aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+       aBackLog.insertBackLog('Taxi seguro.')
        # Inicio de la prueba.
        aAcc   = accions()
        aAcc.insertAccion(12345,1)
@@ -567,7 +567,7 @@ class TestAccions(unittest.TestCase):
     # Prueba 44    
      def test_44DeleteAccionNotExist(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         # Inicio de la prueba.
         aAcc   = accions()
         result = aAcc.deleteAccion('Legar rápido')
