@@ -27,9 +27,9 @@ class role(object):
             long_namerole = minNameRole <= len(namerole) <= maxNameRole
             long_roledescription = minRoleDescription <= len(roledescription) <= maxRoleDescription
             if (long_namerole and long_roledescription):
-                backLog = clsBackLog.query.filter_by(id_backLog = id_pila).all()
+                obackLog = clsBackLog.query.filter_by(id_backLog = id_pila).all()
                 arole = clsRole.query.filter_by(namerole = namerole).all()
-                if ((arole == []) and (backLog != [])):
+                if ((arole == []) and (obackLog != [])):
                     new_role = clsRole(namerole = namerole,roledescription = roledescription,id_pila = id_pila)
                     db.session.add(new_role)
                     db.session.commit()
@@ -60,7 +60,7 @@ class role(object):
             if (long_namerole and long_newNameRole and long_roledescription):    
                 foundnamerole = self.findNameRole(namerole)
                 foundnewrole  = self.findNameRole(newNameRole)
-                if (foundnamerole != []) and (foundnewrole == []):
+                if (foundnamerole != []):
                     
                     update_role = clsRole.query.filter_by(namerole = namerole).first()
                     update_role.namerole = newNameRole

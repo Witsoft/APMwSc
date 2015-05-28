@@ -56,7 +56,7 @@ class TestclsBackLog(unittest.TestCase):
          # Inicio de la prueba
          result = aBackLog.findDescription('T')
          self.assertTrue(result)
-         aBackLog.deleteProduct('Taxi seguro.')
+         aBackLog.deleteProduct('T')
          
      # Prueba 5
      def testfindDescriptionShortDesc140(self):
@@ -121,7 +121,7 @@ class TestclsBackLog(unittest.TestCase):
      def testInserBackLogExists(self):
           aBackLog = backLog()
           aBackLog.insertBackLog('Taxi seguro.')
-          aBackLog.deleteProduct('Reservar un taxi.')  
+          aBackLog.deleteProduct('Taxi seguro.')  
           
      # Casos Normal
      
@@ -208,7 +208,7 @@ class TestclsBackLog(unittest.TestCase):
          # Inicio de la prueba.
          result = aBackLog.deleteProduct('Taxi seguro.')
          self.assertFalse(result)
-        
+         aBackLog.deleteProduct('Reservar un taxi')
          # Casos Fronteras
        
      # Prueba 20
@@ -304,7 +304,7 @@ class TestclsBackLog(unittest.TestCase):
          # Inicio de la prueba.
          result = aBackLog.modifyDescription('Buscar al cliente donde esté','A')
          self.assertTrue(result)
-         aBackLog.deleteProduct('Buscar al cliente donde esté')
+         aBackLog.deleteProduct('A')
          
      # Prueba 29        
      def testmodifyDescriptionRightLen140(self):
@@ -342,7 +342,7 @@ class TestclsBackLog(unittest.TestCase):
          # Inicio de la prueba.
          result = aBackLog.modifyDescription(141*'T',141*'S')
          self.assertFalse(result)
-         aBackLog.deleteProduct(141*'S')
+         aBackLog.deleteProduct(141*'T')
          
      # Prueba 33
      def testmodifyDescriptionLen1(self):
@@ -376,6 +376,7 @@ class TestclsBackLog(unittest.TestCase):
          # Inicio de la prueba.
          result = aBackLog.modifyDescription('','')
          self.assertFalse(result)
+         
  
      # Casos Maliciosos
      
@@ -455,11 +456,11 @@ class TestclsBackLog(unittest.TestCase):
         aBackLog.insertBackLog('Taxi Seguro')
         arole.insertRole('Role1','nuevo role1',1)
         arole.insertRole('Role2','nuevo role2',2)
-        result = aBackLog.actorsAsociatedToProduct(3)
+        result = aBackLog.actorsAsociatedToProduct(2)
         self.assertEqual([],result)
         arole.deleteRole('Role1')
         aBackLog.deleteProduct('Taxi Seguro')
-
+'''
     # Casos Malicia
     
      # Prueba 44
@@ -655,4 +656,4 @@ class TestclsBackLog(unittest.TestCase):
         self.assertEqual([],result)
         oObjective.deleteObjective('nuevo objectives1')
         aBackLog.deleteProduct('Taxi Seguro')
-              
+'''              
