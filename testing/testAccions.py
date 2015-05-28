@@ -15,7 +15,7 @@ class TestAccions(unittest.TestCase):
      # Prueba 1
      def testInserAccionExists(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          aAcc = accions()
          aAcc.insertAccion('Reservar un taxi.',1)
          aAcc.deleteAccion('Reservar un taxi.')
