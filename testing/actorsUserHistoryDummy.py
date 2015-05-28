@@ -18,7 +18,7 @@ class actorsUserHistory(object):
         if checkIdActor and checkUserHistory:
             oActor         = clsRole.query.filter_by(idrole = id_Actor).all()
             oIdUserHistory = clsUserHistory.query.filter_by(id_userHistory = id_userHistory).all()
-            
+
             if oActor != [] and oIdUserHistory != []:
                 newAct = clsRolesUserHistory(ref_idrole = id_Actor, ref_idUserHistory = id_userHistory)
                 db.session.add(newAct)
@@ -29,10 +29,12 @@ class actorsUserHistory(object):
     def idActorsAsociatedToUserHistory(self, id_userHistory):
         '''Permite obtener los ids de los actores asociados a una historia de usuario'''
         
-        checkIdUserHistory = type(id_userHistory) == int and id_userHistory >= const_min_id
+        checkIdUserHistory = (type(id_userHistory) == int) and (id_userHistory >= const_min_id)
         if checkIdUserHistory:
-            result = clsRolesUserHistory.query.filter_by(ref_idUserHistory = id_userHistory)
+            result = clsRolesUserHistory.query.filter_by(ref_idUserHistory = id_userHistory).all()
+            print(result)
             idsList = []
             for act in result:
                 idsList.append(act.ref_idrole)
             return idsList
+        return ([])

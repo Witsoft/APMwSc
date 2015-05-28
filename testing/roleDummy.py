@@ -29,7 +29,6 @@ class role(object):
             if (long_namerole and long_roledescription):
                 obackLog = clsBackLog.query.filter_by(id_backLog = id_pila).all()
                 arole = clsRole.query.filter_by(namerole = namerole).all()
-                print(arole,obackLog)
                 if ((arole == []) and (obackLog != [])):
                     new_role = clsRole(namerole = namerole,roledescription = roledescription,id_pila = id_pila)
                     db.session.add(new_role)
