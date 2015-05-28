@@ -27,20 +27,20 @@ class TestHistory(unittest.TestCase):
         aBackLog = backLog()
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         aAcc   = userHistory()
-        result = aAcc.insertUserHistory('hola','obligatorio',1)
+        result = aAcc.insertUserHistory('hola','Obligatorio',1)
         self.assertTrue(result)
        
         # Prueba 2
         # Insertando una historia en un idBacklog que no existe
     def testInsertHistoryElementNotExist(self):
         aAcc   = userHistory()
-        result = aAcc.insertUserHistory('chao','opcional',2)
+        result = aAcc.insertUserHistory('chao','Opcional',2)
         self.assertFalse(result)
         
     # Prueba 3
     def testInsertHistoryRepeatedElement(self):
         aAcc   = userHistory()
-        result1 = aAcc.insertUserHistory('hola','obligatorio',1)
+        result1 = aAcc.insertUserHistory('hola','Obligatorio',1)
         self.assertFalse(result1)
         
     # Casos Fronteras
@@ -70,9 +70,9 @@ class TestHistory(unittest.TestCase):
         aBackLog = backLog()
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         aAcc   = userHistory()
-        result = aAcc.insertUserHistory('A'*11,'obligatorio',1)
+        result = aAcc.insertUserHistory('A'*11,'Obligatorio',1)
         self.assertTrue(result)
-        aAcc.deleteUserHistory('obligatorio')
+        aAcc.deleteUserHistory('Obligatorio')
         aBackLog.deleteProduct('Taxi seguro.')
         
     # Prueba 7
@@ -81,7 +81,7 @@ class TestHistory(unittest.TestCase):
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         # Inicio de la prueba.
         aAcc   = userHistory()
-        result = aAcc.insertUserHistory('B'*12,'obligatorios',1)
+        result = aAcc.insertUserHistory('B'*12,'Obligatorios',1)
         self.assertFalse(result)
         aBackLog.deleteProduct('Taxi seguro.')
         
@@ -90,7 +90,7 @@ class TestHistory(unittest.TestCase):
         aBackLog = backLog()
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         aAcc   = userHistory()
-        result = aAcc.insertUserHistory('B'*4,'obligatorio',0)
+        result = aAcc.insertUserHistory('B'*4,'Obligatorio',0)
         self.assertFalse(result)
         aBackLog.deleteProduct('Taxi seguro.')
      
@@ -102,7 +102,7 @@ class TestHistory(unittest.TestCase):
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         # Inicio de la prueba.
         aAcc   = userHistory()
-        result = aAcc.insertUserHistory('luis','opcional',2)
+        result = aAcc.insertUserHistory('luis','Opcional',2)
         self.assertFalse(result)
         aBackLog.deleteProduct('Taxi seguro.')
      
@@ -112,7 +112,7 @@ class TestHistory(unittest.TestCase):
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         # Inicio de la prueba.
         aAcc   = userHistory()
-        result = aAcc.insertUserHistory('A'*11,'obligatorio',3)
+        result = aAcc.insertUserHistory('A'*11,'Obligatorio',3)
         self.assertFalse(result)
         aBackLog.deleteProduct('Taxi seguro.')
      
@@ -150,7 +150,7 @@ class TestHistory(unittest.TestCase):
         aBackLog = backLog()
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         userH = userHistory()
-        userH.insertUserHistory('codigo1','obligatorio',1)
+        userH.insertUserHistory('codigo1','Obligatorio',1)
         result = userH.searchUserHistory('codigo1')
         aBackLog.deleteProduct('Reservar un taxi.')        
     
@@ -159,7 +159,7 @@ class TestHistory(unittest.TestCase):
         aBackLog = backLog()
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         userH = userHistory()
-        userH.insertUserHistory('codigo2','obligatorio',1)
+        userH.insertUserHistory('codigo2','Obligatorio',1)
         result = userH.searchUserHistory('codigo2')
         self.assertNotEqual([],result)
         #userH.deleteUserHistory('codigo2')
@@ -170,7 +170,7 @@ class TestHistory(unittest.TestCase):
         aBackLog = backLog()
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         userH = userHistory()
-        userH.insertUserHistory('codigo3','obligatorio',1)
+        userH.insertUserHistory('codigo3','Obligatorio',1)
         result = userH.searchUserHistory('codigo4')
         self.assertEqual([],result)
         #userH.deleteUserHistory('codigo3')
@@ -181,7 +181,7 @@ class TestHistory(unittest.TestCase):
         aBackLog = backLog()
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         userH = userHistory()
-        userH.insertUserHistory('codigo7890','obligatorio',1)
+        userH.insertUserHistory('codigo7890','Obligatorio',1)
         result = userH.searchUserHistory('codigo7890')
         self.assertNotEqual([],result)
         #userH.deleteUserHistory('codigo7890')
@@ -192,7 +192,7 @@ class TestHistory(unittest.TestCase):
         aBackLog = backLog()
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         userH = userHistory()
-        userH.insertUserHistory('codigo78910','obligatorio',1)
+        userH.insertUserHistory('codigo78910','Obligatorio',1)
         result = userH.searchUserHistory('codigo78910')
         self.assertNotEqual([],result)
         aBackLog.deleteProduct('Reservar un taxi.')
@@ -204,7 +204,7 @@ class TestHistory(unittest.TestCase):
         aBackLog = backLog()
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         userH = userHistory()
-        userH.insertUserHistory(None,'obligatorio',1)
+        userH.insertUserHistory(None,'Obligatorio',1)
         result = userH.searchUserHistory(None)
         self.assertEqual([],result)
         aBackLog.deleteProduct('Reservar un taxi.') 
@@ -222,7 +222,7 @@ class TestHistory(unittest.TestCase):
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         # Inicio de la prueba.
         aAcc   = userHistory()
-        aAcc.insertUserHistory('luis','opcional',1)
+        aAcc.insertUserHistory('luis','Opcional',1)
         aAcc.deleteUserHistory('luis')
         aBackLog.deleteProduct('Taxi seguro.')
           
@@ -234,7 +234,7 @@ class TestHistory(unittest.TestCase):
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         # Inicio de la prueba.
         aAcc   = userHistory()
-        result = aAcc.insertUserHistory('A'*11,'obligatorio',1)
+        result = aAcc.insertUserHistory('A'*11,'Obligatorio',1)
         result = aAcc.deleteUserHistory('A'*11)
         self.assertTrue(result)
         aBackLog.deleteProduct('Taxi seguro.')
@@ -245,9 +245,9 @@ class TestHistory(unittest.TestCase):
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         # Inicio de la prueba.
         aAcc   = userHistory()
-        result = aAcc.deleteUserHistory('opcional')
+        result = aAcc.deleteUserHistory('Opcional')
         self.assertFalse(result)
-        aAcc.deleteUserHistory('opcional')
+        aAcc.deleteUserHistory('Opcional')
         aBackLog.deleteProduct('Taxi seguro.')
           
     # Casos Fronteras
@@ -280,7 +280,7 @@ class TestHistory(unittest.TestCase):
         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
         # Inicio de la prueba.
         aAcc   = userHistory()
-        aAcc.insertUserHistory(12345,'opcional',1)
+        aAcc.insertUserHistory(12345,'Opcional',1)
         result = aAcc.deleteUserHistory(12345)
         self.assertFalse(result,"Id no válido")
         aBackLog.deleteProduct('Taxi seguro.')

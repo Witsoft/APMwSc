@@ -56,6 +56,16 @@ class accions(object):
                     return True
         return False
     
+    def updateAccionReferenceToHistory(self, idAccion, ref_idUserHistory):
+        '''Permite actualizar la referencia a la historia de usuario a la cual pertenece la accion'''
+        result = clsUserHistory.query.filter_by(id_userHistory = ref_idUserHistory).all()
+        
+        if (result != []):
+            oAccion = clsAccions.query.filter_by(idaccion = idAccion).first()
+            oAccion.id_userHistory = ref_idUserHistory
+            db.session.commit()
+            return True
+        return False
        
     def deleteAccion(self, acciondescription):
         '''Permite eliminar una accion segun su id'''

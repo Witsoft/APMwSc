@@ -68,6 +68,17 @@ class role(object):
                     update_role.roledescription = newDescription
                     db.session.commit()
                     return True
+        return False  
+    
+    def updateRoleReferenceToHistory(self,idRole, ref_idUserHistory):
+        '''Permite actualizar la referencia a la historia de usuario a la cual pertenece el actor'''
+        result = clsUserHistory.query.filter_by(id_userHistory = ref_idUserHistory).all()
+        
+        if (result != []):
+            oRole = clsRole.query.filter_by(idrole = idRole).first()
+            oRole.id_userHistory = ref_idUserHistory
+            db.session.commit()
+            return True
         return False   
 
            

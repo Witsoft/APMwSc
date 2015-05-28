@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-. 
 
 from app.scrum.model import *
-from lxml.html._diffcommand import description
 
 # Declaracion de constantes.
 const_maxDescription = 140
@@ -102,5 +101,13 @@ class backLog(object):
         if checkTypeId: 
             found = clsObjective.query.filter_by(id_backlog=productId).all()
             return found
-        return([])                                 
+        return([])   
+    
+    def userHistoryAsociatedToProduct(self,productId):
+        ''' Permite obtener una lista de los historias de usuario asociadas a una pila de Producto'''
+        checkTypeId = type(productId) == int    
+        if checkTypeId: 
+            found = clsUserHistory.query.filter_by(id_backLog=productId).all()
+            return found
+        return([])                                
 
