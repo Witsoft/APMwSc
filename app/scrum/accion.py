@@ -48,41 +48,18 @@ def AModifAccion():
     res = results[0]
     idPila = 1    
     
-    #Action code goes here, res should be a list with a label and a message    
-    
-    
+    #Action code goes here, res should be a list with a label and a message       
     newdescription = params['descripcion']
-    print (params)
-    idAccion = params['idAccion']  #Obtenemos el id de la accion
-    print('id Accion: ',idAccion)
+    idAccion       = params['idAccion']  #Obtenemos el id de la acción
 
-    oAccion = accions()
-    result   = clsAccions.query.filter_by(idaccion = idAccion).first()  #Conseguimos el producto a modificar
-    print('accion: ',result)
+    oAccion  = accions()
+    result   = clsAccions.query.filter_by(idaccion = idAccion).first()  #Conseguimos la acción a modificar
     oAccion.updateAccion(result.acciondescription, newdescription) #Modificamos la acción      
 
-
-
-#     if request.method == 'POST':
-# 
-# 
-#         DescriptionList = clsAccions.query.filter_by(id_backLog = idPila).all() 
-#         oldDescription = DescriptionList[0]
-#         oAccion = accions()
-#         newDescription = params['descripcion']
-#         result = oAccion.updateAccion(oldDescription,newDescription)
-#         if result:
-#             print("Se actualizó satisfactoriamente la acción")
-#             res = results[0]
-#         else:
-#             res = results[1]
-#     else:
-#             res = results[1]
-
     res['label'] = res['label'] + '/' + str(idPila)
-
-
+    
     #Action code ends here
+    
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
