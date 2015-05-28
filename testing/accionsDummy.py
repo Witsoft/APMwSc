@@ -24,6 +24,7 @@ class accions(object):
             if long_acciondescription:
                 obackLog = clsBackLog.query.filter_by(id_backLog = id_backLog).all()
                 oaccion = clsAccions.query.filter_by(acciondescription = acciondescription).all()
+                
                 if (obackLog != []) and (oaccion == []):
                     new_accion = clsAccions(acciondescription = acciondescription,id_backLog = id_backLog)
                     db.session.add(new_accion)
@@ -36,6 +37,15 @@ class accions(object):
         '''Permite buscar acciones por su descripcion'''
         oAccion = clsAccions.query.filter_by(acciondescription = acciondescription).all()
         return oAccion
+    
+    def searchIdAccion(self, idaccion):
+        '''Permite buscar acciones por su id'''
+        typeIdAccion = (type(idaccion) == int)
+        if (typeIdAccion and idaccion >= minId):
+            oAccion = clsAccions.query.filter_by(idaccion  = idaccion).all()
+            return oAccion
+        return ([])
+
             
     def updateAccion(self, acciondescription,newDescription):
         '''Permite actualizar la descripcion de una accion'''

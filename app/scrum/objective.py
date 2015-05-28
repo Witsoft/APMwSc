@@ -4,8 +4,10 @@ from app.scrum.backLog import *
 
 # Declaracion de constantes.
 const_minIdBacklog = 1
+const_minIdObj     = 1
 const_minDescObj   = 1
 const_maxDescObj   = 140
+
 
 
 class objective(object):
@@ -39,8 +41,11 @@ class objective(object):
     
     def searchIdObjective(self, IdObjective):
         '''Permite buscar objetivos por su id'''
-        aObj = clsObjective.query.filter_by(idobjective = IdObjective).all()
-        return aObj
+        checkIdObjective = type(IdObjective) == int and IdObjective >= const_minIdObj 
+        if (checkIdObjective):
+            aObj = clsObjective.query.filter_by(idobjective = IdObjective).all()
+            return aObj
+        return ([])
             
     def updateObjective(self, descObjective, newDescObjective):
         '''Permite actualizar la descripcion de un objetivo'''

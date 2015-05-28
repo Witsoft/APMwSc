@@ -29,6 +29,7 @@ class role(object):
             if (long_namerole and long_roledescription):
                 obackLog = clsBackLog.query.filter_by(id_backLog = id_pila).all()
                 arole = clsRole.query.filter_by(namerole = namerole).all()
+                print(arole,obackLog)
                 if ((arole == []) and (obackLog != [])):
                     new_role = clsRole(namerole = namerole,roledescription = roledescription,id_pila = id_pila)
                     db.session.add(new_role)
@@ -44,7 +45,15 @@ class role(object):
                 found = clsRole.query.filter_by(namerole=namerole).all()
                 return found
         return([])
-                
+    
+    def findIdRole(self, idrole):
+        """Permite buscar un elemento en la base de datos por su id"""
+        checkIdRole = type(idrole) == int and idrole >= minId
+        if checkIdRole:
+                found = clsRole.query.filter_by(idrole=idrole).all()
+                return found
+        return([])
+              
 
     def updateRole(self, namerole, newNameRole, newDescription):
         """Permite modificar un nombre de la clase role"""

@@ -251,7 +251,7 @@ class TestAccions(unittest.TestCase):
 
      #Prueba 20
       
-     def testFindNameNoneString(self):
+     def testSearchNameNoneString(self):
          aBackLog = backLog()
          aBackLog.insertBackLog('Taxi seguro.')
          # Inicio de la prueba.   
@@ -259,6 +259,21 @@ class TestAccions(unittest.TestCase):
          result = aAcc.searchAccion(None)
          self.assertEqual(result, [],'Accion Encontrada')
          aBackLog.deleteProduct('Taxi seguro.')
+         
+    #############################################      
+     #   Suite de Pruebas para searchIdAccion   #
+     #############################################  
+    # Caso Inicial
+         
+         #Prueba 21
+#       
+#      def testsearchIdAccionExists(self):
+#          aBackLog = backLog()
+#          aBackLog.insertBackLog('Taxi seguro.')
+#          # Inicio de la prueba.
+#          aAcc = accions()
+#          aAcc.insertAccion('Permite reservar un taxi',1)
+#          aAcc.searchAccion('Permite reservar un taxi')
                          
      #############################################      
      #   Suite de Pruebas para updateAccion   #
