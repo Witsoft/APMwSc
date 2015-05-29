@@ -46,7 +46,6 @@ def ACrearHistoria():
         else:
             res = results[1] 
             
-
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)

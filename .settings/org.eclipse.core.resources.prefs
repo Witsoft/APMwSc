@@ -7,8 +7,19 @@ encoding//app/scrum/accions.py=utf-8
 encoding//app/scrum/actor.py=utf-8
 encoding//app/scrum/actorsUserHistory.py=utf-8
 encoding//app/scrum/backLog.py=utf-8
+<<<<<<< HEAD
 encoding//app/scrum/dev.py=utf-8
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+encoding//app/scrum/dev.py=utf-8
+=======
+>>>>>>> refs/remotes/origin/Desarrolladores
 encoding//app/scrum/historias.py=utf-8
+>>>>>>> refs/remotes/origin/Historias_Usuario
+=======
+encoding//app/scrum/dev.py=utf-8
+>>>>>>> refs/remotes/origin/Acciones
 encoding//app/scrum/ident.py=utf-8
 encoding//app/scrum/mast.py=utf-8
 encoding//app/scrum/model.py=utf-8
