@@ -38,7 +38,6 @@ class TestActorsUserHistory(unittest.TestCase):
         searchAct = aAct.findNameRole('Scrum Master')
         idFound2 = searchAct[0].idrole 
         
-        #Inicio de caso de prueba
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
         aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
@@ -75,7 +74,6 @@ class TestActorsUserHistory(unittest.TestCase):
         searchAct = aAct.findNameRole('Team Member')
         idFound2 = searchAct[0].idrole 
         
-        #Inicio de caso de prueba
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
         result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
@@ -112,7 +110,6 @@ class TestActorsUserHistory(unittest.TestCase):
         searchAct = aAct.findNameRole('Team Member')
         idFound2 = searchAct[0].idrole 
         
-        #Inicio de caso de prueba
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
         result = aAccAs.insertActorAsociatedInUserHistory(0, idFound1) 
@@ -147,7 +144,6 @@ class TestActorsUserHistory(unittest.TestCase):
         searchAct = aAct.findNameRole('Team Member')
         idFound2 = searchAct[0].idrole 
         
-        #Inicio de caso de prueba
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
         result = aAccAs.insertActorAsociatedInUserHistory(idFound2, 0) 
@@ -182,7 +178,6 @@ class TestActorsUserHistory(unittest.TestCase):
         searchAct = aAct.findNameRole('Team Member')
         idFound2 = searchAct[0].idrole 
         
-        #Inicio de caso de prueba
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
         result = aAccAs.insertActorAsociatedInUserHistory((2**31)-1, idFound1) 
@@ -195,7 +190,7 @@ class TestActorsUserHistory(unittest.TestCase):
         
 
     # Prueba 5
-    def testinsertActorAsociatedInUserHistoryIdActorBig(self):
+    def testinsertActorAsociatedInUserHistoryIdUserHistoryBig(self):
         # Insertamos Producto
         aBackLog = backLog()
         aBackLog.insertBackLog('Taxi seguro.')
@@ -220,7 +215,7 @@ class TestActorsUserHistory(unittest.TestCase):
         
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
-        result = aAccAs.insertActorAsociatedInUserHistory(idFound1, (2**31)-1) 
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, (2**31)-1) 
         self.assertFalse(result)
         
         # Eliminamos historia, accion y producto
@@ -577,7 +572,6 @@ class TestActorsUserHistory(unittest.TestCase):
          
         #Inicio de caso de prueba 
         # Buscamos los ids de los actores asociados a una historia de usuario
-        aAccAs = actorsUserHistory()
         aAccAs.idActorsAsociatedToUserHistory(idFound1)
         
         # Eliminamos historia, accion y producto
@@ -617,7 +611,6 @@ class TestActorsUserHistory(unittest.TestCase):
         
         #Inicio de caso de prueba
         # Buscamos los ids de los actores asociados a una historia de usuario
-        aAccAs = actorsUserHistory()
         result = aAccAs.idActorsAsociatedToUserHistory(idFound1)
         self.assertNotEqual([],result)
         
@@ -656,7 +649,6 @@ class TestActorsUserHistory(unittest.TestCase):
         
         #Inicio de caso de prueba
         # Buscamos los ids de los actores asociados a una historia de usuario
-        aAccAs = actorsUserHistory()
         result = aAccAs.idActorsAsociatedToUserHistory(0)
         self.assertEqual([],result)
         
@@ -695,7 +687,6 @@ class TestActorsUserHistory(unittest.TestCase):
         
         #Inicio de caso de prueba
         # Buscamos los ids de los actores asociados a una historia de usuario
-        aAccAs = actorsUserHistory()
         result = aAccAs.idActorsAsociatedToUserHistory((2**31)-1)
         self.assertEqual([],result)
         
@@ -736,7 +727,6 @@ class TestActorsUserHistory(unittest.TestCase):
         
         #Inicio de caso de prueba
         # Buscamos los ids de los actores asociados a una historia de usuario
-        aAccAs = actorsUserHistory()
         result = aAccAs.idActorsAsociatedToUserHistory(-1)
         self.assertEqual([],result)
         
@@ -775,7 +765,6 @@ class TestActorsUserHistory(unittest.TestCase):
         
         #Inicio de caso de prueba
         # Buscamos los ids de los actores asociados a una historia de usuario
-        aAccAs = actorsUserHistory()
         result = aAccAs.idActorsAsociatedToUserHistory('1')
         self.assertEqual([],result)
         
@@ -814,7 +803,6 @@ class TestActorsUserHistory(unittest.TestCase):
         
         #Inicio de caso de prueba
         # Buscamos los ids de los actores asociados a una historia de usuario
-        aAccAs = actorsUserHistory()
         result = aAccAs.idActorsAsociatedToUserHistory(None)
         self.assertEqual([],result)
         
@@ -853,8 +841,7 @@ class TestActorsUserHistory(unittest.TestCase):
         
         #Inicio de caso de prueba
         # Buscamos los ids de los actores asociados a una historia de usuario
-        aAccAs = actorsUserHistory()
-        result = aAccAs.idActorsAsociatedToUserHistory('')
+        result = aAccAs.idActorsAsociatedToUserHistory(' ')
         self.assertEqual([],result)
         
         # Eliminamos historia, accion y producto
