@@ -4,8 +4,10 @@ from app.scrum.backLog import *
 
 # Declaracion de constantes.
 const_minIdBacklog = 1
+const_minIdObj     = 1
 const_minDescObj   = 1
 const_maxDescObj   = 140
+
 
 
 class objective(object):
@@ -36,6 +38,14 @@ class objective(object):
         '''Permite buscar objetivos por su descripcion'''
         aObj = clsObjective.query.filter_by(descObjective = descObjective).all()
         return aObj
+    
+    def searchIdObjective(self, IdObjective):
+        '''Permite buscar objetivos por su id'''
+        checkIdObjective = type(IdObjective) == int and IdObjective >= const_minIdObj 
+        if (checkIdObjective):
+            aObj = clsObjective.query.filter_by(idobjective = IdObjective).all()
+            return aObj
+        return ([])
             
     def updateObjective(self, descObjective, newDescObjective):
         '''Permite actualizar la descripcion de un objetivo'''
@@ -57,7 +67,18 @@ class objective(object):
                         aObj[0].descObjective = newDescObjective
                         db.session.commit()
                         return True
-        return False     
+        return False  
+    
+    def updateObjectiveReferenceToHistory(self, idObjective, ref_idUserHistory):
+        '''Permite actualizar la referencia a la historia de usuario a la cual pertenece el objetivo'''
+        result = clsUserHistory.query.filter_by(id_userHistory = ref_idUserHistory).all()
+        
+        if (result != []):
+            oObjective = clsObjective.query.filter_by(idobjective = idObjective).first()
+            oObjective.id_userHistory = ref_idUserHistory
+            db.session.commit()
+            return True
+        return False   
     
        
     def deleteObjective(self, descObjective):

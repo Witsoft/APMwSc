@@ -40,6 +40,13 @@ def AModifProducto():
     res     = results[0]
     #Action code goes here, res should be a list with a label and a message
 
+    newdescription = params['descripcion']
+
+    idPila = params['idPila'] #Obtenemos el id del producto
+
+    oBackLog = backLog()
+    result   = clsBackLog.query.filter_by(id_backLog = idPila).first()  #Conseguimos el producto a modificar
+    oBackLog.modifyDescription(result.BL_description, newdescription) #Modificamos el producto      
 
     #Action code ends here
     if "actor" in res:
@@ -58,7 +65,6 @@ def VCrearProducto():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
-
     #Action code ends here
     return json.dumps(res)
 
@@ -71,24 +77,27 @@ def VProducto():
         res['actor']=session['actor']
 
 
-    idPila = int(request.args.get('idPila', 1))
+    idPila    = request.args.get('idPila')
+    idProduct = int(idPila)
+    idProduct = 1
     #pilas = [{'idPila':1, 'nombre':'Pagos en línea', 'descripcion':'Pagos usando tarjeta de débito'}]
     #res['fPila'] = pilas[idPila-1]    
-    
+
     oBackLog   = backLog()
-    actorsList = oBackLog.actorsAsociatedToProduct(1)
-    accionList = oBackLog.accionsAsociatedToProduct(1)
-    objectList = oBackLog.objectivesAsociatedToProduct(1)
+    actorsList = oBackLog.actorsAsociatedToProduct(idProduct)
+    accionList = oBackLog.accionsAsociatedToProduct(idProduct)
+    objectList = oBackLog.objectivesAsociatedToProduct(idProduct)
     
 
-    res['data3'] = [{'idActor':act.idrole,'descripcion':act.roledescription}for act in actorsList]
+    res['data3'] = [{'idActor':act.idrole,'descripcion':act.namerole + ' : ' + act.roledescription}for act in actorsList]
     res['data5'] = [{'idAccion':acc.idaccion, 'descripcion':acc.acciondescription}for acc in accionList]
     res['data7'] = [{'idObjetivo':obj.idobjective, 'descripcion':obj.descObjective} for obj in objectList]
-    
-
     res['idPila'] = idPila    
 
-    #Action code ends here
+    result   = clsBackLog.query.filter_by(id_backLog = idPila).first()
+    
+    res['fPila'] = {'idPila':idPila,'descripcion':result.BL_description}
+
     return json.dumps(res)
 
 
@@ -100,10 +109,8 @@ def VProductos():
         res['actor']=session['actor']
 
     # Obtenemos la lista de productos.
-    productList = clsBackLog.query.all()  
-    for prod in productList:
-        print(prod.id_backLog,prod.BL_description)
-
+    productList = clsBackLog.query.all()
+    
     res['data0'] = [{'idPila':prod.id_backLog,'nombre':prod.BL_description}for prod in productList]
 
     return json.dumps(res)

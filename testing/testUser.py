@@ -12,7 +12,7 @@ class clsUserTester(unittest.TestCase):
       
     def testUserInsertExist(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -24,7 +24,7 @@ class clsUserTester(unittest.TestCase):
     # Caso frontera
     def testUserInsertTrue(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -38,7 +38,7 @@ class clsUserTester(unittest.TestCase):
     # Caso frontera
     def testUserInsertFalse(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -50,7 +50,7 @@ class clsUserTester(unittest.TestCase):
     # Caso frontera externa
     def testUserInsertNoUser(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -63,7 +63,7 @@ class clsUserTester(unittest.TestCase):
     # Caso frontera interna 
     def testUserInsert1char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -76,7 +76,7 @@ class clsUserTester(unittest.TestCase):
     # Caso frontera Externa 
     def testUserInsert17char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -89,7 +89,7 @@ class clsUserTester(unittest.TestCase):
     # Caso frontera Externa 
     def testUserInsert16char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -102,7 +102,7 @@ class clsUserTester(unittest.TestCase):
     # Caso frontera Externa 
     def testUserInsert15char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -115,7 +115,7 @@ class clsUserTester(unittest.TestCase):
     # Caso frontera
     def testUserInsert8char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -128,7 +128,7 @@ class clsUserTester(unittest.TestCase):
     # Caso frontera Externa 
     def testUserInserFullnamet51char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -141,7 +141,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera
     def testUserInserFullnamet50char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -155,7 +155,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera Interna 
     def testUserInserFullnamet49char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -168,7 +168,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera Externa 
     def testUserInserFullnamet25char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -181,7 +181,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera Externa 
     def test9_0UserInserNoFullname(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -193,7 +193,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera Externa 
     def testUserInserFullnamet1char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -206,7 +206,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera Externa
     def testUserInsertEmail31char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -218,7 +218,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera Externa
     def testUserInsertNoEmail(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -230,7 +230,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera Interna
     def testUserInsertEmail1char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -243,7 +243,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera Interna
     def testUserInsertEmail30char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -256,7 +256,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera Interna
     def testUserInsertEmail29char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -269,7 +269,7 @@ class clsUserTester(unittest.TestCase):
      #caso frontera externa
     def testUserInsertPassword17(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -281,7 +281,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera externa
     def testUserInsertNoPassword(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -293,7 +293,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera interna
     def testUserInsertPassword15(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -306,7 +306,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera interna
     def testUserInsertPassword8(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -319,7 +319,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera
     def testUserInsertPasword16(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -332,7 +332,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera
     def testUserInsertPassword8(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -345,7 +345,7 @@ class clsUserTester(unittest.TestCase):
     #Caso Malicia
     def testUserInsertidroleChar(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -357,7 +357,7 @@ class clsUserTester(unittest.TestCase):
     #caso malicia
     def testUserInsertNochar(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -369,7 +369,7 @@ class clsUserTester(unittest.TestCase):
     #caso malicia   
     def testUserInsertNoParam(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -381,7 +381,7 @@ class clsUserTester(unittest.TestCase):
     #caso Frontera
     def testUserInsertNoRole(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -393,7 +393,7 @@ class clsUserTester(unittest.TestCase):
     #caso Frontera
     def testUserInsertNoRole(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -405,7 +405,7 @@ class clsUserTester(unittest.TestCase):
     #Caso esquina
     def testUserInsertNoForeign(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -427,7 +427,7 @@ class clsUserTester(unittest.TestCase):
     #Caso Frontera
     def testsearchUserTrue(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -441,7 +441,7 @@ class clsUserTester(unittest.TestCase):
     #Caso Frontera 
     def testsearchUser1Char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -455,7 +455,7 @@ class clsUserTester(unittest.TestCase):
     #Caso Frontera
     def testsearchUser16Char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -469,7 +469,7 @@ class clsUserTester(unittest.TestCase):
     #Caso Frontera externa
     def testSearchUserNotChar(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -482,7 +482,7 @@ class clsUserTester(unittest.TestCase):
     def testsearchUser17Char(self):
   
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -495,7 +495,7 @@ class clsUserTester(unittest.TestCase):
     #Caso Esquina
     def testsearchUserNotInsert(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -507,7 +507,7 @@ class clsUserTester(unittest.TestCase):
     #Caso Intermedio
     def testsearchUser8Char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -521,7 +521,7 @@ class clsUserTester(unittest.TestCase):
     #caso Malicia 
     def testsearchUserNoChar(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -532,7 +532,7 @@ class clsUserTester(unittest.TestCase):
             
     def testsearchUserNoParam(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -551,7 +551,7 @@ class clsUserTester(unittest.TestCase):
         
     def testupdateUserTrue(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          role1 = role()
          user1 = user()
          role1.insertRole('Product Owner','description',1)
@@ -564,7 +564,7 @@ class clsUserTester(unittest.TestCase):
  
     def testupdateUserFalse(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          role1 = role()
          user1 = user()
          role1.insertRole('Product Owner','description',1)
@@ -577,7 +577,7 @@ class clsUserTester(unittest.TestCase):
     
     def testupdateUserNonepass(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          role1 = role()
          user1 = user()
          role1.insertRole('Product Owner','description',1)
@@ -590,7 +590,7 @@ class clsUserTester(unittest.TestCase):
         
     def testupdateUserNonedescription(self):
          aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+         aBackLog.insertBackLog('Taxi seguro.')
          role1 = role()
          user1 = user()
          role1.insertRole('Product Owner','description',1)
@@ -603,7 +603,7 @@ class clsUserTester(unittest.TestCase):
                              
     def testupdateUserIntermedio(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -616,7 +616,7 @@ class clsUserTester(unittest.TestCase):
     
     def testupdateUserNorole(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -629,7 +629,7 @@ class clsUserTester(unittest.TestCase):
  
     def testupdateUserChar(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -640,7 +640,7 @@ class clsUserTester(unittest.TestCase):
      
     def testupdateUserNoUser(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -653,7 +653,7 @@ class clsUserTester(unittest.TestCase):
      
     def testupdateUserBlancs(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -666,7 +666,7 @@ class clsUserTester(unittest.TestCase):
      
     def testupdateUserNoParam(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -679,7 +679,7 @@ class clsUserTester(unittest.TestCase):
      
     def testupdateUserNoChange(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -692,7 +692,7 @@ class clsUserTester(unittest.TestCase):
      
     def testupdateUsermaxchar(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -705,7 +705,7 @@ class clsUserTester(unittest.TestCase):
  
     def testupdateUserFronteraExt(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -718,7 +718,7 @@ class clsUserTester(unittest.TestCase):
      
     def testupdateUserFronteraInt(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -731,7 +731,7 @@ class clsUserTester(unittest.TestCase):
      
     def testupdateUserNotfound(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -755,7 +755,7 @@ class clsUserTester(unittest.TestCase):
     #Caso Frontera
     def testUserDeleteTrue(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -768,7 +768,7 @@ class clsUserTester(unittest.TestCase):
     #caso Frontera     
     def testUserDeleteFalse(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -780,7 +780,7 @@ class clsUserTester(unittest.TestCase):
     #caso malicia    
     def testUserDeleteNoUser(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -792,7 +792,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera Interna 
     def testUserDelete1char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -805,7 +805,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera     
     def testUserDelete16char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -818,7 +818,7 @@ class clsUserTester(unittest.TestCase):
     #Caso frontera Externa        
     def testUserDelete17char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -830,7 +830,7 @@ class clsUserTester(unittest.TestCase):
     #caso frontera Interna 
     def testUserDelete15char(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -843,7 +843,7 @@ class clsUserTester(unittest.TestCase):
     #caso Malicia
     def testUserDeleteNoParam(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)
@@ -855,7 +855,7 @@ class clsUserTester(unittest.TestCase):
     #caso Malicia
     def testUserDeleteNoChar(self):
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.','Permite localizar un taxi')
+        aBackLog.insertBackLog('Taxi seguro.')
         role1 = role()
         user1 = user()
         role1.insertRole('Product Owner','description',1)

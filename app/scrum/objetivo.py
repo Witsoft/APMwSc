@@ -15,8 +15,6 @@ def ACrearObjetivo():
     params = request.get_json()
     results = [{'label':'/VProducto', 'msg':['Objetivo creado']}, {'label':'/VCrearObjetivo', 'msg':['Error al crear objetivo']}, ]
     
-    #Action code goes here, res should be a list with a label and a message  
-
     if request.method == 'POST':
     
         oObjective = objective()
@@ -24,7 +22,6 @@ def ACrearObjetivo():
         result = oObjective.insertObjective(newDescription,1)
 
         if result:
-            print("Se registró satisfactoriamente el objetivo")
             res = results[0]
         else:
             res = results[1]
@@ -33,8 +30,6 @@ def ACrearObjetivo():
 
     idPila = 1
     res['label'] = res['label'] + '/' + str(idPila)
-
-    #Action code ends here
     
     if "actor" in res:
         if res['actor'] is None:
@@ -47,19 +42,22 @@ def ACrearObjetivo():
 @objetivo.route('/objetivo/AModifObjetivo', methods=['POST'])
 def AModifObjetivo():
     #POST/PUT parameters
-    params = request.get_json()
+    params  = request.get_json()
     results = [{'label':'/VProducto', 'msg':['Objetivo actualizado']}, {'label':'/VObjetivo', 'msg':['Error al modificar objetivo']}, ]
-    res = results[0]
-    idpila = 1
+    idPila  = 1
 
-    #Action code goes here, res should be a list with a label and a message
-#     idPila = int(request.args.get('idPila', 1))
-#     objetivo = objective()
-#     objetivo.updateObjective(objetivo.descObjective, params['descripcion'])
-    res['label'] = res['label'] + '/' + str(idPila)
-     
+    idObjetivo     = params['idObjetivo']  #Obtenemos el id del objetivo
+    newDescription = params['descripcion'] #Obtenemos la nueva descripción del objetivo
+    
+    objetivoDesc = clsObjective.query.filter_by(idobjective = idObjetivo).first() #Conseguimos el objetivo a modificar
+    oObjetivo    = objective()
+    result       = oObjetivo.updateObjective(objetivoDesc.descObjective, newDescription) #Modificamos la descripción del objetivo
 
-    #Action code ends here
+    if result:
+        res = results[0]
+        res['label'] = res['label'] + '/' + str(idPila)
+    else:
+        res = results[1]
 
     if "actor" in res:
         if res['actor'] is None:
@@ -74,9 +72,15 @@ def VObjetivo():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
+    
     #Action code goes here, res should be a JSON structure
+    idObjetivo = request.args.get('idObjetivo')
 
+    result   = clsObjective.query.filter_by(idobjective = idObjetivo).first()
+    
     res['idPila'] = 1 
+    res['fObjetivo'] = {'idObjetivo':idObjetivo, 'descripcion':result.descObjective} 
+    
 
     #Action code ends here
     return json.dumps(res)
