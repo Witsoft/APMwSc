@@ -25,6 +25,24 @@ class objectivesUserHistory(object):
                 db.session.commit()
                 return True
         return False
+
+
+    def deleteObjectiveAsociatedInUserHistory(self,id_Objective, id_userHistory):
+        '''Permite eliminar un actor de una historia de usuario'''
+        
+        checkIdObjective     = type(id_Objective) == int and id_Objective >= const_min_id
+        checkUserHistory = type(id_userHistory) == int and id_userHistory >= const_min_id
+
+        if checkIdObjective and checkUserHistory:
+            oObjective = clsObjectivesUserHistory.query.filter_by(ref_idobjective = id_Objective,ref_idUserHistory = id_userHistory).all()
+            
+            if oObjective != []:
+                for i in oObjective:
+                    db.session.delete(i)
+                db.session.commit()
+                return True
+        return False
+    
         
     def idObjectivesAsociatedToUserHistory(self,id_userHistory):
         '''Permite obtener los ids de los objetivos asociados a una historia de usuario'''
