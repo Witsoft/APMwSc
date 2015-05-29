@@ -59,6 +59,34 @@ class userHistory(object):
                 found = clsUserHistory.query.filter_by(cod_userHistory = cod_userHistory).all()
                 return found
         return ([])
+    
+    def updateUserHistory(self,iduserHist,new_cod_userHistory,new_id_History,new_type_accion,new_id_Accion):
+        '''Permite modificar una Historia de usuario'''
+        checkCodUserHistory    = type(new_cod_userHistory) == str
+        checkLenCodUserHistory = const_min_cod <= len(new_cod_userHistory) <= const_max_cod
+        checkIdHistory         = type(new_id_History) == int and new_id_History >= const_min_idHist
+        
+        if checkCodUserHistory and checkLenCodUserHistory and checkIdHistory:
+            oUserHistory = clsUserHistory.query.filter_by(id_userHistory = new_id_History).all()
+            
+            if oUserHistory !=[] or new_id_History == 0:
+                checkTypeAccion = new_type_accion in arrayType
+                checkIdAccion   = type(new_id_Accion) == int and new_id_Accion >= const_min_id
+                
+                if checkTypeAccion and checkIdAccion:
+                    oAccions = clsAccions.query.filter_by(idaccion = new_id_Accion).all()
+                    
+                    if oAccions != []:
+                        result = clsUserHistory.query.filter_by(id_userHistory = iduserHist).all()
+                        
+                        if result != []:
+                            result[0].cod_userHistory = new_cod_userHistory
+                            result[0].id_History      = new_id_History
+                            result[0].type_accion     = new_type_accion
+                            result[0].id_Accion       = new_id_Accion
+                            db.session.commit()
+                        return True
+        return False
      
 
     def accionsAsociatedToUserHistory(self,userHistoryId):
