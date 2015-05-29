@@ -38,8 +38,12 @@ class accions(object):
     
     def searchIdAccion(self, idaccion):
         '''Permite buscar acciones por su id'''
-        oAccion = clsAccions.query.filter_by(idaccion  = idaccion).all()
-        return oAccion
+        typeIdAccion = (type(idaccion) == int)
+        if (typeIdAccion and idaccion >= minId):
+            oAccion = clsAccions.query.filter_by(idaccion  = idaccion).all()
+            return oAccion
+        return ([])
+
             
     def updateAccion(self, acciondescription,newDescription):
         '''Permite actualizar la descripcion de una accion'''
