@@ -46,28 +46,6 @@ def ACrearHistoria():
         else:
             res = results[1] 
             
-#     if (inserted):
-#         result = oUserHistory.searchUserHistory(codeHistory)
-#         # Buscamos el id de la historia de usuario recien insertada.
-#         idVarInsert = result[0].id_userHistory
-#         
-#         # Modificamos las tablas que referencian a la historia de usuario.
-#         oActor     = role()
-#         oAccion    = accions()
-#         oObjective = objective()
-# 
-#         resultUpdateAccion   = oAccion.updateAccionReferenceToHistory(idAccion,idVarInsert)
-# 
-#         for id in idActor:
-#             resultUpdateActor    = oActor.updateRoleReferenceToHistory(id,idVarInsert)
-#         
-#         for id in idObjective:
-#             resultUpdateObjective = oObjective.updateObjectiveReferenceToHistory(id,idVarInsert)
-#         
-#         if resultUpdateAccion and resultUpdateActor and resultUpdateObjective:
-#            res = results[0]
-#         else:
-#            res = results[1] 
 
     if "actor" in res:
         if res['actor'] is None:
@@ -112,13 +90,13 @@ def VCrearHistoria():
     historyList   = oBacklog.userHistoryAsociatedToProduct(1)
 
     #Ejemplo de relleno de listas para selectrores
-    res['fHistoria_opcionesActores'] = [{'key':act.idrole,'value':act.namerole}for act in actorList]
-    res['fHistoria_opcionesAcciones'] = [{'key':acc.idaccion,'value':acc.acciondescription}for acc in accionList]
-    res['fHistoria_opcionesObjetivos'] = [{'key':obj.idobjective,'value':obj.descObjective}for obj in objectiveList]
-    res['fHistoria_opcionesHistorias'] = [{'key':hist.id_userHistory,'value':hist.cod_userHistory}for hist in historyList]
+    res['fHistoria_opcionesActores']       = [{'key':act.idrole,'value':act.namerole}for act in actorList]
+    res['fHistoria_opcionesAcciones']      = [{'key':acc.idaccion,'value':acc.acciondescription}for acc in accionList]
+    res['fHistoria_opcionesObjetivos']     = [{'key':obj.idobjective,'value':obj.descObjective}for obj in objectiveList]
+    res['fHistoria_opcionesHistorias']     = [{'key':hist.id_userHistory,'value':hist.cod_userHistory}for hist in historyList]
     res['fHistoria_opcionesTiposHistoria'] = [{'key':1,'value':'Opcional'},{'key':2,'value':'Obligatoria'}]
     res['fHistoria'] = {'super':0}
-    res['idPila'] = 1
+    res['idPila']    = 1
 
 
     #Action code ends here
