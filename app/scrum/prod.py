@@ -78,10 +78,10 @@ def VProducto():
         res['actor']=session['actor']
 
 
-    idPila = int(request.args.get('idPila', 1))
+    idPila = request.args.get('idPila')
     #pilas = [{'idPila':1, 'nombre':'Pagos en línea', 'descripcion':'Pagos usando tarjeta de débito'}]
     #res['fPila'] = pilas[idPila-1]    
-    
+
     oBackLog   = backLog()
     actorsList = oBackLog.actorsAsociatedToProduct(1)
     accionList = oBackLog.accionsAsociatedToProduct(1)
