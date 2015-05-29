@@ -803,4 +803,72 @@ class clsRoleTester(unittest.TestCase):
          role1.insertRole('Rolenuevo','Nombre variable',0)
          result = role1.deleteRole('Rolenuevo')
          self.assertFalse(result,"No válido.")
-         aBackLog.deleteProduct('Taxi seguro.')       
+         aBackLog.deleteProduct('Taxi seguro.')
+         
+         
+     #############################################      
+     #       Suite de Pruebas para FindIdRole    #
+     #############################################
+    
+     # Prueba 75  
+     def testFindIdExist(self):
+         role1 = role()
+         role1.findIdRole(1)
+  
+     # Casos Fronteras
+     
+     # Prueba 76
+     def testFindIdTrue(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.')
+         role1   = role()
+         role1.insertRole('Nuevo T','Desc',1)
+         searchAct = role1.findNameRole('Nuevo T')
+         idFound = searchAct[0].idrole
+         result = role1.findIdRole(idFound)
+         self.assertNotEqual(result,[],"Elemento no encontrado")
+         role1.deleteRole('Nuevo T')
+         aBackLog.deleteProduct('Taxi seguro.') 
+     
+     # Prueba 77
+     def testFindIdEmpty(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.')
+         role1   = role()
+         role1.insertRole('','nombre',1)
+         result = role1.findIdRole(0)
+         self.assertEqual(result,[], "Elemento no encontrado")
+         aBackLog.deleteProduct('Taxi seguro.')
+           
+     # Prueba 78
+     def testFindIdNoRole(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.')
+         role1   = role()
+         role1.insertRole('T','Desc',1)
+         result = role1.findIdRole(2)
+         self.assertEqual(result,[],"Elemento no encontrado")
+         role1.deleteRole('T')
+         aBackLog.deleteProduct('Taxi seguro.') 
+ 
+     # Casos Maliciosos
+     
+     # Prueba 79
+     def testFindIdString(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.')
+         role1   = role()
+         role1.insertRole(1254,'numeros',1)
+         result = role1.findIdRole('')
+         self.assertEqual(result,[],"Elemento Insertado") 
+         aBackLog.deleteProduct('Taxi seguro.') 
+      
+     # Prueba 80
+     def testFindIdNoneString(self):
+         aBackLog = backLog()
+         aBackLog.insertBackLog('Taxi seguro.')
+         role1   = role()
+         role1.insertRole(None,'nada',1)
+         result = role1.findIdRole(None)
+         self.assertEqual(result,[],"Válido")    
+         aBackLog.deleteProduct('Taxi seguro.') 
