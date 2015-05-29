@@ -93,6 +93,10 @@ def VProducto():
     res['data7'] = [{'idObjetivo':obj.idobjective, 'descripcion':obj.descObjective} for obj in objectList]
     
     res['idPila'] = idPila    
+    
+    #result   = clsBackLog.query.filter_by(id_backLog = idPila).first()
+    
+    #res['fPila'] = {'idPila':idPila, 'descripcion':result.BL_description}
 
     result   = clsBackLog.query.filter_by(id_backLog = idPila).first()
     
