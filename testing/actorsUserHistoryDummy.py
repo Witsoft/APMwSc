@@ -32,7 +32,6 @@ class actorsUserHistory(object):
         checkIdUserHistory = (type(id_userHistory) == int) and (id_userHistory >= const_min_id)
         if checkIdUserHistory:
             result = clsRolesUserHistory.query.filter_by(ref_idUserHistory = id_userHistory).all()
-            print(result)
             idsList = []
             for act in result:
                 idsList.append(act.ref_idrole)

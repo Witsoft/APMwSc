@@ -38,6 +38,7 @@ class TestActorsUserHistory(unittest.TestCase):
         searchAct = aAct.findNameRole('Scrum Master')
         idFound2 = searchAct[0].idrole 
         
+        #Inicio de caso de prueba
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
         aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
@@ -74,6 +75,7 @@ class TestActorsUserHistory(unittest.TestCase):
         searchAct = aAct.findNameRole('Team Member')
         idFound2 = searchAct[0].idrole 
         
+        #Inicio de caso de prueba
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
         result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
@@ -110,6 +112,7 @@ class TestActorsUserHistory(unittest.TestCase):
         searchAct = aAct.findNameRole('Team Member')
         idFound2 = searchAct[0].idrole 
         
+        #Inicio de caso de prueba
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
         result = aAccAs.insertActorAsociatedInUserHistory(0, idFound1) 
@@ -144,6 +147,7 @@ class TestActorsUserHistory(unittest.TestCase):
         searchAct = aAct.findNameRole('Team Member')
         idFound2 = searchAct[0].idrole 
         
+        #Inicio de caso de prueba
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
         result = aAccAs.insertActorAsociatedInUserHistory(idFound2, 0) 
@@ -178,6 +182,7 @@ class TestActorsUserHistory(unittest.TestCase):
         searchAct = aAct.findNameRole('Team Member')
         idFound2 = searchAct[0].idrole 
         
+        #Inicio de caso de prueba
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
         result = aAccAs.insertActorAsociatedInUserHistory((2**31)-1, idFound1) 
@@ -565,7 +570,12 @@ class TestActorsUserHistory(unittest.TestCase):
         aAct.insertRole('Team Member', 'Descripcion1', 1)
         searchAct = aAct.findNameRole('Team Member')
         idFound2 = searchAct[0].idrole 
+        
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1)
          
+        #Inicio de caso de prueba 
         # Buscamos los ids de los actores asociados a una historia de usuario
         aAccAs = actorsUserHistory()
         aAccAs.idActorsAsociatedToUserHistory(idFound1)
@@ -578,7 +588,7 @@ class TestActorsUserHistory(unittest.TestCase):
     # Caso Frontera
     
     # Prueba 16    
-    def testidActorsAsociatedToUserHistory1(self):
+    def testidActorsAsociatedToUserHistoryid_userHistory1(self):
         # Insertamos Producto
         aBackLog = backLog()
         aBackLog.insertBackLog('Taxi seguro.')
@@ -600,13 +610,12 @@ class TestActorsUserHistory(unittest.TestCase):
         aHist.insertUserHistory('H10',0, 1,idFound, 1)
         searchHist = aHist.searchUserHistory('H10')
         idFound1 = searchHist[0].id_userHistory 
-    
-                    
+                      
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
         aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
-
-         
+        
+        #Inicio de caso de prueba
         # Buscamos los ids de los actores asociados a una historia de usuario
         aAccAs = actorsUserHistory()
         result = aAccAs.idActorsAsociatedToUserHistory(idFound1)
@@ -617,5 +626,238 @@ class TestActorsUserHistory(unittest.TestCase):
         aAcc.deleteAccion('Una Accion')
         aBackLog.deleteProduct('Taxi seguro.')
     
- 
-     
+      # Prueba 17   
+    def testidActorsAsociatedToUserHistoryid_userHistory0(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.')
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra Accion',1)
+        search = aAcc.searchAccion('Otra Accion')
+        idFound = search[0].idaccion
+        
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertRole('Team Member', 'Descripcion1', 1)
+        searchAct = aAct.findNameRole('Team Member')
+        idFound2 = searchAct[0].idrole   
+    
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('H10',0, 1,idFound, 1)
+        searchHist = aHist.searchUserHistory('H10')
+        idFound1 = searchHist[0].id_userHistory 
+                      
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+        
+        #Inicio de caso de prueba
+        # Buscamos los ids de los actores asociados a una historia de usuario
+        aAccAs = actorsUserHistory()
+        result = aAccAs.idActorsAsociatedToUserHistory(0)
+        self.assertEqual([],result)
+        
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('H10')
+        aAcc.deleteAccion('Una Accion')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+      # Prueba 18   
+    def testidActorsAsociatedToUserHistoryid_userHistoryBig(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.')
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra Accion',1)
+        search = aAcc.searchAccion('Otra Accion')
+        idFound = search[0].idaccion
+        
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertRole('Team Member', 'Descripcion1', 1)
+        searchAct = aAct.findNameRole('Team Member')
+        idFound2 = searchAct[0].idrole   
+    
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('H10',0, 1,idFound, 1)
+        searchHist = aHist.searchUserHistory('H10')
+        idFound1 = searchHist[0].id_userHistory 
+                      
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+        
+        #Inicio de caso de prueba
+        # Buscamos los ids de los actores asociados a una historia de usuario
+        aAccAs = actorsUserHistory()
+        result = aAccAs.idActorsAsociatedToUserHistory((2**31)-1)
+        self.assertEqual([],result)
+        
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('H10')
+        aAcc.deleteAccion('Una Accion')
+        aBackLog.deleteProduct('Taxi seguro.')
+
+    # Casos Malicia
+
+      # Prueba 19   
+    def testidActorsAsociatedToUserHistoryid_userHistoryNoExist(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.')
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra Accion',1)
+        search = aAcc.searchAccion('Otra Accion')
+        idFound = search[0].idaccion
+        
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertRole('Team Member', 'Descripcion1', 1)
+        searchAct = aAct.findNameRole('Team Member')
+        idFound2 = searchAct[0].idrole   
+    
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('H10',0, 1,idFound, 1)
+        searchHist = aHist.searchUserHistory('H10')
+        idFound1 = searchHist[0].id_userHistory 
+                      
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+        
+        #Inicio de caso de prueba
+        # Buscamos los ids de los actores asociados a una historia de usuario
+        aAccAs = actorsUserHistory()
+        result = aAccAs.idActorsAsociatedToUserHistory(-1)
+        self.assertEqual([],result)
+        
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('H10')
+        aAcc.deleteAccion('Una Accion')
+        aBackLog.deleteProduct('Taxi seguro.')
+
+      # Prueba 20   
+    def testidActorsAsociatedToUserHistoryid_userHistoryNoInt(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.')
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra Accion',1)
+        search = aAcc.searchAccion('Otra Accion')
+        idFound = search[0].idaccion
+        
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertRole('Team Member', 'Descripcion1', 1)
+        searchAct = aAct.findNameRole('Team Member')
+        idFound2 = searchAct[0].idrole   
+    
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('H10',0, 1,idFound, 1)
+        searchHist = aHist.searchUserHistory('H10')
+        idFound1 = searchHist[0].id_userHistory 
+                      
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+        
+        #Inicio de caso de prueba
+        # Buscamos los ids de los actores asociados a una historia de usuario
+        aAccAs = actorsUserHistory()
+        result = aAccAs.idActorsAsociatedToUserHistory('1')
+        self.assertEqual([],result)
+        
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('H10')
+        aAcc.deleteAccion('Una Accion')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+      # Prueba 21   
+    def testidActorsAsociatedToUserHistoryid_userHistoryNone(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.')
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra Accion',1)
+        search = aAcc.searchAccion('Otra Accion')
+        idFound = search[0].idaccion
+        
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertRole('Team Member', 'Descripcion1', 1)
+        searchAct = aAct.findNameRole('Team Member')
+        idFound2 = searchAct[0].idrole   
+    
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('H10',0, 1,idFound, 1)
+        searchHist = aHist.searchUserHistory('H10')
+        idFound1 = searchHist[0].id_userHistory 
+                      
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+        
+        #Inicio de caso de prueba
+        # Buscamos los ids de los actores asociados a una historia de usuario
+        aAccAs = actorsUserHistory()
+        result = aAccAs.idActorsAsociatedToUserHistory(None)
+        self.assertEqual([],result)
+        
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('H10')
+        aAcc.deleteAccion('Una Accion')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+      # Prueba 22   
+    def testidActorsAsociatedToUserHistoryid_userHistoryStringInvalid(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.')
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra Accion',1)
+        search = aAcc.searchAccion('Otra Accion')
+        idFound = search[0].idaccion
+        
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertRole('Team Member', 'Descripcion1', 1)
+        searchAct = aAct.findNameRole('Team Member')
+        idFound2 = searchAct[0].idrole   
+    
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('H10',0, 1,idFound, 1)
+        searchHist = aHist.searchUserHistory('H10')
+        idFound1 = searchHist[0].id_userHistory 
+                      
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+        
+        #Inicio de caso de prueba
+        # Buscamos los ids de los actores asociados a una historia de usuario
+        aAccAs = actorsUserHistory()
+        result = aAccAs.idActorsAsociatedToUserHistory('')
+        self.assertEqual([],result)
+        
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('H10')
+        aAcc.deleteAccion('Una Accion')
+        aBackLog.deleteProduct('Taxi seguro.')
