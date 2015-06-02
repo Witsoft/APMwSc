@@ -143,25 +143,27 @@ class clsUserHistory(db.Model):
 	'''Clase que define el modelo de tabla userHistory'''
 	
 	__tablename__ = 'userHistory'
-	id_userHistory     = db.Column(db.Integer, primary_key = True, index = True)
-	cod_userHistory    = db.Column(db.String(11),unique = True , index = True) 
-	id_History         = db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'),nullable = True) 
-	type_accion        = db.Column(db.Integer)
-	ref_idaccion	   = db.Column(db.Integer, db.ForeignKey('accions.idaccion'))
-	id_backLog         = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+	id_userHistory  = db.Column(db.Integer, primary_key = True, index = True)
+	cod_userHistory = db.Column(db.String(11),unique = True , index = True) 
+	id_History      = db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'),nullable = True) 
+	type_accion     = db.Column(db.Integer)
+	ref_idaccion	= db.Column(db.Integer, db.ForeignKey('accions.idaccion'))
+	id_backLog      = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+	UH_scale        = db.Column(db.Integer, index = True)
 	roleUserHistory_userHistory = db.relationship('clsRolesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")
 	objUserHistory_userHistory  = db.relationship('clsObjectivesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")	
 	
-	def __init__(self,cod_userHistory,id_History,type_accion,ref_idaccion,id_backLog):
+	def __init__(self,cod_userHistory,id_History,type_accion,ref_idaccion,id_backLog,UH_scale):
 		self.cod_userHistory = cod_userHistory
 		self.id_History      = id_History 
 		self.type_accion     = type_accion
 		self.ref_idaccion    = ref_idaccion
 		self.id_backLog      = id_backLog
+		self.UH_scale		 = UH_scale
 		
 	def __repr__(self):
 		'''Representacion en string de la Historia de Usuario'''
-		return '<id_userHistory %r, cod_userHistory %r>' % (self.id_userHistory,self.cod_userHistory)
+		return '<id_userHistory %r, cod_userHistory %r, Us_scale %r>' % (self.id_userHistory,self.cod_userHistory, self.UH_scale)
 	
 	
 	
