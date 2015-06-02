@@ -199,7 +199,9 @@ def VHistoria():
 
     # Obtenemos los objetivos asociados a una historia de usuario.
     objectives = oObjUserHist.idObjectivesAsociatedToUserHistory(idHistoria)            
-     
+    
+    # Obtenemos la escala a mostrar
+    
     res['fHistoria_opcionesHistorias']     = [{'key':hist.id_userHistory,'value':hist.cod_userHistory}for hist in historias] 
     res['fHistoria_opcionesHistorias'].append({'key':0,'value':'Ninguno'})
     res['fHistoria_opcionesTiposHistoria'] = [{'key':1,'value':'Opcional'},{'key':2,'value':'Obligatoria'}]

@@ -68,7 +68,7 @@ class backLog(object):
         typeName          = (type(name) == str)
         typeNewName       = (type(new_name) == str)
         typeDescription   = (type(new_description) == str)
-        typeScale         = (type(new_scale) == str) 
+        typeScale         = (type(new_scale) == int) 
 
         if (typeName and typeNewName and typeDescription and typeScale):
             long_n   = const_minName <= len(name) <= const_maxName

@@ -11,7 +11,6 @@ def ACrearProducto():
     #POST/PUT parameters
     params  = request.get_json()
     results = [{'label':'/VProductos', 'msg':['Producto creado']}, {'label':'/VCrearProducto', 'msg':['Error al crear producto']}, ]
-    print(params)
     
     prodName = params['nombre']
     prodDesc = params['descripcion']
