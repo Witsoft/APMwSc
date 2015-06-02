@@ -65,6 +65,10 @@ def VCrearProducto():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    res['fPila_opcionesEscala'] = [
+      {'key':1,'value':'Alta/Media/Baja'},
+      {'key':2,'value':'Entre 1 y 20'}]
+
     #Action code ends here
     return json.dumps(res)
 
@@ -97,6 +101,10 @@ def VProducto():
     result   = clsBackLog.query.filter_by(id_backLog = idPila).first()
     
     res['fPila'] = {'idPila':idPila,'descripcion':result.BL_description}
+    res['fPila_opcionesEscala'] = [
+      {'key':1,'value':'Alta/Media/Baja'},
+      {'key':2,'value':'Entre 1 y 20'}]
+
 
     return json.dumps(res)
 

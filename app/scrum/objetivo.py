@@ -80,7 +80,10 @@ def VObjetivo():
     
     res['idPila'] = 1 
     res['fObjetivo'] = {'idObjetivo':idObjetivo, 'descripcion':result.descObjective} 
-    
+    res['fObjetivo_opcionesTransversalidad'] = [
+      {'key':True, 'value':'Si'},{'key':False, 'value':'No'},
+    ]
+
 
     #Action code ends here
     return json.dumps(res)
@@ -97,7 +100,10 @@ def VCrearObjetivo():
     #params = request.get_json() 
     
     #Datos de prueba
-    res['idPila'] = 1   
+    res['idPila'] = 1
+    res['fObjetivo_opcionesTransversalidad'] = [
+      {'key':True, 'value':'Si'},{'key':False, 'value':'No'},
+    ]   
 
     #Action code ends here
     return json.dumps(res)
