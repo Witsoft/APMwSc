@@ -105,12 +105,14 @@ class clsObjective(db.Model):
     idobjective    = db.Column(db.Integer, primary_key=True)
     descObjective  = db.Column(db.String(140), unique=True)
     id_backlog     = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+    obj_type	   = db.Column(db.String(5)) 
     objectiveUserHistory_role = db.relationship('clsObjectivesUserHistory', backref = 'role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
    
     def __init__(self, descObjective, id_backLog):
         '''Constructor del modelo Objective'''
         self.descObjective  = descObjective
         self.id_backlog     = id_backLog
+        self.obj_type	    = objType
 
     def __repr__(self):
         '''Respresentación en string de la descripción del Objective'''
