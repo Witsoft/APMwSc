@@ -310,6 +310,7 @@ def VPrioridades():
         historyDict   = {}
          
         historyDict['idHistory'] = hist.id_userHistory
+        historyDict['priority'] = hist.UH_scale
          
         idActorsList  = oActUserHist.idActorsAsociatedToUserHistory(hist.id_userHistory)
         missingActors = len(idActorsList)
@@ -342,7 +343,7 @@ def VPrioridades():
         userHistories.append(historyDict)
 
     
-    res['data0']   = [{'idHistoria':hist['idHistory'], 'prioridad':'Alta','enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]
+    res['data0']   = [{'idHistoria':hist['idHistory'], 'prioridad':hist['priority'],'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]
 
     #Escala dependiente del proyecto
     res['fPrioridades_opcionesPrioridad'] = [
@@ -352,7 +353,7 @@ def VPrioridades():
     ]
     res['idPila'] = 1
     res['fPrioridades'] = {'idPila':1,
-      'lista':[{'idHistoria':hist['idHistory'],'prioridad':2, 'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]}
+      'lista':[{'idHistoria':hist['idHistory'],'prioridad':hist['priority'], 'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]}
 
 
     #Action code ends here

@@ -11,11 +11,14 @@ def ACrearProducto():
     #POST/PUT parameters
     params  = request.get_json()
     results = [{'label':'/VProductos', 'msg':['Producto creado']}, {'label':'/VCrearProducto', 'msg':['Error al crear producto']}, ]
+    print(params)
     
+    prodName = params['nombre']
     prodDesc = params['descripcion']
+    prodScale = params['escala']
     
     oBackLog = backLog()
-    result   = oBackLog.insertBackLog(prodDesc)
+    result   = oBackLog.insertBackLog(prodName,prodDesc,prodScale)
     
     if result:
         res = results[0]
@@ -39,14 +42,15 @@ def AModifProducto():
     results = [{'label':'/VProductos', 'msg':['Producto actualizado']}, ]
     res     = results[0]
     #Action code goes here, res should be a list with a label and a message
-
+    newname        = params['nombre']
     newdescription = params['descripcion']
-
+    newscale       = params['escala']
+     
     idPila = params['idPila'] #Obtenemos el id del producto
 
     oBackLog = backLog()
     result   = clsBackLog.query.filter_by(id_backLog = idPila).first()  #Conseguimos el producto a modificar
-    oBackLog.modifyDescription(result.BL_description, newdescription) #Modificamos el producto      
+    oBackLog.modifyBackLog(result.BL_name, newname, newdescription, newscale) #Modificamos el producto      
 
     #Action code ends here
     if "actor" in res:
@@ -100,7 +104,7 @@ def VProducto():
 
     result   = clsBackLog.query.filter_by(id_backLog = idPila).first()
     
-    res['fPila'] = {'idPila':idPila,'descripcion':result.BL_description}
+    res['fPila'] = {'idPila':idPila,'nombre': result.BL_name,'descripcion':result.BL_description,'prioridad':result.BL_scaleType}
     res['fPila_opcionesEscala'] = [
       {'key':1,'value':'Alta/Media/Baja'},
       {'key':2,'value':'Entre 1 y 20'}]
@@ -119,7 +123,7 @@ def VProductos():
     # Obtenemos la lista de productos.
     productList = clsBackLog.query.all()
     
-    res['data0'] = [{'idPila':prod.id_backLog,'nombre':prod.BL_description}for prod in productList]
+    res['data0'] = [{'idPila':prod.id_backLog,'nombre':prod.BL_name, 'descripcion': prod.BL_description, 'prioridad': prod.BL_scaleType}for prod in productList]
 
     return json.dumps(res)
 

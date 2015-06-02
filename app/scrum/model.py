@@ -34,20 +34,24 @@ class clsBackLog(db.Model):
 	'''Clase que define el modelo BackLog'''
 	
 	__tablename__ =  'backLog'
-	id_backLog     = db.Column(db.Integer,primary_key = True, index = True)	
-	BL_description = db.Column(db.String(140),unique = True)
+	id_backLog     = db.Column(db.Integer,primary_key = True, index = True)
+	BL_name        = db.Column(db.String(50),unique = True)	
+	BL_description = db.Column(db.String(140))
+	BL_scaleType   = db.Column(db.Integer)
 	obj_backLog    = db.relationship('clsObjective',backref='objective',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	act_backLog    = db.relationship('clsRole',backref='backLog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	acc_backLog    = db.relationship('clsAccions',backref='backLog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
 	usrHis_backLog = db.relationship('clsUserHistory',backref='backLog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 
-	def __init__(self, BL_description):
+	def __init__(self, BL_name,BL_description,BL_scaleType):
 		'''Constructor del modelo BackLog'''
+		self.BL_name 		= BL_name
 		self.BL_description = BL_description
+		self.BL_scaleType	= BL_scaleType
 		
 	def __repr__(self):
 		'''Representacion en string del nombre del BakcLog'''
-		return '<id_backLog %r, BL_descripcion %r>' % (self.id_backLog, self.BL_description)
+		return '<id_backLog %r, BL_name %r, BL_scaleType %r>' % (self.id_backLog, self.BL_name,self.BL_scaleType)
 	
 	
 	
