@@ -34,7 +34,7 @@ def ACrearHistoria():
     #POST/PUT parameters
     params = request.get_json()
     results = [{'label':'/VHistorias', 'msg':['Historia creada']}, {'label':'/VCrearHistoria', 'msg':['Error al crear historia']}, ]
-
+    
     # Extraemos los parametros.
     codeHistory = params['codigo']
     idSuperHist = params['super']
@@ -43,6 +43,7 @@ def ACrearHistoria():
     idAccion    = params['accion']
     idObjective = params['objetivos']
     priority    = params['prioridad']
+
     
     oUserHistory = userHistory()
     inserted     = oUserHistory.insertUserHistory(codeHistory,idSuperHist,idType,idAccion,1,priority)

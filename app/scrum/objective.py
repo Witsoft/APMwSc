@@ -29,9 +29,10 @@ class objective(object):
                 aObj     = self.searchObjective(descObjective)
 
                 if (aBackLog != []) and (aObj == []) :
-                    new_objective = clsObjective(descObjective, id_backLog)
+                    new_objective = clsObjective(descObjective, id_backLog, objType)
                     db.session.add(new_objective)
                     db.session.commit()
+                    print("Holaaaaaa",new_objective.obj_type)
                     return True
         return False
                 
@@ -83,7 +84,7 @@ class objective(object):
 #             return True
 #         return False   
 
-    def verifyObjectiveTransverse(self, idObjetive):
+    def verifyObjectiveTransverse(self, idObjective):
         '''Permite verificar si un objetivo es de tipo trasnversal o no'''
         
         checkDesc = type(idObjective) == int

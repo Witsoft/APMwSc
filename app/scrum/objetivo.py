@@ -19,7 +19,9 @@ def ACrearObjetivo():
     
         oObjective = objective()
         newDescription = params['descripcion']
-        result = oObjective.insertObjective(newDescription,1)
+        transverseObjective = params['transversal']
+                
+        result = oObjective.insertObjective(newDescription,1,transverseObjective)
 
         if result:
             res = results[0]
@@ -48,10 +50,11 @@ def AModifObjetivo():
 
     idObjetivo     = params['idObjetivo']  #Obtenemos el id del objetivo
     newDescription = params['descripcion'] #Obtenemos la nueva descripción del objetivo
-    
+    newType        = params['transversal'] #Obtenermos el tipo de objetivo(transversal,no transversal)
     objetivoDesc = clsObjective.query.filter_by(idobjective = idObjetivo).first() #Conseguimos el objetivo a modificar
+    print("Antes",objetivoDesc.obj_type)
     oObjetivo    = objective()
-    result       = oObjetivo.updateObjective(objetivoDesc.descObjective, newDescription) #Modificamos la descripción del objetivo
+    result       = oObjetivo.updateObjective(objetivoDesc.descObjective, newDescription,newType) #Modificamos la descripción del objetivo
 
     if result:
         res = results[0]
@@ -70,21 +73,24 @@ def AModifObjetivo():
 @objetivo.route('/objetivo/VObjetivo')
 def VObjetivo():
     res = {}
+    boolean = {0:'False',1:'True'}
     if "actor" in session:
         res['actor']=session['actor']
     
     #Action code goes here, res should be a JSON structure
     idObjetivo = request.args.get('idObjetivo')
-
-    result   = clsObjective.query.filter_by(idobjective = idObjetivo).first()
     
+    result   = clsObjective.query.filter_by(idobjective = idObjetivo).first()
+    entero = int(result.obj_type)
+    print("boolean",boolean[entero])
+
     res['idPila'] = 1 
     res['fObjetivo'] = {'idObjetivo':idObjetivo, 'descripcion':result.descObjective} 
     res['fObjetivo_opcionesTransversalidad'] = [
       {'key':True, 'value':'Si'},{'key':False, 'value':'No'},
     ]
-
-
+    res['fObjetivo_transversal'] = {'transversal':'1'}
+    
     #Action code ends here
     return json.dumps(res)
 
