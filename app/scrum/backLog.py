@@ -81,7 +81,9 @@ class backLog(object):
                     new_n = clsBackLog.query.filter_by(BL_name = name).first()
                     new_n.BL_name        = new_name 
                     new_n.BL_description = new_description
-                    new_n.BL_scaleType   = new_scale 
+                    aUserHistory = clsUserHistory.query.all()
+                    if (aUserHistory == []):
+                        new_n.BL_scaleType   = new_scale 
                     db.session.commit()
                     return True
         return False
@@ -119,6 +121,16 @@ class backLog(object):
                     db.session.commit()
                     return True
 
+    def scaleType(self,productId):
+        checkTypeId = type(productId) == int    
+        if checkTypeId: 
+            found = clsBackLog.query.filter_by(id_backLog=productId).all()
+            if found:
+                oBackLog = clsBackLog.query.filter_by(id_backLog = productId).first()
+                scale = oBackLog.BL_scaleType
+                return scale
+        return ([])
+
     def actorsAsociatedToProduct(self,productId):
         ''' Permite obtener una lista de los Actores asociados a una pila de Producto'''
         checkTypeId = type(productId) == int    
@@ -152,3 +164,4 @@ class backLog(object):
             return found
         return([])                                
 
+    

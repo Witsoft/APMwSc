@@ -75,7 +75,7 @@ class clsRole(db.Model):
     def __repr__(self):
         '''Respresentacion en string del nombre del Role'''
         return '<Id_Objetivo %r>, <Descripcion %r>, <Id_backlog %r>' %(self.namerole, self.roledescription, self.id_pila)
-
+  
 
 
 class clsUser(db.Model):
