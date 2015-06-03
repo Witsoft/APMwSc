@@ -34,7 +34,7 @@ def ACrearHistoria():
     #POST/PUT parameters
     params = request.get_json()
     results = [{'label':'/VHistorias', 'msg':['Historia creada']}, {'label':'/VCrearHistoria', 'msg':['Error al crear historia']}, ]
-
+    
     # Extraemos los parametros.
     codeHistory = params['codigo']
     idSuperHist = params['super']
@@ -43,6 +43,8 @@ def ACrearHistoria():
     idAccion    = params['accion']
     idObjective = params['objetivos']
     priority    = params['prioridad']
+    print(idObjective[0])
+
     
     oUserHistory = userHistory()
     inserted     = oUserHistory.insertUserHistory(codeHistory,idSuperHist,idType,idAccion,1,priority)
@@ -56,6 +58,9 @@ def ACrearHistoria():
             insertedObj  = oObjUserHist.insertObjectiveAsociatedInUserHistory(idobj,idInserted)
         for idact in idActor:
             insertedAct  = oActUserHist.insertActorAsociatedInUserHistory(idact,idInserted)
+        
+        print(insertedObj)
+        print(insertedAct)
         
         if insertedAct and insertedObj:
             res = results[0]  
@@ -141,10 +146,18 @@ def VCrearHistoria():
     
     # Objetenemos los datos asociados al producto
     oBacklog      = backLog() 
+    oObjective    = objective()    
     actorList     = oBacklog.actorsAsociatedToProduct(idProduct)
     accionList    = oBacklog.accionsAsociatedToProduct(idProduct)
     objectiveList = oBacklog.objectivesAsociatedToProduct(idProduct)
     historyList   = oBacklog.userHistoryAsociatedToProduct(idProduct)
+
+    # Obtenemos todos los objetivos que son no trasnversales.        
+    for object in objectiveList:
+        idObjective = object.idobjective
+        transverse  = oObjective.verifyObjectiveTransverse(idObjective)
+        if (int(transverse) == 1):
+            objectiveList.remove(object)
     
     typeScale = oBacklog.scaleType(idProduct)
     # Obtenemos el tipo de escala asociado al producto (id,valor)
@@ -184,6 +197,7 @@ def VHistoria():
     
     # Obtenemos todas las acciones, actores y objetivos asociados al producto.
     oBacklog      = backLog() 
+    oObjective    = objective()
     oUserHist     = userHistory()
     oActUserHist  = actorsUserHistory()
     oObjUserHist  = objectivesUserHistory()
@@ -197,7 +211,14 @@ def VHistoria():
         if hist.id_userHistory == idHistoria:
             historias.remove(hist)
             break
-  
+
+    # Obtenemos todos los objetivos que son no trasnversales.        
+    for object in objectiveList:
+        idObjective = object.idobjective
+        transverse  = oObjective.verifyObjectiveTransverse(idObjective)
+        if (int(transverse) == 1):
+            objectiveList.remove(object)
+
     # Obtenemos los actores asociados a una historia de usuario.
     actors = oActUserHist.idActorsAsociatedToUserHistory(idHistoria)
 
