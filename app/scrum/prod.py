@@ -104,10 +104,8 @@ def VProducto():
     result   = clsBackLog.query.filter_by(id_backLog = idPila).first()
     
     res['fPila'] = {'idPila':idPila,'nombre': result.BL_name,'descripcion':result.BL_description,'prioridad':result.BL_scaleType}
-    res['fPila_opcionesEscala'] = [
-      {'key':1,'value':'Alta/Media/Baja'},
-      {'key':2,'value':'Entre 1 y 20'}]
-
+    res['fPila_opcionesEscala'] = [{'key':1,'value':'Alta/Media/Baja'}, {'key':2,'value':'Entre 1 y 20'}]
+    res['fPila_escala'] = {'prioridad':1}
 
     return json.dumps(res)
 
