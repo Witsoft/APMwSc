@@ -25,21 +25,6 @@ class backLog(object):
                 return dBackLog
         return []
     
-    
-    def findDescription(self,dDescription):
-        '''Permite buscar una descripcion'''
-        
-        checkTypeDesc = (type(dDescription)) != str
-        if checkTypeDesc:
-            return []
-        else:
-            long_dDescription = len(dDescription)
-            if ((long_dDescription >const_maxDescription) or (long_dDescription < const_minDescription)):
-                return []
-            else:
-                dBackLog = clsBackLog.query.filter_by(BL_description = dDescription).all()
-                return dBackLog
-        
     def insertBackLog(self,name,description,scale):
         '''Permite insertar una descripción'''
         
@@ -88,21 +73,7 @@ class backLog(object):
                     return True
         return False
 
-    def modifyDescription(self, description, new_description):   
-        '''Permite actualizar los valores de una Descripcion'''         
-        typenew_d   = (type(new_description) == str) 
-        type_d      = (type(description) == str)
-        if (type_d and typenew_d):
-            long_d   = const_minDescription <= len(new_description) <= const_maxDescription
-            if long_d:
-                aDescription = self.findDescription(description)
-                if (aDescription != []):
-                    new_d = clsBackLog.query.filter_by(BL_description = description).first()
-                    new_d.BL_description = new_description
-                    db.session.commit()
-                    return True
-        return False
-
+#Modificar
     def deleteProduct(self, description):
         '''Permite eliminar una a descripción de la tabla'''
         if (type(description) != str):
@@ -125,7 +96,7 @@ class backLog(object):
         checkTypeId = type(productId) == int    
         if checkTypeId: 
             found = clsBackLog.query.filter_by(id_backLog=productId).all()
-            if found:
+            if found != []:
                 oBackLog = clsBackLog.query.filter_by(id_backLog = productId).first()
                 scale = oBackLog.BL_scaleType
                 return scale
