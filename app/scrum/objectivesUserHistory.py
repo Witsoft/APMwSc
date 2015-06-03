@@ -15,10 +15,7 @@ class objectivesUserHistory(object):
         checkIdObjective = type(id_Objective) == int and id_Objective >= const_min_id
         checkUserHistory = type(id_userHistory) == int and id_userHistory >= const_min_id
         
-        objType = objective()
-        checkType = objType.verifyObjectiveTransverse(id_Objective)
-
-        if checkIdObjective and checkUserHistory and (not checkType):
+        if checkIdObjective and checkUserHistory:
             oObjective     = clsObjective.query.filter_by(idobjective = id_Objective).all()
             oIdUserHistory = clsUserHistory.query.filter_by(id_userHistory = id_userHistory).all()
             
@@ -28,7 +25,6 @@ class objectivesUserHistory(object):
                 db.session.commit()
                 return True
         return False
-
 
     def deleteObjectiveAsociatedInUserHistory(self,id_Objective, id_userHistory):
         '''Permite eliminar un actor de una historia de usuario'''

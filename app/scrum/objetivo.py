@@ -86,8 +86,7 @@ def VObjetivo():
 
     res['idPila'] = 1 
     res['fObjetivo_opcionesTransversalidad'] = [
-      {'key':True, 'value':'Si'},{'key':False, 'value':'No'},
-    ]
+      {'key':True, 'value':'Si'},{'key':False, 'value':'No'}]
     res['fObjetivo'] = {'idObjetivo':idObjetivo, 'descripcion':result.descObjective, 'transversal':istrans}    
     
     #Action code ends here
