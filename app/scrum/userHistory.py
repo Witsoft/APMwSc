@@ -91,10 +91,11 @@ class userHistory(object):
                     
                     if oAccions != []:
                         result = clsUserHistory.query.filter_by(id_userHistory = iduserHist).all()
-                        
+                        checkSuperHistory = clsUserHistory.query.filter_by(id_History = new_id_History).all()
                         if result != []:
                             result[0].cod_userHistory = new_cod_userHistory
-                            result[0].id_History      = new_id_History
+                            if (checkSuperHistory == []):
+                                result[0].id_History      = new_id_History
                             result[0].type_accion     = new_type_accion
                             result[0].id_Accion       = new_id_Accion
                             result[0].UH_scale        = new_Scale

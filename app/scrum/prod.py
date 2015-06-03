@@ -85,7 +85,7 @@ def VProducto():
 
 
     idPila    = request.args.get('idPila')
-    idProduct = int(idPila)
+    idProduct = idPila
     idProduct = 1
     #pilas = [{'idPila':1, 'nombre':'Pagos en línea', 'descripcion':'Pagos usando tarjeta de débito'}]
     #res['fPila'] = pilas[idPila-1]    
@@ -103,9 +103,10 @@ def VProducto():
 
     result   = clsBackLog.query.filter_by(id_backLog = idPila).first()
     
-    res['fPila'] = {'idPila':idPila,'nombre': result.BL_name,'descripcion':result.BL_description,'prioridad':result.BL_scaleType}
+    res['fPila'] = {'idPila':idPila,'nombre': result.BL_name,'descripcion':result.BL_description,'escala':result.BL_scaleType}
     res['fPila_opcionesEscala'] = [{'key':1,'value':'Alta/Media/Baja'}, {'key':2,'value':'Entre 1 y 20'}]
     res['fPila_escala'] = {'prioridad':1}
+    
 
     return json.dumps(res)
 

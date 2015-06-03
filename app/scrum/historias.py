@@ -77,7 +77,7 @@ def AModifHistoria():
     #POST/PUT parameters
     params  = request.get_json()
     results = [{'label':'/VHistorias', 'msg':['Historia modificada']}, {'label':'/VHistoria', 'msg':['Error al modificar historia']}, ]
-    prioridad = request.args.get('prioridad')
+    
     # Extraemos los valores
     oUserHist    = userHistory()
     oObjUserHist = objectivesUserHistory()
@@ -146,7 +146,7 @@ def VCrearHistoria():
     objectiveList = oBacklog.objectivesAsociatedToProduct(idProduct)
     historyList   = oBacklog.userHistoryAsociatedToProduct(idProduct)
     
-    typeScale = 1
+    typeScale = oBacklog.scaleType(idProduct)
     # Obtenemos el tipo de escala asociado al producto (id,valor)
     if typeScale == 1:
         resultScale = [(i,scale[i]) for i in range(1,3+1)]
@@ -191,12 +191,12 @@ def VHistoria():
     objectiveList = oBacklog.objectivesAsociatedToProduct(1)
     
     # Obtenemos todas las historias de usuarios excepto la actual
-    historias =  oUserHist.getAllUserHistoryId(idHistoria)
+    historias =  oUserHist.getAllUserHistoryId(1)
     for hist in historias:
         if hist.id_userHistory == idHistoria:
             historias.remove(hist)
             break
-        
+  
     # Obtenemos los actores asociados a una historia de usuario.
     actors = oActUserHist.idActorsAsociatedToUserHistory(idHistoria)
 
@@ -219,7 +219,7 @@ def VHistoria():
       {'key':3, 'value':'Baja'},
     ]
     
-    res['fHistoria'] = {'super':0, 'idHistoria':idHistoria, 'idPila':history.id_backLog, 'codigo':history.cod_userHistory,
+    res['fHistoria'] = {'super':history.id_History, 'idHistoria':idHistoria, 'idPila':history.id_backLog, 'codigo':history.cod_userHistory,
        'actores':[1], 'accion':history.ref_idaccion, 'objetivos':[1], 'tipo':history.type_accion,
        'prioridad':history.UH_scale}
     
