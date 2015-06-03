@@ -82,7 +82,7 @@ def AModifHistoria():
     #POST/PUT parameters
     params  = request.get_json()
     results = [{'label':'/VHistorias', 'msg':['Historia modificada']}, {'label':'/VHistoria', 'msg':['Error al modificar historia']}, ]
-    prioridad = request.args.get('prioridad')
+    
     # Extraemos los valores
     oUserHist    = userHistory()
     oObjUserHist = objectivesUserHistory()
@@ -139,10 +139,12 @@ def VCrearHistoria():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
-    
+        
+    scale = {1:'Alta',2:'Media',3:'Baja'}
     idProduct = request.args.get('idPila')  #Obtenemos el id de la historia
     idProduct = int(idProduct)
     
+    # Objetenemos los datos asociados al producto
     oBacklog      = backLog() 
     oObjective    = objective()    
     actorList     = oBacklog.actorsAsociatedToProduct(idProduct)
@@ -157,22 +159,24 @@ def VCrearHistoria():
         if (int(transverse) == 1):
             objectiveList.remove(object)
     
+    typeScale = oBacklog.scaleType(idProduct)
+    # Obtenemos el tipo de escala asociado al producto (id,valor)
+    if typeScale == 1:
+        resultScale = [(i,scale[i]) for i in range(1,3+1)]
+    elif typeScale == 2:
+        resultScale = [(i,i) for i in range(1,20+1)]
+    
+    #Valores dependientes del proyecto
     res['fHistoria_opcionesActores']       = [{'key':act.idrole,'value':act.namerole}for act in actorList]
     res['fHistoria_opcionesAcciones']      = [{'key':acc.idaccion,'value':acc.acciondescription}for acc in accionList]
     res['fHistoria_opcionesObjetivos']     = [{'key':obj.idobjective,'value':obj.descObjective}for obj in objectiveList]
     res['fHistoria_opcionesHistorias']     = [{'key':hist.id_userHistory,'value':hist.cod_userHistory}for hist in historyList]
     res['fHistoria_opcionesTiposHistoria'] = [{'key':1,'value':'Opcional'},{'key':2,'value':'Obligatoria'}]
+    res['fHistoria_opcionesPrioridad']     = [{'key':scale[0], 'value':scale[1]}for scale in resultScale]
+    
     res['fHistoria'] = {'super':0, 'idPila':1}
-    
-    #Escala dependiente del proyecto
-    res['fHistoria_opcionesPrioridad'] = [
-      {'key':1, 'value':'Alta'},
-      {'key':2, 'value':'Media'},
-      {'key':3, 'value':'Baja'},
-    ]
-    
     res['idPila'] = 1
-    #Action code ends here
+ 
     return json.dumps(res)
 
 
@@ -187,6 +191,7 @@ def VHistoria():
     idHistoria = request.args.get('idHistoria')  
     idHistoria = int(idHistoria)
 
+    scale = {1:'Alta',2:'Media',3:'Baja'}
     # Obtenemos la historia que queremos modificar.
     history    = clsUserHistory.query.filter_by(id_userHistory = idHistoria).first()
     
@@ -201,7 +206,7 @@ def VHistoria():
     objectiveList = oBacklog.objectivesAsociatedToProduct(1)
     
     # Obtenemos todas las historias de usuarios excepto la actual
-    historias =  oUserHist.getAllUserHistoryId(idHistoria)
+    historias =  oUserHist.getAllUserHistoryId(1)
     for hist in historias:
         if hist.id_userHistory == idHistoria:
             historias.remove(hist)
@@ -219,22 +224,33 @@ def VHistoria():
 
     # Obtenemos los objetivos asociados a una historia de usuario.
     objectives = oObjUserHist.idObjectivesAsociatedToUserHistory(idHistoria)            
-     
+    
+    # Obtenemos la escala a mostrar
+    
+    typeScale = oUserHist.scaleType(idHistoria)
+    # Obtenemos el tipo de escala asociado al producto (id,valor)
+    if typeScale == 1:
+        resultScale = [(i,scale[i]) for i in range(1,3+1)]
+    elif typeScale == 2:
+        resultScale = [(i,i) for i in range(1,20+1)]
+    
+    
     res['fHistoria_opcionesHistorias']     = [{'key':hist.id_userHistory,'value':hist.cod_userHistory}for hist in historias] 
     res['fHistoria_opcionesHistorias'].append({'key':0,'value':'Ninguno'})
     res['fHistoria_opcionesTiposHistoria'] = [{'key':1,'value':'Opcional'},{'key':2,'value':'Obligatoria'}]
     res['fHistoria_opcionesActores']       = [{'key':act.idrole,'value':act.namerole}for act in actorList]
     res['fHistoria_opcionesAcciones']      = [{'key':acc.idaccion,'value':acc.acciondescription}for acc in accionList]
     res['fHistoria_opcionesObjetivos']     = [{'key':obj.idobjective,'value':obj.descObjective}for obj in objectiveList]
+    res['fHistoria_opcionesPrioridad']     = [{'key':scale[0], 'value':scale[1]}for scale in resultScale]
     
     #Escala dependiente del proyecto
-    res['fHistoria_opcionesPrioridad'] = [
-      {'key':1, 'value':'Alta'},
-      {'key':2, 'value':'Media'},
-      {'key':3, 'value':'Baja'},
-    ]
+#    res['fHistoria_opcionesPrioridad'] = [
+#      {'key':1, 'value':'Alta'},
+#      {'key':2, 'value':'Media'},
+#     {'key':3, 'value':'Baja'},
+#    ]
     
-    res['fHistoria'] = {'super':0, 'idHistoria':idHistoria, 'idPila':history.id_backLog, 'codigo':history.cod_userHistory,
+    res['fHistoria'] = {'super':history.id_History, 'idHistoria':idHistoria, 'idPila':history.id_backLog, 'codigo':history.cod_userHistory,
        'actores':[1], 'accion':history.ref_idaccion, 'objetivos':[1], 'tipo':history.type_accion,
        'prioridad':history.UH_scale}
     
@@ -260,7 +276,7 @@ def VHistorias():
          
     userHistories = []
     options       = {1:'podria ',2:'puede '}
-    priorities    = {1:'Alta',2:'Media',3:'Baja'}
+    #priorities    = {1:'Alta',2:'Media',3:'Baja'}
     
     for hist in userHistoriesList:
         historyDict   = {}
@@ -300,7 +316,7 @@ def VHistorias():
              
         userHistories.append(historyDict)
 
-    res['data0']   = [{'idHistoria':hist['idHistory'], 'prioridad':priorities[hist['priority']],'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]
+    res['data0']   = [{'idHistoria':hist['idHistory'], 'prioridad':hist['priority'],'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]
     
     res['idPila']  = 1
     
@@ -330,6 +346,7 @@ def VPrioridades():
         historyDict   = {}
          
         historyDict['idHistory'] = hist.id_userHistory
+        historyDict['priority'] = hist.UH_scale
          
         idActorsList  = oActUserHist.idActorsAsociatedToUserHistory(hist.id_userHistory)
         missingActors = len(idActorsList)
@@ -362,7 +379,7 @@ def VPrioridades():
         userHistories.append(historyDict)
 
     
-    res['data0']   = [{'idHistoria':hist['idHistory'], 'prioridad':'Alta','enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]
+    res['data0']   = [{'idHistoria':hist['idHistory'], 'prioridad':hist['priority'],'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]
 
     #Escala dependiente del proyecto
     res['fPrioridades_opcionesPrioridad'] = [
@@ -372,7 +389,7 @@ def VPrioridades():
     ]
     res['idPila'] = 1
     res['fPrioridades'] = {'idPila':1,
-      'lista':[{'idHistoria':hist['idHistory'],'prioridad':2, 'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]}
+      'lista':[{'idHistoria':hist['idHistory'],'prioridad':hist['priority'], 'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]}
 
 
     #Action code ends here
