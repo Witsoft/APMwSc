@@ -32,7 +32,6 @@ class objective(object):
                     new_objective = clsObjective(descObjective, id_backLog, objType)
                     db.session.add(new_objective)
                     db.session.commit()
-                    print("Holaaaaaa",new_objective.obj_type)
                     return True
         return False
                 
@@ -64,13 +63,10 @@ class objective(object):
                 aObj = self.searchObjective(descObjective)
                 
                 if aObj != []:
-                    result = self.searchObjective(newDescObjective)
-                
-                    if result == []:                
-                        aObj[0].descObjective = newDescObjective
-                        aObj[0].obj_type = newObjType
-                        db.session.commit()
-                        return True
+                    aObj[0].descObjective = newDescObjective
+                    aObj[0].obj_type = newObjType
+                    db.session.commit()
+                    return True
         return False   
     
 #     def updateObjectiveReferenceToHistory(self, idObjective, ref_idUserHistory):

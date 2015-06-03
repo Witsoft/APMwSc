@@ -73,7 +73,7 @@ def AModifObjetivo():
 @objetivo.route('/objetivo/VObjetivo')
 def VObjetivo():
     res = {}
-    boolean = {0:'False',1:'True'}
+    boolean = {0:False,1:True}
     if "actor" in session:
         res['actor']=session['actor']
     
@@ -81,15 +81,14 @@ def VObjetivo():
     idObjetivo = request.args.get('idObjetivo')
     
     result   = clsObjective.query.filter_by(idobjective = idObjetivo).first()
-    entero = int(result.obj_type)
-    print("boolean",boolean[entero])
+    entero   = int(result.obj_type)
+    istrans  = boolean[entero]
 
     res['idPila'] = 1 
-    res['fObjetivo'] = {'idObjetivo':idObjetivo, 'descripcion':result.descObjective} 
     res['fObjetivo_opcionesTransversalidad'] = [
       {'key':True, 'value':'Si'},{'key':False, 'value':'No'},
     ]
-    res['fObjetivo_transversal'] = {'transversal':'1'}
+    res['fObjetivo'] = {'idObjetivo':idObjetivo, 'descripcion':result.descObjective, 'transversal':istrans}    
     
     #Action code ends here
     return json.dumps(res)
