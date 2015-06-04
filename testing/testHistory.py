@@ -1967,4 +1967,608 @@ class TestHistory(unittest.TestCase):
         aAcc.deleteAccion('Cualquier cosa2')
         aBackLog.deleteProduct('Taxi seguro.')     
         
+    ######################################################      
+    #       Suite de Pruebas para getAllUserHistoryId    #
+    ###################################################### 
+       
+    # Caso Inicial
+    
+    # Prueba 63
+    def test_getAllUserHistoryIdNormal(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        aHist = userHistory()
+        temp = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        result = aHist.getAllUserHistoryId(1)
+        self.assertNotEqual(result,[])
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+    # Prueba 64
+    def test_getAllUserHistoryIdNotExist(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        aHist = userHistory()
+        temp = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        result = aHist.getAllUserHistoryId(2)
+        self.assertEqual(result,[])
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+    # Casos Frontera
+    
+    # Prueba 65
+    def test_getAllUserHistoryId0(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        aHist = userHistory()
+        temp = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        result = aHist.getAllUserHistoryId(0)
+        self.assertEqual(result,[])
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')   
+        
+    # Prueba 66
+    def test_getAllUserHistoryIdMaxNumber(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        aHist = userHistory()
+        temp = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        result = aHist.getAllUserHistoryId((2^31)-1)
+        self.assertEqual(result,[])
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')     
+    
+    # Casos Malicia
+    
+    # Prueba 67
+    def test_getAllUserHistoryIdNone(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        aHist = userHistory()
+        temp = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        result = aHist.getAllUserHistoryId(None)
+        self.assertEqual(result,[])
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')      
+        
+    # Prueba 68
+    def test_getAllUserHistoryIdNegativeNumber(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        aHist = userHistory()
+        temp = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        result = aHist.getAllUserHistoryId(-1)
+        self.assertEqual(result,[])
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')    
+        
+    # Prueba 69
+    def test_getAllUserHistoryIdString(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        aHist = userHistory()
+        temp = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        result = aHist.getAllUserHistoryId('1')
+        self.assertEqual(result,[])
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')       
+        
+    # Prueba 70
+    def test_getAllUserHistoryIdArray(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        aHist = userHistory()
+        temp = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        result = aHist.getAllUserHistoryId([])
+        self.assertEqual(result,[])
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+    ######################################################      
+    #       Suite de Pruebas para isEpic                 #
+    ###################################################### 
+       
+    # Caso Inicial
+    
+    # Prueba 71
+    def testExistsIsEpic(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.isEpic(idHist)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+    # Prueba 72
+    def testExistsIsEpicExist(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.isEpic(idHist)
+        self.assertTrue(idHist)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+    # Prueba 73
+    def testExistsIsEpicNotExist(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.isEpic(2)
+        self.assertFalse(result)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+    # Casos Frontera
+    
+    # Prueba 74
+    def testExistsIsEpic0(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.isEpic(0)
+        self.assertFalse(result)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+    # Prueba 75
+    def testExistsIsEpicMaxInt(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.isEpic((2^31)-1)
+        self.assertFalse(result)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')    
+        
+    # Casos Malicia
+    
+    # Prueba 76
+    def testExistsIsEpicNegativeNumber(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.isEpic(-1)
+        self.assertFalse(result)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')  
+    
+    # Prueba 77
+    def testExistsIsEpicNone(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.isEpic(None)
+        self.assertFalse(result)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')    
+    
+    # Prueba 78
+    def testExistsIsEpicString(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.isEpic('1')
+        self.assertFalse(result)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+        ######################################################      
+    #       Suite de Pruebas para historySuccesors       #
+    ###################################################### 
+       
+    # Caso Inicial
+    
+    # Caso 79
+    def testhistorySuccesors(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.historySuccesors(1)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+    # Casos Normal
+    
+    # Caso 80
+    def testhistorySuccesorsExist(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.historySuccesors(idHist)
+        self.assertEqual(result,[])
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+    # Prueba 81
+    def testhistorySuccesorsNotExist(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.historySuccesors(idHist)
+        self.assertFalse(result)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+    # Casos Frontera
+    
+    # Prueba 82
+    def testhistorySuccesors0(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.historySuccesors(0)
+        self.assertFalse(result)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+    # Prueba 83
+    def testhistorySuccesorsMaxInt(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.historySuccesors((2^31)-1)
+        self.assertFalse(result)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')    
+        
+    # Casos Malicia
+    
+    # Prueba 84
+    def testhistorySuccesorsNegativeNumber(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.historySuccesors(-1)
+        self.assertFalse(result)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')  
+    
+    # Prueba 85
+    def testhistorySuccesorsNone(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.historySuccesors(None)
+        self.assertFalse(result)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')    
+    
+    # Prueba 86
+    def testhistorySuccesorsString(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+        
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search  = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+        
+        # Insertamos la historia
+        aHist  = userHistory()
+        temp   = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        hist   = aHist.searchUserHistory('H1')
+        idHist = hist[0].id_userHistory
+        result = aHist.historySuccesors('1')
+        self.assertFalse(result)
+                
+        # Eliminamos producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
