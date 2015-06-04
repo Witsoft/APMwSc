@@ -1894,6 +1894,77 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
         aHist.deleteUserHistory('H1')
         aAcc.deleteAccion('Cualquier cosa2')
-        aBackLog.deleteProduct('Taxi seguro.')       
+        aBackLog.deleteProduct('Taxi seguro.')  
+        
+    # ###########################################     
+    #      Suite de Pruebas para succesors      #
+    ############################################# 
+      
+    # Prueba 63
+    def testExistsSuccesors(self):
+       # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+         
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+         
+        # Insertamos la historia
+        aHist  = userHistory()
+        result = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        result = aHist.succesors(1)
+                 
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+
+
+    # Prueba 65
+    def testNoExistsSuccesors(self):         
+        # Insertamos la historia
+        aHist  = userHistory()        
+        result = aHist.succesors(1)
+        self.assertFalse(result)
+                 
+        # Eliminamos la historia
+        aHist.deleteUserHistory('H1')
+        
+        
+    # Casos Frontera        
+    
+    def testSuccesorsIdZero(self):
+       # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+         
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+         
+        # Insertamos la historia 1
+        aHist  = userHistory()
+        result = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        
+        # Insertamos la historia 2
+        aHist  = userHistory()
+        result = aHist.insertUserHistory('H2',1, 1,idFound, 1,1)
+        
+        # Insertamos la historia 3
+        aHist  = userHistory()
+        result = aHist.insertUserHistory('H3',1, 1,idFound, 1,1)
+        
+        result = aHist.succesors(0)
+        self.assertEqual(result,[])
+                 
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')     
         
         

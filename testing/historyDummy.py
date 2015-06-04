@@ -37,17 +37,20 @@ class userHistory(object):
         return False
     
     
-    def succesors(self,id,succ,visit):
-        result = clsUserHistory.query.filter_by(id_History = id).all()
-        idHistories = []
-        for elem in result:
-            idHistories.append(elem.id_userHistory)
-
-        for id in idHistories:
-            if not(id in visit):
-                succ.append(id)
-                visit.append(id)
-                succ = self.succesors(id,succ,visit)
+    def succesors(self,id,succ = [],visit = []):
+        '''Permite encontrar los sucesores de una historia de usuario'''
+        if (id != 0):
+            result = clsUserHistory.query.filter_by(id_History = id).all()
+            idHistories = []
+            for elem in result:
+                idHistories.append(elem.id_userHistory)
+    
+            for id in idHistories:
+                if not(id in visit):
+                    succ.append(id)
+                    visit.append(id)
+                    succ = self.succesors(id,succ,visit)
+                    
         return succ
                             
     
