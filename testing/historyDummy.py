@@ -37,17 +37,20 @@ class userHistory(object):
         return False
     
     
-    def succesors(self,id,succ,visit):
-        result = clsUserHistory.query.filter_by(id_History = id).all()
-        idHistories = []
-        for elem in result:
-            idHistories.append(elem.id_userHistory)
-
-        for id in idHistories:
-            if not(id in visit):
-                succ.append(id)
-                visit.append(id)
-                succ = self.succesors(id,succ,visit)
+    def succesors(self,id,succ = [],visit = []):
+        '''Permite encontrar los sucesores de una historia de usuario'''
+        if (id != 0):
+            result = clsUserHistory.query.filter_by(id_History = id).all()
+            idHistories = []
+            for elem in result:
+                idHistories.append(elem.id_userHistory)
+    
+            for id in idHistories:
+                if not(id in visit):
+                    succ.append(id)
+                    visit.append(id)
+                    succ = self.succesors(id,succ,visit)
+                    
         return succ
                             
     
@@ -131,7 +134,18 @@ class userHistory(object):
                             db.session.commit()
                         return True
         return False
-        
+    
+    def updatePriority(self,idHistory,priority):
+        checkIdHistory  = (type(idHistory) == int) and (const_min_id <= idHistory)
+        checkPriority   = (type(priority) == int) and (const_min_scale <= priority)
+        if checkIdHistory and checkPriority:
+            found = clsUserHistory.query.filter_by(id_userHistory = idHistory).first()
+            if found != None:
+                found.UH_scale = priority
+                db.session.commit()
+                return True
+        return False
+            
     def scaleType(self,historyId):
         checkTypeId = type(historyId) == int    
         if checkTypeId: 
