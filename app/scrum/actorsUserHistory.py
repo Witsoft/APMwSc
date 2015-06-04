@@ -25,8 +25,18 @@ class actorsUserHistory(object):
                 db.session.commit()
                 return True
         return False
-    
-    
+        
+    def idActorsAsociatedToUserHistory(self, id_userHistory):
+        '''Permite obtener los ids de los actores asociados a una historia de usuario'''
+        
+        checkIdUserHistory = type(id_userHistory) == int and id_userHistory >= const_min_id
+        if checkIdUserHistory:
+            result = clsRolesUserHistory.query.filter_by(ref_idUserHistory = id_userHistory)
+            idsList = []
+            for act in result:
+                idsList.append(act.ref_idrole)
+            return idsList
+        
     def deleteActorAsociatedInUserHistory(self,id_Actor, id_userHistory):
         '''Permite eliminar un actor de una historia de usuario'''
         
@@ -41,15 +51,3 @@ class actorsUserHistory(object):
                 db.session.commit()
                 return True
         return False
-                
-    
-    def idActorsAsociatedToUserHistory(self, id_userHistory):
-        '''Permite obtener los ids de los actores asociados a una historia de usuario'''
-        
-        checkIdUserHistory = type(id_userHistory) == int and id_userHistory >= const_min_id
-        if checkIdUserHistory:
-            result = clsRolesUserHistory.query.filter_by(ref_idUserHistory = id_userHistory)
-            idsList = []
-            for act in result:
-                idsList.append(act.ref_idrole)
-            return idsList

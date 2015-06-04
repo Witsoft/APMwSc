@@ -22,6 +22,7 @@ class objective(object):
         checkIdMin   = id_backLog >= const_minIdBacklog 
         
         if checkDesc and checkId_BL and checkIdMin and checkObjType: 
+            print("Entre")
             checkDescLen = const_minDescObj <= len(descObjective) <= const_maxDescObj
             
             if checkDescLen:

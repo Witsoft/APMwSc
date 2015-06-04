@@ -134,5 +134,3 @@ class backLog(object):
             found = clsUserHistory.query.filter_by(id_backLog=productId).all()
             return found
         return([])                                
-
-    
