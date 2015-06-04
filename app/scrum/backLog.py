@@ -26,30 +26,28 @@ class backLog(object):
         return []
     
     def insertBackLog(self,name,description,scale):
-        '''Permite insertar una descripción'''
+        '''Permite insertar un producto'''
         
-        checkTypeName = (type(name)) != str
-        checkTypeDesc = (type(description)) != str
-        checkTypeScale = (type(scale)) != int
+        checkTypeName = (type(name) == str)
+        checkTypeDesc = (type(description) == str)
+        checkTypeScale = (type(scale) == int)
         if (checkTypeName and checkTypeDesc and checkTypeScale):
-            return False
-        else:
-            new_prod = clsBackLog(BL_name = name, BL_description = description, BL_scaleType = scale)
+           
             long_name = const_minName <= len(name) <= const_maxName
-            long_description = (const_maxDescription >= len(new_prod.BL_description) >= const_minDescription)
+            long_description = (const_minDescription <= len(description) <= const_maxDescription)
             checkScale = scale in scale_type
             if  (long_name and long_description and checkScale):
-                dDescAux = self.findName(description);
+                dDescAux = self.findName(name);
                 if (dDescAux == []):
+                    new_prod = clsBackLog(BL_name = name, BL_description = description, BL_scaleType = scale)
                     db.session.add(new_prod)
                     db.session.commit()
                     return True
-            return False
+        return False
 
 
     def modifyBackLog(self, name, new_name, new_description, new_scale):   
-        '''Permite actualizar los valores de una Descripcion'''    
-        
+        '''Permite actualizar los valores de un producto'''            
         typeName          = (type(name) == str)
         typeNewName       = (type(new_name) == str)
         typeDescription   = (type(new_description) == str)
@@ -62,7 +60,8 @@ class backLog(object):
             checkScale = new_scale in scale_type
             if long_d and long_n and long_New and checkScale:
                 aName = self.findName(name)
-                if (aName != []):
+                aNewName = self.findName(new_name)
+                if (aName != [] and (aNewName == [] or new_name == name)):
                     new_n = clsBackLog.query.filter_by(BL_name = name).first()
                     new_n.BL_name        = new_name 
                     new_n.BL_description = new_description
@@ -73,21 +72,20 @@ class backLog(object):
                     return True
         return False
 
-#Modificar
-    def deleteProduct(self, description):
+    def deleteProduct(self, name):
         '''Permite eliminar una a descripción de la tabla'''
-        if (type(description) != str):
+        if (type(name) != str):
             return False
         else:
-            long_description =  (const_minDescription > len(description) > const_maxDescription)
-            if long_description:
+            long_name =  (const_minName > len(name) > const_maxName)
+            if long_name:
                 return False
             else:
-                adescription = self.findDescription(description)
-                if (adescription == []):
+                aName = self.findName(name)
+                if (aName == []):
                     return False
                 else:
-                    tupla = clsBackLog.query.filter_by(BL_description = description).first()    
+                    tupla = clsBackLog.query.filter_by(BL_name = name).first()    
                     db.session.delete(tupla)
                     db.session.commit()
                     return True
@@ -135,4 +133,3 @@ class backLog(object):
             return found
         return([])                                
 
-    

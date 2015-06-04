@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-. 
 
 from app.scrum.backLog import *
+from speechd.client import Priority
 
 # Declaracion de constantes
 const_max_cod    = 11
@@ -25,14 +26,45 @@ class userHistory(object):
                     return found
         return ([])
         
+        
     def isEpic(self, id_userHistory):
         '''Clase que permite reconocer las épicas'''
-        checkId = (type(id) == int) and (const_min_id <= id_userHistory)
+        checkId = (type(id_userHistory) == int) and (const_min_id <= id_userHistory)
         if checkId:
             existId = clsUserHistory.query.filter_by(id_History = id_userHistory).all()
             if existId != []:
                 return True
         return False
+    
+    
+    def succesors(self,id,succ = [],visit = []):
+        '''Permite encontrar los sucesores de una historia de usuario'''
+        if (id != 0):
+            result = clsUserHistory.query.filter_by(id_History = id).all()
+            idHistories = []
+            for elem in result:
+                idHistories.append(elem.id_userHistory)
+    
+            for id in idHistories:
+                if not(id in visit):
+                    succ.append(id)
+                    visit.append(id)
+                    succ = self.succesors(id,succ,visit)
+                    
+        return succ
+                            
+    
+    def historySuccesors(self, id_userHistory):
+        '''Permite saber las subhistorias que componen a una historia mas general'''
+        succ = []
+        checkIdHistory = (type(id_userHistory) == int) and (const_min_id <= id_userHistory)
+        if checkIdHistory:
+            existId = clsUserHistory.query.filter_by(id_userHistory = id_userHistory).all()
+            if existId != []:
+                visited = []
+                self.succesors(id_userHistory,succ,visited)
+        return succ
+                
                 
     def insertUserHistory(self,cod_userHistory,id_History,type_accion,id_Accion,id_backLog, priority):
         '''Permite insertar una Historia de usuario'''
@@ -102,7 +134,18 @@ class userHistory(object):
                             db.session.commit()
                         return True
         return False
-        
+    
+    def updatePriority(self,idHistory,priority):
+        checkIdHistory  = (type(idHistory) == int) and (const_min_id <= idHistory)
+        checkPriority   = (type(priority) == int) and (const_min_scale <= priority)
+        if checkIdHistory and checkPriority:
+            found = clsUserHistory.query.filter_by(id_userHistory = idHistory).first()
+            if found != None:
+                found.UH_scale = priority
+                db.session.commit()
+                return True
+        return False
+    
     def scaleType(self,historyId):
         checkTypeId = type(historyId) == int    
         if checkTypeId: 
