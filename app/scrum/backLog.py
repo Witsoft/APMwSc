@@ -73,21 +73,20 @@ class backLog(object):
                     return True
         return False
 
-#Modificar
-    def deleteProduct(self, description):
+    def deleteProduct(self, name):
         '''Permite eliminar una a descripción de la tabla'''
-        if (type(description) != str):
+        if (type(name) != str):
             return False
         else:
-            long_description =  (const_minDescription > len(description) > const_maxDescription)
-            if long_description:
+            long_name =  (const_minName > len(name) > const_maxName)
+            if long_name:
                 return False
             else:
-                adescription = self.findDescription(description)
-                if (adescription == []):
+                aName = self.findName(name)
+                if (aName == []):
                     return False
                 else:
-                    tupla = clsBackLog.query.filter_by(BL_description = description).first()    
+                    tupla = clsBackLog.query.filter_by(BL_name = name).first()    
                     db.session.delete(tupla)
                     db.session.commit()
                     return True
