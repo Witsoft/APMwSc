@@ -46,8 +46,7 @@ class backLog(object):
 
 
     def modifyBackLog(self, name, new_name, new_description, new_scale):   
-        '''Permite actualizar los valores de una Descripcion'''    
-        
+        '''Permite actualizar los valores de un producto'''            
         typeName          = (type(name) == str)
         typeNewName       = (type(new_name) == str)
         typeDescription   = (type(new_description) == str)
@@ -60,7 +59,8 @@ class backLog(object):
             checkScale = new_scale in scale_type
             if long_d and long_n and long_New and checkScale:
                 aName = self.findName(name)
-                if (aName != []):
+                aNewName = self.findName(new_name)
+                if (aName != [] and (aNewName == [] or new_name == name)):
                     new_n = clsBackLog.query.filter_by(BL_name = name).first()
                     new_n.BL_name        = new_name 
                     new_n.BL_description = new_description
