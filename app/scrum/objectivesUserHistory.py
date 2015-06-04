@@ -26,6 +26,7 @@ class objectivesUserHistory(object):
                 return True
         return False
 
+
     def deleteObjectiveAsociatedInUserHistory(self,id_Objective, id_userHistory):
         '''Permite eliminar un actor de una historia de usuario'''
         
