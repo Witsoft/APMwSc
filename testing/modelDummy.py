@@ -9,8 +9,6 @@ from flask.ext.sqlalchemy  import SQLAlchemy
 from flask.ext.script      import Manager
 from sqlalchemy.sql.schema import PrimaryKeyConstraint
  
-
-
 # Conexion con la base de datos.
 basedir                 = os.path.abspath(os.path.dirname(__file__))
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'apl.db')
@@ -34,20 +32,24 @@ class clsBackLog(db.Model):
 	'''Clase que define el modelo BackLog'''
 	
 	__tablename__ =  'backLog'
-	id_backLog     = db.Column(db.Integer,primary_key = True, index = True)	
-	BL_description = db.Column(db.String(140),unique = True)
+	id_backLog     = db.Column(db.Integer,primary_key = True, index = True)
+	BL_name        = db.Column(db.String(50),unique = True)	
+	BL_description = db.Column(db.String(140))
+	BL_scaleType   = db.Column(db.Integer)
 	obj_backLog    = db.relationship('clsObjective',backref='objective',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	act_backLog    = db.relationship('clsRole',backref='backLog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	acc_backLog    = db.relationship('clsAccions',backref='backLog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
 	usrHis_backLog = db.relationship('clsUserHistory',backref='backLog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 
-	def __init__(self, BL_description):
+	def __init__(self, BL_name,BL_description,BL_scaleType):
 		'''Constructor del modelo BackLog'''
+		self.BL_name 		= BL_name
 		self.BL_description = BL_description
+		self.BL_scaleType	= BL_scaleType
 		
 	def __repr__(self):
 		'''Representacion en string del nombre del BakcLog'''
-		return '<id_backLog %r, BL_descripcion %r>' % (self.id_backLog, self.BL_description)
+		return '<id_backLog %r, BL_name %r, BL_scaleType %r>' % (self.id_backLog, self.BL_name,self.BL_scaleType)
 	
 	
 	
@@ -70,8 +72,8 @@ class clsRole(db.Model):
 
     def __repr__(self):
         '''Respresentacion en string del nombre del Role'''
-        return '<Id_Role %r>, <Name_Role %r>, <Descripcion %r>, <Id_backlog %r>' %(self.idrole, self.namerole, self.roledescription, self.id_pila)
-
+        return '<Id_Objetivo %r>, <Descripcion %r>, <Id_backlog %r>' %(self.namerole, self.roledescription, self.id_pila)
+  
 
 
 class clsUser(db.Model):
@@ -143,25 +145,27 @@ class clsUserHistory(db.Model):
 	'''Clase que define el modelo de tabla userHistory'''
 	
 	__tablename__ = 'userHistory'
-	id_userHistory     = db.Column(db.Integer, primary_key = True, index = True)
-	cod_userHistory    = db.Column(db.String(11),unique = True , index = True) 
-	id_History         = db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'),nullable = True) 
-	type_accion        = db.Column(db.Integer)
-	ref_idaccion	   = db.Column(db.Integer, db.ForeignKey('accions.idaccion'))
-	id_backLog         = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+	id_userHistory  = db.Column(db.Integer, primary_key = True, index = True)
+	cod_userHistory = db.Column(db.String(11),unique = True , index = True) 
+	id_History      = db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'),nullable = True) 
+	type_accion     = db.Column(db.Integer)
+	ref_idaccion	= db.Column(db.Integer, db.ForeignKey('accions.idaccion'))
+	id_backLog      = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+	UH_scale        = db.Column(db.Integer, index = True)
 	roleUserHistory_userHistory = db.relationship('clsRolesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")
 	objUserHistory_userHistory  = db.relationship('clsObjectivesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")	
 	
-	def __init__(self,cod_userHistory,id_History,type_accion,ref_idaccion,id_backLog):
+	def __init__(self,cod_userHistory,id_History,type_accion,ref_idaccion,id_backLog,UH_scale):
 		self.cod_userHistory = cod_userHistory
 		self.id_History      = id_History 
 		self.type_accion     = type_accion
 		self.ref_idaccion    = ref_idaccion
 		self.id_backLog      = id_backLog
+		self.UH_scale		 = UH_scale
 		
 	def __repr__(self):
 		'''Representacion en string de la Historia de Usuario'''
-		return '<cod_userHistory %r>, <Id_User_History %r>' % (self.cod_userHistory, self.id_userHistory)
+		return '<id_userHistory %r, cod_userHistory %r, Us_scale %r>' % (self.id_userHistory,self.cod_userHistory, self.UH_scale)
 	
 	
 	
