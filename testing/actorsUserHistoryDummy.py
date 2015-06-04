@@ -29,11 +29,25 @@ class actorsUserHistory(object):
     def idActorsAsociatedToUserHistory(self, id_userHistory):
         '''Permite obtener los ids de los actores asociados a una historia de usuario'''
         
-        checkIdUserHistory = (type(id_userHistory) == int) and (id_userHistory >= const_min_id)
+        checkIdUserHistory = type(id_userHistory) == int and id_userHistory >= const_min_id
         if checkIdUserHistory:
-            result = clsRolesUserHistory.query.filter_by(ref_idUserHistory = id_userHistory).all()
+            result = clsRolesUserHistory.query.filter_by(ref_idUserHistory = id_userHistory)
             idsList = []
             for act in result:
                 idsList.append(act.ref_idrole)
             return idsList
-        return ([])
+        
+    def deleteActorAsociatedInUserHistory(self,id_Actor, id_userHistory):
+        '''Permite eliminar un actor de una historia de usuario'''
+        
+        checkIdActor     = type(id_Actor) == int and id_Actor >= const_min_id
+        checkUserHistory = type(id_userHistory) == int and id_userHistory >= const_min_id
+
+        if checkIdActor and checkUserHistory:
+            oActor = clsRolesUserHistory.query.filter_by(ref_idrole = id_Actor,ref_idUserHistory = id_userHistory).all()
+            if oActor != []:
+                for i in oActor:
+                    db.session.delete(i)
+                db.session.commit()
+                return True
+        return False

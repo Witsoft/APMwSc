@@ -50,7 +50,7 @@ def AModifObjetivo():
 
     idObjetivo     = params['idObjetivo']  #Obtenemos el id del objetivo
     newDescription = params['descripcion'] #Obtenemos la nueva descripción del objetivo
-    newType        = params['transversal'] #Obtenermos el tipo de objetivo(transversal,no transversal)
+    newType        = params['transversal'] #Obtenemos el tipo de objetivo(transversal,no transversal)
     objetivoDesc = clsObjective.query.filter_by(idobjective = idObjetivo).first() #Conseguimos el objetivo a modificar
     print("Antes",objetivoDesc.obj_type)
     oObjetivo    = objective()

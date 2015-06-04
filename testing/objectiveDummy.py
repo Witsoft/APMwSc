@@ -17,10 +17,10 @@ class objective(object):
     def insertObjective(self,descObjective, id_backLog, objType):
         '''Permite insertar un Objetivo'''
 
-        checkObjType = objType in arrayType
+        checkObjType = (objType in arrayType)
         checkDesc    = type(descObjective) == str
         checkId_BL   = type(id_backLog) == int 
-        checkIdMin   = id_backLog >= const_minIdBacklog 
+        checkIdMin   = checkId_BL >= const_minIdBacklog 
         
         if checkDesc and checkId_BL and checkIdMin and checkObjType: 
             checkDescLen = const_minDescObj <= len(descObjective) <= const_maxDescObj
@@ -28,7 +28,7 @@ class objective(object):
             if checkDescLen:
                 aBackLog = clsBackLog.query.filter_by(id_backLog = id_backLog).all()
                 aObj     = self.searchObjective(descObjective)
-
+                
                 if (aBackLog != []) and (aObj == []) :
                     new_objective = clsObjective(descObjective, id_backLog, objType)
                     db.session.add(new_objective)
@@ -69,6 +69,7 @@ class objective(object):
                     db.session.commit()
                     return True
         return False   
+<<<<<<< HEAD
     
 #     def updateObjectiveReferenceToHistory(self, idObjective, ref_idUserHistory):
 #         '''Permite actualizar la referencia a la historia de usuario a la cual pertenece el objetivo'''
@@ -89,6 +90,9 @@ class objective(object):
             result = self.searchIdObjective(idObjective)
             return result[0].obj_type
 
+=======
+               
+>>>>>>> refs/remotes/origin/Historia_4b
     def deleteObjective(self, descObjective):
         '''Permite eliminar un objetivo de acuerdo a su descripcion'''
         
@@ -106,6 +110,17 @@ class objective(object):
                     db.session.commit()
                     return True
         return False 
+
+    def verifyObjectiveTransverse(self, idObjective):
+        '''Permite verificar si un objetivo es de tipo trasnversal o no'''
+        
+        checkDesc = type(idObjective) == int
+        if checkDesc:
+            result = self.searchIdObjective(idObjective)
+            if (result != []):
+                return result[0].obj_type
+        return([])
+                
 
            
 
