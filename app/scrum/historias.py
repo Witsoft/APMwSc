@@ -43,25 +43,33 @@ def ACrearHistoria():
     idAccion    = params['accion']
     idObjective = params['objetivos']
     priority    = params['prioridad']
+    idPila      = params['idPila']
     
     oUserHistory = userHistory()
-    inserted     = oUserHistory.insertUserHistory(codeHistory,idSuperHist,idType,idAccion,1,priority)
+    # Insertamos los datos de la historia
+    inserted     = oUserHistory.insertUserHistory(codeHistory,idSuperHist,idType,idAccion,idPila,priority)
 
     if inserted:
         oObjUserHist = objectivesUserHistory()
         oActUserHist = actorsUserHistory()
         result       = oUserHistory.searchUserHistory(codeHistory)
         idInserted   = result[0].id_userHistory
+        
+        # Insertamos los nuevos objetivos seleccionados
         for idobj in idObjective:
             insertedObj  = oObjUserHist.insertObjectiveAsociatedInUserHistory(idobj,idInserted)
+        
+        # Insertamos los nuevos actores seleccionados
         for idact in idActor:
             insertedAct  = oActUserHist.insertActorAsociatedInUserHistory(idact,idInserted)
-        
+     
         if insertedAct and insertedObj:
             res = results[0]  
-            res['label'] = res['label'] + '/1'
         else:
             res = results[1] 
+     
+            
+    res['label'] = res['label'] + '/'+str(idPila)
             
     if "actor" in res:
         if res['actor'] is None:
@@ -92,33 +100,40 @@ def AModifHistoria():
     idObjectives = params['objetivos']
     type         = params['tipo']
     priority     = params['prioridad']
+    idPila       = params['idPila']
     
-    # Actualizamos los datos de la historia
-    updated     = oUserHist.updateUserHistory(idHistory,codeHist,idSupHist,type,idaccion,priority)
+    subHistories = oUserHist.historySuccesors(idHistory)
     
-    if updated:
-        # Buscamos los actores asociados
-        idActorsList = oActUserHist.idActorsAsociatedToUserHistory(idHistory)
-        # Eliminamos los actores asociados
-        for id in idActorsList:
-            insertedAct = oActUserHist.deleteActorAsociatedInUserHistory(id,idHistory)
-        # Insertamos los nuevos actores seleccionados
-        for id in idActors:
-            insertedAct = oActUserHist.insertActorAsociatedInUserHistory(id,idHistory)
+    if not(idSupHist in subHistories):
+        # Actualizamos los datos de la historia
+        updated     = oUserHist.updateUserHistory(idHistory,codeHist,idSupHist,type,idaccion,priority)
+
+        if updated:
+            # Buscamos los actores asociados
+            idActorsList = oActUserHist.idActorsAsociatedToUserHistory(idHistory)
+            # Eliminamos los actores asociados
+            for id in idActorsList:
+                insertedAct = oActUserHist.deleteActorAsociatedInUserHistory(id,idHistory)
+            # Insertamos los nuevos actores seleccionados
+            for id in idActors:
+                insertedAct = oActUserHist.insertActorAsociatedInUserHistory(id,idHistory)
             
-        # Buscamos los objetivos asociados
-        idObjectivesList = oObjUserHist.idObjectivesAsociatedToUserHistory(idHistory)
-        # Eliminamos los objetivos asociados
-        for id in idObjectivesList:
-            insertedObj = oObjUserHist.deleteObjectiveAsociatedInUserHistory(id,idHistory)
-        # Insertamos los nuevos objetivos seleccionados
-        for id in idObjectives:
-            insertedAct = oObjUserHist.insertObjectiveAsociatedInUserHistory(id,idHistory)
+            # Buscamos los objetivos asociados
+            idObjectivesList = oObjUserHist.idObjectivesAsociatedToUserHistory(idHistory)
+            # Eliminamos los objetivos asociados
+            for id in idObjectivesList:
+                insertedObj = oObjUserHist.deleteObjectiveAsociatedInUserHistory(id,idHistory)
+            # Insertamos los nuevos objetivos seleccionados
+            for id in idObjectives:
+                insertedAct = oObjUserHist.insertObjectiveAsociatedInUserHistory(id,idHistory)
         
-        res = results[0]
-        res['label'] = res['label'] + '/1'
+            res = results[0]
+        else:
+            res = results[1]
     else:
         res = results[1]
+        
+    res['label'] = res['label'] + '/'+str(idPila)
 
     if "actor" in res:
         if res['actor'] is None:
@@ -158,6 +173,7 @@ def VCrearHistoria():
     res['fHistoria_opcionesAcciones']      = [{'key':acc.idaccion,'value':acc.acciondescription}for acc in accionList]
     res['fHistoria_opcionesObjetivos']     = [{'key':obj.idobjective,'value':obj.descObjective}for obj in objectiveList]
     res['fHistoria_opcionesHistorias']     = [{'key':hist.id_userHistory,'value':hist.cod_userHistory}for hist in historyList]
+    res['fHistoria_opcionesHistorias'].append({'key':0,'value':'Ninguno'})
     res['fHistoria_opcionesTiposHistoria'] = [{'key':1,'value':'Opcional'},{'key':2,'value':'Obligatoria'}]
     res['fHistoria_opcionesPrioridad']     = [{'key':scale[0], 'value':scale[1]}for scale in resultScale]
     
@@ -222,12 +238,6 @@ def VHistoria():
     res['fHistoria_opcionesObjetivos']     = [{'key':obj.idobjective,'value':obj.descObjective}for obj in objectiveList]
     res['fHistoria_opcionesPrioridad']     = [{'key':scale[0], 'value':scale[1]}for scale in resultScale]
     
-    #Escala dependiente del proyecto
-#    res['fHistoria_opcionesPrioridad'] = [
-#      {'key':1, 'value':'Alta'},
-#      {'key':2, 'value':'Media'},
-#     {'key':3, 'value':'Baja'},
-#    ]
     
     res['fHistoria'] = {'super':history.id_History, 'idHistoria':idHistoria, 'idPila':history.id_backLog, 'codigo':history.cod_userHistory,
        'actores':[1], 'accion':history.ref_idaccion, 'objetivos':[1], 'tipo':history.type_accion,
