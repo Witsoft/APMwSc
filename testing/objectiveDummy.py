@@ -8,6 +8,7 @@ const_minIdBacklog = 1
 const_minIdObj     = 1
 const_minDescObj   = 1
 const_maxDescObj   = 140
+arrayType          = [True,False]
 
 
 class objective(object):
@@ -29,7 +30,7 @@ class objective(object):
                 aObj     = self.searchObjective(descObjective)
 
                 if (aBackLog != []) and (aObj == []) :
-                    new_objective = clsObjective(descObjective, id_backLog)
+                    new_objective = clsObjective(descObjective, id_backLog, objType)
                     db.session.add(new_objective)
                     db.session.commit()
                     return True
@@ -63,23 +64,31 @@ class objective(object):
                 aObj = self.searchObjective(descObjective)
                 
                 if aObj != []:
-                    result = self.searchObjective(newDescObjective)
-                
-                    if result == []:                
-                        aObj[0].descObjective = newDescObjective
-                        aObj[0].obj_type = newObjType
-                        db.session.commit()
-                        return True
-        return False     
+                    aObj[0].descObjective = newDescObjective
+                    aObj[0].obj_type = newObjType
+                    db.session.commit()
+                    return True
+        return False   
     
-    def verifyObjectiveTransverse(self, idObjetive):
+#     def updateObjectiveReferenceToHistory(self, idObjective, ref_idUserHistory):
+#         '''Permite actualizar la referencia a la historia de usuario a la cual pertenece el objetivo'''
+#         result = clsUserHistory.query.filter_by(id_userHistory = ref_idUserHistory).all()
+#         
+#         if (result != []):
+#             oObjective = clsObjective.query.filter_by(idobjective = idObjective).first()
+#             oObjective.id_userHistory = ref_idUserHistory
+#             db.session.commit()
+#             return True
+#         return False   
+
+    def verifyObjectiveTransverse(self, idObjective):
         '''Permite verificar si un objetivo es de tipo trasnversal o no'''
         
         checkDesc = type(idObjective) == int
         if checkDesc:
             result = self.searchIdObjective(idObjective)
             return result[0].obj_type
-       
+
     def deleteObjective(self, descObjective):
         '''Permite eliminar un objetivo de acuerdo a su descripcion'''
         

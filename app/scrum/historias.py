@@ -16,8 +16,19 @@ def ACambiarPrioridades():
     #POST/PUT parameters
     params = request.get_json()
     results = [{'label':'/VHistorias', 'msg':['Prioridades reasignadas']}, ]
-    res = results[0]
+   
     #Action code goes here, res should be a list with a label and a message
+
+    list = params['lista']
+    
+    oHistory = userHistory()
+    update = True
+    for i in list:
+        idHistory   = i['idHistoria']
+        priority    = i['prioridad'] 
+        oHistory.updatePriority(idHistory,priority)    
+           
+    res = results[0]
 
     res['label'] = res['label']+'/1'
 
@@ -257,7 +268,7 @@ def VHistoria():
     
     
     res['fHistoria'] = {'super':history.id_History, 'idHistoria':idHistoria, 'idPila':history.id_backLog, 'codigo':history.cod_userHistory,
-       'actores':[1], 'accion':history.ref_idaccion, 'objetivos':[1], 'tipo':history.type_accion,
+       'actores':actors, 'accion':history.ref_idaccion, 'objetivos':objectives, 'tipo':history.type_accion,
        'prioridad':history.UH_scale}
     
     res['idPila']  = 1   
@@ -348,6 +359,20 @@ def VPrioridades():
          
     userHistories = []
     options       = {1:'podría ',2:'puede '}
+    
+    scale = {1:'Alta',2:'Media',3:'Baja'}
+    idProduct = request.args.get('idPila')  #Obtenemos el id de la historia
+    idProduct = int(idProduct)
+    
+        
+    typeScale = oBacklog.scaleType(idProduct)
+    # Obtenemos el tipo de escala asociado al producto (id,valor)
+    if typeScale == 1:
+        resultScale = [(i,scale[i]) for i in range(1,3+1)]
+    elif typeScale == 2:
+        resultScale = [(i,i) for i in range(1,20+1)]
+    
+    
     for hist in userHistoriesList:
         historyDict   = {}
          
@@ -388,15 +413,10 @@ def VPrioridades():
     res['data0']   = [{'idHistoria':hist['idHistory'], 'prioridad':hist['priority'],'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]
 
     #Escala dependiente del proyecto
-    res['fPrioridades_opcionesPrioridad'] = [
-      {'key':1, 'value':'Alta'},
-      {'key':2, 'value':'Media'},
-      {'key':3, 'value':'Baja'},
-    ]
+    res['fPrioridades_opcionesPrioridad'] = [{'key':scale[0], 'value':scale[1]}for scale in resultScale]
+    
     res['idPila'] = 1
-    res['fPrioridades'] = {'idPila':1,
-      'lista':[{'idHistoria':hist['idHistory'],'prioridad':hist['priority'], 'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]}
-
+    res['fPrioridades'] = {'idPila':1,'lista':[{'idHistoria':hist['idHistory'],'prioridad':hist['priority'], 'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]}
 
     #Action code ends here
     return json.dumps(res)

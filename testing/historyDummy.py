@@ -131,7 +131,18 @@ class userHistory(object):
                             db.session.commit()
                         return True
         return False
-        
+    
+    def updatePriority(self,idHistory,priority):
+        checkIdHistory  = (type(idHistory) == int) and (const_min_id <= idHistory)
+        checkPriority   = (type(priority) == int) and (const_min_scale <= priority)
+        if checkIdHistory and checkPriority:
+            found = clsUserHistory.query.filter_by(id_userHistory = idHistory).first()
+            if found != None:
+                found.UH_scale = priority
+                db.session.commit()
+                return True
+        return False
+            
     def scaleType(self,historyId):
         checkTypeId = type(historyId) == int    
         if checkTypeId: 

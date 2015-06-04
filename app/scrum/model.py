@@ -9,8 +9,6 @@ from flask.ext.sqlalchemy  import SQLAlchemy
 from flask.ext.script      import Manager
 from sqlalchemy.sql.schema import PrimaryKeyConstraint
  
-
-
 # Conexion con la base de datos.
 basedir                 = os.path.abspath(os.path.dirname(__file__))
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'apl.db')
@@ -116,7 +114,7 @@ class clsObjective(db.Model):
         '''Constructor del modelo Objective'''
         self.descObjective  = descObjective
         self.id_backlog     = id_backLog
-        self.obj_type   	= objType
+        self.obj_type	    = objType
 
     def __repr__(self):
         '''Respresentación en string de la descripción del Objective'''

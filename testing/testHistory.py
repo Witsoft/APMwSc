@@ -17,7 +17,7 @@ class TestHistory(unittest.TestCase):
     def testInserHistoryExists(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -27,7 +27,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H1',0, 1,idFound, 1)
+        result = aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
         self.assertTrue(result)
         searchHist = aHist.searchUserHistory('H1')
         idFound1 = searchHist[0].id_userHistory
@@ -42,7 +42,7 @@ class TestHistory(unittest.TestCase):
     def testInsertHistoryElementNotExist(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -52,7 +52,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H2',0, 1,idFound, 1)
+        aHist.insertUserHistory('H2',0, 1,idFound, 1,1)
         result = searchHist = aHist.searchUserHistory('H2')
         self.assertTrue(result)
         idFound1 = searchHist[0].id_userHistory
@@ -66,7 +66,7 @@ class TestHistory(unittest.TestCase):
     def testInsertHistoryRepeatedElement(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -76,8 +76,8 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H2',0, 1,idFound, 1)
-        result1 = aHist.insertUserHistory('H2',0, 1,idFound, 2)
+        result = aHist.insertUserHistory('H2',0, 1,idFound, 1,1)
+        result1 = aHist.insertUserHistory('H2',0, 1,idFound, 2,1)
         self.assertFalse(result1)
         searchHist = aHist.searchUserHistory('H2')
         idFound1 = searchHist[0].id_userHistory
@@ -94,7 +94,7 @@ class TestHistory(unittest.TestCase):
     def test4InsertHistoryShortDesc0(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -104,7 +104,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('',0, 1,idFound, 1)
+        result = aHist.insertUserHistory('',0, 1,idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos accion y producto
@@ -116,7 +116,7 @@ class TestHistory(unittest.TestCase):
     def test4InsertHistoryShortDesc1(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -126,7 +126,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H',0, 1,idFound, 1)
+        result = aHist.insertUserHistory('H',0, 1,idFound, 1,1)
         self.assertTrue(result)
         searchHist = aHist.searchUserHistory('H')
         idFound1 = searchHist[0].id_userHistory
@@ -141,7 +141,7 @@ class TestHistory(unittest.TestCase):
     def test4InsertHistoryShortDesc11(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -151,7 +151,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 1,idFound, 1)
+        result = aHist.insertUserHistory('H'*11,0, 1,idFound, 1,1)
         self.assertTrue(result)
         searchHist = aHist.searchUserHistory('H'*11)
         idFound1 = searchHist[0].id_userHistory
@@ -165,7 +165,7 @@ class TestHistory(unittest.TestCase):
     def testInsertHistoryElementType2(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -175,7 +175,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0, 2,idFound, 1)
+        result = aHist.insertUserHistory('H3',0, 2,idFound, 1,1)
         self.assertTrue(result)
         searchHist = aHist.searchUserHistory('H3')
         idFound1 = searchHist[0].id_userHistory
@@ -189,7 +189,7 @@ class TestHistory(unittest.TestCase):
     def testInsertHistoryElementBakcLog2(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -199,7 +199,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0, 2,idFound, 2)
+        result = aHist.insertUserHistory('H3',0, 2,idFound, 2,1)
         self.assertFalse(result)
                 
         # Eliminamos accion y producto
@@ -210,7 +210,7 @@ class TestHistory(unittest.TestCase):
     def testInsertHistoryElementCodBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -220,7 +220,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*((2^31)-1),0, 2,idFound, 1)
+        result = aHist.insertUserHistory('H'*((2^31)-1),0, 2,idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -231,7 +231,7 @@ class TestHistory(unittest.TestCase):
     def testInsertHistoryElementTypeBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -241,7 +241,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H',0, 2*((2^31)-1),idFound, 1)
+        result = aHist.insertUserHistory('H',0, 2*((2^31)-1),idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -252,7 +252,7 @@ class TestHistory(unittest.TestCase):
     def testInsertHistoryElementBackLogBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -262,7 +262,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H',0, 2,idFound, 1*((2^31)-1))
+        result = aHist.insertUserHistory('H',0, 2,idFound, 1*((2^31)-1),1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -275,7 +275,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryIdBackLogNoExists(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -285,7 +285,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H1',0, 2,idFound, 3)
+        result = aHist.insertUserHistory('H1',0, 2,idFound, 3,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -297,7 +297,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongDesc11AndIdBackLogNoExists(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -307,7 +307,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 2,idFound, 3)
+        result = aHist.insertUserHistory('H'*11,0, 2,idFound, 3,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -318,7 +318,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndIdBackLogBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -328,7 +328,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 2,idFound, 1*((2^31)-1))
+        result = aHist.insertUserHistory('H'*11,0, 2,idFound, 1*((2^31)-1),1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -339,7 +339,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndTypeBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -349,7 +349,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 2*((2^31)-1),idFound, 1)
+        result = aHist.insertUserHistory('H'*11,0, 2*((2^31)-1),idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -360,7 +360,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistory0Cod11AndTypeBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -370,7 +370,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('',0, 2*((2^31)-1),idFound, 1)
+        result = aHist.insertUserHistory('',0, 2*((2^31)-1),idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -381,7 +381,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndType0(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -391,7 +391,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 2*((2^31)-1),idFound, 0)
+        result = aHist.insertUserHistory('H'*11,0, 2*((2^31)-1),idFound, 0,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -402,7 +402,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistory0Cod11AndType0(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -412,7 +412,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('',0, 2*((2^31)-1),idFound, 0)
+        result = aHist.insertUserHistory('',0, 2*((2^31)-1),idFound, 0,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -423,7 +423,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndType0AndBackLog0(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -433,7 +433,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 0,idFound, 0)
+        result = aHist.insertUserHistory('H'*11,0, 0,idFound, 0,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -444,7 +444,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongBackLog0AndType0(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -454,7 +454,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H',0, 0,idFound, 1)
+        result = aHist.insertUserHistory('H',0, 0,idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -465,7 +465,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod0AndType0AndBackLog0(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -475,7 +475,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('',0, 0,idFound, 0)
+        result = aHist.insertUserHistory('',0, 0,idFound, 0,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -486,7 +486,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCodBigAndType0AndBackLog0(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -496,7 +496,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*((2^31)-1),0, 0,idFound, 0)
+        result = aHist.insertUserHistory('H'*((2^31)-1),0, 0,idFound, 0,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -507,7 +507,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCodBigAndTypeBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -517,7 +517,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*((2^31)-1),0, 1*((2^31)-1),idFound, 0)
+        result = aHist.insertUserHistory('H'*((2^31)-1),0, 1*((2^31)-1),idFound, 0,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -528,7 +528,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod1AndTypeBigAndBackLogBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -538,7 +538,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H',0, 1*((2^31)-1),idFound, 1*((2^31)-1))
+        result = aHist.insertUserHistory('H',0, 1*((2^31)-1),idFound, 1*((2^31)-1),1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -549,7 +549,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod1AndType1AndBackLogBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -559,7 +559,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H',0, 1,idFound, 1*((2^31)-1))
+        result = aHist.insertUserHistory('H',0, 1,idFound, 1*((2^31)-1),1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -570,7 +570,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod0AndType1AndBackLogBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -580,7 +580,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('',0, 1,idFound, 1*((2^31)-1))
+        result = aHist.insertUserHistory('',0, 1,idFound, 1*((2^31)-1),1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -591,7 +591,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod1AndType1AndBackLog0(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -601,7 +601,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H',0, 1,idFound, 0)
+        result = aHist.insertUserHistory('H',0, 1,idFound, 0,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -612,7 +612,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod1AndType0AndBackLogBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -622,7 +622,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H',0, 0,idFound, 1*((2^31)-1))
+        result = aHist.insertUserHistory('H',0, 0,idFound, 1*((2^31)-1),1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -633,7 +633,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod1AndType1AndBackLog1(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -643,7 +643,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H',0, 1*((2^31)-1),idFound, 1)
+        result = aHist.insertUserHistory('H',0, 1*((2^31)-1),idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -654,7 +654,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod1AndType0AndBackLog1(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -664,7 +664,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H',0, 0,idFound, 1)
+        result = aHist.insertUserHistory('H',0, 0,idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -675,7 +675,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndType0AndBackLog1(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -685,7 +685,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 0,idFound, 1)
+        result = aHist.insertUserHistory('H'*11,0, 0,idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -696,7 +696,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndType0AndBackLog00(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -706,7 +706,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 0,idFound, 00)
+        result = aHist.insertUserHistory('H'*11,0, 0,idFound, 00,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -717,7 +717,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndType1AndBackLog0(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -727,7 +727,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 1,idFound, 0)
+        result = aHist.insertUserHistory('H'*11,0, 1,idFound, 0,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -738,7 +738,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndType1AndBackLog1(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -748,7 +748,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 1,idFound, 1)
+        result = aHist.insertUserHistory('H'*11,0, 1,idFound, 1,1)
         self.assertTrue(result)
                 
         # Eliminamos historia, accion y producto
@@ -760,7 +760,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndTypeBigAndBackLog1(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -770,7 +770,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 1*((2^31)-1),idFound, 1)
+        result = aHist.insertUserHistory('H'*11,0, 1*((2^31)-1),idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -781,7 +781,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndType1AndBackLogBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -791,7 +791,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 1,idFound, 1*((2^31)-1))
+        result = aHist.insertUserHistory('H'*11,0, 1,idFound, 1*((2^31)-1),1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -802,7 +802,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndType0AndBackLogBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -812,7 +812,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 0,idFound, 1*((2^31)-1))
+        result = aHist.insertUserHistory('H'*11,0, 0,idFound, 1*((2^31)-1),1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -823,7 +823,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndTypeBigAndBackLog0(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -833,7 +833,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 1*((2^31)-1),idFound, 0)
+        result = aHist.insertUserHistory('H'*11,0, 1*((2^31)-1),idFound, 0,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -844,7 +844,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndTypeBigAndBackLog11(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -854,7 +854,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 1*((2^31)-1),idFound, 11)
+        result = aHist.insertUserHistory('H'*11,0, 1*((2^31)-1),idFound, 11,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -865,7 +865,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCod11AndTypeBigAndBackLogBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -875,7 +875,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*11,0, 1*((2^31)-1),idFound, 1*((2^31)-1))
+        result = aHist.insertUserHistory('H'*11,0, 1*((2^31)-1),idFound, 1*((2^31)-1),1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -886,7 +886,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryLongCodBigAndTypeBigAndBackLogBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -896,7 +896,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H'*((2^31)-1),0, 1*((2^31)-1),idFound, 1*((2^31)-1))
+        result = aHist.insertUserHistory('H'*((2^31)-1),0, 1*((2^31)-1),idFound, 1*((2^31)-1),1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -911,7 +911,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryCodNotString(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -921,7 +921,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory(123,0, 1,idFound, 1)
+        result = aHist.insertUserHistory(123,0, 1,idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -932,7 +932,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryCodNone(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -942,7 +942,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory(None,0, 1,idFound, 1)
+        result = aHist.insertUserHistory(None,0, 1,idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -953,7 +953,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryTypeNone(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -963,7 +963,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H2',0, None,idFound, 1)
+        result = aHist.insertUserHistory('H2',0, None,idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -974,7 +974,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryBackLogNone(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -984,7 +984,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0, 1,idFound, None)
+        result = aHist.insertUserHistory('H3',0, 1,idFound, None,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -995,7 +995,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryTypeNoneBackLogNone(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1005,7 +1005,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0, None,idFound, None)
+        result = aHist.insertUserHistory('H3',0, None,idFound, None,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -1016,7 +1016,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryCodeNoneTypeNoneBackLogNone(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1026,7 +1026,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory(None,0, None,idFound, None)
+        result = aHist.insertUserHistory(None,0, None,idFound, None,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -1037,7 +1037,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryTypeNoneBackLogString(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1047,7 +1047,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0, None,idFound, '1')
+        result = aHist.insertUserHistory('H3',0, None,idFound, '1',1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -1058,7 +1058,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryTypeStringBackLogNone(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1068,7 +1068,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0, '1',idFound, 1)
+        result = aHist.insertUserHistory('H3',0, '1',idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -1079,7 +1079,7 @@ class TestHistory(unittest.TestCase):
     def testinsertUserHistoryTypeArrayBackLogNone(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1089,7 +1089,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0, [],idFound, 1)
+        result = aHist.insertUserHistory('H3',0, [],idFound, 1,1)
         self.assertFalse(result)
                 
         # Eliminamos historia, accion y producto
@@ -1108,7 +1108,7 @@ class TestHistory(unittest.TestCase):
     def testSearchHistoryExist(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1118,7 +1118,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound, 1)
+        aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
         
         # Buscamos el codigo de la historia
         searchHist = aHist.searchUserHistory('H1')
@@ -1134,7 +1134,7 @@ class TestHistory(unittest.TestCase):
     def testSearchHistoryNotExist(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1156,7 +1156,7 @@ class TestHistory(unittest.TestCase):
     def testSearchHistoryLong11(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1166,7 +1166,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H'*11,0, 1,idFound, 1)
+        aHist.insertUserHistory('H'*11,0, 1,idFound, 1,1)
         
         # Buscamos el codigo de la historia
         searchHist = aHist.searchUserHistory('H'*11)
@@ -1182,7 +1182,7 @@ class TestHistory(unittest.TestCase):
     def testSearchHistoryBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1192,7 +1192,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H'*((2^31)-1),0, 1,idFound, 1)
+        aHist.insertUserHistory('H'*((2^31)-1),0, 1,idFound, 1,1)
         
         # Buscamos el codigo de la historia
         searchHist = aHist.searchUserHistory('H'*((2^31)-1))
@@ -1209,7 +1209,7 @@ class TestHistory(unittest.TestCase):
     def testSearchHistoryNone(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1219,7 +1219,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory(None,0, 1,idFound, 1)
+        aHist.insertUserHistory(None,0, 1,idFound, 1,1)
         
         # Buscamos el codigo de la historia
         searchHist = aHist.searchUserHistory('H'*((2^31)-1))
@@ -1241,7 +1241,7 @@ class TestHistory(unittest.TestCase):
     def testdeleteUserHistoryExists(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1251,7 +1251,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound, 1)
+        aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
         
         # Buscamos el codigo de la historia
         searchHist = aHist.searchUserHistory('H1')
@@ -1267,7 +1267,7 @@ class TestHistory(unittest.TestCase):
     def testdeleteUserHistoryNotExists(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1291,7 +1291,7 @@ class TestHistory(unittest.TestCase):
     def testdeleteUserHistoryLong11(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1301,7 +1301,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H'*11,0, 1,idFound, 1)
+        aHist.insertUserHistory('H'*11,0, 1,idFound, 1,1)
         
         # Buscamos el codigo de la historia
         searchHist = aHist.searchUserHistory('H'*11)
@@ -1317,7 +1317,7 @@ class TestHistory(unittest.TestCase):
     def testdeleteUserHistoryBig(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1327,7 +1327,7 @@ class TestHistory(unittest.TestCase):
         
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H'*((2^31)-1),0, 1,idFound, 1)
+        aHist.insertUserHistory('H'*((2^31)-1),0, 1,idFound, 1,1)
                 
         # Eliminamos historia, accion y producto
         result = aHist.deleteUserHistory('H'*((2^31)-1))
@@ -1341,7 +1341,7 @@ class TestHistory(unittest.TestCase):
     def testdeleteUserHistoryInvalid(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1362,7 +1362,7 @@ class TestHistory(unittest.TestCase):
     def testdeleteUserHistoryNotString(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()
@@ -1383,7 +1383,7 @@ class TestHistory(unittest.TestCase):
     def test_44deleteUserHistoryNone(self):
         # Insertamos Producto
         aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
         
         # Insertamos la accion
         aAcc = accions()

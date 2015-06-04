@@ -110,7 +110,7 @@ class clsObjective(db.Model):
     obj_type	   = db.Column(db.String(5)) 
     objectiveUserHistory_role = db.relationship('clsObjectivesUserHistory', backref = 'role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
    
-    def __init__(self, descObjective, id_backLog):
+    def __init__(self, descObjective, id_backLog, objType):
         '''Constructor del modelo Objective'''
         self.descObjective  = descObjective
         self.id_backlog     = id_backLog
