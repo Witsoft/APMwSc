@@ -17,284 +17,573 @@ class TestclsBackLog(unittest.TestCase):
      #    Suite de Pruebas para findDescription  #
      #############################################
  
-     # Caso Inicial
-     
-     # Prueba 1
-     def testFindName(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi','Permite localizar un taxi',1)
-         aBackLog.findName('Taxi')
-         aBackLog.deleteProduct('Taxi')   
-         
-        # Casos Normales
-         
-     # Prueba 2
-     def testFindNameNotExist(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi','Taxi seguro.',1)
-          # Inicio de la prueba.
-         result = aBackLog.findName('Nuevo')
-         self.assertEqual(result,[])
-         aBackLog.deleteProduct('Taxi seguro.')
-           
-         
-     # Casos Fronteras
-       
-     # Prueba 3
-     def testfindNameShortName0(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('','Taxi seguro.',1)
-         # Inicio de la prueba.        
-         result = aBackLog.findName('')
-         self.assertEqual(result,[])
-         
-     # Prueba 4
-     def testfindNameShortName1(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('T','new t',1)
-         # Inicio de la prueba
-         result = aBackLog.findName('T')
-         self.assertNotEqual(result,[])
-         aBackLog.deleteProduct('T')
-         
-     # Prueba 5
-     def testfindNameShortName50(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog(50*'Z','new z',1)
-          # Inicio de la prueba.
-         result = aBackLog.findName(50*'Z')
-         self.assertNotEqual(result,[],"Accion no encontrada")
-         aBackLog.deleteProduct(50*'Z')
- 
-     # Prueba 6
-     def testfindNameShortName51(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog(50*'W'+'q','nuevo wq',1)
-         # Inicio de la prueba.
-         result = aBackLog.findName(50*'W'+'q')
-         self.assertEqual(result,[]) 
-     
-    # Casos Maliciosos
-       
-      # Prueba 7
-     def testfindNameNotString(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','un nuevo taxi',1)
-         # Inicio de la prueba. 
-         result = aBackLog.findName(4350)
-         self.assertEqual(result, [],'Accion Encontrada')
-         aBackLog.deleteProduct('Taxi seguro.')
-         
-      #Prueba 8
-       
-     def testFindNameNoneString(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','cualquiera',1)
-         # Inicio de la prueba.   
-         result = aBackLog.findName(None)
-         self.assertEqual(result,[],'Accion Encontrada')
-         aBackLog.deleteProduct('Taxi seguro.')
+#      # Caso Inicial
+#      
+#      # Prueba 1
+#      def testFindName(self):
+#          aBackLog = backLog()
+#          aBackLog.insertBackLog('Taxi','Permite localizar un taxi',1)
+#          aBackLog.findName('Taxi')
+#          aBackLog.deleteProduct('Taxi')   
+#          
+#         # Casos Normales
+#          
+#      # Prueba 2
+#      def testFindNameNotExist(self):
+#          aBackLog = backLog()
+#          aBackLog.insertBackLog('Taxi','Taxi seguro.',1)
+#           # Inicio de la prueba.
+#          result = aBackLog.findName('Nuevo')
+#          self.assertEqual(result,[])
+#          aBackLog.deleteProduct('Taxi seguro.')
+#            
+#          
+#      # Casos Fronteras
+#        
+#      # Prueba 3
+#      def testfindNameShortName0(self):
+#          aBackLog = backLog()
+#          aBackLog.insertBackLog('','Taxi seguro.',1)
+#          # Inicio de la prueba.        
+#          result = aBackLog.findName('')
+#          self.assertEqual(result,[])
+#          
+#      # Prueba 4
+#      def testfindNameShortName1(self):
+#          aBackLog = backLog()
+#          aBackLog.insertBackLog('T','new t',1)
+#          # Inicio de la prueba
+#          result = aBackLog.findName('T')
+#          self.assertNotEqual(result,[])
+#          aBackLog.deleteProduct('T')
+#          
+#      # Prueba 5
+#      def testfindNameShortName50(self):
+#          aBackLog = backLog()
+#          aBackLog.insertBackLog(50*'Z','new z',1)
+#           # Inicio de la prueba.
+#          result = aBackLog.findName(50*'Z')
+#          self.assertNotEqual(result,[],"Accion no encontrada")
+#          aBackLog.deleteProduct(50*'Z')
+#  
+#      # Prueba 6
+#      def testfindNameShortName51(self):
+#          aBackLog = backLog()
+#          aBackLog.insertBackLog(50*'W'+'q','nuevo wq',1)
+#          # Inicio de la prueba.
+#          result = aBackLog.findName(50*'W'+'q')
+#          self.assertEqual(result,[]) 
+# 
+#  # Casos Fronteras
+#        
+#      # Prueba 7
+#      def testfindNameShortDesc0(self):
+#          aBackLog = backLog()
+#          aBackLog.insertBackLog('Taxi seguro.','',1)
+#          # Inicio de la prueba.        
+#          result = aBackLog.findName('Taxi seguro')
+#          self.assertEqual(result,[])
+#          #aBackLog.deleteProduct('Taxi seguro.')
+#          
+#      # Prueba 8
+#      def testfindNameShortDesc1(self):
+#          aBackLog = backLog()
+#          aBackLog.insertBackLog('Nuevo','T',1)
+#          # Inicio de la prueba
+#          result = aBackLog.findName('Nuevo')
+#          self.assertNotEqual(result,[])
+#          aBackLog.deleteProduct('Nuevo')
+#          
+#      # Prueba 9
+#      def testfindNameShortDesc140(self):
+#          aBackLog = backLog()
+#          aBackLog.insertBackLog('Nuevo',140*'Z',1)
+#           # Inicio de la prueba.
+#          result = aBackLog.findName('Nuevo')
+#          self.assertNotEqual(result,[],"Accion no encontrada")
+#          aBackLog.deleteProduct('Nuevo')
+#  
+#      # Prueba 10
+#      def testfindNameShortDesc141(self):
+#          aBackLog = backLog()
+#          aBackLog.insertBackLog('Nuevo',140*'W'+'q',1)
+#          # Inicio de la prueba.
+#          result = aBackLog.findName('Nuevo')
+#          self.assertEqual(result,[]) 
+#      
+#      #Casos Esquina
+#      
+#      # Prueba 11 
+#      def testfindNameMinLong(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('T','T',1)
+#         # Inicio de la prueba
+#         result = aBackLog.findName('T')
+#         self.assertNotEqual(result,[])
+#         aBackLog.deleteProduct('T')
+#      
+#      # Prueba 12 
+#      def testfindNameMaxLong(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog(50*'A',140*'T',2)
+#         # Inicio de la prueba
+#         result = aBackLog.findName(50*'A')
+#         self.assertNotEqual(result,[])
+#         aBackLog.deleteProduct(50*'A')
+#      
+#      # Prueba 13 
+#      def testfindNameMaxLongDescMinLong(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog(50*'A','T',2)
+#         # Inicio de la prueba
+#         result = aBackLog.findName(50*'A')
+#         self.assertNotEqual(result,[])
+#         aBackLog.deleteProduct(50*'A')   
+#      
+#      # Prueba 14    
+#      def testfindName51Desc141(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog(50*'A'+'B',140*'T'+'S',1)
+#         # Inicio de la prueba
+#         result = aBackLog.findName(50*'A'+'B')
+#         self.assertEqual(result,[])
+#      
+#      # Prueba 15 
+#      def testfindName51Desc141Tipe3(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog(50*'A'+'B',140*'T'+'S',3)
+#         # Inicio de la prueba
+#         result = aBackLog.findName(50*'A'+'B')
+#         self.assertEqual(result,[])
+#     
+#      # Prueba 16 
+#      def testfindName51Desc1(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog(50*'A'+'B','T'+'S',1)
+#         # Inicio de la prueba
+#         result = aBackLog.findName(50*'A'+'B')
+#         self.assertEqual(result,[])
+#      
+#      #Prueba 17   
+#      def testfindName1Desc141(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('A',140*'T'+'S',1)
+#         # Inicio de la prueba
+#         result = aBackLog.findName('A')
+#         self.assertEqual(result,[])
+# 
+#      # Prueba 18 
+#      def testfindName1Desc1Tipe3(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('A','T',3)
+#         # Inicio de la prueba
+#         result = aBackLog.findName('A')
+#         self.assertEqual(result,[])
+#    
+#      # Prueba 19 
+#      def testfindNameLong0Desc141Tipe3(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('',140*'T'+'S',3)
+#         # Inicio de la prueba
+#         result = aBackLog.findName('')
+#         self.assertEqual(result,[])
+# 
+#      # Prueba 20
+#      def testfindName51DescLong0Tipe3(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog(50*'A'+'B','',3)
+#         # Inicio de la prueba
+#         result = aBackLog.findName(50*'A'+'B')
+#         self.assertEqual(result,[])
+#      
+#     # Casos Maliciosos
+#        
+#     # Prueba 21
+#      def testfindNameNotString(self):
+#          aBackLog = backLog()
+#          aBackLog.insertBackLog('Taxi seguro.','un nuevo taxi',1)
+#          # Inicio de la prueba. 
+#          result = aBackLog.findName(4350)
+#          self.assertEqual(result, [],'Accion Encontrada')
+#          aBackLog.deleteProduct('Taxi seguro.')
+#          
+#     # Prueba 22   
+#      def testFindNameNoneString(self):
+#          aBackLog = backLog()
+#          aBackLog.insertBackLog('Taxi seguro.','cualquiera',1)
+#          # Inicio de la prueba.   
+#          result = aBackLog.findName(None)
+#          self.assertEqual(result,[],'Accion Encontrada')
+#          aBackLog.deleteProduct('Taxi seguro.')
+# 
+#          
+#       #############################################      
+#       #   Suite de Pruebas para insertBackLog  #
+#       #############################################
+#       
+#     # Caso Inicial
+#         
+#     # Prueba 23
+#     def testFindName(self):
+#         aBackLog = backLog()
+#         result = aBackLog.insertBackLog('Taxi','Permite localizar un taxi',1)
+#         aBackLog.deleteProduct('Taxi')   
+#           
+#        # Casos Normales
+#           
+#     # Prueba 24
+#     def testInsertBackLogRepeated(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('Taxi','Taxi seguro.',1)
+#         result = aBackLog.insertBackLog('Taxi','Taxi seguro.',1)
+#          # Inicio de la prueba.
+#         self.assertFalse(result)
+#         aBackLog.deleteProduct('Taxi')
+#             
+#           
+#     # Casos Fronteras
+#         
+#     # Prueba 25
+#     def testInsertBackLogShortName0(self):
+#         aBackLog = backLog()
+#         result = aBackLog.insertBackLog('','Taxi seguro.',1)
+#         # Inicio de la prueba.        
+#         self.assertFalse(result)
+#           
+#     # Prueba 26
+#     def testInsertBackLogShortName1(self):
+#         aBackLog = backLog()
+#         result = aBackLog.insertBackLog('T','new t',1)
+#         # Inicio de la prueba
+#         self.assertTrue(result)
+#         aBackLog.deleteProduct('T')
+#           
+#     # Prueba 27
+#     def testInsertBackLogShortName50(self):
+#         aBackLog = backLog()
+#         result = aBackLog.insertBackLog(50*'Z','new z',1)
+#          # Inicio de la prueba.
+#         self.assertTrue(result)
+#         aBackLog.deleteProduct(50*'Z')
+#   
+#     # Prueba 28
+#     def testInsertBackLogShortName51(self):
+#         aBackLog = backLog()
+#         result = aBackLog.insertBackLog(50*'W'+'q','nuevo wq',1)
+#         # Inicio de la prueba.
+#         self.assertFalse(result) 
+#  
+# # Casos Fronteras
+#         
+#     # Prueba 29
+#     def testInsertBackLogShortDesc0(self):
+#         aBackLog = backLog()
+#         result = aBackLog.insertBackLog('Taxi seguro.','',1)
+#         # Inicio de la prueba.        
+#         self.assertFalse(result)
+#           
+#     # Prueba 30
+#     def testInsertBackLogShortDesc1(self):
+#         aBackLog = backLog()
+#         result = aBackLog.insertBackLog('Nuevo','T',1)
+#         # Inicio de la prueba
+#         self.assertTrue(result)
+#         aBackLog.deleteProduct('Nuevo')
+#           
+#     # Prueba 31
+#     def testInsertBackLogShortDesc140(self):
+#         aBackLog = backLog()
+#         result = aBackLog.insertBackLog('Nuevo',140*'Z',1)
+#          # Inicio de la prueba.
+#         self.assertTrue(result)
+#         aBackLog.deleteProduct('Nuevo')
+#   
+#     # Prueba 32
+#     def testInsertBackLogShortDesc141(self):
+#         aBackLog = backLog()
+#         result = aBackLog.insertBackLog('Nuevo',140*'W'+'q',1)
+#         # Inicio de la prueba.
+#         self.assertFalse(result) 
+#       
+#     #Casos Esquina
+#       
+#     # Prueba 33 
+#     def testInsertBackLogMinLong(self):
+#        aBackLog = backLog()
+#        result = aBackLog.insertBackLog('T','T',1)
+#        # Inicio de la prueba
+#        self.assertTrue(result)
+#        aBackLog.deleteProduct('T')
+#       
+#     # Prueba 34 
+#     def testInsertBackLogMaxLong(self):
+#        aBackLog = backLog()
+#        result = aBackLog.insertBackLog(50*'A',140*'T',2)
+#        # Inicio de la prueba
+#        self.assertTrue(result)
+#        aBackLog.deleteProduct(50*'A')
+#       
+#     # Prueba 35 
+#     def testInsertBackLogMaxLongDescMinLong(self):
+#        aBackLog = backLog()
+#        result = aBackLog.insertBackLog(50*'A','T',2)
+#        # Inicio de la prueba
+#        self.assertTrue(result)
+#        aBackLog.deleteProduct(50*'A')   
+#       
+#     # Prueba 36    
+#     def testInsertBackLog51Desc141(self):
+#        aBackLog = backLog()
+#        result = aBackLog.insertBackLog(50*'A'+'B',140*'T'+'S',1)
+#        # Inicio de la prueba
+#        self.assertFalse(result)
+#       
+#     # Prueba 37 
+#     def testInsertBackLog51Desc141Tipe3(self):
+#        aBackLog = backLog()
+#        result = aBackLog.insertBackLog(50*'A'+'B',140*'T'+'S',3)
+#        # Inicio de la prueba
+#        self.assertFalse(result)
+#      
+#     # Prueba 38 
+#     def testInsertBackLog51Desc1(self):
+#        aBackLog = backLog()
+#        result = aBackLog.insertBackLog(50*'A'+'B','T'+'S',1)
+#        # Inicio de la prueba
+#        self.assertFalse(result)
+#       
+#     #Prueba 39  
+#     def testInsertBackLog1Desc141(self):
+#        aBackLog = backLog()
+#        result = aBackLog.insertBackLog('A',140*'T'+'S',1)
+#        # Inicio de la prueba
+#        self.assertFalse(result)
+#  
+#     # Prueba 40 
+#     def testInsertBackLog1Desc1Tipe3(self):
+#        aBackLog = backLog()
+#        result = aBackLog.insertBackLog('A','T',3)
+#        # Inicio de la prueba
+#        self.assertFalse(result)
+#     
+#     # Prueba 41 
+#     def testInsertBackLogLong0Desc141Tipe3(self):
+#        aBackLog = backLog()
+#        result = aBackLog.insertBackLog('',140*'T'+'S',3)
+#        # Inicio de la prueba
+#        self.assertFalse(result)
+#  
+#     # Prueba 42
+#     def testInsertBackLog51DescLong0Tipe3(self):
+#        aBackLog = backLog()
+#        result = aBackLog.insertBackLog(50*'A'+'B','',3)
+#        # Inicio de la prueba
+#        self.assertFalse(result)
+#       
+#    # Casos Maliciosos
+#         
+#    # Prueba 43
+#     def testInsertBackLogNone(self):
+#         aBackLog = backLog()
+#         result = aBackLog.insertBackLog(None,None,None)
+#         # Inicio de la prueba. 
+#         self.assertFalse(result)
+#           
+#    # Prueba 44   
+#     def testInsertBackLogLong0(self):
+#         aBackLog = backLog()
+#         result = aBackLog.insertBackLog('','',1)
+#         # Inicio de la prueba.  
+#         self.assertFalse(result)
+# 
+#       #############################################      
+#       #   Suite de Pruebas para deleteProduct  #
+#       #############################################
+#       
+#      # Caso Inicial
+#      
+#     # Prueba 45
+#     def testDeleteProductExist(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('Taxi','Permite localizar un taxi',1)
+#         aBackLog.deleteProduct('Taxi')   
+#           
+#        # Casos Normales
+#           
+#     # Prueba 46
+#     def testDeleteProductRepeated(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('Taxi','Taxi seguro.',1)
+#         aBackLog.insertBackLog('Taxi','Taxi seguro.',1)
+#          # Inicio de la prueba.
+#         result = aBackLog.deleteProduct('Taxi')
+#         self.assertTrue(result)         
+#           
+#     # Casos Fronteras
+#         
+#     # Prueba 47
+#     def testDeleteProductShortName0(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('','Taxi seguro.',1)
+#         # Inicio de la prueba.        
+#         result = aBackLog.deleteProduct('')
+#         self.assertFalse(result)
+#           
+#     # Prueba 48
+#     def testDeleteProductShortName1(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('T','new t',1)
+#         # Inicio de la prueba
+#         result = aBackLog.deleteProduct('T')
+#         self.assertTrue(result)
+#           
+#     # Prueba 49
+#     def testDeleteProductShortName50(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog(50*'Z','new z',1)
+#          # Inicio de la prueba.
+#         result = aBackLog.deleteProduct(50*'Z')
+#         self.assertTrue(result)
+#   
+#     # Prueba 50
+#     def testDeleteProductShortName51(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog(50*'W'+'q','nuevo wq',1)
+#         # Inicio de la prueba. 
+#  
+# # Casos Fronteras
+#         
+#     # Prueba 51
+#     def testDeleteProductShortDesc0(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('Taxi seguro.','',1)
+#         # Inicio de la prueba.        
+#         result = aBackLog.deleteProduct('Taxi seguro.')
+#         self.assertFalse(result)
+#           
+#     # Prueba 52
+#     def testDeleteProductShortDesc1(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('Nuevo','T',1)
+#         # Inicio de la prueba 
+#         result = aBackLog.deleteProduct('Nuevo')
+#         self.assertTrue(result)
+#           
+#     # Prueba 53
+#     def testDeleteProductShortDesc140(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('Nuevo',140*'Z',1)
+#          # Inicio de la prueba.
+#         result = aBackLog.deleteProduct('Nuevo')
+#         self.assertTrue(result)
+# 
+#   
+#     # Prueba 54
+#     def testDeleteProductShortDesc141(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('Nuevo',140*'W'+'q',1)
+#         # Inicio de la prueba. 
+#         result = aBackLog.deleteProduct('Nuevo')
+#         self.assertFalse(result)
+#       
+#     #Casos Esquina
+#       
+#     # Prueba 55 
+#     def testDeleteProductMinLong(self):
+#        aBackLog = backLog()
+#        aBackLog.insertBackLog('T','T',1)
+#        # Inicio de la prueba
+#        result = aBackLog.deleteProduct('T')
+#        self.assertTrue(result)
+#       
+#     # Prueba 56 
+#     def testDeleteProductMaxLong(self):
+#        aBackLog = backLog()
+#        aBackLog.insertBackLog(50*'A',140*'T',2)
+#        # Inicio de la prueba
+#        result = aBackLog.deleteProduct(50*'A')
+#        self.assertTrue(result)
+#       
+#     # Prueba 57 
+#     def testDeleteProductMaxLongDescMinLong(self):
+#        aBackLog = backLog()
+#        aBackLog.insertBackLog(50*'A','T',2)
+#        # Inicio de la prueba
+#        result = aBackLog.deleteProduct(50*'A')   
+#        self.assertTrue(result)
+#       
+#     # Prueba 58    
+#     def testDeleteProduct51Desc141(self):
+#        aBackLog = backLog()
+#        aBackLog.insertBackLog(50*'A'+'B',140*'T'+'S',1)
+#        # Inicio de la prueba
+#        result = aBackLog.deleteProduct(50*'A'+'B')
+#        self.assertFalse(result)
+#       
+#     # Prueba 59 
+#     def testDeleteProduct51Desc141Tipe3(self):
+#        aBackLog = backLog()
+#        aBackLog.insertBackLog(50*'A'+'B',140*'T'+'S',3)
+#        # Inicio de la prueba
+#        result = aBackLog.deleteProduct(50*'A'+'B')
+#        self.assertFalse(result)
+#      
+#     # Prueba 60 
+#     def testDeleteProduct51Desc1(self):
+#        aBackLog = backLog()
+#        aBackLog.insertBackLog(50*'A'+'B','T'+'S',1)
+#        # Inicio de la prueba
+#       
+#     #Prueba 61  
+#     def testDeleteProduct1Desc141(self):
+#        aBackLog = backLog()
+#        aBackLog.insertBackLog('A',140*'T'+'S',1)
+#        # Inicio de la prueba
+#        result = aBackLog.deleteProduct('A')
+#        self.assertFalse(result)
+#  
+#     # Prueba 62 
+#     def testDeleteProduct1Desc1Tipe3(self):
+#        aBackLog = backLog()
+#        aBackLog.insertBackLog('A','T',3)
+#        # Inicio de la prueba
+#        result = aBackLog.deleteProduct('A')
+#        self.assertFalse(result)
+#     
+#     # Prueba 63 
+#     def testDeleteProductLong0Desc141Tipe3(self):
+#        aBackLog = backLog()
+#        aBackLog.insertBackLog('',140*'T'+'S',3)
+#        # Inicio de la prueba
+#        result = aBackLog.deleteProduct('')
+#        self.assertFalse(result)
+#  
+#     # Prueba 64
+#     def testDeleteProduct51DescLong0Tipe3(self):
+#        aBackLog = backLog()
+#        aBackLog.insertBackLog(50*'A'+'B','',3)
+#        # Inicio de la prueba
+#        result = aBackLog.deleteProduct(50*'A'+'B')
+#        self.assertFalse(result)
+#       
+#    # Casos Maliciosos
+#         
+#    # Prueba 65
+#     def testDeleteProductNone(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog(None,None,None)
+#         # Inicio de la prueba. 
+#         result = aBackLog.deleteProduct(None)
+#         self.assertFalse(result)
+#   
+#    # Prueba 66   
+#     def testDeleteProductLong0(self):
+#         aBackLog = backLog()
+#         aBackLog.insertBackLog('','',1)
+#         # Inicio de la prueba.  
+#         result = aBackLog.deleteProduct('')
+#         self.assertFalse(result)
 
- # Casos Fronteras
-       
-     # Prueba 9
-     def testfindNameShortDesc0(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.','',1)
-         # Inicio de la prueba.        
-         result = aBackLog.findName('Taxi seguro')
-         self.assertEqual(result,[])
-         #aBackLog.deleteProduct('Taxi seguro.')
-         
-     # Prueba 10
-     def testfindNameShortDesc1(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Nuevo','T',1)
-         # Inicio de la prueba
-         result = aBackLog.findName('Nuevo')
-         self.assertNotEqual(result,[])
-         aBackLog.deleteProduct('Nuevo')
-         
-     # Prueba 11
-     def testfindNameShortDesc140(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Nuevo',140*'Z',1)
-          # Inicio de la prueba.
-         result = aBackLog.findName('Nuevo')
-         self.assertNotEqual(result,[],"Accion no encontrada")
-         aBackLog.deleteProduct('Nuevo')
- 
-     # Prueba 12
-     def testfindNameShortDesc141(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Nuevo',140*'W'+'q',1)
-         # Inicio de la prueba.
-         result = aBackLog.findName('Nuevo')
-         self.assertEqual(result,[]) 
-     
-     # Prueba 13
-     def testfindNameNoType(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Nuevo','nuevo',None)
-         # Inicio de la prueba.
-         result = aBackLog.findName('Nuevo')
-         self.assertEqual(result,[]) 
-
-
-     #Casos Esquina
-     
-     #Prueba 
-     def testfindNameMinLong(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('T','T',1)
-        # Inicio de la prueba
-        result = aBackLog.findName('T')
-        self.assertNotEqual(result,[])
-        aBackLog.deleteProduct('T')
-
-     def testfindNameMaxLong(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('T','T',1)
-        # Inicio de la prueba
-        result = aBackLog.findName('T')
-        self.assertNotEqual(result,[])
-        aBackLog.deleteProduct('T')
-'''         
-      #############################################      
-      #   Suite de Pruebas para insertBackLog  #
-      #############################################
-      
-        # Caso Inicial
-     
-      # Prueba 9
-     def testInserBackLogExists(self):
-          aBackLog = backLog()
-          aBackLog.insertBackLog('Taxi seguro.')
-          aBackLog.deleteProduct('Taxi seguro.')  
-          
-     # Casos Normal
-     
-     # Prueba 10
-     def testInsertBackLogElement(self):
-         aBackLog = backLog()
-         result = aBackLog.insertBackLog('Permite localizar un taxi')
-         self.assertTrue(result)
-         aBackLog.deleteProduct('Permite localizar un taxi')
-     
- 
-      #Casos Frontera
-     
-     # Prueba 11   
-     def testInsertBackLoglong140(self):
-         aBackLog = backLog()
-         result = aBackLog.insertBackLog(140*'a')
-         self.assertTrue(result)
-         aBackLog.deleteProduct(140*'a')
-     
-     # Prueba 12    
-     def testInsertBackloglong141(self):    
-         aBackLog = backLog()
-         result = aBackLog.insertBackLog(140*'a' + 'b')
-         self.assertFalse(result)
-         aBackLog.deleteProduct(140*'a' + 'b')
-     
-     # Prueba 13
-     def testInsertBackloglong1(self):    
-         aBackLog = backLog()
-         result = aBackLog.insertBackLog('a')
-         self.assertTrue(result)
-         aBackLog.deleteProduct('a')
-         
-     # Prueba 14
-     def testInsertBackloglong0(self):    
-         aBackLog = backLog()
-         result = aBackLog.insertBackLog('')
-         self.assertFalse(result)
-         aBackLog.deleteProduct('')
-     
-      #Casos Malicia
-     
-     # Prueba 15   
-     def testInsertBacklogNone(self):    
-         aBackLog = backLog()
-         result = aBackLog.insertBackLog(None)
-         self.assertFalse(result)
-         aBackLog.deleteProduct(None)
-         
-     # Prueba 16    
-     def testInsertBacklogNoString(self):    
-         aBackLog = backLog()
-         result = aBackLog.insertBackLog(140)
-         self.assertFalse(result)
-         aBackLog.deleteProduct(140)                     
-         
-      #############################################      
-      #   Suite de Pruebas para deleteProduct  #
-      #############################################
-      
-     # Caso Inicial
-       # Prueba 17
-     def testDeleteProductExists(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
-         aBackLog.deleteProduct('Taxi seguro.')
-        
-            # Casos Normales
-   
-     # Prueba 18
-     def testDeleteProduct(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Permite localizar un taxi')
-         # Inicio de la prueba.
-         result = aBackLog.deleteProduct('Permite localizar un taxi')
-         self.assertTrue(result)
-         
-     # Prueba 19      
-     def testDeleteProductNoExist(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Reservar un taxi')
-         # Inicio de la prueba.
-         result = aBackLog.deleteProduct('Taxi seguro.')
-         self.assertFalse(result)
-         aBackLog.deleteProduct('Reservar un taxi')
-         # Casos Fronteras
-       
-     # Prueba 20
-     def testDeleteProductString1(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('T')
-         # Inicio de la prueba.
-         result = aBackLog.deleteProduct('T')
-         self.assertTrue(result)
-         
-     # Prueba 21
-     def testDeleteProductString140(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog(140*'M')
-         # Inicio de la prueba.
-         result = aBackLog.deleteProduct(140*'M')
-         self.assertTrue(result)
-        
-     # Casos Maliciosos
-   
-     # Prueba 22
-     def testDeleteProductInvalid(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
-         result = aBackLog.deleteProduct('')
-         self.assertFalse(result,"Id no válido")
-         aBackLog.deleteProduct('Taxi seguro.')
-        
-     # Prueba 23
-     def testDeleteProductNotString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Permite localizar un taxi')
-        # Inicio de la prueba.
-        result = aBackLog.deleteProduct(12345)
-        self.assertFalse(result,"Id no válido")
-        aBackLog.deleteProduct('Permite localizar un taxi')
                 
      #############################################      
       #   Suite de Pruebas para modifyDescription  #
@@ -309,7 +598,7 @@ class TestclsBackLog(unittest.TestCase):
          # Inicio de la prueba.   
          aBackLog.modifyDescription('Taxi seguro.','reservar un taxi o varios.')
          aBackLog.deleteProduct('reservar un taxi o varios.')  
-         
+'''         
      # Casos Normales
      
      # Prueba 25 

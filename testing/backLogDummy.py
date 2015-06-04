@@ -25,25 +25,24 @@ class backLog(object):
         return []
     
     def insertBackLog(self,name,description,scale):
-        '''Permite insertar una descripción'''
+        '''Permite insertar un producto'''
         
-        checkTypeName = (type(name)) != str
-        checkTypeDesc = (type(description)) != str
-        checkTypeScale = (type(scale)) != int
+        checkTypeName = (type(name) == str)
+        checkTypeDesc = (type(description) == str)
+        checkTypeScale = (type(scale) == int)
         if (checkTypeName and checkTypeDesc and checkTypeScale):
-            return False
-        else:
-            new_prod = clsBackLog(BL_name = name, BL_description = description, BL_scaleType = scale)
+           
             long_name = const_minName <= len(name) <= const_maxName
-            long_description = (const_maxDescription >= len(new_prod.BL_description) >= const_minDescription)
+            long_description = (const_minDescription <= len(description) <= const_maxDescription)
             checkScale = scale in scale_type
             if  (long_name and long_description and checkScale):
-                dDescAux = self.findName(description);
+                dDescAux = self.findName(name);
                 if (dDescAux == []):
+                    new_prod = clsBackLog(BL_name = name, BL_description = description, BL_scaleType = scale)
                     db.session.add(new_prod)
                     db.session.commit()
                     return True
-            return False
+        return False
 
 
     def modifyBackLog(self, name, new_name, new_description, new_scale):   
