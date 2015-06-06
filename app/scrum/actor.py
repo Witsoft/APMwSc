@@ -11,13 +11,17 @@ def ACrearActor():
     params = request.get_json()
     results = [{'label':'/VProducto', 'msg':['Actor creado']}, {'label':'/VCrearActor', 'msg':['Error al crear actor']}, ]
 
-    idPila   = 1
-    nameRole = params['nombre']
-    descRole = params['descripcion'] 
+    idPila    = 1
     
-    oRole  = role()
-    result = oRole.insertRole(nameRole,descRole,idPila)
-    if result:
+    # Extraemos los datos.
+    nameActor = params['nombre']
+    descActor = params['descripcion'] 
+    
+    # INsertamos el actor.
+    oActor   = role()
+    inserted = oActor.insertActor(nameActor,descActor,idPila)
+    
+    if inserted:
         res = results[0]
         res['label'] = res['label'] + '/' + str(idPila)
     else:
@@ -60,21 +64,17 @@ def AModifActor():
     
     if 'usuario' not in session:
       res['logout'] = '/'
-      return json.dumps(res)
-  
-    #idPila = 1
-    #res['label'] = res['label'] + '/' + str(idPila)
-    
+      return json.dumps(res)    
     idPila   = 1
     
     # Action code goes here
-    idActor     = params['idActor'] #Obtenemos el id del actor
-    newNameRole = params['nombre']
-    newDescRole = params['descripcion'] 
+    idActor      = params['idActor'] #Obtenemos el id del actor
+    newNameActor = params['nombre']
+    newDescActor = params['descripcion'] 
     
-    actorNombre   = clsRole.query.filter_by(idrole = idActor).first() #Conseguimos el actor a modificar  
-    oRole  = role()
-    result = oRole.updateRole(actorNombre.namerole, newNameRole, newDescRole)    #Modfificamos el actor deseado
+    actorNombre   = clsActor.query.filter_by(A_idActor = idActor).first() #Conseguimos el actor a modificar  
+    oActor = actor()
+    result = oActor.updateActor(actorNombre.A_nameActor, newNameActor, newDescActor)    #Modfificamos el actor deseado
     
     if result:
         res = results[0]
@@ -109,10 +109,10 @@ def VActor():
     
     idActor = request.args.get('idActor')
 
-    result   = clsRole.query.filter_by(idrole = idActor).first()
+    result   = clsActor.query.filter_by(A_idActor = idActor).first()
     
     res['idPila'] = 1 
-    res['fActor'] = {'idActor':idActor, 'nombre':result.namerole, 'descripcion':result.roledescription}    
+    res['fActor'] = {'idActor':idActor, 'nombre':result.A_nameActor, 'descripcion':result.A_actorDescription}    
 
     #Action code ends here
     return json.dumps(res)

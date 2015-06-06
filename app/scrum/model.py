@@ -36,7 +36,7 @@ class clsBackLog(db.Model):
 	BL_description = db.Column(db.String(140))
 	BL_scaleType   = db.Column(db.Integer)
 	#obj_backLog    = db.relationship('clsObjective',backref='objective',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-	act_backLog    = db.relationship('clsRole',backref='backLog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	act_backLog    = db.relationship('clsActor',backref='backLog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	#acc_backLog    = db.relationship('clsAccions',backref='backLog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
 	#usrHis_backLog = db.relationship('clsUserHistory',backref='backLog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
  
@@ -52,26 +52,26 @@ class clsBackLog(db.Model):
  	
  	
 	
-class clsRole(db.Model):
-    '''Clase que define el modelo Role'''
+class clsActor(db.Model):
+    '''Clase que define el modelo Actor'''
 
-    __tablename__ = 'roles'
-    idrole          = db.Column(db.Integer, primary_key=True)
-    namerole        = db.Column(db.String(50), unique=True)
-    roledescription = db.Column(db.String(140))
-    id_pila         = db.Column(db.Integer,db.ForeignKey('backLog.id_backLog'))
-    user_role              = db.relationship('clsUser', backref = 'roles',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-    #rolesUserHistory_role = db.relationship('clsRolesUserHistory', backref = 'roles',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+    __tablename__ = 'actors'
+    A_idActor          = db.Column(db.Integer, primary_key=True)
+    A_nameActor        = db.Column(db.String(50), unique=True)
+    A_actorDescription = db.Column(db.String(140))
+    A_idBacklog        = db.Column(db.Integer,db.ForeignKey('backLog.id_backLog'))
+    A_refUser          = db.relationship('clsUser', backref = 'actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+    #sUserHistory_role = db.relationship('clsRolesUserHistory', backref = 'roles',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
       
-    def __init__(self, namerole,roledescription,id_pila):
-        '''Constructor del modelo Role'''
-        self.namerole        = namerole
-        self.roledescription = roledescription
-        self.id_pila         = id_pila
+    def __init__(self, nameActor,actorDescription,idBacklog):
+        '''Constructor del modelo Actor'''
+        self.A_nameActor        = nameActor
+        self.A_actorDescription = actorDescription
+        self.A_idBacklog        = idBacklog
 
     def __repr__(self):
-        '''Respresentacion en string del nombre del Role'''
-        return '<Id_Objetivo %r>, <Descripcion %r>, <Id_backlog %r>' %(self.namerole, self.roledescription, self.id_pila)
+        '''Respresentacion en string del modelo Actor'''
+        return '<IdActor %r, Nombre %r, Descripcion %r, IdBacklog %r>' %(self.A_idActor, self.A_nameActor , self.A_actorDescription, self.A_idBacklog)
   
 
 
@@ -83,7 +83,7 @@ class clsUser(db.Model):
     U_username = db.Column(db.String(16), primary_key = True, index = True)
     U_password = db.Column(db.String(200))
     U_email    = db.Column(db.String(30), unique = True)
-    U_idActor  = db.Column(db.Integer, db.ForeignKey('roles.idrole'))
+    U_idActor  = db.Column(db.Integer, db.ForeignKey('actors.A_idActor'))
 
     def __init__(self, fullname, username, password, email, idActor):
         '''Constructor del modelo usuario'''
@@ -107,7 +107,7 @@ class clsObjective(db.Model):
     descObjective  = db.Column(db.String(140), unique=True)
     id_backlog     = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
     obj_type	   = db.Column(db.String(5)) 
-    objectiveUserHistory_role = db.relationship('clsObjectivesUserHistory', backref = 'role',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+    objectiveUserHistory_role = db.relationship('clsObjectivesUserHistory', backref = 'objectives',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
     
     def __init__(self, descObjective, id_backLog, objType):
         '''Constructor del modelo Objective'''
@@ -175,7 +175,7 @@ class clsRolesUserHistory(db.Model):
  	
 	__tablename__ = 'rolesUserHistory'
 	id_roleUserHistory = db.Column(db.Integer, primary_key = True, index = True) 
-	ref_idrole         = db.Column(db.Integer, db.ForeignKey('roles.idrole'))
+	#ref_idrole         = db.Column(db.Integer, db.ForeignKey('roles.idrole'))
 	ref_idUserHistory  = db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'))
  	
 	def __init__(self, ref_idrole, ref_idUserHistory):

@@ -58,7 +58,7 @@ class user(object):
                 if  (not checkLongUser) or (not checkLongFullname) or (not checkLongPassword) or (not checkLongEmail):
                     return False
                 else:
-                    checkIdActor = clsRole.query.filter_by(idrole = idActor).all()
+                    checkIdActor = clsActor.query.filter_by(A_idActor = idActor).all()
                     if checkIdActor == []:
                         return False
                     else:
@@ -94,7 +94,7 @@ class user(object):
                     if  (not checkLongNewFullname) or (not checkLongNewPassword) or (not checkLongNewEmail):
                         return False
                     else:
-                        checkIdActor = clsRole.query.filter_by(idrole = new_idActor).all()
+                        checkIdActor = clsActor.query.filter_by(A_idActor = new_idActor).all()
                         if (checkIdActor == []):
                             return False
                         else:

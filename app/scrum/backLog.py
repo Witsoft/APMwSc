@@ -104,7 +104,7 @@ class backLog(object):
         ''' Permite obtener una lista de los Actores asociados a una pila de Producto'''
         checkTypeId = type(productId) == int    
         if checkTypeId: 
-            found = clsRole.query.filter_by(id_pila=productId).all()
+            found = clsActor.query.filter_by(A_idBacklog = productId).all()
             return found
         return([])              
                    
