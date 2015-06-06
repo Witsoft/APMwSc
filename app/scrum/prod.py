@@ -67,7 +67,11 @@ def VCrearProducto():
     if "actor" in session:
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
-
+    if 'usuario' not in session:
+      res['logout'] = '/'
+      return json.dumps(res)
+    res['usuario'] = session['usuario']
+    
     res['fPila_opcionesEscala'] = [
       {'key':1,'value':'Alta/Media/Baja'},
       {'key':2,'value':'Entre 1 y 20'}]
@@ -79,14 +83,21 @@ def VCrearProducto():
 
 @prod.route('/prod/VProducto')
 def VProducto():
+    #GET parameter
+    idPila = request.args['idPila']
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
 
-
-    idPila    = request.args.get('idPila')
+    if 'usuario' not in session:
+      res['logout'] = '/'
+      return json.dumps(res)
+    res['usuario'] = session['usuario']
+    idPila = int(request.args.get('idPila', 1))
+    
+    #idPila    = request.args.get('idPila')
     idProduct = idPila
-    idProduct = 1
+    #idProduct = 1
     #pilas = [{'idPila':1, 'nombre':'Pagos en línea', 'descripcion':'Pagos usando tarjeta de débito'}]
     #res['fPila'] = pilas[idPila-1]    
 
@@ -99,10 +110,11 @@ def VProducto():
     res['data3'] = [{'idActor':act.idrole,'descripcion':act.namerole + ' : ' + act.roledescription}for act in actorsList]
     res['data5'] = [{'idAccion':acc.idaccion, 'descripcion':acc.acciondescription}for acc in accionList]
     res['data7'] = [{'idObjetivo':obj.idobjective, 'descripcion':obj.descObjective} for obj in objectList]
-    res['idPila'] = idPila    
+      
 
     result   = clsBackLog.query.filter_by(id_backLog = idPila).first()
     
+    res['idPila'] = idPila  
     res['fPila'] = {'idPila':idPila,'nombre': result.BL_name,'descripcion':result.BL_description,'escala':result.BL_scaleType}
     res['fPila_opcionesEscala'] = [{'key':1,'value':'Alta/Media/Baja'}, {'key':2,'value':'Entre 1 y 20'}]
     res['fPila_escala'] = {'prioridad':1}
@@ -117,6 +129,11 @@ def VProductos():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
+        
+    if 'usuario' not in session:
+      res['logout'] = '/'
+      return json.dumps(res)
+    res['usuario'] = session['usuario']
 
     # Obtenemos la lista de productos.
     productList = clsBackLog.query.all()

@@ -92,6 +92,26 @@ def ACrearHistoria():
 
 
 
+@historias.route('/historias/AElimHistoria')
+def AElimHistoria():
+    #GET parameter
+    idHistoria = request.args['idHistoria']
+    results = [{'label':'/VHistorias', 'msg':['Historia eliminada']}, {'label':'/VHistoria', 'msg':['No se pudo eliminar esta historia']}, ]
+    res = results[0]
+    #Action code goes here, res should be a list with a label and a message
+
+    res['label'] = res['label'] + '/1'
+
+    #Action code ends here
+    if "actor" in res:
+        if res['actor'] is None:
+            session.pop("actor", None)
+        else:
+            session['actor'] = res['actor']
+    return json.dumps(res)
+
+
+
 @historias.route('/historias/AModifHistoria', methods=['POST'])
 def AModifHistoria():
     #POST/PUT parameters
@@ -161,6 +181,11 @@ def VCrearHistoria():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
+    
+    if 'usuario' not in session:
+      res['logout'] = '/'
+      return json.dumps(res)
+    res['usuario'] = session['usuario']
         
     scale = {1:'Alta',2:'Media',3:'Baja'}
     idProduct = request.args.get('idPila')  #Obtenemos el id de la historia
@@ -206,10 +231,19 @@ def VCrearHistoria():
 
 @historias.route('/historias/VHistoria')
 def VHistoria():
+    
+    #GET parameter
+    idHistoria = request.args['idHistoria']
+    
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
         
+    if 'usuario' not in session:
+      res['logout'] = '/'
+      return json.dumps(res)
+    res['usuario'] = session['usuario']
+    
     # Obtenemos el id de la historia
     idHistoria = request.args.get('idHistoria')  
     idHistoria = int(idHistoria)
@@ -270,6 +304,12 @@ def VHistoria():
     res['fHistoria'] = {'super':history.id_History, 'idHistoria':idHistoria, 'idPila':history.id_backLog, 'codigo':history.cod_userHistory,
        'actores':actors, 'accion':history.ref_idaccion, 'objetivos':objectives, 'tipo':history.type_accion,
        'prioridad':history.UH_scale}
+
+    res['data2'] = [ 
+      {'idTarea':1, 'descripcion':'Sacarle jugo a una piedra'},
+      {'idTarea':2, 'descripcion':'Pelar un mango'},
+    ]
+    res['idHistoria'] = 1
     
     res['idPila']  = 1   
 
@@ -278,9 +318,17 @@ def VHistoria():
 
 @historias.route('/historias/VHistorias')
 def VHistorias():
+    #GET parameter
+    idPila = request.args['idPila']
+    
     res = {}
     if "actor" in session:
         res['actor'] = session['actor']
+        
+    if 'usuario' not in session:
+      res['logout'] = '/'
+      return json.dumps(res)
+    res['usuario'] = session['usuario']
     
     oRole             = role()
     oAccion           = accions()
@@ -333,9 +381,8 @@ def VHistorias():
              
         userHistories.append(historyDict)
 
-    res['data0']   = [{'idHistoria':hist['idHistory'], 'prioridad':hist['priority'],'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]
-    
     res['idPila']  = 1
+    res['data0']   = [{'idHistoria':hist['idHistory'], 'prioridad':hist['priority'],'enunciado':'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in userHistories]
     
     return json.dumps(res)
 
@@ -346,6 +393,11 @@ def VPrioridades():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
+        
+    if 'usuario' not in session:
+      res['logout'] = '/'
+      return json.dumps(res)
+    res['usuario'] = session['usuario']
     #Action code goes here, res should be a JSON structure
 
     oRole             = role()
@@ -420,3 +472,13 @@ def VPrioridades():
 
     #Action code ends here
     return json.dumps(res)
+
+
+
+
+
+#Use case code starts here
+
+
+#Use case code ends here
+

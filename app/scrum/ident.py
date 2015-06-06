@@ -11,7 +11,7 @@ def AIdentificar():
     #POST/PUT parameters
     params  = request.get_json()
     results = [{'label':'/VProductos', 'msg':['Bienvenido dueño de producto'], "actor":"duenoProducto"}, {'label':'/VMaestroScrum', 'msg':['Bienvenido Maestro Scrum'], "actor":"maestroScrum"}, {'label':'/VDesarrollador', 'msg':['Bienvenido Desarrollador'], "actor":"desarrollador"}, {'label':'/VLogin', 'msg':['Datos de identificación incorrectos']}, ]
-
+    
     if request.method == 'POST':
         newUser     = params['usuario']
         newPassword = params['clave']
@@ -20,7 +20,6 @@ def AIdentificar():
         # Buscamos el usuario en la base de datos
         userLogin   = oUser.searchUser(newUser)
 
-
         if userLogin:
             encriptPassword = userLogin[0].password
             # Creamos instancia de la clase login
@@ -28,6 +27,7 @@ def AIdentificar():
             isValid = logPass.check_password(encriptPassword, newPassword)
 
             if isValid:
+                session['usuario'] = {'nombre':userLogin[0].fullname.title()}
                 res = results[0]
             else:
                 res = results[3]
@@ -49,7 +49,6 @@ def ARegistrar():
     params = request.get_json()
     results = [{'label':'/VLogin', 'msg':['Felicitaciones, Ya estás registrado en la aplicación']}, {'label':'/VRegistro', 'msg':['Error al tratar de registrarse']}, ]
 
-    #Action code goes here, res should be a list with a label and a message
     if request.method == 'POST':
         # Se precargan valores en la base de datos.
         oRole    = role()
@@ -108,7 +107,7 @@ def VLogin():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
-
+    session.pop('usuario', None)
     #Action code ends here
     return json.dumps(res)
 

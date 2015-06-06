@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from flask import request, session, Blueprint, json
+from flask               import request, session, Blueprint, json
 from app.scrum.objective import *
-from app.scrum.backLog import *
-#import model 
+from app.scrum.backLog   import *
 
 objetivo = Blueprint('objetivo', __name__)
 
@@ -41,6 +40,27 @@ def ACrearObjetivo():
     return json.dumps(res)
 
 
+
+@objetivo.route('/objetivo/AElimObjetivo')
+def AElimObjetivo():
+    #GET parameter
+    idObjetivo = request.args['idObjetivo']
+    results = [{'label':'/VProducto', 'msg':['Objetivo eliminado']}, {'label':'/VObjetivo', 'msg':['No se pudo eliminar este objetivo']}, ]
+    res = results[0]
+    #Action code goes here, res should be a list with a label and a message
+
+    res['label'] = res['label'] + '/1'
+
+    #Action code ends here
+    if "actor" in res:
+        if res['actor'] is None:
+            session.pop("actor", None)
+        else:
+            session['actor'] = res['actor']
+    return json.dumps(res)
+
+
+
 @objetivo.route('/objetivo/AModifObjetivo', methods=['POST'])
 def AModifObjetivo():
     #POST/PUT parameters
@@ -70,12 +90,43 @@ def AModifObjetivo():
     return json.dumps(res)
 
 
+
+@objetivo.route('/objetivo/VCrearObjetivo')
+def VCrearObjetivo():
+    #GET parameter
+    idPila = request.args['idPila']
+    res = {}
+    if "actor" in session:
+        res['actor']=session['actor']
+        
+    if 'usuario' not in session:
+      res['logout'] = '/'
+      return json.dumps(res)
+    res['usuario'] = session['usuario']
+   
+    #Datos de prueba
+    res['idPila'] = 1
+    res['fObjetivo_opcionesTransversalidad'] = [
+      {'key':True, 'value':'Si'},{'key':False, 'value':'No'},
+    ]   
+
+    return json.dumps(res)
+
+
 @objetivo.route('/objetivo/VObjetivo')
 def VObjetivo():
+    #GET parameter
+    idObjetivo = request.args['idObjetivo']
     res = {}
     boolean = {0:False,1:True}
     if "actor" in session:
         res['actor']=session['actor']
+        
+    if 'usuario' not in session:
+      res['logout'] = '/'
+      return json.dumps(res)
+  
+    res['usuario'] = session['usuario']
     
     #Action code goes here, res should be a JSON structure
     idObjetivo = request.args.get('idObjetivo')
@@ -88,29 +139,14 @@ def VObjetivo():
     res['fObjetivo_opcionesTransversalidad'] = [
       {'key':True, 'value':'Si'},{'key':False, 'value':'No'}]
     res['fObjetivo'] = {'idObjetivo':idObjetivo, 'descripcion':result.descObjective, 'transversal':istrans}    
+    res['idObjetivo'] = 1
     
     #Action code ends here
     return json.dumps(res)
 
 
 
-@objetivo.route('/objetivo/VCrearObjetivo')
-def VCrearObjetivo():
-    res = {}
-    if "actor" in session:
-        res['actor']=session['actor']
-   
-    #Action code goes here, res should be a JSON structure
-    #params = request.get_json() 
-    
-    #Datos de prueba
-    res['idPila'] = 1
-    res['fObjetivo_opcionesTransversalidad'] = [
-      {'key':True, 'value':'Si'},{'key':False, 'value':'No'},
-    ]   
 
-    #Action code ends here
-    return json.dumps(res)
 
 
 

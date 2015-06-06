@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-. 
 
 from app.scrum.backLog import *
-from speechd.client import Priority
 
 # Declaracion de constantes
 const_max_cod    = 11
