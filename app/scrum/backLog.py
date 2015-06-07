@@ -79,7 +79,7 @@ class backlog(object):
                 
                 if foundName != [] and (foundNewName == [] or new_name == name):
                     idBacklog        = foundName[0].BL_idBacklog
-                    foundUserHistory = clsUserHistory.query.filter_by(id_backLog = idBacklog).all()
+                    foundUserHistory = clsUserHistory.query.filter_by(UH_idBacklog  = idBacklog).all()
                     currentScale     = foundName[0].BL_scaleType
                     
                     if currentScale != new_scale and foundUserHistory != []:
@@ -156,7 +156,7 @@ class backlog(object):
         ''' Permite obtener una lista de los historias de usuario asociadas a una pila de Producto'''
         checkTypeId = type(idBacklog) == int    
         if checkTypeId: 
-            found = clsUserHistory.query.filter_by(id_backLog = idBacklog).all()
+            found = clsUserHistory.query.filter_by(UH_idBacklog  = idBacklog).all()
             return found
         return([])                                
 

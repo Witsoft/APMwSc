@@ -78,7 +78,7 @@ def ACrearHistoria():
             oObjUserHist = objectivesUserHistory()
             oActUserHist = actorsUserHistory()
             result       = oUserHistory.searchUserHistory(codeHistory)
-            idInserted   = result[0].id_userHistory
+            idInserted   = result[0].UH_idUserHistory
             insertedAct  = False
             insertedObj  = False
             
@@ -245,7 +245,7 @@ def VCrearHistoria():
     res['fHistoria_opcionesAcciones']      = [{'key':acc.AC_idAccion,'value':acc.AC_accionDescription}for acc in accionList]
     res['fHistoria_opcionesAcciones'].append({'key':0,'value':'Seleccione una acción'})
     res['fHistoria_opcionesObjetivos']     = [{'key':obj.O_idObjective ,'value':obj.O_descObjective}for obj in objectiveList]
-    res['fHistoria_opcionesHistorias']     = [{'key':hist.id_userHistory,'value':hist.cod_userHistory}for hist in historyList]
+    res['fHistoria_opcionesHistorias']     = [{'key':hist.UH_idUserHistory,'value':hist.UH_codeUserHistory}for hist in historyList]
     res['fHistoria_opcionesHistorias'].append({'key':0,'value':'Ninguno'})
     res['fHistoria_opcionesTiposHistoria'] = [{'key':1,'value':'Opcional'},{'key':2,'value':'Obligatoria'}]
     res['fHistoria_opcionesTiposHistoria'].append({'key':0,'value':'Seleccione un tipo de acción'})
@@ -278,9 +278,11 @@ def VHistoria():
     res['usuario'] = session['usuario']
 
     scale = {1:'Alta',2:'Media',3:'Baja'}
+
     # Obtenemos la historia que queremos modificar.
-    history    = clsUserHistory.query.filter_by(id_userHistory = idHistory).first()
-    
+    history = searchIdUserHistory(idHistory)
+    history = histori[0]
+        
     # Obtenemos todas las acciones, actores y objetivos asociados al producto.
     oBacklog      = backlog() 
     oObjective    = objective()
@@ -295,7 +297,7 @@ def VHistoria():
     # Obtenemos todas las historias de usuarios excepto la actual
     historias =  oUserHist.getAllUserHistoryId(idPila)
     for hist in historias:
-        if hist.id_userHistory == idHistory:
+        if hist.UH_idUserHistory == idHistory:
             historias.remove(hist)
             break
 
@@ -323,7 +325,7 @@ def VHistoria():
         resultScale = [(i,i) for i in range(1,20+1)]
     
     
-    res['fHistoria_opcionesHistorias']     = [{'key':hist.id_userHistory,'value':hist.cod_userHistory}for hist in historias] 
+    res['fHistoria_opcionesHistorias']     = [{'key':hist.UH_idUserHistory,'value':hist.UH_codeUserHistory}for hist in historias] 
     res['fHistoria_opcionesHistorias'].append({'key':0,'value':'Ninguno'})
     res['fHistoria_opcionesTiposHistoria'] = [{'key':1,'value':'Opcional'},{'key':2,'value':'Obligatoria'}]
     res['fHistoria_opcionesActores']       = [{'key':act.A_idActor,'value':act.A_nameActor}for act in actorList]
@@ -332,8 +334,8 @@ def VHistoria():
     res['fHistoria_opcionesPrioridad']     = [{'key':scale[0], 'value':scale[1]}for scale in resultScale]
     
     
-    res['fHistoria'] = {'super':history.id_History, 'idHistoria':idHistory, 'idPila':history.id_backLog, 'codigo':history.cod_userHistory,
-       'actores':actors, 'accion':history.ref_idaccion, 'objetivos':objectives, 'tipo':history.type_accion,
+    res['fHistoria'] = {'super':history.UH_idSuperHistory , 'idHistoria':idHistory, 'idPila':history.UH_idBacklog, 'codigo':history.UH_codeUserHistory,
+       'actores':actors, 'accion':history.UH_idAccion, 'objetivos':objectives, 'tipo':history.UH_accionType ,
        'prioridad':history.UH_scale}
 
     res['data2'] = [ 
@@ -386,13 +388,13 @@ def VHistorias():
     for hist in userHistoriesList:
         historyDict   = {}
          
-        historyDict['idHistory'] = hist.id_userHistory
+        historyDict['idHistory'] = hist.UH_idUserHistory 
         
         # Almacenamos en el diccionario el valor de la escala correspondiente.
         historyDict['priority'] = hist.UH_scale
             
         # Obtenemos los id de los actores que componen la historia.
-        idActorsList  = oActUserHist.idActorsAsociatedToUserHistory(hist.id_userHistory)
+        idActorsList  = oActUserHist.idActorsAsociatedToUserHistory(hist.UH_idUserHistory )
         missingActors = len(idActorsList)
         actorsString  = ''
         
@@ -408,15 +410,15 @@ def VHistorias():
         historyDict['actors'] = actorsString.lower()
 
         # Almacenamos la accion asociada la historia en el diccionario de la historia.
-        idAccions = oUserHistory.accionsAsociatedToUserHistory(hist.id_userHistory)
-        result    = oAccion.searchIdAccion(idAccions[0].ref_idaccion)
+        idAccions = oUserHistory.accionsAsociatedToUserHistory(hist.UH_idUserHistory )
+        result    = oAccion.searchIdAccion(idAccions[0].UH_idAccion)
         
         # Obtenemos el tipo de accion de la historia.
-        option    = hist.type_accion
+        option    = hist.UH_accionType
         historyDict['accions'] = ' ' + options[option] + str(result[0].AC_accionDescription).lower() + ' ' 
          
         # Obtenemos los id de los objetivos que componen la historia.
-        idObjectivesList  = oObjUserHIst.idObjectivesAsociatedToUserHistory(hist.id_userHistory)
+        idObjectivesList  = oObjUserHIst.idObjectivesAsociatedToUserHistory(hist.UH_idUserHistory)
         missingObjectives = len(idObjectivesList)
         objectivesString  = ''
         
@@ -509,11 +511,11 @@ def VPrioridades():
     for hist in userHistoriesList:
         historyDict   = {}
          
-        historyDict['idHistory'] = hist.id_userHistory
+        historyDict['idHistory'] = hist.UH_idUserHistory
         historyDict['priority']  = hist.UH_scale
          
         # Obtenemos los id de los actores que componen la historia.
-        idActorsList  = oActUserHist.idActorsAsociatedToUserHistory(hist.id_userHistory)
+        idActorsList  = oActUserHist.idActorsAsociatedToUserHistory(hist.UH_idUserHistory)
         missingActors = len(idActorsList)
         actorsString  = ''
         
@@ -529,15 +531,15 @@ def VPrioridades():
         historyDict['actors'] = actorsString.lower()
 
         # Almacenamos la accion asociada la historia en el diccionario de la historia.
-        idAccions = oUserHistory.accionsAsociatedToUserHistory(hist.id_userHistory)
-        result    = oAccion.searchIdAccion(idAccions[0].ref_idaccion)
+        idAccions = oUserHistory.accionsAsociatedToUserHistory(hist.UH_idUserHistory)
+        result    = oAccion.searchIdAccion(idAccions[0].UH_idAccion)
         
         # Obtenemos el tipo de accion de la historia.
-        option    = hist.type_accion
+        option    = hist.UH_accionType 
         historyDict['accions'] = ' ' + options[option] + str(result[0].AC_accionDescription).lower() + ' ' 
          
         # Obtenemos los id de los objetivos que componen la historia.
-        idObjectivesList  = oObjUserHIst.idObjectivesAsociatedToUserHistory(hist.id_userHistory)
+        idObjectivesList  = oObjUserHIst.idObjectivesAsociatedToUserHistory(hist.UH_idUserHistory)
         missingObjectives = len(idObjectivesList)
         objectivesString  = ''
         

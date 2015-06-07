@@ -15,7 +15,7 @@ class actorsUserHistory(object):
         
         if checkIdActor and checkUserHistory:
             oActor         = clsActor.query.filter_by(A_idActor = id_Actor).all()
-            oIdUserHistory = clsUserHistory.query.filter_by(id_userHistory = id_userHistory).all()
+            oIdUserHistory = clsUserHistory.query.filter_by(UH_idUserHistory = id_userHistory).all()
             
             if oActor != [] and oIdUserHistory != []:
                 newAct = clsActorsUserHistory(id_Actor,id_userHistory)
@@ -32,7 +32,7 @@ class actorsUserHistory(object):
         idsList = []
         if checkIdUserHistory:
             result = clsActorsUserHistory.query.filter_by(AUH_idUserHistory = id_userHistory)
-            idsList = []
+            
             for act in result:
                 idsList.append(act.AUH_idActor)
         return idsList
