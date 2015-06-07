@@ -61,16 +61,16 @@ class role(object):
         return([])
               
 
-    def updateActor(self, nameActor, newnameActor, newDescription):
+    def updateActor(self, nameActor, newNameActor, newDescription):
         '''Permite modificar un nombre de la clase actor'''
     
         checkTypeName        = type(nameActor) == str
-        checkTypeNewActor    = type(newnameActor) == str
+        checkTypeNewActor    = type(newNameActor) == str
         checkTypeDescription = type(newDescription) == str
     
         if checkTypeName and checkTypeNewActor and checkTypeDescription:
             checkLongnameActor      = CONST_MIN_NAME_ACTOR <= len(nameActor) <= CONST_MAX_NAME_ACTOR
-            checkLongNewnameActor   = CONST_MIN_NAME_ACTOR <= len(newnameActor) <= CONST_MAX_NAME_ACTOR
+            checkLongNewnameActor   = CONST_MIN_NAME_ACTOR <= len(newNameActor) <= CONST_MAX_NAME_ACTOR
             checkLongNewDescription = CONST_MIN_ACTOR_DESCRIPTION <= len(newDescription) <= CONST_MAX_ACTOR_DESCRIPTION
             
             if checkLongnameActor and checkLongNewnameActor  and checkLongNewDescription:    
@@ -79,7 +79,7 @@ class role(object):
                 
                 if foundnameActor != []:
                     updateActor = clsActor.query.filter_by(A_nameActor = nameActor).first()
-                    updateActor.A_nameActor        = newnameActor
+                    updateActor.A_nameActor        = newNameActor
                     updateActor.A_actorDescription = newDescription
                     db.session.commit()
                     return True

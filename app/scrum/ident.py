@@ -76,6 +76,8 @@ def ARegistrar():
         checkNewPassword = oLogin.validPassword(newPassword)
         encriptPassword  = oLogin.encript(newPassword)
         
+        print('Que esta mal?')
+        
         res = results[1]
         
         if (not checkNewUser) and checkNewPassword and (not checkNewEmail):

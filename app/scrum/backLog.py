@@ -14,6 +14,11 @@ scale_type = [1,2]
 class backlog(object):
     '''Clase que permite (completar)'''
     
+    def getAllProducts(self):
+        '''Permite obtener todos los productos de la tabla'''
+        result = clsBacklog.query.all()
+        return result
+    
     def findName(self,name):
         '''Permite buscar un nombre'''
         checkTypeName = type(name) == str
@@ -25,6 +30,13 @@ class backlog(object):
                 return oBacklog
         return []
     
+    def findIdProduct(self,idBacklog):
+        '''Permite buscar un elemento por su id'''
+        checkTypeId = type(idBacklog) == int
+        found = None
+        if checkTypeId:
+            found = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).first()
+        return found
     
     def insertBacklog(self,name,description,scale):
         '''Permite insertar un producto'''
@@ -61,7 +73,7 @@ class backlog(object):
             checkLongNewDesc = CONST_MIN_DESCRIPTION <= len(new_description) <= CONST_MAX_DESCRIPTION
             checkNewScale    = new_scale in scale_type
             
-            if long_d and long_n and long_New and checkScale:
+            if checkLongName and checkLongNewName and checkLongNewDesc and checkNewScale:
                 foundName    = self.findName(name)
                 foundNewName = self.findName(new_name)
                 
@@ -120,7 +132,7 @@ class backlog(object):
         ''' Permite obtener una lista de las acciones asociados a una pila de Producto'''
         checkTypeId = type(idBacklog) == int    
         if checkTypeId: 
-            found = clsAccions.query.filter_by(id_backLog = idBacklog).all()
+            found = clsAccion.query.filter_by(AC_idBacklog  = idBacklog).all()
             return found
         return([]) 
      
@@ -129,7 +141,7 @@ class backlog(object):
         ''' Permite obtener una lista de los Objetivos asociados a una pila de Producto'''
         checkTypeId = type(idBacklog) == int    
         if checkTypeId: 
-            found = clsObjective.query.filter_by(id_backlog = idBacklog).all()
+            found = clsObjective.query.filter_by(O_idObjective  = idBacklog).all()
             return found
         return([]) 
       
