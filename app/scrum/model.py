@@ -168,7 +168,7 @@ class clsUserHistory(db.Model):
 		
 	def __repr__(self):
 		'''Representacion en string de la Historia de Usuario'''
-		return '<id_userHistory %r, cod_userHistory %r, Us_scale %r>' % (self.id_userHistory,self.cod_userHistory, self.UH_scale)
+		return '<id_userHistory %r, cod_userHistory %r, UH_scale %r>' % (self.id_userHistory,self.cod_userHistory, self.UH_scale)
 	
 	
 	
@@ -210,18 +210,18 @@ class clsHomework(db.Model):
 	'''Clase que define el modelo de la tabla Homework'''
 	
 	__tablename__ = 'homework'
-	id_homework  	= db.Column(db.Integer, primary_key = True, index = True)
-	HW_description 	= db.Column(db.String(140),unique = True , index = True) 
-	ref_idHistory	= db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'))
+	HW_idHomework  		= db.Column(db.Integer, primary_key = True, index = True)
+	HW_description 		= db.Column(db.String(140),unique = True , index = True) 
+	HW_refUserHistory	= db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'))
 
-	def __init__(self,descHomework,id_History):
+	def __init__(self,descHomework,idHistory):
 		self.HW_description	= descHomework
-		self.ref_idHistory  = id_History 
+		self.HW_refUserHistory  = id_History 
 
 		
 	def __repr__(self):
 		'''Representacion en string de la Tarea'''
-		return '<id_homework %r,ref_idHistory %r>' % (self.id_homework,self.ref_idHistory)
+		return '<descHomework  %r, idHistory %r>' % (self.HW_idHomework,self.HW_refUserHistory)
 	
 	
 	
