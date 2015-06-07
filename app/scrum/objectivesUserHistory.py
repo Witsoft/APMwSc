@@ -16,7 +16,7 @@ class objectivesUserHistory(object):
         checkUserHistory = type(id_userHistory) == int and id_userHistory >= const_min_id
         
         if checkIdObjective and checkUserHistory:
-            oObjective     = clsObjective.query.filter_by(idobjective = id_Objective).all()
+            oObjective     = clsObjective.query.filter_by(O_idObjective = id_Objective).all()
             oIdUserHistory = clsUserHistory.query.filter_by(id_userHistory = id_userHistory).all()
             
             if oObjective != [] and oIdUserHistory != []:
@@ -26,6 +26,18 @@ class objectivesUserHistory(object):
                 return True
         return False
 
+
+    def idObjectivesAsociatedToUserHistory(self,id_userHistory):
+        '''Permite obtener los ids de los objetivos asociados a una historia de usuario'''
+        
+        checkIdUserHistory = type(id_userHistory) == int and id_userHistory >= const_min_id
+        if checkIdUserHistory:
+            result  = clsObjectivesUserHistory.query.filter_by(ref_idUserHistory = id_userHistory)
+            idsList = []
+            for obj in result:
+                idsList.append(obj.ref_idobjective)
+            return idsList
+        
 
     def deleteObjectiveAsociatedInUserHistory(self,id_Objective, id_userHistory):
         '''Permite eliminar un actor de una historia de usuario'''
@@ -43,14 +55,4 @@ class objectivesUserHistory(object):
                 return True
         return False
     
-        
-    def idObjectivesAsociatedToUserHistory(self,id_userHistory):
-        '''Permite obtener los ids de los objetivos asociados a una historia de usuario'''
-        
-        checkIdUserHistory = type(id_userHistory) == int and id_userHistory >= const_min_id
-        if checkIdUserHistory:
-            result  = clsObjectivesUserHistory.query.filter_by(ref_idUserHistory = id_userHistory)
-            idsList = []
-            for obj in result:
-                idsList.append(obj.ref_idobjective)
-            return idsList
+# Fin Clase objectivesUserHistory

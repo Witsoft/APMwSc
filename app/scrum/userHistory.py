@@ -22,7 +22,7 @@ class userHistory(object):
             if checkLengIdBacklog:
                 existIdBacklog = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).first()
                 if existIdBacklog != []:
-                    found = clsUserHistory.query.filter_by(idBacklog = idBacklog).all()
+                    found = clsUserHistory.query.filter_by(id_backLog  = idBacklog).all()
                     return found
         return ([])
         
@@ -84,7 +84,7 @@ class userHistory(object):
                     checkIdBacklog  = type(idBacklog) == int and idBacklog >= CONST_MIN_ID
                     
                     if checkTypeAccion and checkIdAccion and checkIdBacklog:
-                        oHistorys = clsAccions.query.filter_by(idaccion = id_Accion).all()
+                        oHistorys = clsAccion.query.filter_by(AC_idAccion = id_Accion).all()
                         oBacklog  = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).all()
                 
                         if oBacklog != [] and oHistorys != []:                         
@@ -120,7 +120,7 @@ class userHistory(object):
                 checkIdAccion   = type(new_id_Accion) == int and new_id_Accion >= CONST_MIN_ID
                 
                 if checkTypeAccion and checkIdAccion:
-                    oAccions = clsAccions.query.filter_by(idaccion = new_id_Accion).all()
+                    oAccions = clsAccion.query.filter_by(AC_idAccion  = new_id_Accion).all()
                     
                     if oAccions != []:
                         result = clsUserHistory.query.filter_by(id_userHistory = iduserHist).all()
@@ -152,7 +152,7 @@ class userHistory(object):
         if checkTypeId: 
             found = clsUserHistory.query.filter_by(id_userHistory = historyId).first()
             if found != None:
-                productId = found.idBacklog
+                productId = found.id_backLog 
                 oBacklog = clsBacklog.query.filter_by(BL_idBacklog = productId).first()
                 scale = oBacklog.BL_scaleType
                 return scale

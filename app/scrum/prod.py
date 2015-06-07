@@ -13,21 +13,22 @@ def ACrearProducto():
     results = [{'label':'/VProductos', 'msg':['Producto creado']}, {'label':'/VCrearProducto', 'msg':['Error al crear producto']}, ]
     res     = results[1]
     
-    # Extraemos los parametros.
-    prodName  = params['nombre']
-    prodDesc  = params['descripcion']
-    prodScale = params['escala']
-    
-    oBacklog = backlog()
-    inserted = oBacklog.insertBacklog(prodName,prodDesc,prodScale)
-    
-    if inserted:
-        # Obtenemos el producto insertado.
-        result = oBacklog.findName(prodName)
-        res['idPila'] = result[0].BL_idBacklog 
-    
-        if result:
-            res = results[0]
+    if params != {}:    
+        # Extraemos los parametros.
+        prodName  = params['nombre']
+        prodDesc  = params['descripcion']
+        prodScale = params['escala']
+        
+        oBacklog = backlog()
+        inserted = oBacklog.insertBacklog(prodName,prodDesc,prodScale)
+        
+        if inserted:
+            # Obtenemos el producto insertado.
+            result = oBacklog.findName(prodName)
+            res['idPila'] = result[0].BL_idBacklog 
+        
+            if result:
+                res = results[0]
         
     if "actor" in res:
         if res['actor'] is None:
@@ -44,6 +45,7 @@ def AModifProducto():
     #POST/PUT parameters
     params  = request.get_json()
     results = [{'label':'/VProductos', 'msg':['Producto actualizado']}, {'label':'/VProductos', 'msg':['Error al modificar el producto']}]
+    res     = results[1]
     
     # obtenemos los parametros
     newname        = params['nombre']
@@ -59,8 +61,6 @@ def AModifProducto():
     
     if result:
         res = results[0]
-    else: 
-        res = results[1]
 
     if "actor" in res:
         if res['actor'] is None:
@@ -87,7 +87,10 @@ def VCrearProducto():
       return json.dumps(res)
     res['usuario'] = session['usuario']
     
-    res['fPila_opcionesEscala'] = [{'key':1,'value':'Alta/Media/Baja'},{'key':2,'value':'Entre 1 y 20'}]
+    res['fPila_opcionesEscala'] = [{'key':1,'value':'Alta/Media/Baja'},
+                                   {'key':2,'value':'Entre 1 y 20'},
+                                   {'key':0,'value':'Seleccione un tipo de escala'}]
+    res['fPila'] = {'escala':0}
 
     return json.dumps(res)
 

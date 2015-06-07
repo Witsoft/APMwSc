@@ -78,14 +78,20 @@ class backlog(object):
                 foundNewName = self.findName(new_name)
                 
                 if foundName != [] and (foundNewName == [] or new_name == name):
-                    newBacklog = clsBacklog.query.filter_by(BL_name = name).first()
+                    idBacklog        = foundName[0].BL_idBacklog
+                    foundUserHistory = clsUserHistory.query.filter_by(id_backLog = idBacklog).all()
+                    currentScale     = foundName[0].BL_scaleType
+                    
+                    if currentScale != new_scale and foundUserHistory != []:
+                        return False
+                    
+                    newBacklog                = clsBacklog.query.filter_by(BL_name = name).first()
                     newBacklog.BL_name        = new_name 
-                    newBacklog.BL_description = new_description
-                    oUserHistory = clsUserHistory.query.all()
-                    if oUserHistory == []:
-                        newBacklog.BL_scaleType = new_scale 
+                    newBacklog.BL_description = new_description                   
+                    newBacklog.BL_scaleType   = new_scale 
                     db.session.commit()
                     return True
+
         return False
     
 
@@ -109,10 +115,10 @@ class backlog(object):
 
     def scaleType(self,idBacklog):
         '''Permite obtener el tipo de escala seleccionado para un producto'''
-        checkTypeId = type(productId) == int
+        checkTypeId = type(idBacklog) == int
             
         if checkTypeId: 
-            found = clsBacklog.query.filter_by(BL_idBackLog = idBacklog).all()
+            found = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).all()
             if found != []:
                 scale = found[0].BL_scaleType
                 return scale
@@ -141,7 +147,7 @@ class backlog(object):
         ''' Permite obtener una lista de los Objetivos asociados a una pila de Producto'''
         checkTypeId = type(idBacklog) == int    
         if checkTypeId: 
-            found = clsObjective.query.filter_by(O_idObjective  = idBacklog).all()
+            found = clsObjective.query.filter_by(O_idBacklog = idBacklog).all()
             return found
         return([]) 
       

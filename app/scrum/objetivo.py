@@ -151,8 +151,11 @@ def VCrearObjetivo():
       return json.dumps(res)
     res['usuario'] = session['usuario']
    
-    res['fObjetivo_opcionesTransversalidad'] = [{'key':True, 'value':'Si'},{'key':False, 'value':'No'}]
-    res['idPila'] = idPila   
+    res['fObjetivo_opcionesTransversalidad'] = [{'key':True, 'value':'Si'},
+                                                {'key':False, 'value':'No'},
+                                                {'key':0,'value':'Seleccione una opción'}]
+    res['fObjetivo'] = {'transversal':0} 
+    res['idPila']    = idPila   
 
     return json.dumps(res)
 
