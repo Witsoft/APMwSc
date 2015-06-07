@@ -156,6 +156,7 @@ class clsUserHistory(db.Model):
 	UH_scale        = db.Column(db.Integer, index = True)
 	roleUserHistory_userHistory = db.relationship('clsRolesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")
 	objUserHistory_userHistory  = db.relationship('clsObjectivesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")	
+	homework_userHistory	= db.relationship('clsHomework', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")	
 	
 	def __init__(self,cod_userHistory,id_History,type_accion,ref_idaccion,id_backLog,UH_scale):
 		self.cod_userHistory = cod_userHistory
@@ -205,7 +206,24 @@ class clsObjectivesUserHistory(db.Model):
 		'''Representacion en string de los id's a los roles y sus historias'''
 		return '<ref_idobjective %r, ref_idUserHistory %r>' % (self.ref_idobjective, self.ref_idUserHistory)
 		
+class clsHomework(db.Model):
+	'''Clase que define el modelo de la tabla Homework'''
+	
+	__tablename__ = 'homework'
+	id_homework  	= db.Column(db.Integer, primary_key = True, index = True)
+	HW_description 	= db.Column(db.String(140),unique = True , index = True) 
+	ref_idHistory	= db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'))
+
+	def __init__(self,descHomework,id_History):
+		self.HW_description	= descHomework
+		self.ref_idHistory  = id_History 
+
 		
+	def __repr__(self):
+		'''Representacion en string de la Tarea'''
+		return '<id_homework %r,ref_idHistory %r>' % (self.id_homework,self.ref_idHistory)
+	
+	
 	
 migrate = Migrate(app, db)
 manager = Manager(app)
