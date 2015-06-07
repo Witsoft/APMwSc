@@ -29,7 +29,7 @@ class role(object):
             checkLongDescription = CONST_MIN_ACTOR_DESCRIPTION <= len(actordescription) <= CONST_MAX_ACTOR_DESCRIPTION
             
             if checkLongName and checkLongDescription:
-                oBacklog = clsBackLog.query.filter_by(id_backLog = idPila).all()
+                oBacklog = clsBacklog.query.filter_by(BL_idBacklog = idPila).all()
                 oActor   = clsActor.query.filter_by(A_nameActor = nameActor).all()
                 
                 if (oActor == []) and (oBacklog != []):

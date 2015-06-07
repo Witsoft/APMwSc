@@ -12,12 +12,12 @@ def ACrearProducto():
     params  = request.get_json()
     results = [{'label':'/VProductos', 'msg':['Producto creado']}, {'label':'/VCrearProducto', 'msg':['Error al crear producto']}, ]
     
-    prodName = params['nombre']
-    prodDesc = params['descripcion']
+    prodName  = params['nombre']
+    prodDesc  = params['descripcion']
     prodScale = params['escala']
     
-    oBackLog = backLog()
-    result   = oBackLog.insertBackLog(prodName,prodDesc,prodScale)
+    oBacklog = backlog()
+    result   = oBacklog.insertBacklog(prodName,prodDesc,prodScale)
     
     if result:
         res = results[0]
@@ -47,9 +47,9 @@ def AModifProducto():
      
     idPila = params['idPila'] #Obtenemos el id del producto
 
-    oBackLog = backLog()
-    result   = clsBackLog.query.filter_by(id_backLog = idPila).first()  #Conseguimos el producto a modificar
-    oBackLog.modifyBackLog(result.BL_name, newname, newdescription, newscale) #Modificamos el producto      
+    oBacklog = backlog()
+    result   = clsBacklog.query.filter_by(BL_idBacklog = idPila).first()  #Conseguimos el producto a modificar
+    oBacklog.modifyBacklog(result.BL_name, newname, newdescription, newscale) #Modificamos el producto      
 
     #Action code ends here
     if "actor" in res:
@@ -101,10 +101,10 @@ def VProducto():
     #pilas = [{'idPila':1, 'nombre':'Pagos en línea', 'descripcion':'Pagos usando tarjeta de débito'}]
     #res['fPila'] = pilas[idPila-1]    
 
-    oBackLog   = backLog()
-    actorsList = oBackLog.actorsAsociatedToProduct(idProduct)
-    accionList = oBackLog.accionsAsociatedToProduct(idProduct)
-    objectList = oBackLog.objectivesAsociatedToProduct(idProduct)
+    oBacklog   = backlog()
+    actorsList = oBacklog.actorsAsociatedToProduct(idProduct)
+    accionList = oBacklog.accionsAsociatedToProduct(idProduct)
+    objectList = oBacklog.objectivesAsociatedToProduct(idProduct)
     
 
     res['data3'] = [{'idActor':act.A_idActor,'descripcion':act.A_nameActor + ' : ' + act.A_actorDescription}for act in actorsList]
@@ -112,7 +112,7 @@ def VProducto():
     res['data7'] = [{'idObjetivo':obj.idobjective, 'descripcion':obj.descObjective} for obj in objectList]
       
 
-    result   = clsBackLog.query.filter_by(id_backLog = idPila).first()
+    result   = clsBacklog.query.filter_by(BL_idBacklog = idPila).first()
     
     res['idPila'] = idPila  
     res['fPila'] = {'idPila':idPila,'nombre': result.BL_name,'descripcion':result.BL_description,'escala':result.BL_scaleType}
@@ -136,9 +136,9 @@ def VProductos():
     res['usuario'] = session['usuario']
 
     # Obtenemos la lista de productos.
-    productList = clsBackLog.query.all()
+    productList = clsBacklog.query.all()
     
-    res['data0'] = [{'idPila':prod.id_backLog,'nombre':prod.BL_name, 'descripcion': prod.BL_description, 'prioridad': prod.BL_scaleType}for prod in productList]
+    res['data0'] = [{'idPila':prod.BL_idBacklog,'nombre':prod.BL_name, 'descripcion': prod.BL_description, 'prioridad': prod.BL_scaleType}for prod in productList]
 
     return json.dumps(res)
 

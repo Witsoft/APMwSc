@@ -52,12 +52,12 @@ def ARegistrar():
 
     if request.method == 'POST':
         # Se precargan valores en la base de datos.
-        oActor   = actor()
-        oBackLog = backLog()
+        oActor   = role()
+        oBacklog = backlog()
 
         isEmpty  = oActor.emptyTable()
         if isEmpty:
-            result1 = oBackLog.insertBackLog('Taxi Seguro','Mejor forma de operar un taxi',1)
+            result1 = oBacklog.insertBacklog('Taxi Seguro','Mejor forma de operar un taxi',1)
             result2 = oActor.insertActor('Product Owner','Encargado de las decisiones de diseno del producto.',1)
             result3 = oActor.insertActor('Scrum Master','Encargado de orientar y ayudar al equipo desarrollador del producto.',1)
             result  = oActor.insertActor('Team Member','Equipo encargado del desarrollo del producto.',1)
@@ -81,8 +81,8 @@ def ARegistrar():
         if (not checkNewUser) and checkNewPassword and (not checkNewEmail):
             result = oUser.insertUser(newName,newUser,encriptPassword,newEmail,1)  
             
-            print('Valores de BackLog:')
-            print(clsBackLog.query.all())
+            print('Valores de Backlog:')
+            print(clsBacklog.query.all())
             print('Valores de Actor:')
             print(clsActor.query.all())
             print('Valores de Usuario:')

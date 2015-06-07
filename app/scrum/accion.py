@@ -20,7 +20,6 @@ def ACrearAccion():
         newDescription = params['descripcion']
         result = oAccion.insertAccion(newDescription,1)
         if result:
-            print("Se registró satisfactoriamente la acción")
             res = results[0]
         else:
             res = results[1]

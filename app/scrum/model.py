@@ -24,31 +24,30 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 # Instancia de la base de datos. 
 db = SQLAlchemy(app)
 
-# Descripcion de la Base de Datos.
+# Definicion de la Base de Datos.
 
-
-class clsBackLog(db.Model):
-	'''Clase que define el modelo BackLog'''
+class clsBacklog(db.Model):
+	'''Clase que define el modelo Backlog'''
  	
-	__tablename__ =  'backLog'
-	id_backLog     = db.Column(db.Integer,primary_key = True, index = True)
-	BL_name        = db.Column(db.String(50),unique = True)	
-	BL_description = db.Column(db.String(140))
-	BL_scaleType   = db.Column(db.Integer)
-	#obj_backLog    = db.relationship('clsObjective',backref='objective',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-	act_backLog    = db.relationship('clsActor',backref='backLog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-	#acc_backLog    = db.relationship('clsAccions',backref='backLog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
-	#usrHis_backLog = db.relationship('clsUserHistory',backref='backLog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	__tablename__ =  'backlog'
+	BL_idBacklog    = db.Column(db.Integer,primary_key = True, index = True)
+	BL_name         = db.Column(db.String(50),unique = True)	
+	BL_description  = db.Column(db.String(140))
+	BL_scaleType    = db.Column(db.Integer)
+	BL_refObjective = db.relationship('clsObjective',backref = 'backlog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	BL_refActor     = db.relationship('clsActor',backref = 'backlog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	BL_refAccion    = db.relationship('clsAccions',backref = 'backlog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
+	BL_refUserHist  = db.relationship('clsUserHistory',backref = 'backlog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
  
-	def __init__(self, BL_name,BL_description,BL_scaleType):
-		'''Constructor del modelo BackLog'''
-		self.BL_name 		= BL_name
-		self.BL_description = BL_description
-		self.BL_scaleType	= BL_scaleType
+	def __init__(self,name,description,scaleType):
+		'''Constructor del modelo Backlog'''
+		self.BL_name 		= name
+		self.BL_description = description
+		self.BL_scaleType	= scaleType
  		
 	def __repr__(self):
-		'''Representacion en string del nombre del BakcLog'''
-		return '<id_backLog %r, BL_name %r, BL_scaleType %r>' % (self.id_backLog, self.BL_name,self.BL_scaleType)
+		'''Representacion en string del modelo Bakclog'''
+		return '<idBacklog %r, name %r, scaleType %r>' % (self.BL_idBacklog, self.BL_name, self.BL_scaleType)
  	
  	
 	
@@ -59,7 +58,7 @@ class clsActor(db.Model):
     A_idActor          = db.Column(db.Integer, primary_key=True)
     A_nameActor        = db.Column(db.String(50), unique=True)
     A_actorDescription = db.Column(db.String(140))
-    A_idBacklog        = db.Column(db.Integer,db.ForeignKey('backLog.id_backLog'))
+    A_idBacklog        = db.Column(db.Integer,db.ForeignKey('backlog.BL_idBacklog'))
     A_refUser          = db.relationship('clsUser', backref = 'actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
     #sUserHistory_role = db.relationship('clsRolesUserHistory', backref = 'roles',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
       
@@ -105,7 +104,7 @@ class clsObjective(db.Model):
     __tablename__  = 'objectives'
     idobjective    = db.Column(db.Integer, primary_key=True)
     descObjective  = db.Column(db.String(140), unique=True)
-    id_backlog     = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+    id_backlog     = db.Column(db.Integer, db.ForeignKey('backlog.BL_idBacklog'))
     obj_type	   = db.Column(db.String(5)) 
     objectiveUserHistory_role = db.relationship('clsObjectivesUserHistory', backref = 'objectives',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
     
@@ -127,7 +126,7 @@ class clsAccions(db.Model):
     __tablename__  = 'accions'
     idaccion          = db.Column(db.Integer, primary_key=True)
     acciondescription = db.Column(db.String(140), unique=True)
-    id_backLog        = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+    id_backLog        = db.Column(db.Integer, db.ForeignKey('backlog.BL_idBacklog'))
     id_userHistory    = db.Column(db.Integer,db.ForeignKey('userHistory.id_userHistory'),nullable = True)    
      
     
@@ -151,7 +150,7 @@ class clsUserHistory(db.Model):
 	id_History      = db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'),nullable = True) 
 	type_accion     = db.Column(db.Integer)
 	ref_idaccion	= db.Column(db.Integer, db.ForeignKey('accions.idaccion'))
-	id_backLog      = db.Column(db.Integer, db.ForeignKey('backLog.id_backLog'))
+	id_backLog      = db.Column(db.Integer, db.ForeignKey('backlog.BL_idBacklog'))
 	UH_scale        = db.Column(db.Integer, index = True)
 	roleUserHistory_userHistory = db.relationship('clsRolesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")
 	objUserHistory_userHistory  = db.relationship('clsObjectivesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")	

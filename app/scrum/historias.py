@@ -126,7 +126,7 @@ def AModifHistoria():
     idHistory    = params['idHistoria']
     idSupHist    = params['super']
     idaccion     = params['accion']
-    idBackLog    = params['idPila']
+    idBacklog    = params['idPila']
     idActors     = params['actores']
     codeHist     = params['codigo']
     idObjectives = params['objetivos']
@@ -192,7 +192,7 @@ def VCrearHistoria():
     idProduct = int(idProduct)
     
     # Objetenemos los datos asociados al producto
-    oBacklog      = backLog() 
+    oBacklog      = backlog() 
     oObjective    = objective()    
     actorList     = oBacklog.actorsAsociatedToProduct(idProduct)
     accionList    = oBacklog.accionsAsociatedToProduct(idProduct)
@@ -253,7 +253,7 @@ def VHistoria():
     history    = clsUserHistory.query.filter_by(id_userHistory = idHistoria).first()
     
     # Obtenemos todas las acciones, actores y objetivos asociados al producto.
-    oBacklog      = backLog() 
+    oBacklog      = backlog() 
     oObjective    = objective()
     oUserHist     = userHistory()
     oActUserHist  = actorsUserHistory()
@@ -333,7 +333,7 @@ def VHistorias():
     oRole             = role()
     oAccion           = accions()
     oObjective        = objective()
-    oBacklog          = backLog() 
+    oBacklog          = backlog() 
     oUserHistory      = userHistory()
     oActUserHist      = actorsUserHistory()
     oObjUserHIst      = objectivesUserHistory()
@@ -403,7 +403,7 @@ def VPrioridades():
     oRole             = role()
     oAccion           = accions()
     oObjective        = objective()
-    oBacklog          = backLog() 
+    oBacklog          = backlog() 
     oUserHistory      = userHistory()
     oActUserHist      = actorsUserHistory()
     oObjUserHIst      = objectivesUserHistory()

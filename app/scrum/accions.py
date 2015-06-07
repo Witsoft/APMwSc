@@ -4,28 +4,27 @@ from app.scrum.backLog import *
 
 
 # Declaracion de constantes.
-minId = 1
-minAccionDescription = 1
-maxAccionDescription   = 140
+MIN_ID = 1
+MIN_ACCION_DESCRIPTION = 1
+MAX_ACCION_DESCRIPTION = 140
 
 class accions(object):
     '''Clase que permite manejar las acciones de manera persistente'''
 
-    def insertAccion(self,acciondescription, id_backLog):
-        '''Permite insertar una Accion'''
-                   
-        typedescription = (type(acciondescription) == str)
-        typeid = (type(id_backLog) == int)
+    def insertAccion(self,accionDescription,idBacklog):
+        '''Permite insertar una Accion'''   
+        checkTypeDescription = type(accionDescription) == str
+        checkTypeId          = type(idBacklog) == int
         
-        if (typedescription and typeid):
-            long_acciondescription = minAccionDescription <= len(acciondescription) <= maxAccionDescription
+        if checkTypeDescription and checkTypeId:
+            checkLongAccionDescription = MIN_ACCION_DESCRIPTION <= len(accionDescription) <= MAX_ACCION_DESCRIPTION
             
-            if long_acciondescription:
-                obackLog = clsBackLog.query.filter_by(id_backLog = id_backLog).all()
-                oaccion = clsAccions.query.filter_by(acciondescription = acciondescription).all()
-                if (obackLog != []) and (oaccion == []):
-                    new_accion = clsAccions(acciondescription = acciondescription,id_backLog = id_backLog)
-                    db.session.add(new_accion)
+            if checkLongAccionDescription:
+                oBacklog = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).all()
+                oAccion  = clsAccions.query.filter_by(acciondescription = accionDescription).all()
+                if oBacklog != [] and oAccion == []:
+                    newAccion = clsAccions(accionDescription,idBacklog)
+                    db.session.add(newAccion)
                     db.session.commit()
                     return True
         return False
@@ -39,7 +38,7 @@ class accions(object):
     def searchIdAccion(self, idaccion):
         '''Permite buscar acciones por su id'''
         typeIdAccion = (type(idaccion) == int)
-        if (typeIdAccion and idaccion >= minId):
+        if (typeIdAccion and idaccion >= MIN_ID):
             oAccion = clsAccions.query.filter_by(idaccion  = idaccion).all()
             return oAccion
         return ([])
@@ -52,8 +51,8 @@ class accions(object):
         typeNewdescription = (type(newDescription) == str)
         
         if (typedescription and typeNewdescription):
-            long_acciondescription = minAccionDescription <= len(acciondescription) <= maxAccionDescription
-            long_newDescription = minAccionDescription <= len(newDescription) <= maxAccionDescription
+            long_acciondescription = MIN_ACCION_DESCRIPTION <= len(acciondescription) <= MAX_ACCION_DESCRIPTION
+            long_newDescription = MIN_ACCION_DESCRIPTION <= len(newDescription) <= MAX_ACCION_DESCRIPTION
             
             if (long_acciondescription and long_newDescription):
                 foundAccion = self.searchAccion(acciondescription)
@@ -83,7 +82,7 @@ class accions(object):
         
         
         if typedescription:
-            Len_description = minAccionDescription <= len(acciondescription) <= maxAccionDescription
+            Len_description = MIN_ACCION_DESCRIPTION <= len(acciondescription) <= MAX_ACCION_DESCRIPTION
             if Len_description:
                 foundid = clsAccions.query.filter_by(acciondescription = acciondescription).all()
                 if foundid != []:

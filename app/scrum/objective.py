@@ -3,34 +3,35 @@
 from app.scrum.backLog import *
 
 # Declaracion de constantes.
-const_minIdBacklog = 1
-const_minIdObj     = 1
-const_minDescObj   = 1
-const_maxDescObj   = 140
+CONST_MIN_ID_BACKLOG = 1
+CONST_MIN_ID_OBJ     = 1
+CONST_MIN_DESC_OBJ   = 1
+CONST_MAX_DESC_OBJ   = 140
+
 arrayType          = [True,False]
 
 
 class objective(object):
     '''Clase que permite manejar los objetivos de manera persistente'''
 
-    def insertObjective(self,descObjective, id_backLog, objType):
+    def insertObjective(self,descObjective, idBacklog, objType):
         '''Permite insertar un Objetivo'''
 
         checkObjType = objType in arrayType
         checkDesc    = type(descObjective) == str
-        checkId_BL   = type(id_backLog) == int 
-        checkIdMin   = id_backLog >= const_minIdBacklog 
+        checkId_BL   = type(idBacklog) == int 
+        checkIdMin   = idBacklog >= CONST_MIN_ID_BACKLOG 
         
         if checkDesc and checkId_BL and checkIdMin and checkObjType: 
             print("Entre")
-            checkDescLen = const_minDescObj <= len(descObjective) <= const_maxDescObj
+            checkDescLen = CONST_MIN_DESC_OBJ <= len(descObjective) <= CONST_MAX_DESC_OBJ
             
             if checkDescLen:
-                aBackLog = clsBackLog.query.filter_by(id_backLog = id_backLog).all()
+                aBacklog = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).all()
                 aObj     = self.searchObjective(descObjective)
 
-                if (aBackLog != []) and (aObj == []) :
-                    new_objective = clsObjective(descObjective, id_backLog, objType)
+                if (aBacklog != []) and (aObj == []) :
+                    new_objective = clsObjective(descObjective, idBacklog, objType)
                     db.session.add(new_objective)
                     db.session.commit()
                     return True
@@ -43,7 +44,7 @@ class objective(object):
     
     def searchIdObjective(self, IdObjective):
         '''Permite buscar objetivos por su id'''
-        checkIdObjective = type(IdObjective) == int and IdObjective >= const_minIdObj 
+        checkIdObjective = type(IdObjective) == int and IdObjective >= CONST_MIN_ID_OBJ 
         if (checkIdObjective):
             aObj = clsObjective.query.filter_by(idobjective = IdObjective).all()
             return aObj
@@ -57,8 +58,8 @@ class objective(object):
         checkNewDesc = type(newDescObjective) == str
         
         if checkDesc and checkNewDesc and checkObjType: 
-            checkDescLen    = const_minDescObj <= len(descObjective) <= const_maxDescObj
-            checkNewDescLen = const_minDescObj <= len(newDescObjective) <= const_maxDescObj
+            checkDescLen    = CONST_MIN_DESC_OBJ <= len(descObjective) <= CONST_MAX_DESC_OBJ
+            checkNewDescLen = CONST_MIN_DESC_OBJ <= len(newDescObjective) <= CONST_MAX_DESC_OBJ
         
             if checkDescLen and checkNewDescLen:
                 aObj = self.searchObjective(descObjective)
@@ -95,7 +96,7 @@ class objective(object):
         checkDesc = type(descObjective) == str
         
         if checkDesc:
-            checkDescLen = const_minDescObj <= len(descObjective) <= const_maxDescObj
+            checkDescLen = CONST_MIN_DESC_OBJ <= len(descObjective) <= CONST_MAX_DESC_OBJ
             
             if checkDescLen:
                 aObj = self.searchObjective(descObjective)
