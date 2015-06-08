@@ -17,6 +17,13 @@ class homework(object):
             ohomework = clsHomework.query.filter_by(HW_idHomework = HW_idHomework ).all()
             return ohomework
         return ([])
+   
+    def getAllHomework(self,HW_refUserHistory):
+        typeId  = (type(HW_refUserHistory) == int)
+        if (typeId  and HW_refUserHistory  >= minId):
+            ohomework = clsHomework.query.filter_by(HW_refUserHistory = HW_refUserHistory).all()
+            return ohomework
+        return ([])
     
     def insertHomework(self,HW_description, id_userHistory):
         '''Permite insertar un Homework'''
@@ -31,7 +38,7 @@ class homework(object):
                 oUserHistory = clsUserHistory.query.filter_by(id_userHistory = id_userHistory).all()
                 oHomework = clsHomework.query.filter_by(HW_description = HW_description).all()
                 if (oUserHistory != []) and (oHomework == []):
-                    new_homework = clsHomework(HW_description = HW_description,id_userHistory = id_userHistory)
+                    new_homework = clsHomework(HW_description = HW_description,HW_refUserHistory = id_userHistory)
                     db.session.add(new_homework)
                     db.session.commit()
                     return True
