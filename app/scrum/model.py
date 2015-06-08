@@ -57,7 +57,7 @@ class clsActor(db.Model):
 
     __tablename__ = 'actors'
     A_idActor           = db.Column(db.Integer, primary_key = True)
-    A_nameActor         = db.Column(db.String(50), unique = True)
+    A_nameActor         = db.Column(db.String(50))
     A_actorDescription  = db.Column(db.String(140))
     A_idBacklog         = db.Column(db.Integer,db.ForeignKey('backlog.BL_idBacklog'))
     A_refUser           = db.relationship('clsUser', backref = 'actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
@@ -104,7 +104,7 @@ class clsObjective(db.Model):
  
     __tablename__  = 'objectives'
     O_idObjective    = db.Column(db.Integer, primary_key = True)
-    O_descObjective  = db.Column(db.String(140), unique = True)
+    O_descObjective  = db.Column(db.String(140))
     O_idBacklog      = db.Column(db.Integer, db.ForeignKey('backlog.BL_idBacklog'))
     O_objType	     = db.Column(db.String(5)) 
     O_refObjUserHist = db.relationship('clsObjectivesUserHistory', backref = 'objectives',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
@@ -126,7 +126,7 @@ class clsAccion(db.Model):
  
     __tablename__  = 'accions'
     AC_idAccion          = db.Column(db.Integer, primary_key = True)
-    AC_accionDescription = db.Column(db.String(140), unique = True)
+    AC_accionDescription = db.Column(db.String(140))
     AC_idBacklog         = db.Column(db.Integer, db.ForeignKey('backlog.BL_idBacklog'))    
     AC_refUserHistory    = db.relationship('clsUserHistory', backref = 'accions', lazy = 'dynamic',cascade = "all, delete, delete-orphan")
      

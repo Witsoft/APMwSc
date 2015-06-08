@@ -78,7 +78,7 @@ def AModifAccion():
 
     oAccion = accions()
     found   = oAccion.searchIdAccion(idAccion)
-    result  = oAccion.updateAccion(found[0].AC_accionDescription, newDescription)     
+    result  = oAccion.updateAccion(found[0].AC_accionDescription, newDescription,idPila)     
     
     if result:
         res = results[0]
