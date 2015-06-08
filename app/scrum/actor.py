@@ -15,16 +15,17 @@ def ACrearActor():
     # Obtenemos el id del producto.
     idPila  = int(session['idPila'])
     print('idPila ACrearActor',idPila) 
-    print(params)
-    # Extraemos los datos.
-    nameActor = params['nombre']
-    descActor = params['descripcion'] 
     
-    # Insertamos el actor.
-    oActor   = role()
-    inserted = oActor.insertActor(nameActor,descActor,idPila)
-    if inserted:
-        res = results[0]
+    if params != {}:    
+        # Extraemos los datos.
+        nameActor = params['nombre']
+        descActor = params['descripcion'] 
+        
+        # Insertamos el actor.
+        oActor   = role()
+        inserted = oActor.insertActor(nameActor,descActor,idPila)
+        if inserted:
+            res = results[0]
     
     res['label'] = res['label'] + '/' + str(idPila)
 

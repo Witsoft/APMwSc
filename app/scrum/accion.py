@@ -13,20 +13,21 @@ def ACrearAccion():
     params  = request.get_json()
     results = [{'label':'/VProducto', 'msg':['Acción creada']}, {'label':'/VCrearAccion', 'msg':['Error al crear acción']}, ]
     res     = results[1]
-      
+    
     # Obtenemos el id del producto.
     idPila  = int(session['idPila'])
-    print('idPila ACrearAccion',idPila)   
+    print('idPila ACrearAccion',idPila) 
     
-    # Extraemos los parametros.
-    newDescription = params['descripcion']
-    
-    if request.method == 'POST':
-        oAccion  = accions()
-        inserted = oAccion.insertAccion(newDescription,idPila)
+    if params != {}:           
+        # Extraemos los parametros.
+        newDescription = params['descripcion']
         
-        if inserted:
-            res = results[0]
+        if request.method == 'POST':
+            oAccion  = accions()
+            inserted = oAccion.insertAccion(newDescription,idPila)
+            
+            if inserted:
+                res = results[0]
 
     res['label'] = res['label'] + '/' + str(idPila)
 
