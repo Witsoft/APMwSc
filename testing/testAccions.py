@@ -6,655 +6,600 @@ from accionsDummy import *
 
 class TestAccions(unittest.TestCase):
     
-     #############################################      
-     #   Suite de Pruebas para insertAccion   #
-     #############################################
+    #############################################      
+    #   Suite de Pruebas para insertAccion      #
+    #############################################
           
-     # Caso Inicial
+    # Caso Inicial
   
-     # Prueba 1
-     def testInserAccionExists(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         aAcc = accions()
-         aAcc.insertAccion('Reservar un taxi.',1)
-         aAcc.deleteAccion('Reservar un taxi.')
-         aBackLog.deleteProduct('Taxi seguro.')        
+    # Prueba 1
+    def testInserAccionExists(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        aAcc = accions()
+        aAcc.insertAccion('Atacar puntos de vida',1)
+        aAcc.deleteAccion('Atacar puntos de vida')
+        aBacklog.deleteProduct('Batalla')        
+
     # Casos Normales
      
     # Prueba 2
-     def testInsertAccionElement(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Permite localizar un taxi')
+    def testInsertAccionElement(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
         aAcc   = accions()
-        result = aAcc.insertAccion('Permite elegir.',1)
+        result = aAcc.insertAccion('Permite elegir',1)
         self.assertTrue(result)
         aAcc.deleteAccion('Permite elegir')
-        aBackLog.deleteProduct('Permite localizar un taxi')
+        aBacklog.deleteProduct('Batalla')
                   
     # Prueba 3
-     def testInsertAccionRepeatedElement(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    def testInsertAccionRepeatedElement(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
         aAcc   = accions()
         result = aAcc.insertAccion('Permite elegir.',1)
         result1 = aAcc.insertAccion('Permite elegir.',1)
         self.assertFalse(result1)
-        aAcc.deleteAccion('Permite seleccionar.')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aAcc.deleteAccion('Permite elegir')
+        aBacklog.deleteProduct('Batalla')
                
     # Casos Fronteras
       
-     # Prueba 4
-     def test4InsertAccionShortDesc0(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
-         aAcc   = accions()
-         result = aAcc.insertAccion('',1)
-         self.assertFalse(result)
-         aBackLog.deleteProduct('Taxi seguro.')
+    # Prueba 4
+    def testInsertAccionShortDesc0(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions()
+        result = aAcc.insertAccion('',1)
+        self.assertFalse(result)
+        aBacklog.deleteProduct('Batalla')
           
            
     # Prueba 5
-     def testInsertAccionLongDesc1(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
-         aAcc   = accions()
-         result = aAcc.insertAccion('A',1)
-         self.assertTrue(result)
-         aAcc.deleteAccion('A')
-         aBackLog.deleteProduct('Taxi seguro.')
+    def testInsertAccionLongDesc1(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions()
+        result = aAcc.insertAccion('A',1)
+        self.assertTrue(result)
+        aAcc.deleteAccion('A')
+        aBacklog.deleteProduct('Batalla')
        
     # Prueba 6
-     def test6InsertAccionLongDesc140(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         aAcc   = accions()
-         result = aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem',1)
-         self.assertTrue(result)
-         aAcc.deleteAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem')
-         aBackLog.deleteProduct('Taxi seguro.')
+    def testInsertAccionLongDesc140(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions()
+        result = aAcc.insertAccion(20*'Llamare',1)
+        self.assertTrue(result)
+        aAcc.deleteAccion(20*'Llamare')
+        aBacklog.deleteProduct('Batalla')
            
     # Prueba 7
-     def testInsertAccionLongDesc141(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
-         aAcc   = accions()
-         result = aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problema',1)
-         self.assertFalse(result)
-         aBackLog.deleteProduct('Taxi seguro.')
+    def testInsertAccionLongDesc141(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions()
+        result = aAcc.insertAccion(20*'Llamare' + 's',1)
+        self.assertFalse(result)
+        aBacklog.deleteProduct('Batalla')
       
     # Prueba 8
-     def testInsertAccionIdBackLogInvalid(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         aAcc   = accions()
-         result  =aAcc.insertAccion('Movlizarme desde mi casa',0)
-         self.assertFalse(result)
-         aBackLog.deleteProduct('Taxi seguro.')
-      
-      
-     # Casos Esquinas
+    def testInsertAccionIdBackLogInvalid(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions()
+        result  =aAcc.insertAccion('Atacar al mas debil',0)
+        self.assertFalse(result)
+        aBacklog.deleteProduct('Batalla')
+        
+    # Casos Esquinas
        
     # Prueba 9
-     def testInsertAccionIdBackLogNoExists(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
-         aAcc   = accions()
-         result  =aAcc.insertAccion('Trasladarse rápido',2)
-         self.assertFalse(result)
-         #Eliminacion del elemento insertado.
-         aBackLog.deleteProduct('Taxi seguro.')
-      
+    def testInsertAccionIdBacklogNoExists(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc    = accions()
+        result  = aAcc.insertAccion('Defender con fuerza',2)
+        self.assertFalse(result)
+        #Eliminacion del elemento insertado.
+        aBacklog.deleteProduct('Batalla')
+
     # Prueba 10
-     def testInsertAccionLongDesc140AndIdBackLogNoExists(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
-         aAcc   = accions()
-         result = aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin proble1',3)
-         self.assertFalse(result)
-         aBackLog.deleteProduct('Taxi seguro.')
-      
+    def testInsertAccionLongDesc140AndIdBackLogNoExists(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions()
+        result = aAcc.insertAccion(20*'Llamare',3)
+        self.assertFalse(result)
+        aBacklog.deleteProduct('Batalla')
+                      
     # Casos Maliciosos
       
     # Prueba 11
-     def testInsertNotString(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
-         aAcc   = accions()
-         result = aAcc.insertAccion(4350,1)
-         self.assertFalse(result)
-         aBackLog.deleteProduct('Taxi seguro.')
+    def testInsertNotString(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions()
+        result = aAcc.insertAccion(4350,1)
+        self.assertFalse(result)
+        aBacklog.deleteProduct('Batalla')
            
     # Prueba 12
-     def testInsertNoneString(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
-         aAcc   = accions()
-         result = aAcc.insertAccion(None,1)
-         self.assertFalse(result)
-         aBackLog.deleteProduct('Taxi seguro.')
+    def testInsertNoneString(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions()
+        result = aAcc.insertAccion(None,1)
+        self.assertFalse(result)
+        aBacklog.deleteProduct('Batalla')
            
-  
-     #############################################      
-     #   Suite de Pruebas para searchAccion   #
-     #############################################
-       
-     # Caso Inicial
+    #############################################      
+    #   Suite de Pruebas para searchAccion      #
+    #############################################
+    # Caso Inicial
        
     # Prueba 13 
-     def testsearchAccionExists(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
-         aAcc = accions()
-         aAcc.insertAccion('Permite reservar un taxi',1)
-         aAcc.searchAccion('Permite reservar un taxi')
+    def testsearchAccionExists(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc = accions()
+        aAcc.insertAccion('Usar magia',1)
+        aAcc.searchAccion('Usar magia')
            
     # Casos Fronteras
        
     # Prueba 14
-     def testsearchAccionShortDesc0(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.        
-         aAcc   = accions()
-         aAcc.insertAccion('',1)
-         result = aAcc.searchAccion('')
-         self.assertFalse(result)
-         aBackLog.deleteProduct('Taxi seguro.')
+    def testsearchAccionShortDesc0(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.        
+        aAcc   = accions()
+        result = aAcc.searchAccion('')
+        self.assertFalse(result)
+        aBacklog.deleteProduct('Enemigos de campo')
       
     # Prueba 15
-     def test_15searchAccionShortDesc1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    def testsearchAccionShortDesc1(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba
         aAcc   = accions()
         aAcc.insertAccion('A',1)
         result = aAcc.searchAccion('A')
         self.assertTrue(result)
         aAcc.deleteAccion('A')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aBacklog.deleteProduct('Enemigos de campo')
            
     # Prueba 16
-     def testsearchAccionShortDesc140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
+    def testsearchAccionShortDesc140(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
         aAcc   = accions()
-        aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem',1)
-        result = aAcc.searchAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem')
+        aAcc.insertAccion(20*'Llamare',1)
+        result = aAcc.searchAccion(20*'Llamare')
         self.assertNotEqual(result,[],"Accion no encontrada")
-        aAcc.deleteAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aAcc.deleteAccion(20*'Llamare')
+        aBacklog.deleteProduct('Enemigos de campo')
            
     # Prueba 17
-     def testsearchAccionShortDesc141(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
-         aAcc   = accions()
-         aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problema',1)
- 
-         result = aAcc.searchAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problema')
-         self.assertFalse(result, "Accion Encontrada.")
-         aBackLog.deleteProduct('Taxi seguro.')
+    def testsearchAccionShortDesc141(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions() 
+        result = aAcc.searchAccion(20*'Llamare' + 's')
+        self.assertFalse(result, "Accion Encontrada")
+        aBacklog.deleteProduct('Enemigos de campo')
   
-     # Caso Normal
+    # Caso Normal
       
-     # Prueba 18
-     def testsearchAccionDescNotExist(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
+    # Prueba 18
+    def testsearchAccionDescNotExist(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
         aAcc   = accions()
-        result = aAcc.searchAccion('Comunicarse via correo electronico')
+        result = aAcc.searchAccion('Luchar con confianza')
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro.')
+        aBacklog.deleteProduct('Batalla')
            
-  
     # Casos Maliciosos
        
-     # Prueba 19
-     def testsearchAccionNotString(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba. 
-         aAcc   = accions()
-         aAcc.insertAccion(4350,1)
-         result = aAcc.searchAccion(4350)
-         self.assertEqual(result, [],'Accion Encontrada')
-         aBackLog.deleteProduct('Taxi seguro.')
+    # Prueba 19
+    def testsearchAccionNotString(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba. 
+        aAcc   = accions()
+        aAcc.insertAccion(4350,1)
+        result = aAcc.searchAccion(4350)
+        self.assertEqual(result, [],'Accion Encontrada')
+        aBacklog.deleteProduct('Batalla')
  
-     #Prueba 20 
-     def testSearchNameNoneString(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.   
-         aAcc   = accions()
-         result = aAcc.searchAccion(None)
-         self.assertEqual(result, [],'Accion Encontrada')
-         aBackLog.deleteProduct('Taxi seguro.')
-          
-    #############################################      
-     #   Suite de Pruebas para searchIdAccion   #
-     #############################################  
-    # Caso Inicial
-          
-     #Prueba 21  
-     def testsearchIdAccionExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
-        # Inicio de la prueba.
-        aAcc = accions()
-        aAcc.insertAccion('Permite reservar un taxi',1)
-        aAcc.searchAccion('Permite reservar un taxi')
-                          
-     #############################################      
-     #   Suite de Pruebas para updateAccion   #
-     #############################################  
-    # Caso Inicial
-      
-    # Prueba 22
-     def testupdateAccionExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 20 
+    def testSearchNameNoneString(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.   
         aAcc   = accions()
-        aAcc.insertAccion('reservar un taxi.',1)
-        aAcc.updateAccion('reservar un taxi.','reservar un taxi o varios.')
-        aBackLog.deleteProduct('Taxi seguro.')  
+        result = aAcc.searchAccion(None)
+        self.assertEqual(result, [],'Accion Encontrada')
+        aBacklog.deleteProduct('Batalla')
+                
+    #############################################      
+    #   Suite de Pruebas para searchIdAccion    #
+    #############################################  
+    # Caso Inicial
+          
+    # Prueba 21  
+    def testsearchIdAccionExists(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc = accions()
+        aAcc.insertAccion('Usar comandos especiales',1)
+        aAcc.searchIdAccion(1)
+
+    # Caso Normal
+
+    # Prueba 22
+    def testSearchIdTrue(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions()
+        aAcc.insertAccion('Nuevo T',1)
+        result = aAcc.searchIdAccion(1)
+        self.assertNotEqual(result,[],"Elemento no encontrado")
+        aAcc.deleteAccion('Nuevo T')
+        aBacklog.deleteProduct('Batalla') 
+
+    # Prueba 23                
+    def testSearchIdNoAccion(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba. 
+        aAcc   = accions()
+        result = aAcc.searchIdAccion(2)
+        self.assertEqual(result,[],"Elemento no encontrado")
+        aBacklog.deleteProduct('Batalla') 
+
+    # Casos Maliciosos
+
+    # Prueba 24
+    def testSearchIdEmpty(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions()
+        result = aAcc.searchIdAccion(0)
+        self.assertEqual(result,[], "Elemento no encontrado")
+        aBacklog.deleteProduct('Batalla')
+      
+    # Prueba 25
+    def testSearchIdString(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions()
+        result = aAcc.searchIdAccion('')
+        self.assertEqual(result,[],"Elemento Insertado") 
+        aBacklog.deleteProduct('Batalla') 
+      
+    # Prueba 26
+    def testSearchIdNoneString(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        aAcc   = accions()
+        result = aAcc.searchIdAccion(None)
+        self.assertEqual(result,[],"Válido")    
+        aBacklog.deleteProduct('Batalla')
+                      
+    #############################################      
+    #   Suite de Pruebas para updateAccion      #
+    #############################################  
+    # Caso Inicial
+      
+    # Prueba 27
+    def testupdateAccionExists(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.   
+        aAcc   = accions()
+        aAcc.insertAccion('Invocar un eon',1)
+        aAcc.updateAccion('Invocar un eon','Invocar arma artema')
+        aBacklog.deleteProduct('Batalla')  
  
     # Casos Normales
       
-     # Prueba 23
-     def testupdateAccionDesc(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
-         aAcc   = accions()
-         aAcc.insertAccion('Permite elegir.',1)
-         result = aAcc.updateAccion('Permite elegir.','Atención las 24 horas del día')
-         self.assertTrue(result)
-         aAcc.deleteAccion('Atención las 24 horas del día')
-         aBackLog.deleteProduct('Taxi seguro.')
+    # Prueba 28
+    def testupdateAccionDesc(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions()
+        aAcc.insertAccion('Ultima invocacion',1)
+        result = aAcc.updateAccion('Ultima invocacion','Terminar partida a tiempo')
+        self.assertTrue(result)
+        aAcc.deleteAccion('Terminar partida a tiempo')
+        aBacklog.deleteProduct('Batalla')
            
-     #Prueba 24     
-     def testupdateAccionDescNOtExist(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
+    # Prueba 29     
+    def testupdateAccionDescNOtExist(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
         aAcc = accions()
-        result = aAcc.updateAccion('Llegar lo mas pronto posible','Ir comodo y seguro')
+        result = aAcc.updateAccion('Usar fuego','Usar rayo')
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro.')
+        aBacklog.deleteProduct('Batalla')
            
     # Casos Fronteras
         
-    # Prueba 25
-     def testupdateAccionLeftLen1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 30
+    def testupdateAccionLeftLen1(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('A',1)
-        result = aAcc.updateAccion('A','Buscar al cliente donde esté')
+        result = aAcc.updateAccion('A','Buscar puntos debiles')
         self.assertTrue(result)
-        aAcc.deleteAccion('Buscar al cliente donde esté')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aAcc.deleteAccion('Buscar puntos debiles')
+        aBacklog.deleteProduct('Batalla')
            
-    # Prueba 26
-     def testupdateAccionLeftLong1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 31
+    def testupdateAccionLeftLong1(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
-        aAcc.insertAccion('Buscar al cliente donde esté',1)
-        result = aAcc.updateAccion('Buscar al cliente donde esté','A')
+        aAcc.insertAccion('Agotar toda la magia',1)
+        result = aAcc.updateAccion('Agotar toda la magia','A')
         self.assertTrue(result)
         aAcc.deleteAccion('A')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aBacklog.deleteProduct('Batalla')
            
-    # Prueba 27         
-     def testupdateAccionRightLen140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 32         
+    def testupdateAccionRightLen140(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
-        aAcc.insertAccion('Atención las 24 horas del día',1)
-        result = aAcc.updateAccion('Atención las 24 horas del día',140*'T')
+        aAcc.insertAccion('Agotar toda la vitalidad',1)
+        result = aAcc.updateAccion('Agotar toda la vitalidad',140*'T')
         self.assertTrue(result)    
         aAcc.deleteAccion(140*'T')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aBacklog.deleteProduct('Batalla')
   
-    # Prueba 28
-     def testupdateAccionLeftLen140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 33
+    def testupdateAccionLeftLen140(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion(140*'T',1)
-        result = aAcc.updateAccion(140*'T','Atención las 24 horas del día')
+        result = aAcc.updateAccion(140*'T','Agotar toda la vitalidad')
         self.assertTrue(result)
-        aAcc.deleteAccion('Atención las 24 horas del día')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aAcc.deleteAccion('Agotar toda la vitalidad')
+        aBacklog.deleteProduct('Batalla')
            
     # Casos Esquinas
        
-    # Prueba 29
-     def testupdateAccionLeftLen1RightLen140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 34
+    def testupdateAccionLeftLen1RightLen140(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('A',1)
-        result = aAcc.updateAccion('A',140*'Us')
-        self.assertFalse(result)
-        aAcc.deleteAccion('A')
-        aBackLog.deleteProduct('Taxi seguro.') 
+        result = aAcc.updateAccion('A',140*'U')
+        self.assertTrue(result)
+        aAcc.deleteAccion(140*'U')
+        aBacklog.deleteProduct('Batalla') 
 
-
-    # Prueba 30
-     def testupdateAccionLeftLen140RightLen140(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         # Inicio de la prueba.
-         aAcc   = accions()
-         aAcc.insertAccion(140*'Us',1)
-         result = aAcc.updateAccion(140*'Us', 140*'Ma')
-         self.assertFalse(result) 
-         aAcc.deleteAccion(140*'Us')
-         aBackLog.deleteProduct('Taxi seguro.')
-           
-    # Prueba 31
-     def testupdateAccionLeftLen140RightLen1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 35
+    def testupdateAccionLeftLen140RightLen140(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
-        aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problem',1)
-        result = aAcc.updateAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problem','M')
-        self.assertTrue(result)
-        aAcc.deleteAccion('A')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aAcc.insertAccion(140*'U',1)
+        result = aAcc.updateAccion(140*'U', 140*'M')
+        self.assertTrue(result) 
+        aAcc.deleteAccion(140*'M')
+        aBacklog.deleteProduct('Batalla')
            
-    # Prueba 32
-     def testupdateAccionLeftLen1RightLen1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 36
+    def testupdateAccionLeftLen140RightLen1(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
+        # Inicio de la prueba.
+        aAcc   = accions()
+        aAcc.insertAccion(20*'Llamare',1)
+        result = aAcc.updateAccion(20*'Llamare','M')
+        self.assertTrue(result)
+        aAcc.deleteAccion('M')
+        aBacklog.deleteProduct('Batalla')
+           
+    # Prueba 37
+    def testupdateAccionLeftLen1RightLen1(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('X',1)
         result = aAcc.updateAccion('X','U')
         self.assertTrue(result)
         aAcc.deleteAccion('U')
-        aBackLog.deleteProduct('Taxi seguro.') 
+        aBacklog.deleteProduct('Batalla') 
            
     # Casos Maliciosos
        
-    # Prueba 33
-     def testupdateSameName(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 38
+    def testupdateSameName(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
-        aAcc.insertAccion('Reservar un taxi.',1)
-        result = aAcc.updateAccion('Reservar un taxi.','Reservar un taxi.')
-        self.assertFalse(result,"Modificación Válida")
-        aAcc.deleteAccion('Reservar un taxi.')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aAcc.insertAccion('Atacar puntos de vida',1)
+        result = aAcc.updateAccion('Atacar puntos de vida','Atacar puntos de vida')
+        self.assertTrue(result,"Modificación Válida")
+        aAcc.deleteAccion('Atacar puntos de vida')
+        aBacklog.deleteProduct('Batalla')
            
-    # Prueba 34
-     def testupdateAccionLeftLen0RightLen141(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 39
+    def testupdateAccionLeftLen0RightLen141(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('',1)
-        result = aAcc.updateAccion('','Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problems')
+        result = aAcc.updateAccion('',20*'Llamare' + 's')
         self.assertFalse(result, "Modificación válida") 
-        aAcc.deleteAccion('')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aBacklog.deleteProduct('Batalla')
  
-    # Prueba 35
-     def testupdateAccionLeftLen141RightLen141(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 40
+    def testupdateAccionLeftLen141RightLen141(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
-        aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problema',1)
-        result = aAcc.updateAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problema',25*'Ma' + 's')
+        aAcc.insertAccion(20*'Llamare' + 's',1)
+        result = aAcc.updateAccion(20*'Llamare' + 's',20*'Malcara' + 's')
         self.assertFalse(result, "Modificación Válida") 
-        aAcc.deleteAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problema')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aBacklog.deleteProduct('Batalla')
            
-    # Prueba 36
-     def testupdateAccionLeftLen141RightLen0(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 41
+    def testupdateAccionLeftLen141RightLen0(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
-        aAcc.insertAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problemas',1)
-        result = aAcc.updateAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problemas','')
+        aAcc.insertAccion(20*'Llamare',1)
+        result = aAcc.updateAccion(20*'Llamare','')
         self.assertFalse(result, "Modificación válida") 
-        aAcc.deleteAccion('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problemas')
-        aBackLog.deleteProduct('Taxi seguro.')  
+        aAcc.deleteAccion(20*'Llamare')
+        aBacklog.deleteProduct('Batalla')  
  
-    # Prueba 37
-     def testupdateAccionLeftNoneRightValidString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 42
+    def testupdateAccionLeftNoneRightValidString(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
-        result = aAcc.updateAccion(None,'Comunicarse via correo electronico')
+        result = aAcc.updateAccion(None,'Planificar estrategia')
         self.assertFalse(result,"Modificación válida") 
-        aBackLog.deleteProduct('Taxi seguro.')  
+        aBacklog.deleteProduct('Batalla')  
  
-    # Prueba 38
-     def testupdateAccionLeftValidStringRightNone(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 43
+    def testupdateAccionLeftValidStringRightNone(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
-        aAcc.insertAccion('Reservar un taxi.',1)
-        result = aAcc.updateAccion('Reservar un taxi.',None)
+        aAcc.insertAccion('Atacar puntos de vida',1)
+        result = aAcc.updateAccion('Atacar puntos de vida',None)
         self.assertFalse(result, "Modificación válida") 
-        aAcc.deleteAccion('Reservar un taxi.')
-        aBackLog.deleteProduct('Taxi seguro.')    
+        aAcc.deleteAccion('Atacar puntos de vida')
+        aBacklog.deleteProduct('Batalla')    
            
     #############################################      
-    #       Suite de Pruebas para deleteAccion      #
+    #   Suite de Pruebas para deleteAccion      #
     ############################################# 
-       
     # Caso Inicial
        
-    # Prueba 39
-     def testDeleteAccionExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 44
+    def testDeleteAccionExists(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
-        aAcc.insertAccion('Reservar un Taxi',1)
-        aAcc.deleteAccion('Reservar un Taxi')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aAcc.insertAccion('Usar magia blanca',1)
+        aAcc.deleteAccion('Usar magia blanca')
+        aBacklog.deleteProduct('Batalla')
            
-        # Casos Normales
+    # Casos Normales
    
-    # Prueba 40
-     def testDeleteAccion(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 45
+    def testDeleteAccion(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
-        aAcc   = accions()
+        aAcc = accions()
         aAcc.insertAccion('U',1)
         result = aAcc.deleteAccion('U')
         self.assertTrue(result)
-        aBackLog.deleteProduct('Taxi seguro.')
+        aBacklog.deleteProduct('Batalla')
+
     # Casos Fronteras
        
-    # Prueba 41
-     def testDeleteAccion1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 46
+    def testDeleteAccion1(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
         aAcc.insertAccion('A',1)
         result = aAcc.deleteAccion('A')
         self.assertTrue(result)
-        aBackLog.deleteProduct('Taxi seguro.')          
-  
-    # Prueba 42      
-     def testDeleteAccionNoAccion(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+        aBacklog.deleteProduct('Batalla')          
+ 
+    # Prueba 47      
+    def testDeleteAccionNoAccion(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
-        aAcc.insertAccion('yyy',1)
-        result = aAcc.deleteAccion('xxx')
+        aAcc.insertAccion('Diseñar armas',1)
+        result = aAcc.deleteAccion('Diseñar vestiferas')
         self.assertFalse(result)
-        aAcc.deleteAccion('yyy')
-        aBackLog.deleteProduct('Taxi seguro.')
+        aAcc.deleteAccion('Diseñar armas')
+        aBacklog.deleteProduct('Batalla')
 
     # Casos Maliciosos
   
-    # Prueba 43
-     def testDeleteAccionInvalid(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 48
+    def testDeleteAccionInvalid(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
         result = aAcc.deleteAccion('')
         self.assertFalse(result,"Id no válido")
-        aBackLog.deleteProduct('Taxi seguro.')
+        aBacklog.deleteProduct('Batalla')
            
-    # Prueba 44
-     def testDeleteAccionNotString(self):
-       aBackLog = backLog()
-       aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 49
+    def testDeleteAccionNotString(self):
+       aBacklog = backlog()
+       aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
        # Inicio de la prueba.
        aAcc   = accions()
-       aAcc.insertAccion(12345,1)
        result = aAcc.deleteAccion(12345)
        self.assertFalse(result,"Id no válido")
-       aBackLog.deleteProduct('Taxi seguro.')
+       aBacklog.deleteProduct('Batalla')
  
-    # Prueba 45    
-     def testDeleteAccionNotExist(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro.')
+    # Prueba 50    
+    def testDeleteAccionNotExist(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Batalla','Enemigos de campo',1)
         # Inicio de la prueba.
         aAcc   = accions()
-        result = aAcc.deleteAccion('Legar rápido')
+        result = aAcc.deleteAccion('Lista de enemigos en batalla')
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro.')
-         
-     ##############################################      
-     #       Suite de Pruebas para SearchIdAccion #
-     ##############################################
-    
-     # Prueba 46  
-     def testSearchIdExist(self):
-         oAccion = accions()
-         oAccion.searchIdAccion(1)
-  
-     # Casos Fronteras
-     
-     # Prueba 47
-     def testSearchIdTrue(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         oAccion   = accions()
-         oAccion.insertAccion('Nuevo T',1)
-         searchAcc = oAccion.searchAccion('Nuevo T')
-         idFound = searchAcc[0].idaccion
-         result = oAccion.searchIdAccion(idFound)
-         self.assertNotEqual(result,[],"Elemento no encontrado")
-         oAccion.deleteAccion('Nuevo T')
-         aBackLog.deleteProduct('Taxi seguro.') 
-     
-     # Prueba 48
-     def testSearchIdEmpty(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         oAccion   = accions()
-         oAccion.insertAccion('',1)
-         result = oAccion.searchIdAccion(0)
-         self.assertEqual(result,[], "Elemento no encontrado")
-         aBackLog.deleteProduct('Taxi seguro.')
-           
-     # Prueba 49
-     def testSearchIdNoAccion(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         oAccion   = accions()
-         oAccion.insertAccion('T',1)
-         result = oAccion.searchIdAccion(2)
-         self.assertEqual(result,[],"Elemento no encontrado")
-         oAccion.deleteAccion('T')
-         aBackLog.deleteProduct('Taxi seguro.') 
- 
-     # Casos Maliciosos
-     
-     # Prueba 50
-     def testSearchIdString(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         oAccion   = accions()
-         oAccion.insertAccion(1254,1)
-         result = oAccion.searchIdAccion('')
-         self.assertEqual(result,[],"Elemento Insertado") 
-         aBackLog.deleteProduct('Taxi seguro.') 
-      
-     # Prueba 51
-     def testSearchIdNoneString(self):
-         aBackLog = backLog()
-         aBackLog.insertBackLog('Taxi seguro.')
-         oAccion   = accions()
-         oAccion.insertAccion(None,1)
-         result = oAccion.searchIdAccion(None)
-         self.assertEqual(result,[],"Válido")    
-         aBackLog.deleteProduct('Taxi seguro.')
-           
+        aBacklog.deleteProduct('Batalla')

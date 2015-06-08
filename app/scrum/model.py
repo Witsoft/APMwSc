@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-. 
 
+# Se importan las librerias necesarias.
 import os
 import sys
 from flask                 import Flask

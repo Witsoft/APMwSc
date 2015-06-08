@@ -14,231 +14,219 @@ class TestObjectives(unittest.TestCase):
   
     # Prueba 1
      def testInsertObjectiveExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Mueve personas',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Materia dificil',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Reservar un taxi',1,True)
-        aAcc.deleteObjective('Reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')        
+        oObj = objective()
+        oObj.insertObjective('Pasar con cinco',1,True)
+        oObj.deleteObjective('Pasar con cinco')
+        oBacklog.deleteProduct('Estructuras Discretas II')        
 
     # Casos Normales
     
     # Prueba 2          
      def testInsertObjectiveElement(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Pasa ciudades',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Profesores dificiles',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('Permite elegir',1,False)
+        oObj   = objective()
+        result = oObj.insertObjective('Estudiar con constancia',1,False)
         self.assertTrue(result)
-        aAcc.deleteObjective('Permite elegir')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Estudiar con constancia')
+        oBacklog.deleteProduct('Estructuras Discretas II')
                           
     # Prueba 3
      def testInsertObjectiveRepeatedElement(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Pasa ciudades',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Dañan el pensum',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('Permite elegir',1,True)
-        result1 = aAcc.insertObjective('Permite elegir',1,True)
+        oObj   = objective()
+        result = oObj.insertObjective('Estudiar con constancia',1,True)
+        result1 = oObj.insertObjective('Estudiar con constancia',1,True)
         self.assertFalse(result1)
-        aAcc.deleteObjective('Permite elegir')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Estudiar con constancia')
+        oBacklog.deleteProduct('Estructuras Discretas II')
                
     # Casos Fronteras
 
     # Prueba 4
      def testInsertObjectiveShortDesc0(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rueda de caras negras',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Imposible sacar 5',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('',1,True)
+        oObj   = objective()
+        result = oObj.insertObjective('',1,True)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
                            
     # Prueba 5
      def testInsertObjectiveLongDesc1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Motor fuerte',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Cursar 4 veces',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('A',1,False)
+        oObj   = objective()
+        result = oObj.insertObjective('A',1,False)
         self.assertTrue(result)
-        aAcc.deleteObjective('A')
-        aBackLog.deleteProduct('Taxi seguro')
-       
+        oObj.deleteObjective('A')
+        oBacklog.deleteProduct('Estructuras Discretas II')
+                  
     # Prueba 6
      def testInsertObjectiveLongDesc140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Pertece a linea movistar',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Pertece a computacion',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem',1,False)
+        oObj   = objective()
+        result = oObj.insertObjective(20*'Llamare',1,False)
         self.assertTrue(result)
-        aAcc.deleteObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective(20*'Llamare')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 7
      def testInsertObjectiveLongDesc141(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','De color rojo',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','De 4 creditos',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problema',1,True)
+        oObj   = objective()
+        result = oObj.insertObjective(20*'Llamare' + 's',1,True)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
                 
     # Prueba 8
-     def testInsertObjectiveIdBackLogInvalid(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+     def testInsertObjectiveIdBacklogInvalid(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Quita horas de sueño',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result  =aAcc.insertObjective('Movilizarme desde mi casa',0,False)
+        oObj   = objective()
+        result  =oObj.insertObjective('Estudiar y pasar',0,False)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 9
      def testInsertObjectiveObjTypeInvalid(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Quita horas de sueño',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result  =aAcc.insertObjective('Movilizarme desde mi casa',1,'Falseee')
+        oObj   = objective()
+        result  =oObj.insertObjective('Estudiar y pasar',1,'Falseee')
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Casos Esquinas
        
     # Prueba 10
-     def testInsertObjectiveIdBackLogNoExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rapido y Furioso',1)
+     def testInsertObjectiveIdBacklogNoExists(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Demasiado complicada',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result  =aAcc.insertObjective('Trasladarse rápido',2,True)
+        oObj   = objective()
+        result  =oObj.insertObjective('Psar con dos parciales',2,True)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
-            
+        oBacklog.deleteProduct('Estructuras Discretas II')
+
     # Prueba 11
-     def testInsertObjectiveLongDesc140AndIdBackLogNoExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Via rapida',1)
+     def testInsertObjectiveLongDesc140AndIdBacklogNoExists(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Demasiado pesada',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin proble1',3,True)
+        oObj   = objective()
+        result = oObj.insertObjective(20*'Llamare',3,True)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 12
-     def testInsertObjectiveLongDesc140AndIdBackLogExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Via rapida',1)
+     def testInsertObjectiveLongDesc140AndIdBacklogExists(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Demasiado pesada',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin proble1',1,False)
+        oObj   = objective()
+        result = oObj.insertObjective(20*'Llamare',1,False)
         self.assertTrue(result)
-        aAcc.deleteObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective(20*'Llamare')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 13
-     def testInsertObjectiveLongDesc1AndIdBackLogExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Via rapida',1)
+     def testInsertObjectiveLongDesc1AndIdBacklogExists(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Pocos profesores',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('L',1,True)
+        oObj   = objective()
+        result = oObj.insertObjective('L',1,True)
         self.assertTrue(result)
-        aAcc.deleteObjective('L')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('L')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 14
-     def testInsertObjectiveLongDesc1AndIdBackLogNotExistsObjTypeExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Via rapida',1)
+     def testInsertObjectiveLongDesc1AndIdBacklogNotExistsObjTypeExists(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Pocos profesores',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('L',7,False)
+        oObj   = objective()
+        result = oObj.insertObjective('L',7,False)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 15
-     def testInsertObjectiveLongDesc0AndIdBackLogExistsObjTypeExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Via rapida',1)
+     def testInsertObjectiveLongDesc0AndIdBacklogExistsObjTypeExists(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Demasiada pesada',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('',1,True)
+        oObj   = objective()
+        result = oObj.insertObjective('',1,True)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
        
     # Casos Maliciosos
       
     # Prueba 16
      def testInsertNotString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Vuelo alto',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Demasiado pasada',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective(4350,1,True)
+        oObj   = objective()
+        result = oObj.insertObjective(4350,1,True)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
            
     # Prueba 17
      def testInsertNoneString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Velocidad maxima',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Materia extensa',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective(None,1,False)
+        oObj   = objective()
+        result = oObj.insertObjective(None,1,False)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 18
      def testInsertWrongObjType(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Velocidad maxima',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Materia extensa',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('7 ruedas',1,'Falseeeee')
+        oObj   = objective()
+        result = oObj.insertObjective('Estudiar bastante',1,'Falseeeee')
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 19
      def testInsertWrongAllParameters(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Velocidad media',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Materia',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective(13500,'Ramas','True or False')
+        oObj   = objective()
+        result = oObj.insertObjective(13500,0,'True or False')
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 20
      def testInsertNoneAllParameters(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Velocidad media',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Materia',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective(None,None,None)
+        oObj   = objective()
+        result = oObj.insertObjective(None,0,None)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
-  
+        oBacklog.deleteProduct('Estructuras Discretas II')
+
     #############################################      
     #   Suite de Pruebas para searchObjective   #
     #############################################
@@ -247,106 +235,95 @@ class TestObjectives(unittest.TestCase):
        
     # Prueba 21 
      def testsearchObjectiveExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Manejar con prudencia',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Estudiar con prudencia',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,True)
-        aAcc.searchObjective('Permite reservar un taxi')
+        oObj = objective()
+        oObj.insertObjective('Subir el indice academico',1,True)
+        oObj.searchObjective('Subir el indice academico')
 
     # Casos Fronteras
        
     # Prueba 22
      def testsearchObjectiveShortDesc0(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilizacion',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Trabajar 24 horas',1)
         # Inicio de la prueba.        
-        aAcc   = objective()
-        aAcc.insertObjective('',1,False)
-        result = aAcc.searchObjective('')
+        oObj   = objective()
+        oObj.insertObjective('',1,False)
+        result = oObj.searchObjective('')
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
       
     # Prueba 23
      def testsearchObjectiveShortDesc1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Desplazamiento',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Terminar de pasar',1)
         # Inicio de la prueba
-        aAcc   = objective()
-        aAcc.insertObjective('A',1,True)
-        result = aAcc.searchObjective('A')
+        oObj   = objective()
+        oObj.insertObjective('A',1,True)
+        result = oObj.searchObjective('A')
         self.assertTrue(result)
-        aAcc.deleteObjective('A')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('A')
+        oBacklog.deleteProduct('Estructuras Discretas II')
            
     # Prueba 24
      def testsearchObjectiveShortDesc140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Trabajar',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Trabajar',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem',1,True)
-        result = aAcc.searchObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem')
-        self.assertNotEqual(result,[],"Objective no encontrada")
-        aAcc.deleteObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem')
-        aBackLog.deleteProduct('Taxi seguro')
-           
+        oObj   = objective()
+        oObj.insertObjective(20*'Llamare',1,True)
+        result = oObj.searchObjective(20*'Llamare')
+        self.assertNotEqual(result,[],"Objectivo no encontrado")
+        oObj.deleteObjective(20*'Llamare')
+        oBacklog.deleteProduct('Estructuras Discretas II')
+
     # Prueba 25
      def testsearchObjectiveShortDesc141(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Estructura del carro',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Estructura de la materia',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problema',1,False)
- 
-        result = aAcc.searchObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problema')
-        self.assertFalse(result, "Objective Encontrada.")
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj   = objective()
+        oObj.insertObjective(20*'Llamare'+'s',1,False)
+        result = oObj.searchObjective(20*'Llamare'+'s')
+        self.assertFalse(result, "Objective no encontrado")
+        oBacklog.deleteProduct('Estructuras Discretas II')
   
     # Caso Normal
       
     # Prueba 26
      def testsearchObjectiveDescNotExist(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Relacion con el cliente',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Relacion con el profesor',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.searchObjective('Comunicarse via correo electronico')
+        oObj   = objective()
+        result = oObj.searchObjective('Comunicarse via correo electronico')
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
   
     # Casos Maliciosos
        
      # Prueba 27
      def testsearchObjectiveNotString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Viajes',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Vacaciones',1)
         # Inicio de la prueba. 
-        aAcc   = objective()
-        aAcc.insertObjective(4350,1,True)
-        result = aAcc.searchObjective(4350)
-        self.assertEqual(result, [],'Objective Encontrada')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj   = objective()
+        oObj.insertObjective(4350,1,True)
+        result = oObj.searchObjective(4350)
+        self.assertEqual(result, [],'Objectivo encontrado')
+        oBacklog.deleteProduct('Estructuras Discretas II')
  
     # Prueba 28 
      def testSearchNameNoneString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rapidez',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Rapidez',1)
         # Inicio de la prueba.   
-        aAcc   = objective()
-        result = aAcc.searchObjective(None)
-        self.assertEqual(result, [],'Objective Encontrada')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj   = objective()
+        result = oObj.searchObjective(None)
+        self.assertEqual(result, [],'objective encontrado')
+        oBacklog.deleteProduct('Estructuras Discretas II')
           
     #############################################      
     #   Suite de Pruebas para searchIdObjective#
@@ -355,87 +332,87 @@ class TestObjectives(unittest.TestCase):
           
     # Prueba 29  
      def testsearchIdObjectiveExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,True)
-        aAcc.searchIdObjective(1)
+        oObj = objective()
+        oObj.insertObjective('Subir el indice academico',1,True)
+        oObj.searchIdObjective(1)
 
     # Caso Normal
           
     # Prueba 30 
      def testsearchValidIdObjective(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,False)
-        result = aAcc.searchIdObjective(1)
+        oObj = objective()
+        oObj.insertObjective('Subir el indice academico',1,False)
+        result = oObj.searchIdObjective(1)
         self.assertNotEqual([],result)
-        aAcc.deleteObjective('Permite reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
-
+        oObj.deleteObjective('Subir el indice academico')
+        oBacklog.deleteProduct('Estructuras Discretas II')
+              
     # Caso Frontera
           
     # Prueba 31 
      def testsearchIdObjective(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,True)
-        result = aAcc.searchIdObjective(1)
+        oObj = objective()
+        oObj.insertObjective('Subir el indice academico',1,True)
+        result = oObj.searchIdObjective(1)
         self.assertNotEqual([],result)
-        aAcc.deleteObjective('Permite reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Subir el indice academico')
+        oBacklog.deleteProduct('Estructuras Discretas II')
           
     # Prueba 32
      def testsearchInValidIdObjective(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,False)
-        result = aAcc.searchIdObjective(5)
+        oObj = objective()
+        oObj.insertObjective('Subir el indice academico',1,False)
+        result = oObj.searchIdObjective(5)
         self.assertEqual([],result)
-        aAcc.deleteObjective('Permite reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Subir el indice academico')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 33
      def testSearchIdEmpty(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
         # Inicio de la prueba.
         oObjective   = objective()
         oObjective.insertObjective('',1,True)
         result = oObjective.searchIdObjective(0)
         self.assertEqual(result,[], "Elemento no encontrado")
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
                     
     # Casos Maliciosos
      
     # Prueba 34
      def testSearchIdString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Ruedas de cara blanca',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Pesadillas al dormir',1)
         # Inicio de la prueba.
         oObjective   = objective()
         oObjective.insertObjective(1254,1,False)
         result = oObjective.searchIdObjective('')
         self.assertEqual(result,[],"Elemento Insertado") 
-        aBackLog.deleteProduct('Taxi seguro')       
+        oBacklog.deleteProduct('Estructuras Discretas II')       
 
     # Prueba 35
      def testSearchIdNoneString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rapidez',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Disciplina',1)
         # Inicio de la prueba.        
         oObjective   = objective()
         oObjective.insertObjective(None,1,False)
         result = oObjective.searchIdObjective(None)
         self.assertEqual(result,[],"Válido")    
-        aBackLog.deleteProduct('Taxi seguro')           
+        oBacklog.deleteProduct('Estructuras Discretas II')           
          
     #############################################      
     #   Suite de Pruebas para updateObjective   #
@@ -444,227 +421,209 @@ class TestObjectives(unittest.TestCase):
       
     # Prueba 36
      def testupdateObjectiveExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Descripcion',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Descripcion',1)
         # Inicio de la prueba.   
-        aAcc   = objective()
-        aAcc.insertObjective('Reservar un taxi.',1,True)
-        aAcc.updateObjective('Reservar un taxi','Reservar un taxi o varios',False)
-        aBackLog.deleteProduct('Taxi seguro')  
+        oObj   = objective()
+        oObj.insertObjective('Pasar con cinco.',1,True)
+        oObj.updateObjective('Pasar con cinco','Pasar con cinco o varios',False)
+        oBacklog.deleteProduct('Estructuras Discretas II')  
 
     # Casos Normales
       
     # Prueba 37
      def testupdateObjectiveDesc(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Carretera',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Universidad',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Permite elegir',1,True)
-        result = aAcc.updateObjective('Permite elegir','Atención las 24 horas del día',False)
+        oObj   = objective()
+        oObj.insertObjective('Estudiar con constancia',1,True)
+        result = oObj.updateObjective('Estudiar con constancia','Ir a consultas',False)
         self.assertTrue(result)
-        aAcc.deleteObjective('Atención las 24 horas del día')
-        aBackLog.deleteProduct('Taxi seguro')                                  
+        oObj.deleteObjective('Ir a consultas')
+        oBacklog.deleteProduct('Estructuras Discretas II')                                  
            
     # Prueba 38     
      def testupdateObjectiveDescNotExist(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        result = aAcc.updateObjective('Llegar lo mas pronto posible','Ir comodo y seguro',True)
+        oObj = objective()
+        result = oObj.updateObjective('Llegar lo mas pronto posible','Ir por lo seguro',True)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Casos Fronteras
         
     # Prueba 39
      def testupdateObjectiveLeftLen1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rapidez',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Busqueda',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('A',1,False)
-        result = aAcc.updateObjective('A','Buscar al cliente donde esté',True)
+        oObj   = objective()
+        oObj.insertObjective('A',1,False)
+        result = oObj.updateObjective('A','Buscar al profesor donde esté',True)
         self.assertTrue(result)
-        aAcc.deleteObjective('Buscar al cliente donde esté')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Buscar al profesor donde esté')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 40
      def testupdateObjectiveLeftLong1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Desplazamiento',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Busqueda',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Buscar al cliente donde esté',1, False)
-        result = aAcc.updateObjective('Buscar al cliente donde esté','A',True)
+        oObj   = objective()
+        oObj.insertObjective('Buscar al profesor donde esté',1, False)
+        result = oObj.updateObjective('Buscar al profesor donde esté','A',True)
         self.assertTrue(result)
-        aAcc.deleteObjective('A')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('A')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 41         
      def testupdateObjectiveRightLen140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Carretera',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Muchas materias',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Atención las 24 horas del día',1,True)
-        result = aAcc.updateObjective('Atención las 24 horas del día',140*'T',False)
+        oObj   = objective()
+        oObj.insertObjective('Cursar en paralelo',1,True)
+        result = oObj.updateObjective('Cursar en paralelo',140*'T',False)
         self.assertTrue(result)    
-        aAcc.deleteObjective(140*'T')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective(140*'T')
+        oBacklog.deleteProduct('Estructuras Discretas II')
                                   
     # Prueba 42
      def testupdateObjectiveLeftLen140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Tipo de taxi',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Materias',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective(140*'T',1, False)
-        result = aAcc.updateObjective(140*'T','Atención las 24 horas del día',True)
+        oObj   = objective()
+        oObj.insertObjective(140*'T',1, False)
+        result = oObj.updateObjective(140*'T','Materias a cursar',True)
         self.assertTrue(result)
-        aAcc.deleteObjective('Atención las 24 horas del día')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Materias a cursar')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Casos Esquinas
        
     # Prueba 43
      def testupdateObjectiveLeftLen1RightLen140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Neumàticos de cara negra',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Verla muchas veces',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('A',1,False)
-        result = aAcc.updateObjective('A',140*'Us',True)
-        self.assertFalse(result)
-        aAcc.deleteObjective('A')
-        aBackLog.deleteProduct('Taxi seguro') 
+        oObj   = objective()
+        oObj.insertObjective('A',1,False)
+        result = oObj.updateObjective('A',70*'Us',True)
+        self.assertTrue(result)
+        oObj.deleteObjective('A')
+        oBacklog.deleteProduct('Estructuras Discretas II') 
 
     # Prueba 44
      def testupdateObjectiveLeftLen140RightLen140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Ruedas de cara blanca',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Materias de computo',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective(140*'Us',1,True)
-        result = aAcc.updateObjective(140*'Us', 140*'Ma',False)
-        self.assertFalse(result) 
-        aAcc.deleteObjective(140*'Us')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj   = objective()
+        oObj.insertObjective(140*'U',1,True)
+        result = oObj.updateObjective(140*'U', 140*'M',False)
+        self.assertTrue(result) 
+        oObj.deleteObjective(140*'M')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 45
      def testupdateObjectiveLeftLen140RightLen1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rueda 250 km',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Vale cuatro creditos',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problem',1,True)
-        result = aAcc.updateObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problem','M',False)
+        oObj   = objective()
+        oObj.insertObjective(20*'Llamare',1,True)
+        result = oObj.updateObjective(20*'Llamare','M',False)
         self.assertTrue(result)
-        aAcc.deleteObjective('M')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('M')
+        oBacklog.deleteProduct('Estructuras Discretas II')
            
     # Prueba 46
      def testupdateObjectiveLeftLen1RightLen1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Semàforo',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Profesores',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('X',1,True)
-        result = aAcc.updateObjective('X','U',False)
+        oObj   = objective()
+        oObj.insertObjective('X',1,True)
+        result = oObj.updateObjective('X','U',False)
         self.assertTrue(result)
-        aAcc.deleteObjective('U')
-        aBackLog.deleteProduct('Taxi seguro') 
+        oObj.deleteObjective('U')
+        oBacklog.deleteProduct('Estructuras Discretas II') 
            
     # Casos Maliciosos
        
     # Prueba 47
      def testupdateSameName(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Partes de un taxi',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Temas de la materia',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Reservar un taxi',1,True)
-        result = aAcc.updateObjective('Reservar un taxi','Reservar un taxi',False)
+        oObj   = objective()
+        oObj.insertObjective('Pasar con cinco',1,True)
+        result = oObj.updateObjective('Pasar con cinco','Pasar con cinco',False)
         self.assertTrue(result)
-        aAcc.deleteObjective('Reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Pasar con cinco')
+        oBacklog.deleteProduct('Estructuras Discretas II')
            
     # Prueba 48
-     def testupdateObjectiveLeftLen0RightLen141(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+     def testupdateObjectiveLeftLen1RightLen141(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('',1,False)
-        result = aAcc.updateObjective('','Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problems',True)
+        oObj   = objective()
+        oObj.insertObjective('A',1,False)
+        result = oObj.updateObjective('',20*'Llamare'+'s',True)
         self.assertFalse(result, "Modificación válida") 
-        aAcc.deleteObjective('')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('A')
+        oBacklog.deleteProduct('Estructuras Discretas II')
  
     # Prueba 49
-     def testupdateObjectiveLeftLen141RightLen141(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Ruedas',1)
+     def testupdateObjectiveLeftLen140RightLen141(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Ruedas',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problema',1,False)
-        result = aAcc.updateObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problema',25*'Ma' + 's',False)
+        oObj   = objective()
+        oObj.insertObjective(20*'Llamare',1,False)
+        result = oObj.updateObjective(20*'Llamare',70*'Ma' + 's',False)
         self.assertFalse(result, "Modificación Válida") 
-        aAcc.deleteObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problema')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective(20*'Llamare')
+        oBacklog.deleteProduct('Estructuras Discretas II')
            
     # Prueba 50
-     def testupdateObjectiveLeftLen141RightLen0(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Ruedas caras',1)
+     def testupdateObjectiveLeftLen140RightLen0(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Materia valida',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problemas',1,True)
-        result = aAcc.updateObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problemas','',False)
+        oObj   = objective()
+        oObj.insertObjective(20*'Llamare',1,True)
+        result = oObj.updateObjective(20*'Llamare','',False)
         self.assertFalse(result, "Modificación válida") 
-        aAcc.deleteObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problemas')
-        aBackLog.deleteProduct('Taxi seguro')  
+        oObj.deleteObjective(20*'Llamare')
+        oBacklog.deleteProduct('Estructuras Discretas II')  
 
     # Prueba 51
      def testupdateObjectiveLeftNoneRightValidString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Recorrer ciudades',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Recorrer diagrama',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.updateObjective(None,'Comunicarse via correo electronico',True)
+        oObj   = objective()
+        result = oObj.updateObjective(None,'Comunicarse via correo electronico',True)
         self.assertFalse(result,"Modificación válida") 
-        aBackLog.deleteProduct('Taxi seguro')  
+        oBacklog.deleteProduct('Estructuras Discretas II')  
  
     # Prueba 52
      def testupdateObjectiveLeftValidStringRightNone(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Recorrer estados',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Recorrer diagrama',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Reservar un taxi',1,False)
-        result = aAcc.updateObjective('Reservar un taxi',None,True)
+        oObj   = objective()
+        oObj.insertObjective('Pasar con cinco',1,False)
+        result = oObj.updateObjective('Pasar con cinco',None,True)
         self.assertFalse(result, "Modificación válida") 
-        aAcc.deleteObjective('Reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')    
+        oObj.deleteObjective('Pasar con cinco')
+        oBacklog.deleteProduct('Estructuras Discretas II')    
 
     #############################################      
     #    Suite de Pruebas para deleteObjective  #
@@ -674,84 +633,84 @@ class TestObjectives(unittest.TestCase):
        
     # Prueba 53
      def testDeleteObjectiveExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movimiento Lineal',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Materia discreta',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Reservar un Taxi',1,True)
-        aAcc.deleteObjective('Reservar un Taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj   = objective()
+        oObj.insertObjective('Reservar cupo',1,True)
+        oObj.deleteObjective('Reservar cupo')
+        oBacklog.deleteProduct('Estructuras Discretas II')
            
         # Casos Normales
    
     # Prueba 54
      def testDeleteObjective(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Asiento',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Cursar',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('U',1,False)
-        result = aAcc.deleteObjective('U')
+        oObj   = objective()
+        oObj.insertObjective('U',1,False)
+        result = oObj.deleteObjective('U')
         self.assertTrue(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Casos Fronteras
 
     # Prueba 55
      def testDeleteObjective1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Peatones',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Faltan 2 mas',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('A',1,True)
-        result = aAcc.deleteObjective('A')
+        oObj   = objective()
+        oObj.insertObjective('A',1,True)
+        result = oObj.deleteObjective('A')
         self.assertTrue(result)
-        aBackLog.deleteProduct('Taxi seguro')          
+        oBacklog.deleteProduct('Estructuras Discretas II')          
   
     # Prueba 56      
      def testDeleteObjectiveNoObjective(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rayado',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Materias de cadena',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('yyy',1,True)
-        result = aAcc.deleteObjective('xxx')
+        oObj   = objective()
+        oObj.insertObjective('yyy',1,True)
+        result = oObj.deleteObjective('xxx')
         self.assertFalse(result)
-        aAcc.deleteObjective('yyy')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('yyy')
+        oBacklog.deleteProduct('Estructuras Discretas II')
      
     # Casos Maliciosos
   
     # Prueba 57
      def testDeleteObjectiveInvalid(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.deleteObjective('')
+        oObj   = objective()
+        result = oObj.deleteObjective('')
         self.assertFalse(result,"Id no válido")
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
            
     # Prueba 58
      def testDeleteObjectiveNotString(self):
-       aBackLog = backLog()
-       aBackLog.insertBackLog('Taxi seguro','Desplazamiento',1)
+       oBacklog = backlog()
+       oBacklog.insertBacklog('Estructuras Discretas II','Determinacion',1)
        # Inicio de la prueba.
-       aAcc   = objective()
-       aAcc.insertObjective(12345,1,False)
-       result = aAcc.deleteObjective(12345)
+       oObj   = objective()
+       oObj.insertObjective(12345,1,False)
+       result = oObj.deleteObjective(12345)
        self.assertFalse(result,"Id no válido")
-       aBackLog.deleteProduct('Taxi seguro')
+       oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Prueba 59    
      def testDeleteObjectiveNotExist(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.deleteObjective('Llegar rápido')
+        oObj   = objective()
+        result = oObj.deleteObjective('Terminar de pasar')
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Estructuras Discretas II')
          
     ###################################################      
     # Suite de Pruebas para VerifyObjectiveTransverse #
@@ -761,90 +720,65 @@ class TestObjectives(unittest.TestCase):
   
     # Prueba 60
      def testVerifyObjectiveExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Mueve personas',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Mueve promedio',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Reservar un taxi',1,True)
-        transverse = aAcc.verifyObjectiveTransverse(1)
+        oObj = objective()
+        oObj.insertObjective('Pasar con cinco',1,True)
+        transverse = oObj.verifyObjectiveTransverse(1)
         self.assertTrue(transverse)
-        aAcc.deleteObjective('Reservar un Taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Pasar con cinco')
+        oBacklog.deleteProduct('Estructuras Discretas II')
         
     # Caso Normal
           
     # Prueba 61 
      def testVerifyValidIdObjectiveTransverse(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,False)
-        transverse = aAcc.verifyObjectiveTransverse(1)
+        oObj = objective()
+        oObj.insertObjective('Subir el indice academico',1,False)
+        transverse = oObj.verifyObjectiveTransverse(1)
         self.assertTrue(transverse)
-        aAcc.deleteObjective('Permite reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Subir el indice academico')
+        oBacklog.deleteProduct('Estructuras Discretas II')
 
     # Caso Frontera
           
     # Prueba 62 
      def testVerifyIdObjectiveTransverse(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,True)
-        transverse = aAcc.verifyObjectiveTransverse(1)
+        oObj = objective()
+        oObj.insertObjective('Subir el indice academico',1,True)
+        transverse = oObj.verifyObjectiveTransverse(1)
         self.assertTrue(transverse)
-        aAcc.deleteObjective('Permite reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
-          
+        oObj.deleteObjective('Subir el indice academico')
+        oBacklog.deleteProduct('Estructuras Discretas II')
+              # Casos Maliciosos
+     
     # Prueba 63
-     def testVerifyInvalidIdObjectiveTransverse(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+     def testVerifyIdStringObjectiveTransverse(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Teoria de conjuntos',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,False)
-        transverse = aAcc.verifyObjectiveTransverse(5)
-        self.assertEqual([],transverse)
-        aAcc.deleteObjective('Permite reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj   = objective()
+        oObj.insertObjective('Asegurar trimestre',1,False)
+        transverse = oObj.verifyObjectiveTransverse('')
+        self.assertFalse([],transverse) 
+        oObj.deleteObjective('Asegurar trimestre')
+        oBacklog.deleteProduct('Estructuras Discretas II')       
 
     # Prueba 64
-     def testVerifyIdEmptyObjectiveTransverse(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
-        # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Terminar todo',1,True)
-        transverse = aAcc.verifyObjectiveTransverse(0)
-        self.assertEqual([],transverse)
-        aAcc.deleteObjective('Terminar todo')        
-        aBackLog.deleteProduct('Taxi seguro')
-                    
-    # Casos Maliciosos
-     
-    # Prueba 65
-     def testVerifyIdStringObjectiveTransverse(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Ruedas de cara blanca',1)
-        # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Asegurar el cinturon',1,False)
-        transverse = aAcc.verifyObjectiveTransverse('')
-        self.assertFalse([],transverse) 
-        aAcc.deleteObjective('Asegurar el cinturon')
-        aBackLog.deleteProduct('Taxi seguro')       
-
-    # Prueba 66
      def testVerifyIdNoneStringObjectiveTransverse(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rapidez',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Estructuras Discretas II','Conocimiento',1)
         # Inicio de la prueba.        
-        aAcc   = objective()
-        aAcc.insertObjective('Desarrollar partes de un carro',1,False)
-        transverse = aAcc.searchIdObjective(None)
+        oObj   = objective()
+        oObj.insertObjective('Desarrollar conjuntos',1,False)
+        transverse = oObj.searchIdObjective(None)
         self.assertEqual([],transverse)    
-        aAcc.deleteObjective('Desarrollar partes de un carro')
-        aBackLog.deleteProduct('Taxi seguro')                   
+        oObj.deleteObjective('Desarrollar conjuntos')
+        oBacklog.deleteProduct('Estructuras Discretas II')                   

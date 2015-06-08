@@ -69,7 +69,7 @@ class accions(object):
        
     def deleteAccion(self, accionDescription):
         '''Permite eliminar una accion segun su id'''
-        checkTypeDescription = type(acciondescription) == str        
+        checkTypeDescription = type(accionDescription) == str        
         
         if checkTypeDescription:
             checkLenDescription = MIN_ACCION_DESCRIPTION <= len(accionDescription) <= MAX_ACCION_DESCRIPTION

@@ -18,29 +18,29 @@ class role(object):
         return (aActor == [])
     
 
-    def insertActor(self,nameActor,actordescription,idPila):
+    def insertActor(self,nameActor,actordescription,idBacklog):
         '''Permite insertar un actor'''
         checkTypeName        = type(nameActor) == str
         checkTypeDescription = type(actordescription) == str
-        checkTypeId          = type(idPila) == int
+        checkTypeId          = type(idBacklog) == int
         
         if checkTypeName  and checkTypeDescription and checkTypeId:
             checkLongName        = CONST_MIN_NAME_ACTOR <= len(nameActor) <= CONST_MAX_NAME_ACTOR
             checkLongDescription = CONST_MIN_ACTOR_DESCRIPTION <= len(actordescription) <= CONST_MAX_ACTOR_DESCRIPTION
             
             if checkLongName and checkLongDescription:
-                oBacklog = clsBacklog.query.filter_by(BL_idBacklog = idPila).all()
+                oBacklog = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).all()
                 oActor   = clsActor.query.filter_by(A_nameActor = nameActor).all()
                 
                 if (oActor == []) and (oBacklog != []):
-                    newActor = clsActor(nameActor, actordescription, idPila)
+                    newActor = clsActor(nameActor, actordescription, idBacklog)
                     db.session.add(newActor)
                     db.session.commit()
                     return True
         return False
 
 
-    def findnameActor(self, nameActor):
+    def findNameActor(self, nameActor):
         '''Permite buscar un elemento en la tabla de actores'''
         checkTypeName = type(nameActor) == str
         if checkTypeName:
