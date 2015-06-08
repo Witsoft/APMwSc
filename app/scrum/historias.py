@@ -277,6 +277,9 @@ def VHistoria():
     res['data2'] = [{'idTarea':tarea.HW_idHomework, 'descripcion':tarea.HW_description}for tarea in homeworkList]
     
     res['idPila']  = 1   
+    session['idHistoria'] = idHistoria
+    res['idHistoria'] = idHistoria
+    
     return json.dumps(res)
 
 
