@@ -42,12 +42,27 @@ def ACrearActor():
 @actor.route('/actor/AElimActor')
 def AElimActor():
     #GET parameter
-    idActor = request.args['idActor']
     results = [{'label':'/VProducto', 'msg':['Actor eliminado']}, {'label':'/VActor', 'msg':['No se pudo eliminar este actor']}, ]
-    res = results[0]
+    res = results[1]
     #Action code goes here, res should be a list with a label and a message
 
-    res['label'] = res['label'] + '/1'
+    # Obtenemos el id del producto y de la accion.
+    idPila   = int(session['idPila'])
+    #idActor = 5
+    idActor  = int(session['idActor'])
+    print('idPila AElimActor', idPila)
+    print('idActor AElimActor', idActor)
+    
+    # Conseguimos el actor a modificar  
+    oActor = role()
+    found  = oActor.findIdActor(idActor)
+    # Modfificamos el actor deseado
+    deleted = oActor.deleteActor(found[0].A_nameActor) 
+    
+    if deleted:
+        res = results[0]
+    
+    res['label'] = res['label'] + '/' + str(idPila)
 
     #Action code ends here
     if "actor" in res:
@@ -95,7 +110,9 @@ def AModifActor():
             session.pop("actor", None)
         else:
             session['actor'] = res['actor']
-            
+    
+     
+       
     return json.dumps(res)
 
 
@@ -124,6 +141,7 @@ def VActor():
     
     res['fActor'] = {'idActor':idActor, 'nombre':result[0].A_nameActor, 'descripcion':result[0].A_actorDescription}    
     res['idPila'] = idPila
+    session['idActor'] = idActor
    
     return json.dumps(res)
 
