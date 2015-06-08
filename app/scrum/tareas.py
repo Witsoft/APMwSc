@@ -14,8 +14,8 @@ def ACrearTarea():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
     idHistoria  = int(session['idHistoria'])
-    print('idHistoria AcrearTarea',idHistoria)
-    idHistoria    = 1
+    #print('idHistoria AcrearTarea',idHistoria)
+    #idHistoria    = 1
     oBackLog = backLog()
     oHistory = userHistory()
     userHistoriesList = oBackLog.userHistoryAsociatedToProduct(1)  
@@ -50,7 +50,18 @@ def AElimTarea():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
-    res['label'] = res['label'] + '/1'
+    idHistoria  = int(session['idHistoria'])
+    idTarea     = int(session['idTarea'])
+    oTarea   = homework()
+    result   = clsHomework.query.filter_by(HW_idHomework = idTarea).first()
+    delete   = oTarea.deleteHomework(result.HW_description)
+    
+    if delete == True:
+        res = results[0]
+    else:
+        res = results[1]
+    
+    res['label'] = res['label'] + '/' + str(idHistoria)
 
     #Action code ends here
     if "actor" in res:
@@ -69,9 +80,21 @@ def AModifTarea():
     results = [{'label':'/VHistoria', 'msg':['Tarea modificada']}, {'label':'/VCrearTarea', 'msg':['No se pudo modificar esta tarea.']}, ]
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
-
-    idHistoria = 1
+    
+    idHistoria  = int(session['idHistoria'])
+    
+    new_description = params['descripcion']
+    idTarea         = params['idTarea']
         
+    oTarea   = homework()
+    result   = clsHomework.query.filter_by(HW_idHomework = idTarea).first()
+    modify   = oTarea.updateHomework(result.HW_description,new_description)
+    
+    if modify:
+        res = results[0]
+    else:
+        res = results[1]
+         
     res['label'] = res['label'] + '/' + repr(idHistoria)
 
     #Action code ends here
@@ -118,19 +141,21 @@ def VTarea():
     if "actor" in session:
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
-
+    idTarea = request.args.get('idTarea')
+    result   = clsHomework.query.filter_by(HW_idHomework = idTarea).first()
+    res['fTarea'] = {'idTarea': idTarea,'descripcion': result.HW_description}
+    
     if 'usuario' not in session:
       res['logout'] = '/'
       return json.dumps(res)
     res['usuario'] = session['usuario']
     res['codHistoria'] = 'H01'
 
+    session['idTarea'] = idTarea
+    res['idTarea'] = idTarea
 
     #Action code ends here
     return json.dumps(res)
-
-
-
 
 
 #Use case code starts here
