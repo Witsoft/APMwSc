@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import request, session, Blueprint, json
-
+from app.scrum.backLog               import *
+from app.scrum.userHistory           import *
+from app.scrum.homework              import *
 tareas = Blueprint('tareas', __name__)
 
 
@@ -9,11 +11,27 @@ def ACrearTarea():
     #POST/PUT parameters
     params = request.get_json()
     results = [{'label':'/VHistoria', 'msg':['Tarea creada']}, {'label':'/VCrearTarea', 'msg':['No se pudo crear tarea.']}, ]
-    res = results[0]
-    #Action code goes here, res should be a list with a label and a message
 
-    idHistoria = 2
+    #Action code goes here, res should be a list with a label and a message
+    
+    #idHistoria = request.args['idHistoria']
+    #idHistoria = request.args.get('idHistoria')
+    idHistoria = 1
+    oBackLog = backLog()
+    oHistory = userHistory()
+    userHistoriesList = oBackLog.userHistoryAsociatedToProduct(1)  
+    oHomework = homework()
+    
     res['label'] = res['label'] + '/' + repr(idHistoria)
+
+    descTarea = params['descripcion']
+    
+    insert = oHomework.insertHomework(descTarea,idHistoria)
+    
+    if insert:        
+        res = results[0]
+    else:
+        res = results[1]
 
     #Action code ends here
     if "actor" in res:
