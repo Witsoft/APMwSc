@@ -3,92 +3,102 @@
 from app.scrum.backLog import *
 
 # Declaracion de constantes.
-maxNameRole = 50
-minNameRole = 1
-minRoleDescription = 1
-maxRoleDescription = 140
-minId = 1
+CONST_MAX_NAME_ACTOR        = 50
+CONST_MIN_NAME_ACTOR        = 1
+CONST_MIN_ACTOR_DESCRIPTION = 1
+CONST_MAX_ACTOR_DESCRIPTION = 140
+CONST_MIN_ID                = 1
 
 class role(object):
-    '''Clase que permite manejar los Roles de manera persistente'''
+    '''Clase que permite manejar los Actores de manera persistente'''
     
     def emptyTable(self):
-        '''Permite saber si la tabla role esta vacia'''
-        arole = clsRole.query.all()
-        return (arole == [])
+        '''Permite saber si la tabla actor esta vacia'''
+        aActor = clsActor.query.all()
+        return (aActor == [])
+    
 
-    def insertRole(self,namerole,roledescription, id_pila):
-        '''Permite insertar un role'''
-        typename = (type(namerole) == str)
-        typedescription = (type(roledescription) == str)
-        typeid = (type(id_pila) == int)
-        if (typename and typedescription and typeid):
-            long_namerole = minNameRole <= len(namerole) <= maxNameRole
-            long_roledescription = minRoleDescription <= len(roledescription) <= maxRoleDescription
-            if (long_namerole and long_roledescription):
-                obackLog = clsBackLog.query.filter_by(id_backLog = id_pila).all()
-                arole = clsRole.query.filter_by(namerole = namerole).all()
-                if ((arole == []) and (obackLog != [])):
-                    new_role = clsRole(namerole = namerole,roledescription = roledescription,id_pila = id_pila)
-                    db.session.add(new_role)
+    def insertActor(self,nameActor,actordescription,idPila):
+        '''Permite insertar un actor'''
+        checkTypeName        = type(nameActor) == str
+        checkTypeDescription = type(actordescription) == str
+        checkTypeId          = type(idPila) == int
+        
+        if checkTypeName  and checkTypeDescription and checkTypeId:
+            checkLongName        = CONST_MIN_NAME_ACTOR <= len(nameActor) <= CONST_MAX_NAME_ACTOR
+            checkLongDescription = CONST_MIN_ACTOR_DESCRIPTION <= len(actordescription) <= CONST_MAX_ACTOR_DESCRIPTION
+            
+            if checkLongName and checkLongDescription:
+                oBacklog = clsBacklog.query.filter_by(BL_idBacklog = idPila).all()
+                oActor   = clsActor.query.filter_by(A_nameActor = nameActor).all()
+                
+                if (oActor == []) and (oBacklog != []):
+                    newActor = clsActor(nameActor, actordescription, idPila)
+                    db.session.add(newActor)
                     db.session.commit()
                     return True
         return False
 
 
-    def findNameRole(self, namerole):
-        """Permite buscar un elemento en la base de datos"""
-        if type(namerole) == str:
-            if len(namerole) >= minNameRole and len(namerole) <= maxNameRole:
-                found = clsRole.query.filter_by(namerole=namerole).all()
+    def findnameActor(self, nameActor):
+        '''Permite buscar un elemento en la tabla de actores'''
+        checkTypeName = type(nameActor) == str
+        if checkTypeName:
+            checkLenName = CONST_MIN_NAME_ACTOR <= len(nameActor) <= CONST_MAX_NAME_ACTOR
+            
+            if  checkLenName:
+                found = clsActor.query.filter_by(A_nameActor = nameActor).all()
                 return found
         return([])
     
-    def findIdRole(self, idrole):
-        """Permite buscar un elemento en la base de datos por su id"""
-        checkIdRole = type(idrole) == int and idrole >= minId
-        if checkIdRole:
-                found = clsRole.query.filter_by(idrole=idrole).all()
+    
+    def findIdActor(self, idActor):
+        '''Permite buscar un elemento en la tabla de actores por su id'''
+        checkIdActor = type(idActor) == int and idActor >= CONST_MIN_ID
+        if checkIdActor:
+                found = clsActor.query.filter_by(A_idActor = idActor).all()
                 return found
         return([])
               
 
-    def updateRole(self, namerole, newNameRole, newDescription):
-        """Permite modificar un nombre de la clase role"""
+    def updateActor(self, nameActor, newNameActor, newDescription):
+        '''Permite modificar un nombre de la clase actor'''
     
-        typename = (type(namerole) == str)
-        typenewrole = (type(newNameRole) == str)
-        typedescription = (type(newDescription) == str)
+        checkTypeName        = type(nameActor) == str
+        checkTypeNewActor    = type(newNameActor) == str
+        checkTypeDescription = type(newDescription) == str
     
-        if (typename and typedescription and typenewrole):
-            long_namerole = minNameRole <= len(namerole) <= maxNameRole
-            long_newNameRole = minNameRole <= len(newNameRole) <= maxNameRole
-            long_roledescription = minRoleDescription <= len(newDescription) <= maxRoleDescription
-            if (long_namerole and long_newNameRole and long_roledescription):    
-                foundnamerole = self.findNameRole(namerole)
-                foundnewrole  = self.findNameRole(newNameRole)
-                if (foundnamerole != []):
-                    
-                    update_role = clsRole.query.filter_by(namerole = namerole).first()
-                    update_role.namerole = newNameRole
-                    update_role.roledescription = newDescription
+        if checkTypeName and checkTypeNewActor and checkTypeDescription:
+            checkLongnameActor      = CONST_MIN_NAME_ACTOR <= len(nameActor) <= CONST_MAX_NAME_ACTOR
+            checkLongNewnameActor   = CONST_MIN_NAME_ACTOR <= len(newNameActor) <= CONST_MAX_NAME_ACTOR
+            checkLongNewDescription = CONST_MIN_ACTOR_DESCRIPTION <= len(newDescription) <= CONST_MAX_ACTOR_DESCRIPTION
+            
+            if checkLongnameActor and checkLongNewnameActor  and checkLongNewDescription:    
+                foundnameActor = clsActor.query.filter_by(A_nameActor = nameActor).all()
+                foundNewActor  = clsActor.query.filter_by(A_nameActor = newNameActor).all()
+                
+                if foundnameActor != []:
+                    updateActor = clsActor.query.filter_by(A_nameActor = nameActor).first()
+                    updateActor.A_nameActor        = newNameActor
+                    updateActor.A_actorDescription = newDescription
                     db.session.commit()
                     return True
         return False   
+    
 
-    def deleteRole(self,namerole):
-        '''Permite eliminar un role dado su nombre'''
+    def deleteActor(self,nameActor):
+        '''Permite eliminar un actor dado su nombre'''
 
-        name = (type(namerole) == str)        
-        if (name):
-            long_namerole = minNameRole <= len(namerole) <= maxNameRole 
-            if (long_namerole):
-                arole = clsRole.query.filter_by(namerole=namerole).all()
-                if (arole != []):
-                    tupla = clsRole.query.filter_by(namerole=namerole).first()    
+        checkTypeName = type(nameActor) == str       
+        if checkTypeName:
+            checkLongNameActor = CONST_MIN_NAME_ACTOR <= len(nameActor) <= CONST_MAX_NAME_ACTOR 
+            if checkLongNameActor:
+                oActor = clsActor.query.filter_by(A_nameActor = nameActor).all()
+                if oActor != []:
+                    tupla = clsActor.query.filter_by(A_nameActor = nameActor).first()    
                     db.session.delete(tupla)
                     db.session.commit()
                     return True
         return False
     
-# Fin Clase Role
+# Fin Clase Actor
