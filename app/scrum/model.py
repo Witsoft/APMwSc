@@ -156,7 +156,7 @@ class clsUserHistory(db.Model):
 	UH_scale        = db.Column(db.Integer, index = True)
 	roleUserHistory_userHistory = db.relationship('clsRolesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")
 	objUserHistory_userHistory  = db.relationship('clsObjectivesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")	
-	homework_userHistory	= db.relationship('clsHomework', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")	
+	homework_userHistory	= db.relationship('clsHomeWork', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")	
 	
 	def __init__(self,cod_userHistory,id_History,type_accion,ref_idaccion,id_backLog,UH_scale):
 		self.cod_userHistory = cod_userHistory
@@ -206,22 +206,22 @@ class clsObjectivesUserHistory(db.Model):
 		'''Representacion en string de los id's a los roles y sus historias'''
 		return '<ref_idobjective %r, ref_idUserHistory %r>' % (self.ref_idobjective, self.ref_idUserHistory)
 		
-class clsHomework(db.Model):
-	'''Clase que define el modelo de la tabla Homework'''
+class clsHomeWork(db.Model):
+	'''Clase que define el modelo de la tabla HomeWork'''
 	
-	__tablename__ = 'homework'
-	HW_idHomework  		= db.Column(db.Integer, primary_key = True, index = True)
+	__tablename__ = 'homeWork'
+	HW_idHomeWork  		= db.Column(db.Integer, primary_key = True, index = True)
 	HW_description 		= db.Column(db.String(140),unique = True , index = True) 
 	HW_refUserHistory	= db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'))
 
-	def __init__(self,descHomework,idHistory):
-		self.HW_description	= descHomework
+	def __init__(self,descHomeWork,idHistory):
+		self.HW_description	= descHomeWork
 		self.HW_refUserHistory  = id_History 
 
 		
 	def __repr__(self):
 		'''Representacion en string de la Tarea'''
-		return '<descHomework  %r, idHistory %r>' % (self.HW_idHomework,self.HW_refUserHistory)
+		return '<descHomeWork  %r, idHistory %r>' % (self.HW_idHomeWork,self.HW_refUserHistory)
 	
 	
 	
