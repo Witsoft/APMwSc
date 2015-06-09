@@ -46,7 +46,7 @@ def ACrearTarea():
 def AElimTarea():
     #POST/PUT parameters
     params = request.get_json()
-    results = [{'label':'/VHistoria', 'msg':['Historia borrada']}, {'label':'/VTarea', 'msg':['No se pudo eliminar esta tarea']}, ]
+    results = [{'label':'/VHistoria', 'msg':['Tarea borrada']}, {'label':'/VTarea', 'msg':['No se pudo eliminar esta tarea']}, ]
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
@@ -137,6 +137,10 @@ def VCrearTarea():
 def VTarea():
     #GET parameter
     idTarea = request.args['idTarea']
+    idHistoria = int(session['idHistoria'])
+    found = clsUserHistory.query.filter_by(id_userHistory = idHistoria).first()
+    codHistoria = found.cod_userHistory
+    
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
@@ -149,7 +153,7 @@ def VTarea():
       res['logout'] = '/'
       return json.dumps(res)
     res['usuario'] = session['usuario']
-    res['codHistoria'] = 'H01'
+    res['codHistoria'] = codHistoria
 
     session['idTarea'] = idTarea
     res['idTarea'] = idTarea
