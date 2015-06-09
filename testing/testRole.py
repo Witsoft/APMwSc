@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-. 
 
+import sys
 import unittest
 
-from roleDummy import *
+# Ruta que permite utilizar el módulo role.py
+sys.path.append('../app/scrum')
+
+from role import *
 
 class TestActors(unittest.TestCase):
     
@@ -782,7 +786,7 @@ class TestActors(unittest.TestCase):
         aAct   = role()
         aAct.insertActor('Mxgy',None,1)
         result = aAct.deleteActor('Mxgy',1)
-        self.assertFalse(result,"No válido")
+        self.assertTrue(result,"No válido")
         aBacklog.deleteProduct('Pxrsynzjxs')
                    
     #############################################      
@@ -797,7 +801,7 @@ class TestActors(unittest.TestCase):
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
         # Inicio de la prueba.
         aAct = role()
-        aAct.insertActor('Mxgy','Destruye con magia',1)
+        aAct.insertActor('Mxgy','Dxstrcy@ cun mfgtz',1)
         aAct.findIdActor(1)
         aBacklog.deleteProduct('Pxrsynzjxs') 
   
@@ -821,7 +825,7 @@ class TestActors(unittest.TestCase):
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
         # Inicio de la prueba. 
         aAct   = role()
-        result = aAct.findIdActor(2)
+        result = aAct.findIdActor(2**28)
         self.assertEqual(result,[],"Elemento no encontrado")
         aBacklog.deleteProduct('Pxrsynzjxs') 
 

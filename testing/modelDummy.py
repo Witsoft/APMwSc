@@ -56,12 +56,12 @@ class clsActor(db.Model):
     '''Clase que define el modelo Actor'''
 
     __tablename__ = 'actors'
-    A_idActor          = db.Column(db.Integer, primary_key = True)
-    A_nameActor        = db.Column(db.String(50), unique = True)
-    A_actorDescription = db.Column(db.String(140))
-    A_idBacklog        = db.Column(db.Integer,db.ForeignKey('backlog.BL_idBacklog'))
-    A_refUser          = db.relationship('clsUser', backref = 'actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
-    #sUserHistory_role = db.relationship('clsRolesUserHistory', backref = 'roles',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+    A_idActor           = db.Column(db.Integer, primary_key = True)
+    A_nameActor         = db.Column(db.String(50))
+    A_actorDescription  = db.Column(db.String(140))
+    A_idBacklog         = db.Column(db.Integer,db.ForeignKey('backlog.BL_idBacklog'))
+    A_refUser           = db.relationship('clsUser', backref = 'actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+    A_refActorsUserHist = db.relationship('clsActorsUserHistory', backref = 'actors',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
       
     def __init__(self, nameActor,actorDescription,idBacklog):
         '''Constructor del modelo Actor'''
@@ -104,7 +104,7 @@ class clsObjective(db.Model):
  
     __tablename__  = 'objectives'
     O_idObjective    = db.Column(db.Integer, primary_key = True)
-    O_descObjective  = db.Column(db.String(140), unique = True)
+    O_descObjective  = db.Column(db.String(140))
     O_idBacklog      = db.Column(db.Integer, db.ForeignKey('backlog.BL_idBacklog'))
     O_objType	     = db.Column(db.String(5)) 
     O_refObjUserHist = db.relationship('clsObjectivesUserHistory', backref = 'objectives',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
@@ -117,7 +117,7 @@ class clsObjective(db.Model):
  
     def __repr__(self):
         '''Respresentación en string del modelo Objective'''
-        return '<IdObjetivo %r>, <Descripcion %r>, <IdBacklog %r>' %(self.O_idObjective, self.O_descObjective, self.O_idBacklog)
+        return '<IdObjetivo %r, Descripcion %r, IdBacklog %r>' %(self.O_idObjective, self.O_descObjective, self.O_idBacklog)
  
  
  	
@@ -126,9 +126,9 @@ class clsAccion(db.Model):
  
     __tablename__  = 'accions'
     AC_idAccion          = db.Column(db.Integer, primary_key = True)
-    AC_accionDescription = db.Column(db.String(140), unique = True)
+    AC_accionDescription = db.Column(db.String(140))
     AC_idBacklog         = db.Column(db.Integer, db.ForeignKey('backlog.BL_idBacklog'))    
-    AC_UserHistory       = db.relationship('clsUserHistory', backref = 'accions', lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+    AC_refUserHistory    = db.relationship('clsUserHistory', backref = 'accions', lazy = 'dynamic',cascade = "all, delete, delete-orphan")
      
     def __init__(self, accionDescription,idBacklog):
         '''Constructor del modelo Accion'''
@@ -137,7 +137,7 @@ class clsAccion(db.Model):
  
     def __repr__(self):
         '''Respresentación en string del modelo accion'''
-        return '<IdAccion %r>, <Descripcion %r>, <IdBacklog %r>' %(self.AC_idAccion, self.AC_accionDescription, self.AC_idBacklog)
+        return '<IdAccion %r, Descripcion %r, IdBacklog %r>' %(self.AC_idAccion, self.AC_accionDescription, self.AC_idBacklog)
         
         
         
@@ -145,45 +145,45 @@ class clsUserHistory(db.Model):
 	'''Clase que define el modelo de tabla userHistory'''
  	
 	__tablename__ = 'userHistory'
-	id_userHistory  = db.Column(db.Integer, primary_key = True, index = True)
-	cod_userHistory = db.Column(db.String(11),unique = True , index = True) 
-	id_History      = db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'),nullable = True) 
-	type_accion     = db.Column(db.Integer)
-	ref_idaccion	= db.Column(db.Integer, db.ForeignKey('accions.AC_idAccion'))
-	id_backLog      = db.Column(db.Integer, db.ForeignKey('backlog.BL_idBacklog'))
-	UH_scale        = db.Column(db.Integer, index = True)
-	roleUserHistory_userHistory = db.relationship('clsRolesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")
-	objUserHistory_userHistory  = db.relationship('clsObjectivesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")	
+	UH_idUserHistory     = db.Column(db.Integer, primary_key = True, index = True)
+	UH_codeUserHistory   = db.Column(db.String(11),unique = True , index = True) 
+	UH_idSuperHistory    = db.Column(db.Integer, db.ForeignKey('userHistory.UH_idUserHistory'),nullable = True) 
+	UH_accionType        = db.Column(db.Integer)
+	UH_idAccion	         = db.Column(db.Integer, db.ForeignKey('accions.AC_idAccion'))
+	UH_idBacklog         = db.Column(db.Integer, db.ForeignKey('backlog.BL_idBacklog'))
+	UH_scale             = db.Column(db.Integer, index = True)
+	UH_refActorsUserHist = db.relationship('clsActorsUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")
+	UH_refObjUserHist    = db.relationship('clsObjectivesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")	
  	
-	def __init__(self,cod_userHistory,id_History,type_accion,ref_idaccion,id_backLog,UH_scale):
-		self.cod_userHistory = cod_userHistory
-		self.id_History      = id_History 
-		self.type_accion     = type_accion
-		self.ref_idaccion    = ref_idaccion
-		self.id_backLog      = id_backLog
-		self.UH_scale		 = UH_scale
+	def __init__(self,codeUserHistory,idSuperHistory,accionType,idAccion,idBacklog,scale):
+		self.UH_codeUserHistory = codeUserHistory
+		self.UH_idSuperHistory  = idSuperHistory 
+		self.UH_accionType      = accionType
+		self.UH_idAccion        = idAccion
+		self.UH_idBacklog       = idBacklog
+		self.UH_scale		    = scale
  		
 	def __repr__(self):
 		'''Representacion en string de la Historia de Usuario'''
-		return '<id_userHistory %r, cod_userHistory %r, Us_scale %r>' % (self.id_userHistory,self.cod_userHistory, self.UH_scale)
+		return '<idUserHistory %r, codeUserHistory %r, scale %r>' % (self.UH_idUserHistory ,self.UH_codeUserHistory, self.UH_scale)
  	
  	
  	
-class clsRolesUserHistory(db.Model):
-	'''Clase que define el modelo de tabla rolesUserHistory'''
+class clsActorsUserHistory(db.Model):
+	'''Clase que define el modelo de tabla actorsUserHistory'''
  	
-	__tablename__ = 'rolesUserHistory'
-	id_roleUserHistory = db.Column(db.Integer, primary_key = True, index = True) 
-	ref_idrole         = db.Column(db.Integer, db.ForeignKey('actors.A_idActor'))
-	ref_idUserHistory  = db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'))
+	__tablename__ = 'actorsUserHistory'
+	AUH_idActorsUserHist = db.Column(db.Integer, primary_key = True, index = True) 
+	AUH_idActor          = db.Column(db.Integer, db.ForeignKey('actors.A_idActor'))
+	AUH_idUserHistory    = db.Column(db.Integer, db.ForeignKey('userHistory.UH_idUserHistory'))
  	
-	def __init__(self, ref_idrole, ref_idUserHistory):
-		self.ref_idrole        = ref_idrole
-		self.ref_idUserHistory = ref_idUserHistory
+	def __init__(self, idActor, idUserHistory):
+		self.AUH_idActor       = idActor
+		self.AUH_idUserHistory = idUserHistory
  		
 	def __repr__(self):
 		'''Representacion en string de los id's a los roles y sus historias'''
-		return '<ref_idrole %r, ref_idUserHistory %r>' % (self.ref_idrole, self.ref_idUserHistory)
+		return '<idActor %r, idUserHistory %r>' % (self.AUH_idActor, self.AUH_idUserHistory)
  		
  	
  	
@@ -191,17 +191,17 @@ class clsObjectivesUserHistory(db.Model):
 	'''Clase que define el modelo de tabla ObjectivesUserHistory'''
  	
 	__tablename__ = 'objectivesUserHistory'
-	id_objectiveUserHistory = db.Column(db.Integer, primary_key = True, index = True)
-	ref_idobjective         = db.Column(db.Integer, db.ForeignKey('objectives.O_idObjective'))
-	ref_idUserHistory       = db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'))	
+	OUH_idObjectivesUserHist = db.Column(db.Integer, primary_key = True, index = True)
+	OUH_idObjective          = db.Column(db.Integer, db.ForeignKey('objectives.O_idObjective'))
+	OUH_idUserHistory        = db.Column(db.Integer, db.ForeignKey('userHistory.UH_idUserHistory'))	
  	
-	def __init__(self, ref_idobjective, ref_idUserHistory):
-		self.ref_idobjective   = ref_idobjective
-		self.ref_idUserHistory = ref_idUserHistory
+	def __init__(self,idObjective,idUserHistory):
+		self.OUH_idObjective   = idObjective
+		self.OUH_idUserHistory = idUserHistory
  		
 	def __repr__(self):
 		'''Representacion en string de los id's a los roles y sus historias'''
-		return '<ref_idobjective %r, ref_idUserHistory %r>' % (self.ref_idobjective, self.ref_idUserHistory)
+		return '<idObjective %r, idUserHistory %r>' % (self.OUH_idObjective, self.OUH_idUserHistory)
 		
 		
 migrate = Migrate(app, db)

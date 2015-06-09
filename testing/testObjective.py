@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-. 
 
+import sys
 import unittest
 
-from objectiveDummy import *
+# Ruta que permite utilizar el módulo objective.py
+sys.path.append('../app/scrum')
+
+from objective import *
 
 class TestObjectives(unittest.TestCase):
     
@@ -15,217 +19,245 @@ class TestObjectives(unittest.TestCase):
     # Prueba 1
      def testInsertObjectiveExists(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Materia dificil',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Pasar con cinco',1,True)
-        oObj.deleteObjective('Pasar con cinco')
-        oBacklog.deleteProduct('Estructuras Discretas II')        
+        oObj.insertObjective('Pxsxr cyn ctncy',idBacklog,True)
+        oObj.deleteObjective('Pxsxr cyn ctncy',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')        
 
     # Casos Normales
     
     # Prueba 2          
      def testInsertObjectiveElement(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Profesores dificiles',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective('Estudiar con constancia',1,False)
+        result = oObj.insertObjective('Xstzdyzr',idBacklog,False)
         self.assertTrue(result)
-        oObj.deleteObjective('Estudiar con constancia')
-        oBacklog.deleteProduct('Estructuras Discretas II')
-                          
+        oObj.deleteObjective('Xstzdyzr',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
+                         
     # Prueba 3
      def testInsertObjectiveRepeatedElement(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Dañan el pensum',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxñxn yl pynszm',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective('Estudiar con constancia',1,True)
-        result1 = oObj.insertObjective('Estudiar con constancia',1,True)
+        result = oObj.insertObjective('Xstzdyzr',idBacklog,True)
+        result1 = oObj.insertObjective('Xstzdyzr',idBacklog,True)
         self.assertFalse(result1)
-        oObj.deleteObjective('Estudiar con constancia')
-        oBacklog.deleteProduct('Estructuras Discretas II')
-               
+        oObj.deleteObjective('Xstzdyzr',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
+              
     # Casos Fronteras
 
     # Prueba 4
      def testInsertObjectiveShortDesc0(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Imposible sacar 5',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Xmpysxblz cxncz',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective('',1,True)
+        result = oObj.insertObjective('',idBacklog,True)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
-                           
+        oBacklog.deleteProduct('Xstryctyrzs')
+                            
     # Prueba 5
      def testInsertObjectiveLongDesc1(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Cursar 4 veces',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Cxrsyr qxtry',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective('A',1,False)
+        result = oObj.insertObjective('@',idBacklog,False)
         self.assertTrue(result)
-        oObj.deleteObjective('A')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('@',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
                   
     # Prueba 6
      def testInsertObjectiveLongDesc140(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Pertece a computacion',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Czmpytxcxzn',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective(20*'Llamare',1,False)
+        result = oObj.insertObjective(20*'Llxmxry',idBacklog,False)
         self.assertTrue(result)
-        oObj.deleteObjective(20*'Llamare')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective(20*'Llxmxry',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 7
      def testInsertObjectiveLongDesc141(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','De 4 creditos',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dx qytrx crxdytts',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective(20*'Llamare' + 's',1,True)
+        result = oObj.insertObjective(20*'Llxmxry' + 's',idBacklog,True)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
                 
     # Prueba 8
      def testInsertObjectiveIdBacklogInvalid(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Quita horas de sueño',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Hxrys dz szxñy',1)
         # Inicio de la prueba.
         oObj   = objective()
-        result  =oObj.insertObjective('Estudiar y pasar',0,False)
+        result  =oObj.insertObjective('Xstsdpxr',0,False)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 9
      def testInsertObjectiveObjTypeInvalid(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Quita horas de sueño',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Hxrys dz szxñy',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result  =oObj.insertObjective('Estudiar y pasar',1,'Falseee')
+        result  =oObj.insertObjective('Xstzdyfr',idBacklog,'Falseee')
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Casos Esquinas
        
     # Prueba 10
      def testInsertObjectiveIdBacklogNoExists(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Demasiado complicada',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Cxmplyczdz',1)
         # Inicio de la prueba.
         oObj   = objective()
-        result  =oObj.insertObjective('Psar con dos parciales',2,True)
+        result  =oObj.insertObjective('Dxs pyrczylcs',2,True)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 11
      def testInsertObjectiveLongDesc140AndIdBacklogNoExists(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Demasiado pesada',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Pxsydy',1)
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective(20*'Llamare',3,True)
+        result = oObj.insertObjective(20*'Llxmxry',3,True)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 12
      def testInsertObjectiveLongDesc140AndIdBacklogExists(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Demasiado pesada',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Pxsydy',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective(20*'Llamare',1,False)
+        result = oObj.insertObjective(20*'Llxmxry',idBacklog,False)
         self.assertTrue(result)
-        oObj.deleteObjective(20*'Llamare')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective(20*'Llxmxry',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 13
      def testInsertObjectiveLongDesc1AndIdBacklogExists(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Pocos profesores',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Pxcxs prxfysxrys',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective('L',1,True)
+        result = oObj.insertObjective('L',idBacklog,True)
         self.assertTrue(result)
-        oObj.deleteObjective('L')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('L',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 14
      def testInsertObjectiveLongDesc1AndIdBacklogNotExistsObjTypeExists(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Pocos profesores',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Pxcxs prxfysxrys',1)
         # Inicio de la prueba.
         oObj   = objective()
         result = oObj.insertObjective('L',7,False)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 15
      def testInsertObjectiveLongDesc0AndIdBacklogExistsObjTypeExists(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Demasiada pesada',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Pxsydy',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective('',1,True)
+        result = oObj.insertObjective('',idBacklog,True)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
        
     # Casos Maliciosos
       
     # Prueba 16
      def testInsertNotString(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Demasiado pasada',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Pxsydy',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective(4350,1,True)
+        result = oObj.insertObjective(4350,idBacklog,True)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 17
      def testInsertNoneString(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Materia extensa',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx yxtxnsy',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective(None,1,False)
+        result = oObj.insertObjective(None,idBacklog,False)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 18
      def testInsertWrongObjType(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Materia extensa',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx yxtxnsy',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective('Estudiar bastante',1,'Falseeeee')
+        result = oObj.insertObjective('Estudiar bastante',idBacklog,'Falseeeee')
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 19
      def testInsertWrongAllParameters(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Materia',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx',1)
         # Inicio de la prueba.
         oObj   = objective()
         result = oObj.insertObjective(13500,0,'True or False')
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 20
      def testInsertNoneAllParameters(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Materia',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx',1)
         # Inicio de la prueba.
         oObj   = objective()
         result = oObj.insertObjective(None,0,None)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     #############################################      
     #   Suite de Pruebas para searchObjective   #
@@ -236,94 +268,99 @@ class TestObjectives(unittest.TestCase):
     # Prueba 21 
      def testsearchObjectiveExists(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Estudiar con prudencia',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Xstzdyfr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Subir el indice academico',1,True)
-        oObj.searchObjective('Subir el indice academico')
+        oObj.insertObjective('Szbxr xndxcy',idBacklog,True)
+        oObj.searchObjective('Szbxr xndxcy',idBacklog)
 
     # Casos Fronteras
        
     # Prueba 22
      def testsearchObjectiveShortDesc0(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Trabajar 24 horas',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Trxbxjxr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.        
         oObj   = objective()
-        oObj.insertObjective('',1,False)
-        result = oObj.searchObjective('')
+        result = oObj.searchObjective('',idBAcklog)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
       
     # Prueba 23
      def testsearchObjectiveShortDesc1(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Terminar de pasar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Txrmynzr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba
         oObj   = objective()
-        oObj.insertObjective('A',1,True)
-        result = oObj.searchObjective('A')
+        oObj.insertObjective('A',idBacklog,True)
+        result = oObj.searchObjective('A',idBacklog)
         self.assertTrue(result)
-        oObj.deleteObjective('A')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('A',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 24
      def testsearchObjectiveShortDesc140(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Trabajar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Trxbxjxr',1)
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective(20*'Llamare',1,True)
-        result = oObj.searchObjective(20*'Llamare')
+        oObj.insertObjective(20*'Llxmxry',1,True)
+        result = oObj.searchObjective(20*'Llxmxry',1)
         self.assertNotEqual(result,[],"Objectivo no encontrado")
-        oObj.deleteObjective(20*'Llamare')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective(20*'Llxmxry',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 25
      def testsearchObjectiveShortDesc141(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Estructura de la materia',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Xstryctyrz dx ly mytxrgx',1)
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective(20*'Llamare'+'s',1,False)
-        result = oObj.searchObjective(20*'Llamare'+'s')
+        oObj.insertObjective(20*'Llxmxry'+'s',1,False)
+        result = oObj.searchObjective(20*'Llxmxry'+'s',1)
         self.assertFalse(result, "Objective no encontrado")
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
   
     # Caso Normal
       
     # Prueba 26
      def testsearchObjectiveDescNotExist(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Relacion con el profesor',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Rxlyczvn',1)
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.searchObjective('Comunicarse via correo electronico')
+        result = oObj.searchObjective('Cxmznycxrsd vyx cxrrzy',1)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
   
     # Casos Maliciosos
        
      # Prueba 27
      def testsearchObjectiveNotString(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Vacaciones',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Vxcxcyznvs',1)
         # Inicio de la prueba. 
         oObj   = objective()
         oObj.insertObjective(4350,1,True)
-        result = oObj.searchObjective(4350)
+        result = oObj.searchObjective(4350,1)
         self.assertEqual(result, [],'Objectivo encontrado')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
  
     # Prueba 28 
      def testSearchNameNoneString(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Rapidez',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Rxpydzz',1)
         # Inicio de la prueba.   
         oObj   = objective()
-        result = oObj.searchObjective(None)
+        result = oObj.searchObjective(None,1)
         self.assertEqual(result, [],'objective encontrado')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
           
     #############################################      
     #   Suite de Pruebas para searchIdObjective#
@@ -333,10 +370,10 @@ class TestObjectives(unittest.TestCase):
     # Prueba 29  
      def testsearchIdObjectiveExists(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Subir el indice academico',1,True)
+        oObj.insertObjective('Szbxr xndxcy',1,True)
         oObj.searchIdObjective(1)
 
     # Caso Normal
@@ -344,75 +381,75 @@ class TestObjectives(unittest.TestCase):
     # Prueba 30 
      def testsearchValidIdObjective(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Subir el indice academico',1,False)
+        oObj.insertObjective('Szbxr xndxcy',1,False)
         result = oObj.searchIdObjective(1)
         self.assertNotEqual([],result)
-        oObj.deleteObjective('Subir el indice academico')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('Szbxr xndxcy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
               
     # Caso Frontera
           
     # Prueba 31 
      def testsearchIdObjective(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Subir el indice academico',1,True)
+        oObj.insertObjective('Szbxr xndxcy',1,True)
         result = oObj.searchIdObjective(1)
         self.assertNotEqual([],result)
-        oObj.deleteObjective('Subir el indice academico')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('Szbxr xndxcy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
           
     # Prueba 32
      def testsearchInValidIdObjective(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Subir el indice academico',1,False)
+        oObj.insertObjective('Szbxr xndxcy',1,False)
         result = oObj.searchIdObjective(5)
         self.assertEqual([],result)
-        oObj.deleteObjective('Subir el indice academico')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('Szbxr xndxcy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 33
      def testSearchIdEmpty(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
         oObjective   = objective()
         oObjective.insertObjective('',1,True)
         result = oObjective.searchIdObjective(0)
-        self.assertEqual(result,[], "Elemento no encontrado")
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        self.assertEqual(result,[],"Elemento no encontrado")
+        oBacklog.deleteProduct('Xstryctyrzs')
                     
     # Casos Maliciosos
      
     # Prueba 34
      def testSearchIdString(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Pesadillas al dormir',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Pxsydzllxs yl drrmyr',1)
         # Inicio de la prueba.
         oObjective   = objective()
         oObjective.insertObjective(1254,1,False)
         result = oObjective.searchIdObjective('')
         self.assertEqual(result,[],"Elemento Insertado") 
-        oBacklog.deleteProduct('Estructuras Discretas II')       
+        oBacklog.deleteProduct('Xstryctyrzs')       
 
     # Prueba 35
      def testSearchIdNoneString(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Disciplina',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxscxplxny',1)
         # Inicio de la prueba.        
         oObjective   = objective()
         oObjective.insertObjective(None,1,False)
         result = oObjective.searchIdObjective(None)
         self.assertEqual(result,[],"Válido")    
-        oBacklog.deleteProduct('Estructuras Discretas II')           
+        oBacklog.deleteProduct('Xstryctyrzs')           
          
     #############################################      
     #   Suite de Pruebas para updateObjective   #
@@ -422,208 +459,208 @@ class TestObjectives(unittest.TestCase):
     # Prueba 36
      def testupdateObjectiveExists(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Descripcion',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxscrypcyzn',1)
         # Inicio de la prueba.   
         oObj   = objective()
-        oObj.insertObjective('Pasar con cinco.',1,True)
-        oObj.updateObjective('Pasar con cinco','Pasar con cinco o varios',False)
-        oBacklog.deleteProduct('Estructuras Discretas II')  
+        oObj.insertObjective('Pxsxr cyn ctncy',1,True)
+        oObj.updateObjective('Pxsxr cyn ctncy','Pxsxr cyn czncy',False,1)
+        oBacklog.deleteProduct('Xstryctyrzs')  
 
     # Casos Normales
       
     # Prueba 37
      def testupdateObjectiveDesc(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Universidad',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Xnyvzrsydvd',1)
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Estudiar con constancia',1,True)
-        result = oObj.updateObjective('Estudiar con constancia','Ir a consultas',False)
+        oObj.insertObjective('Xstzdyzr',1,True)
+        result = oObj.updateObjective('Xstzdyzr','Cxnsyltzas',False,1)
         self.assertTrue(result)
-        oObj.deleteObjective('Ir a consultas')
-        oBacklog.deleteProduct('Estructuras Discretas II')                                  
+        oObj.deleteObjective('Cxnsyltzas',1)
+        oBacklog.deleteProduct('Xstryctyrzs')                                  
            
     # Prueba 38     
      def testupdateObjectiveDescNotExist(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
         oObj = objective()
-        result = oObj.updateObjective('Llegar lo mas pronto posible','Ir por lo seguro',True)
+        result = oObj.updateObjective('LLxgyr sxgzrj','Yr pxr lx szgvrx',True,1)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Casos Fronteras
         
     # Prueba 39
      def testupdateObjectiveLeftLen1(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Busqueda',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Bxsqxydz',1)
         # Inicio de la prueba.
         oObj   = objective()
         oObj.insertObjective('A',1,False)
-        result = oObj.updateObjective('A','Buscar al profesor donde esté',True)
+        result = oObj.updateObjective('A','Bxscyr yl przft',True,1)
         self.assertTrue(result)
-        oObj.deleteObjective('Buscar al profesor donde esté')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('Bxscyr yl przft',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 40
      def testupdateObjectiveLeftLong1(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Busqueda',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Bxsqxydz',1)
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Buscar al profesor donde esté',1, False)
-        result = oObj.updateObjective('Buscar al profesor donde esté','A',True)
+        oObj.insertObjective('Bxscyr yl przft',1, False)
+        result = oObj.updateObjective('Bxscyr yl przft','A',True,1)
         self.assertTrue(result)
-        oObj.deleteObjective('A')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('A',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 41         
      def testupdateObjectiveRightLen140(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Muchas materias',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Mxchys mytzrvys',1)
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Cursar en paralelo',1,True)
-        result = oObj.updateObjective('Cursar en paralelo',140*'T',False)
+        oObj.insertObjective('Cxrsyr fn pyrylflx',1,True)
+        result = oObj.updateObjective('Cxrsyr fn pyrylflx',140*'T',False,1)
         self.assertTrue(result)    
-        oObj.deleteObjective(140*'T')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective(140*'T',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
                                   
     # Prueba 42
      def testupdateObjectiveLeftLen140(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Materias',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzxs',1)
         # Inicio de la prueba.
         oObj   = objective()
         oObj.insertObjective(140*'T',1, False)
-        result = oObj.updateObjective(140*'T','Materias a cursar',True)
+        result = oObj.updateObjective(140*'T','Mxtyrzxs x cfrsxr',True,1)
         self.assertTrue(result)
-        oObj.deleteObjective('Materias a cursar')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('Mxtyrzxs x cfrsxr',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Casos Esquinas
        
     # Prueba 43
      def testupdateObjectiveLeftLen1RightLen140(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Verla muchas veces',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Vxrly',1)
         # Inicio de la prueba.
         oObj   = objective()
         oObj.insertObjective('A',1,False)
-        result = oObj.updateObjective('A',70*'Us',True)
+        result = oObj.updateObjective('A',70*'Us',True,1)
         self.assertTrue(result)
-        oObj.deleteObjective('A')
-        oBacklog.deleteProduct('Estructuras Discretas II') 
+        oObj.deleteObjective('A',1)
+        oBacklog.deleteProduct('Xstryctyrzs') 
 
     # Prueba 44
      def testupdateObjectiveLeftLen140RightLen140(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Materias de computo',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzxs',1)
         # Inicio de la prueba.
         oObj   = objective()
         oObj.insertObjective(140*'U',1,True)
-        result = oObj.updateObjective(140*'U', 140*'M',False)
+        result = oObj.updateObjective(140*'U', 140*'M',False,1)
         self.assertTrue(result) 
-        oObj.deleteObjective(140*'M')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective(140*'M',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 45
      def testupdateObjectiveLeftLen140RightLen1(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Vale cuatro creditos',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Qxtry crzdytfs',1)
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective(20*'Llamare',1,True)
-        result = oObj.updateObjective(20*'Llamare','M',False)
+        oObj.insertObjective(20*'Llxmxry',1,True)
+        result = oObj.updateObjective(20*'Llxmxry','M',False,1)
         self.assertTrue(result)
-        oObj.deleteObjective('M')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('M',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 46
      def testupdateObjectiveLeftLen1RightLen1(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Profesores',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Prxfysxrys',1)
         # Inicio de la prueba.
         oObj   = objective()
         oObj.insertObjective('X',1,True)
-        result = oObj.updateObjective('X','U',False)
+        result = oObj.updateObjective('X','U',False,1)
         self.assertTrue(result)
-        oObj.deleteObjective('U')
-        oBacklog.deleteProduct('Estructuras Discretas II') 
+        oObj.deleteObjective('U',1)
+        oBacklog.deleteProduct('Xstryctyrzs') 
            
     # Casos Maliciosos
        
     # Prueba 47
      def testupdateSameName(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Temas de la materia',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Txmys',1)
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Pasar con cinco',1,True)
-        result = oObj.updateObjective('Pasar con cinco','Pasar con cinco',False)
+        oObj.insertObjective('Pxsxr cyn ctncy',1,True)
+        result = oObj.updateObjective('Pxsxr cyn ctncy','Pxsxr cyn ctncy',False,1)
         self.assertTrue(result)
-        oObj.deleteObjective('Pasar con cinco')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('Pxsxr cyn ctncy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 48
      def testupdateObjectiveLeftLen1RightLen141(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
         oObj   = objective()
         oObj.insertObjective('A',1,False)
-        result = oObj.updateObjective('',20*'Llamare'+'s',True)
+        result = oObj.updateObjective('',20*'Llxmxry'+'s',True,1)
         self.assertFalse(result, "Modificación válida") 
-        oObj.deleteObjective('A')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('A',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
  
     # Prueba 49
      def testupdateObjectiveLeftLen140RightLen141(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Ruedas',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Rxddxs',1)
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective(20*'Llamare',1,False)
-        result = oObj.updateObjective(20*'Llamare',70*'Ma' + 's',False)
+        oObj.insertObjective(20*'Llxmxry',1,False)
+        result = oObj.updateObjective(20*'Llxmxry',70*'Ma' + 's',False,1)
         self.assertFalse(result, "Modificación Válida") 
-        oObj.deleteObjective(20*'Llamare')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective(20*'Llxmxry',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 50
      def testupdateObjectiveLeftLen140RightLen0(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Materia valida',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx vxlzdx',1)
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective(20*'Llamare',1,True)
-        result = oObj.updateObjective(20*'Llamare','',False)
+        oObj.insertObjective(20*'Llxmxry',1,True)
+        result = oObj.updateObjective(20*'Llxmxry','',False,1)
         self.assertFalse(result, "Modificación válida") 
-        oObj.deleteObjective(20*'Llamare')
-        oBacklog.deleteProduct('Estructuras Discretas II')  
+        oObj.deleteObjective(20*'Llxmxry',1)
+        oBacklog.deleteProduct('Xstryctyrzs')  
 
     # Prueba 51
      def testupdateObjectiveLeftNoneRightValidString(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Recorrer diagrama',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Rxcorrxr dyxgrxmx',1)
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.updateObjective(None,'Comunicarse via correo electronico',True)
+        result = oObj.updateObjective(None,'Cxmznycxrsd vyx cxrrzy',True,1)
         self.assertFalse(result,"Modificación válida") 
-        oBacklog.deleteProduct('Estructuras Discretas II')  
+        oBacklog.deleteProduct('Xstryctyrzs')  
  
     # Prueba 52
      def testupdateObjectiveLeftValidStringRightNone(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Recorrer diagrama',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Rxcorrxr dyxgrxmx',1)
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Pasar con cinco',1,False)
-        result = oObj.updateObjective('Pasar con cinco',None,True)
+        oObj.insertObjective('Pxsxr cyn ctncy',1,False)
+        result = oObj.updateObjective('Pxsxr cyn ctncy',None,True,1)
         self.assertFalse(result, "Modificación válida") 
-        oObj.deleteObjective('Pasar con cinco')
-        oBacklog.deleteProduct('Estructuras Discretas II')    
+        oObj.deleteObjective('Pxsxr cyn ctncy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')    
 
     #############################################      
     #    Suite de Pruebas para deleteObjective  #
@@ -634,83 +671,83 @@ class TestObjectives(unittest.TestCase):
     # Prueba 53
      def testDeleteObjectiveExists(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Materia discreta',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx Dyscrxtz',1)
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Reservar cupo',1,True)
-        oObj.deleteObjective('Reservar cupo')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.insertObjective('Rxsxrvyr czpk',1,True)
+        oObj.deleteObjective('Rxsxrvyr czpk',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
            
         # Casos Normales
    
     # Prueba 54
      def testDeleteObjective(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Cursar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Cxrsyr',1)
         # Inicio de la prueba.
         oObj   = objective()
         oObj.insertObjective('U',1,False)
-        result = oObj.deleteObjective('U')
+        result = oObj.deleteObjective('U',1)
         self.assertTrue(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Casos Fronteras
 
     # Prueba 55
      def testDeleteObjective1(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Faltan 2 mas',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Fxltxn dzs',1)
         # Inicio de la prueba.
         oObj   = objective()
         oObj.insertObjective('A',1,True)
-        result = oObj.deleteObjective('A')
+        result = oObj.deleteObjective('A',1)
         self.assertTrue(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')          
+        oBacklog.deleteProduct('Xstryctyrzs')          
   
     # Prueba 56      
      def testDeleteObjectiveNoObjective(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Materias de cadena',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzfs dy cxdynx',1)
         # Inicio de la prueba.
         oObj   = objective()
         oObj.insertObjective('yyy',1,True)
-        result = oObj.deleteObjective('xxx')
+        result = oObj.deleteObjective('xxx',1)
         self.assertFalse(result)
-        oObj.deleteObjective('yyy')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('yyy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
      
     # Casos Maliciosos
   
     # Prueba 57
      def testDeleteObjectiveInvalid(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.deleteObjective('')
+        result = oObj.deleteObjective('',1)
         self.assertFalse(result,"Id no válido")
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 58
      def testDeleteObjectiveNotString(self):
        oBacklog = backlog()
-       oBacklog.insertBacklog('Estructuras Discretas II','Determinacion',1)
+       oBacklog.insertBacklog('Xstryctyrzs','Determinacion',1)
        # Inicio de la prueba.
        oObj   = objective()
        oObj.insertObjective(12345,1,False)
-       result = oObj.deleteObjective(12345)
+       result = oObj.deleteObjective(12345,1)
        self.assertFalse(result,"Id no válido")
-       oBacklog.deleteProduct('Estructuras Discretas II')
+       oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 59    
      def testDeleteObjectiveNotExist(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.deleteObjective('Terminar de pasar')
+        result = oObj.deleteObjective('Txrmynzr dx pzszr',1)
         self.assertFalse(result)
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oBacklog.deleteProduct('Xstryctyrzs')
          
     ###################################################      
     # Suite de Pruebas para VerifyObjectiveTransverse #
@@ -721,64 +758,65 @@ class TestObjectives(unittest.TestCase):
     # Prueba 60
      def testVerifyObjectiveExists(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Mueve promedio',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Mxyvy przmedxz',1)
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Pasar con cinco',1,True)
+        oObj.insertObjective('Pxsxr cyn ctncy',1,True)
         transverse = oObj.verifyObjectiveTransverse(1)
         self.assertTrue(transverse)
-        oObj.deleteObjective('Pasar con cinco')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('Pxsxr cyn ctncy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
         
     # Caso Normal
           
     # Prueba 61 
      def testVerifyValidIdObjectiveTransverse(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Subir el indice academico',1,False)
+        oObj.insertObjective('Szbxr xndxcy',1,False)
         transverse = oObj.verifyObjectiveTransverse(1)
         self.assertTrue(transverse)
-        oObj.deleteObjective('Subir el indice academico')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('Szbxr xndxcy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Caso Frontera
           
     # Prueba 62 
      def testVerifyIdObjectiveTransverse(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Dificil de olvidar',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Subir el indice academico',1,True)
+        oObj.insertObjective('Szbxr xndxcy',1,True)
         transverse = oObj.verifyObjectiveTransverse(1)
         self.assertTrue(transverse)
-        oObj.deleteObjective('Subir el indice academico')
-        oBacklog.deleteProduct('Estructuras Discretas II')
+        oObj.deleteObjective('Szbxr xndxcy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
               # Casos Maliciosos
      
     # Prueba 63
      def testVerifyIdStringObjectiveTransverse(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Teoria de conjuntos',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Cxnjzntxs',1)
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Asegurar trimestre',1,False)
+        oObj.insertObjective('Xsygzrxr trsmxstrx',1,False)
         transverse = oObj.verifyObjectiveTransverse('')
         self.assertFalse([],transverse) 
-        oObj.deleteObjective('Asegurar trimestre')
-        oBacklog.deleteProduct('Estructuras Discretas II')       
+        oObj.deleteObjective('Xsygzrxr trsmxstrx',1)
+        oBacklog.deleteProduct('Xstryctyrzs')       
 
     # Prueba 64
      def testVerifyIdNoneStringObjectiveTransverse(self):
         oBacklog = backlog()
-        oBacklog.insertBacklog('Estructuras Discretas II','Conocimiento',1)
+        oBacklog.insertBacklog('Xstryctyrzs','Cxnxcymyzntx',1)
         # Inicio de la prueba.        
         oObj   = objective()
-        oObj.insertObjective('Desarrollar conjuntos',1,False)
+        oObj.insertObjective('Dvsxrryllzr conjzntys',1,False)
         transverse = oObj.searchIdObjective(None)
         self.assertEqual([],transverse)    
-        oObj.deleteObjective('Desarrollar conjuntos')
-        oBacklog.deleteProduct('Estructuras Discretas II')                   
+        oObj.deleteObjective('Dvsxrryllzr conjzntys',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
+'''

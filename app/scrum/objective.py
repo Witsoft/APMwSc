@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.backLog import *
+import sys
+# Ruta que permite utilizar el módulo backlog.py
+sys.path.append('app/scrum')
+
+from backLog import *
 
 # Declaracion de constantes.
 CONST_MIN_ID_BACKLOG = 1
@@ -51,7 +55,7 @@ class objective(object):
         
         foundObjective = []
         if checkTypeId and checkTypeDesc:
-            checkLenDesc = MIN_ACCION_DESCRIPTION <= len(descObjective) <= MAX_ACCION_DESCRIPTION
+            checkLenDesc = CONST_MIN_DESC_OBJ <= len(descObjective) <= CONST_MAX_DESC_OBJ
             checkId      = CONST_MIN_ID_OBJ <= idBacklog  
             
             if checkLenDesc and checkId:
@@ -146,7 +150,7 @@ class objective(object):
         checkTypeIdBacklog   = type(idBacklog) == int   
         
         if checkTypeDescription and checkTypeIdBacklog:
-            checkLenDescription = MIN_ACCION_DESCRIPTION <= len(descObjective) <= MAX_ACCION_DESCRIPTION
+            checkLenDescription = CONST_MIN_DESC_OBJ <= len(descObjective) <= CONST_MAX_DESC_OBJ
             checkLongIdBacklog  = CONST_MIN_ID_OBJ <= idBacklog 
             
             if checkLenDescription and checkLongIdBacklog :
