@@ -1,136 +1,166 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.model import *
-from distutils.command.check import check
+import sys
+# Ruta que permite utilizar el módulo model.py
+sys.path.append('app/scrum')
+
+from model import *
 
 # Declaracion de constantes.
-const_maxDescription = 140
-const_minDescription = 1
-const_maxName = 50
-const_minName = 1
+CONST_MAX_DESCRIPTION = 140
+CONST_MIN_DESCRIPTION = 1
+CONST_MAX_NAME        = 50
+CONST_MIN_NAME        = 1
+
 scale_type = [1,2]
 
-class backLog(object):
+class backlog(object):
     '''Clase que permite (completar)'''
     
+    def getAllProducts(self):
+        '''Permite obtener todos los productos de la tabla'''
+        result = clsBacklog.query.all()
+        return result
     
-    def findName(self,dname):
-        '''Permite buscar una descripcion'''
+    def findName(self,name):
+        '''Permite buscar un nombre'''
+        checkTypeName = type(name) == str
         
-        checkTypeName = (type(dname)) == str
         if checkTypeName:
-            long_dName = const_minName <= len(dname) <= const_maxName
-            if long_dName:
-                dBackLog = clsBackLog.query.filter_by(BL_name = dname).all()
-                return dBackLog
+            checkLongName = CONST_MIN_NAME <= len(name) <= CONST_MAX_NAME
+            if checkLongName:
+                oBacklog = clsBacklog.query.filter_by(BL_name = name).all()
+                return oBacklog
         return []
     
-    def insertBackLog(self,name,description,scale):
+    def findIdProduct(self,idBacklog):
+        '''Permite buscar un elemento por su id'''
+        checkTypeId = type(idBacklog) == int
+        found = None
+        if checkTypeId:
+            found = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).first()
+        return found
+    
+    def insertBacklog(self,name,description,scale):
         '''Permite insertar un producto'''
+        checkTypeName  = type(name) == str
+        checkTypeDesc  = type(description) == str
+        checkTypeScale = type(scale) == int
         
-        checkTypeName = (type(name) == str)
-        checkTypeDesc = (type(description) == str)
-        checkTypeScale = (type(scale) == int)
-        if (checkTypeName and checkTypeDesc and checkTypeScale):
-           
-            long_name = const_minName <= len(name) <= const_maxName
-            long_description = (const_minDescription <= len(description) <= const_maxDescription)
+        if checkTypeName and checkTypeDesc and checkTypeScale:
+            checkLongName        = CONST_MIN_NAME <= len(name) <= CONST_MAX_NAME
+            checkLongDescription = CONST_MIN_DESCRIPTION <= len(description) <= CONST_MAX_DESCRIPTION
             checkScale = scale in scale_type
-            if  (long_name and long_description and checkScale):
-                dDescAux = self.findName(name);
-                if (dDescAux == []):
-                    new_prod = clsBackLog(BL_name = name, BL_description = description, BL_scaleType = scale)
-                    db.session.add(new_prod)
+            
+            if  checkLongName and checkLongDescription and checkScale:
+                found = self.findName(name);
+                
+                if found == []:
+                    newProd = clsBacklog(name,description,scale)
+                    db.session.add(newProd)
                     db.session.commit()
                     return True
         return False
 
 
-    def modifyBackLog(self, name, new_name, new_description, new_scale):   
+    def modifyBacklog(self, name, new_name, new_description, new_scale):   
         '''Permite actualizar los valores de un producto'''            
-        typeName          = (type(name) == str)
-        typeNewName       = (type(new_name) == str)
-        typeDescription   = (type(new_description) == str)
-        typeScale         = (type(new_scale) == int) 
+        checkTypeName          = type(name) == str
+        checkTypeNewName       = type(new_name) == str
+        checkTypeDescription   = type(new_description) == str
+        checkTypeScale         = type(new_scale) == int 
 
-        if (typeName and typeNewName and typeDescription and typeScale):
-            long_n   = const_minName <= len(name) <= const_maxName
-            long_New = const_minName <= len(new_name) <= const_maxName
-            long_d = const_minDescription <= len(new_description) <= const_maxDescription
-            checkScale = new_scale in scale_type
-            if long_d and long_n and long_New and checkScale:
-                aName = self.findName(name)
-                aNewName = self.findName(new_name)
-                if (aName != [] and (aNewName == [] or new_name == name)):
-                    new_n = clsBackLog.query.filter_by(BL_name = name).first()
-                    new_n.BL_name        = new_name 
-                    new_n.BL_description = new_description
-                    aUserHistory = clsUserHistory.query.all()
-                    if (aUserHistory == []):
-                        new_n.BL_scaleType   = new_scale 
+        if checkTypeName  and checkTypeNewName  and checkTypeDescription and checkTypeScale:
+            checkLongName    = CONST_MIN_NAME <= len(name) <= CONST_MAX_NAME
+            checkLongNewName = CONST_MIN_NAME <= len(new_name) <= CONST_MAX_NAME
+            checkLongNewDesc = CONST_MIN_DESCRIPTION <= len(new_description) <= CONST_MAX_DESCRIPTION
+            checkNewScale    = new_scale in scale_type
+            
+            if checkLongName and checkLongNewName and checkLongNewDesc and checkNewScale:
+                foundName    = self.findName(name)
+                foundNewName = self.findName(new_name)
+                
+                if foundName != [] and (foundNewName == [] or new_name == name):
+                    idBacklog        = foundName[0].BL_idBacklog
+                    foundUserHistory = clsUserHistory.query.filter_by(UH_idBacklog  = idBacklog).all()
+                    currentScale     = foundName[0].BL_scaleType
+                    
+                    if currentScale != new_scale and foundUserHistory != []:
+                        return False
+                    
+                    newBacklog                = clsBacklog.query.filter_by(BL_name = name).first()
+                    newBacklog.BL_name        = new_name 
+                    newBacklog.BL_description = new_description                   
+                    newBacklog.BL_scaleType   = new_scale 
                     db.session.commit()
                     return True
+
         return False
+    
 
     def deleteProduct(self, name):
-        '''Permite eliminar una a descripción de la tabla'''
-        if (type(name) != str):
+        '''Permite eliminar un producto de la tabla'''
+        checkTypeName = type(name) == str
+        checkLongName = CONST_MIN_NAME > len(name) > CONST_MAX_NAME
+        
+        if (not checkTypeName) and checkLongName:
             return False
         else:
-            long_name =  (const_minName > len(name) > const_maxName)
-            if long_name:
+            foundName = self.findName(name)
+            if foundName == []:
                 return False
             else:
-                aName = self.findName(name)
-                if (aName == []):
-                    return False
-                else:
-                    tupla = clsBackLog.query.filter_by(BL_name = name).first()    
-                    db.session.delete(tupla)
-                    db.session.commit()
-                    return True
+                tupla = clsBacklog.query.filter_by(BL_name = name).first()    
+                db.session.delete(tupla)
+                db.session.commit()
+                return True
+            
 
-    def scaleType(self,productId):
-        checkTypeId = type(productId) == int    
+    def scaleType(self,idBacklog):
+        '''Permite obtener el tipo de escala seleccionado para un producto'''
+        checkTypeId = type(idBacklog) == int
+            
         if checkTypeId: 
-            found = clsBackLog.query.filter_by(id_backLog=productId).all()
+            found = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).all()
             if found != []:
-                oBackLog = clsBackLog.query.filter_by(id_backLog = productId).first()
-                scale = oBackLog.BL_scaleType
+                scale = found[0].BL_scaleType
                 return scale
         return ([])
+    
 
-    def actorsAsociatedToProduct(self,productId):
+    def actorsAsociatedToProduct(self,idBacklog):
         ''' Permite obtener una lista de los Actores asociados a una pila de Producto'''
-        checkTypeId = type(productId) == int    
+        checkTypeId = type(idBacklog) == int    
         if checkTypeId: 
-            found = clsRole.query.filter_by(id_pila=productId).all()
+            found = clsActor.query.filter_by(A_idBacklog = idBacklog).all()
             return found
         return([])              
                    
 
-    def accionsAsociatedToProduct(self,accionId):
+    def accionsAsociatedToProduct(self,idBacklog):
         ''' Permite obtener una lista de las acciones asociados a una pila de Producto'''
-        checkTypeId = type(accionId) == int    
+        checkTypeId = type(idBacklog) == int    
         if checkTypeId: 
-            found = clsAccions.query.filter_by(id_backLog=accionId).all()
+            found = clsAccion.query.filter_by(AC_idBacklog  = idBacklog).all()
             return found
-        return([])  
+        return([]) 
+     
 
-    def objectivesAsociatedToProduct(self,productId):
+    def objectivesAsociatedToProduct(self,idBacklog):
         ''' Permite obtener una lista de los Objetivos asociados a una pila de Producto'''
-        checkTypeId = type(productId) == int    
+        checkTypeId = type(idBacklog) == int    
         if checkTypeId: 
-            found = clsObjective.query.filter_by(id_backlog=productId).all()
+            found = clsObjective.query.filter_by(O_idBacklog = idBacklog).all()
             return found
-        return([])   
+        return([]) 
+      
     
-    def userHistoryAsociatedToProduct(self,productId):
+    def userHistoryAsociatedToProduct(self,idBacklog):
         ''' Permite obtener una lista de los historias de usuario asociadas a una pila de Producto'''
-        checkTypeId = type(productId) == int    
+        checkTypeId = type(idBacklog) == int    
         if checkTypeId: 
-            found = clsUserHistory.query.filter_by(id_backLog=productId).all()
+            found = clsUserHistory.query.filter_by(UH_idBacklog  = idBacklog).all()
             return found
         return([])                                
 
-
+# Fin Clase Backlog

@@ -8,26 +8,33 @@ actor = Blueprint('actor', __name__)
 @actor.route('/actor/ACrearActor', methods=['POST'])
 def ACrearActor():
     #POST/PUT parameters
-    params = request.get_json()
+    params  = request.get_json()
     results = [{'label':'/VProducto', 'msg':['Actor creado']}, {'label':'/VCrearActor', 'msg':['Error al crear actor']}, ]
-
-    idPila   = 1
-    nameRole = params['nombre']
-    descRole = params['descripcion'] 
+    res     = results[1]
     
-    oRole  = role()
-    result = oRole.insertRole(nameRole,descRole,idPila)
-    if result:
-        res = results[0]
-        res['label'] = res['label'] + '/' + str(idPila)
-    else:
-        res = results[1]
+    # Obtenemos el id del producto.
+    idPila  = int(session['idPila'])
+    print('idPila ACrearActor',idPila) 
+    
+    if params != {}:    
+        # Extraemos los datos.
+        nameActor = params['nombre']
+        descActor = params['descripcion'] 
+        
+        # Insertamos el actor.
+        oActor   = role()
+        inserted = oActor.insertActor(nameActor,descActor,idPila)
+        if inserted:
+            res = results[0]
+    
+    res['label'] = res['label'] + '/' + str(idPila)
 
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
         else:
             session['actor'] = res['actor']
+            
     return json.dumps(res)
 
 
@@ -55,38 +62,40 @@ def AElimActor():
 @actor.route('/actor/AModifActor', methods=['POST'])
 def AModifActor():
     #POST/PUT parameters
-    params = request.get_json()
+    params  = request.get_json()
     results = [{'label':'/VProducto', 'msg':['Actor actualizado']}, {'label':'/VActor', 'msg':['Error al modificar actor']}, ]
+    res     = results[1]
     
     if 'usuario' not in session:
       res['logout'] = '/'
-      return json.dumps(res)
-  
-    #idPila = 1
-    #res['label'] = res['label'] + '/' + str(idPila)
+      return json.dumps(res)    
+
+    # Obtenemos el id del Producto.
+    idPila  = int(session['idPila'])
+    print('idPila AModifActor',idPila) 
     
-    idPila   = 1
+    # Extraemos los parametros.
+    idActor      = params['idActor'] #Obtenemos el id del actor
+    newNameActor = params['nombre']
+    newDescActor = params['descripcion'] 
     
-    # Action code goes here
-    idActor     = params['idActor'] #Obtenemos el id del actor
-    newNameRole = params['nombre']
-    newDescRole = params['descripcion'] 
-    
-    actorNombre   = clsRole.query.filter_by(idrole = idActor).first() #Conseguimos el actor a modificar  
-    oRole  = role()
-    result = oRole.updateRole(actorNombre.namerole, newNameRole, newDescRole)    #Modfificamos el actor deseado
+    # Conseguimos el actor a modificar  
+    oActor = role()
+    found  = oActor.findIdActor(idActor)
+    # Modfificamos el actor deseado
+    result = oActor.updateActor(found[0].A_nameActor , newNameActor, newDescActor,idPila)    
     
     if result:
         res = results[0]
-        res['label'] = res['label'] + '/' + str(idPila)
-    else:
-        res = results[1]
+    
+    res['label'] = res['label'] + '/' + str(idPila)
 
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
         else:
             session['actor'] = res['actor']
+            
     return json.dumps(res)
 
 
@@ -94,27 +103,28 @@ def AModifActor():
 @actor.route('/actor/VActor')
 def VActor():
     #GET parameter
-    idActor = request.args['idActor']
     res = {}
+    # Obtenemos el id del producto y de la accion.
+    idPila   = int(session['idPila'])
+    idActor  = int(request.args.get('idActor'))
+    print('idPila VActor',idPila)
+    print('idActor VActor',idActor)
+    
     if "actor" in session:
         res['actor']=session['actor']
-    #Action code goes here, res should be a JSON structure
     
     if 'usuario' not in session:
       res['logout'] = '/'
       return json.dumps(res)
     res['usuario'] = session['usuario']
-    res['idPila'] = 1 
-    res['idActor'] = 1
-    
-    idActor = request.args.get('idActor')
 
-    result   = clsRole.query.filter_by(idrole = idActor).first()
+    # Buscamos el actor actual.
+    oActor = role()
+    result = oActor.findIdActor(idActor) 
     
-    res['idPila'] = 1 
-    res['fActor'] = {'idActor':idActor, 'nombre':result.namerole, 'descripcion':result.roledescription}    
-
-    #Action code ends here
+    res['fActor'] = {'idActor':idActor, 'nombre':result[0].A_nameActor, 'descripcion':result[0].A_actorDescription}    
+    res['idPila'] = idPila
+   
     return json.dumps(res)
 
 
@@ -122,20 +132,22 @@ def VActor():
 @actor.route('/actor/VCrearActor')
 def VCrearActor():
     #GET parameter
-    idPila = request.args['idPila']
     res = {}
+           
+    # Obtenemos el id del producto.
+    idPila = request.args.get('idPila',1)
+    print('idPila VCrearActor',idPila)
+    
     if "actor" in session:
         res['actor']=session['actor']
-    #Action code goes here, res should be a JSON structure
 
     if 'usuario' not in session:
       res['logout'] = '/'
       return json.dumps(res)
     res['usuario'] = session['usuario']
-    #Datos de prueba
-    res['idPila'] = 1
+    
+    res['idPila'] = idPila
 
-    #Action code ends here
     return json.dumps(res)
 
 
