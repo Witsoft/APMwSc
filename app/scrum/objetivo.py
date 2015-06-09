@@ -3,6 +3,7 @@
 from flask               import request, session, Blueprint, json
 from app.scrum.objective import *
 from app.scrum.backLog   import *
+from app.scrum.objectivesUserHistory   import *
 
 objetivo = Blueprint('objetivo', __name__)
 
@@ -45,12 +46,30 @@ def ACrearObjetivo():
 @objetivo.route('/objetivo/AElimObjetivo')
 def AElimObjetivo():
     #GET parameter
-    idObjetivo = request.args['idObjetivo']
-    results = [{'label':'/VProducto', 'msg':['Objetivo eliminado']}, {'label':'/VObjetivo', 'msg':['No se pudo eliminar este objetivo']}, ]
-    res = results[0]
+    #idObjetivo = request.args['idObjetivo']
+    results = [{'label':'/VProducto', 'msg':['Objetivo eliminado']}, {'label':'/VProducto', 'msg':['No se pudo eliminar este objetivo']}, ]
+    res = results[1]
     #Action code goes here, res should be a list with a label and a message
+    
+    # Obtenemos el id del Producto.
+    idPila  = int(session['idPila'])
+    idObjective  = int(session['idObjective'])
+    
+    # Conseguimos el objetivo a eliminar  
+    oObjetivo    = objective()
+    found = oObjetivo.searchIdObjective(idObjective) 
+    
+    oObjUserHistory = objectivesUserHistory()
+    result = oObjUserHistory.searchidUserHistoryIdObjective(idObjective)
+    # Verificamos si el objetivo esta asociado a una historia
+    print("result",result)
+    if (result == []):
+        deleted = oObjetivo.deleteObjective(found[0].O_descObjective) 
 
-    res['label'] = res['label'] + '/1'
+        if deleted:
+            res = results[0]  
+
+    res['label'] = res['label'] +  '/' + str(idPila)
 
     #Action code ends here
     if "actor" in res:
@@ -129,6 +148,7 @@ def VObjetivo():
     res['fObjetivo_opcionesTransversalidad'] = [{'key':True, 'value':'Si'},{'key':False, 'value':'No'}]
     res['fObjetivo'] = {'idObjetivo':idObjective, 'descripcion':result[0].O_descObjective , 'transversal':istransver}    
     res['idPila']    = idPila
+    session['idObjective'] = idObjective
 
     return json.dumps(res)
 

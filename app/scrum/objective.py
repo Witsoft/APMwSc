@@ -95,8 +95,8 @@ class objective(object):
                 oObj = clsObjective.query.filter_by(O_descObjective = descObjective).all()
                 
                 if oObj != []:  
-                    for i in oObj:    
-                        db.session.delete(i)          
+                    tupla = clsObjective.query.filter_by(O_descObjective = descObjective).first()   
+                    db.session.delete(tupla)     
                     db.session.commit()
                     return True
         return False 
