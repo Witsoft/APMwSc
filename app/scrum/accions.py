@@ -61,11 +61,9 @@ class accions(object):
     def searchIdAccion(self, idAccion):
         '''Permite buscar acciones por su id'''
         checkTypeIdAccion = type(idAccion) == int
-        
         foundAccion =[]
         if checkTypeIdAccion and idAccion >= MIN_ID:
-            foundAccion = clsAccion.query.filter_by(AC_idAccion  = idAccion).all()
-        
+            foundAccion = clsAccion.query.filter_by(AC_idAccion = idAccion).all()
         return foundAccion
     
             
