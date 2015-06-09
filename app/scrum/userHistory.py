@@ -115,8 +115,8 @@ class userHistory(object):
     
     def searchIdUserHistory(self,idUserHistory):
         '''Permite encontrar una historia de usuario por su id'''
-        checkTypeId           = type(idUserHistory) == str
-        checkLenIdUserHistory = len(idUserHistory) >= CONST_MIN_ID
+        checkTypeId           = type(idUserHistory) == int
+        checkLenIdUserHistory = idUserHistory >= CONST_MIN_ID
         
         if checkTypeId and checkLenIdUserHistory:
             found = clsUserHistory.query.filter_by(UH_idUserHistory = idUserHistory).all()
@@ -151,7 +151,7 @@ class userHistory(object):
                             result[0].UH_idAccion        = newIdAccion
                             result[0].UH_scale           = newScale
                             if checkSuperHistory == []:
-                                result[0].UH_idSuperHistory = new_idSuperHistory
+                                result[0].UH_idSuperHistory = newIdSuperHistory
                             db.session.commit()
                         return True
         return False

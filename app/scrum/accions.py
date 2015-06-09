@@ -63,8 +63,10 @@ class accions(object):
         checkTypeIdAccion = type(idAccion) == int
         
         foundAccion =[]
-        if checkTypeIdAccion and idAccion >= MIN_ID:
-            foundAccion = clsAccion.query.filter_by(AC_idAccion  = idAccion).all()
+        if checkTypeIdAccion:
+            checkId = idAccion >= MIN_ID
+            if checkId:
+                foundAccion = clsAccion.query.filter_by(AC_idAccion  = idAccion).all()
         
         return foundAccion
     
