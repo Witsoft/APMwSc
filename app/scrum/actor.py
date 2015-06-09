@@ -83,7 +83,7 @@ def AModifActor():
     oActor = role()
     found  = oActor.findIdActor(idActor)
     # Modfificamos el actor deseado
-    result = oActor.updateActor(found[0].A_nameActor , newNameActor, newDescActor)    
+    result = oActor.updateActor(found[0].A_nameActor , newNameActor, newDescActor,idPila)    
     
     if result:
         res = results[0]

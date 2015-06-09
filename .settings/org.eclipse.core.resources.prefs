@@ -20,7 +20,6 @@ encoding//app/scrum/prod.py=utf-8
 encoding//app/scrum/role.py=utf-8
 encoding//app/scrum/user.py=utf-8
 encoding//app/scrum/userHistory.py=utf-8
-encoding//testing/accionsDummy.py=utf-8
 encoding//testing/actorsUserHistoryDummy.py=utf-8
 encoding//testing/backLogDummy.py=utf-8
 encoding//testing/historyDummy.py=utf-8
