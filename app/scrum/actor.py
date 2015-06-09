@@ -62,7 +62,7 @@ def AElimActor():
     # Verificamos si el actor esta asociado a una historia
 
     if (result == []):
-        deleted = oActor.deleteActor(found[0].A_nameActor)
+        deleted = oActor.deleteActor(found[0].A_nameActor,idPila)
         print("otor",deleted) 
     
         if deleted:
@@ -105,7 +105,7 @@ def AModifActor():
     oActor = role()
     found  = oActor.findIdActor(idActor)
     # Modfificamos el actor deseado
-    result = oActor.updateActor(found[0].A_nameActor , newNameActor, newDescActor)    
+    result = oActor.updateActor(found[0].A_nameActor , newNameActor, newDescActor,idPila)    
     
     if result:
         res = results[0]

@@ -64,7 +64,7 @@ def AElimObjetivo():
     # Verificamos si el objetivo esta asociado a una historia
     print("result",result)
     if (result == []):
-        deleted = oObjetivo.deleteObjective(found[0].O_descObjective) 
+        deleted = oObjetivo.deleteObjective(found[0].O_descObjective,idPila) 
 
         if deleted:
             res = results[0]  
@@ -101,7 +101,7 @@ def AModifObjetivo():
     # Conseguimos el objetivo a modificar.
     objetivoDesc = oObjetivo.searchIdObjective(idObjetivo) 
     #Modificamos la descripción del objetivo.    
-    result       = oObjetivo.updateObjective(objetivoDesc[0].O_descObjective , newDescription,newType) 
+    result       = oObjetivo.updateObjective(objetivoDesc[0].O_descObjective , newDescription,newType,idPila) 
 
     if result:
         res = results[0]

@@ -278,18 +278,18 @@ def VHistoria():
     res['usuario'] = session['usuario']
 
     scale = {1:'Alta',2:'Media',3:'Baja'}
-
-    # Obtenemos la historia que queremos modificar.
-    history = searchIdUserHistory(idHistory)
-    history = histori[0]
         
-    # Obtenemos todas las acciones, actores y objetivos asociados al producto.
     oBacklog      = backlog() 
     oObjective    = objective()
     oUserHist     = userHistory()
     oActUserHist  = actorsUserHistory()
     oObjUserHist  = objectivesUserHistory()
     
+    # Obtenemos la historia que queremos modificar.
+    history = oUserHist.searchIdUserHistory(idHistory)
+    history = history[0]
+
+    # Obtenemos todas las acciones, actores y objetivos asociados al producto.
     actorList     = oBacklog.actorsAsociatedToProduct(idPila)
     accionList    = oBacklog.accionsAsociatedToProduct(idPila)
     objectiveList = oBacklog.objectivesAsociatedToProduct(idPila)

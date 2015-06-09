@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.model import *
-from distutils.command.check import check
+import sys
+# Ruta que permite utilizar el módulo model.py
+sys.path.append('app/scrum')
+
+from model import *
 
 # Declaracion de constantes.
 CONST_MAX_DESCRIPTION = 140

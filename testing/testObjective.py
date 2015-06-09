@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-. 
 
+import sys
 import unittest
 
-from objectiveDummy import *
+# Ruta que permite utilizar el módulo objective.py
+sys.path.append('../app/scrum')
+
+from objective import *
 
 class TestObjectives(unittest.TestCase):
     
@@ -14,231 +18,247 @@ class TestObjectives(unittest.TestCase):
   
     # Prueba 1
      def testInsertObjectiveExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Mueve personas',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Reservar un taxi',1,True)
-        aAcc.deleteObjective('Reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')        
+        oObj = objective()
+        oObj.insertObjective('Pxsxr cyn ctncy',idBacklog,True)
+        oObj.deleteObjective('Pxsxr cyn ctncy',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')        
 
     # Casos Normales
     
     # Prueba 2          
      def testInsertObjectiveElement(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Pasa ciudades',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('Permite elegir',1,False)
+        oObj   = objective()
+        result = oObj.insertObjective('Xstzdyzr',idBacklog,False)
         self.assertTrue(result)
-        aAcc.deleteObjective('Permite elegir')
-        aBackLog.deleteProduct('Taxi seguro')
-                          
+        oObj.deleteObjective('Xstzdyzr',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
+                         
     # Prueba 3
      def testInsertObjectiveRepeatedElement(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Pasa ciudades',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxñxn yl pynszm',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('Permite elegir',1,True)
-        result1 = aAcc.insertObjective('Permite elegir',1,True)
+        oObj   = objective()
+        result = oObj.insertObjective('Xstzdyzr',idBacklog,True)
+        result1 = oObj.insertObjective('Xstzdyzr',idBacklog,True)
         self.assertFalse(result1)
-        aAcc.deleteObjective('Permite elegir')
-        aBackLog.deleteProduct('Taxi seguro')
-               
+        oObj.deleteObjective('Xstzdyzr',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
+              
     # Casos Fronteras
 
     # Prueba 4
      def testInsertObjectiveShortDesc0(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rueda de caras negras',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Xmpysxblz cxncz',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('',1,True)
+        oObj   = objective()
+        result = oObj.insertObjective('',idBacklog,True)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
-                           
+        oBacklog.deleteProduct('Xstryctyrzs')
+                            
     # Prueba 5
      def testInsertObjectiveLongDesc1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Motor fuerte',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Cxrsyr qxtry',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('A',1,False)
+        oObj   = objective()
+        result = oObj.insertObjective('@',idBacklog,False)
         self.assertTrue(result)
-        aAcc.deleteObjective('A')
-        aBackLog.deleteProduct('Taxi seguro')
-       
+        oObj.deleteObjective('@',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
+                  
     # Prueba 6
      def testInsertObjectiveLongDesc140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Pertece a linea movistar',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Czmpytxcxzn',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem',1,False)
+        oObj   = objective()
+        result = oObj.insertObjective(20*'Llxmxry',idBacklog,False)
         self.assertTrue(result)
-        aAcc.deleteObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective(20*'Llxmxry',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 7
      def testInsertObjectiveLongDesc141(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','De color rojo',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dx qytrx crxdytts',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problema',1,True)
+        oObj   = objective()
+        result = oObj.insertObjective(20*'Llxmxry' + 's',idBacklog,True)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
                 
     # Prueba 8
-     def testInsertObjectiveIdBackLogInvalid(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+     def testInsertObjectiveIdBacklogInvalid(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Hxrys dz szxñy',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result  =aAcc.insertObjective('Movilizarme desde mi casa',0,False)
+        oObj   = objective()
+        result  =oObj.insertObjective('Xstsdpxr',0,False)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 9
      def testInsertObjectiveObjTypeInvalid(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Hxrys dz szxñy',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc   = objective()
-        result  =aAcc.insertObjective('Movilizarme desde mi casa',1,'Falseee')
+        oObj   = objective()
+        result  =oObj.insertObjective('Xstzdyfr',idBacklog,'Falseee')
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Casos Esquinas
        
     # Prueba 10
-     def testInsertObjectiveIdBackLogNoExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rapido y Furioso',1)
+     def testInsertObjectiveIdBacklogNoExists(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Cxmplyczdz',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result  =aAcc.insertObjective('Trasladarse rápido',2,True)
+        oObj   = objective()
+        result  =oObj.insertObjective('Dxs pyrczylcs',2,True)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
-            
+        oBacklog.deleteProduct('Xstryctyrzs')
+
     # Prueba 11
-     def testInsertObjectiveLongDesc140AndIdBackLogNoExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Via rapida',1)
+     def testInsertObjectiveLongDesc140AndIdBacklogNoExists(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Pxsydy',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin proble1',3,True)
+        oObj   = objective()
+        result = oObj.insertObjective(20*'Llxmxry',3,True)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 12
-     def testInsertObjectiveLongDesc140AndIdBackLogExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Via rapida',1)
+     def testInsertObjectiveLongDesc140AndIdBacklogExists(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Pxsydy',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin proble1',1,False)
+        oObj   = objective()
+        result = oObj.insertObjective(20*'Llxmxry',idBacklog,False)
         self.assertTrue(result)
-        aAcc.deleteObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective(20*'Llxmxry',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 13
-     def testInsertObjectiveLongDesc1AndIdBackLogExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Via rapida',1)
+     def testInsertObjectiveLongDesc1AndIdBacklogExists(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Pxcxs prxfysxrys',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('L',1,True)
+        oObj   = objective()
+        result = oObj.insertObjective('L',idBacklog,True)
         self.assertTrue(result)
-        aAcc.deleteObjective('L')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('L',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 14
-     def testInsertObjectiveLongDesc1AndIdBackLogNotExistsObjTypeExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Via rapida',1)
+     def testInsertObjectiveLongDesc1AndIdBacklogNotExistsObjTypeExists(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Pxcxs prxfysxrys',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('L',7,False)
+        oObj   = objective()
+        result = oObj.insertObjective('L',7,False)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 15
-     def testInsertObjectiveLongDesc0AndIdBackLogExistsObjTypeExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Via rapida',1)
+     def testInsertObjectiveLongDesc0AndIdBacklogExistsObjTypeExists(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Pxsydy',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('',1,True)
+        oObj   = objective()
+        result = oObj.insertObjective('',idBacklog,True)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
        
     # Casos Maliciosos
       
     # Prueba 16
      def testInsertNotString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Vuelo alto',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Pxsydy',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective(4350,1,True)
+        oObj   = objective()
+        result = oObj.insertObjective(4350,idBacklog,True)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 17
      def testInsertNoneString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Velocidad maxima',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx yxtxnsy',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective(None,1,False)
+        oObj   = objective()
+        result = oObj.insertObjective(None,idBacklog,False)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 18
      def testInsertWrongObjType(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Velocidad maxima',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx yxtxnsy',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective('7 ruedas',1,'Falseeeee')
+        oObj   = objective()
+        result = oObj.insertObjective('Estudiar bastante',idBacklog,'Falseeeee')
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 19
      def testInsertWrongAllParameters(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Velocidad media',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective(13500,'Ramas','True or False')
+        oObj   = objective()
+        result = oObj.insertObjective(13500,0,'True or False')
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 20
      def testInsertNoneAllParameters(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Velocidad media',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.insertObjective(None,None,None)
+        oObj   = objective()
+        result = oObj.insertObjective(None,0,None)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
-  
+        oBacklog.deleteProduct('Xstryctyrzs')
+
     #############################################      
     #   Suite de Pruebas para searchObjective   #
     #############################################
@@ -247,106 +267,100 @@ class TestObjectives(unittest.TestCase):
        
     # Prueba 21 
      def testsearchObjectiveExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Manejar con prudencia',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Xstzdyfr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,True)
-        aAcc.searchObjective('Permite reservar un taxi')
+        oObj = objective()
+        oObj.insertObjective('Szbxr xndxcy',idBacklog,True)
+        oObj.searchObjective('Szbxr xndxcy',idBacklog)
 
     # Casos Fronteras
        
     # Prueba 22
      def testsearchObjectiveShortDesc0(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilizacion',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Trxbxjxr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.        
-        aAcc   = objective()
-        aAcc.insertObjective('',1,False)
-        result = aAcc.searchObjective('')
+        oObj   = objective()
+        result = oObj.searchObjective('',idBAcklog)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
       
     # Prueba 23
      def testsearchObjectiveShortDesc1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Desplazamiento',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Txrmynzr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba
-        aAcc   = objective()
-        aAcc.insertObjective('A',1,True)
-        result = aAcc.searchObjective('A')
+        oObj   = objective()
+        oObj.insertObjective('A',idBacklog,True)
+        result = oObj.searchObjective('A',idBacklog)
         self.assertTrue(result)
-        aAcc.deleteObjective('A')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('A',idBacklog)
+        oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 24
      def testsearchObjectiveShortDesc140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Trabajar',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Trxbxjxr',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem',1,True)
-        result = aAcc.searchObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem')
-        self.assertNotEqual(result,[],"Objective no encontrada")
-        aAcc.deleteObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problem')
-        aBackLog.deleteProduct('Taxi seguro')
-           
+        oObj   = objective()
+        oObj.insertObjective(20*'Llxmxry',1,True)
+        result = oObj.searchObjective(20*'Llxmxry',1)
+        self.assertNotEqual(result,[],"Objectivo no encontrado")
+        oObj.deleteObjective(20*'Llxmxry',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
+
     # Prueba 25
      def testsearchObjectiveShortDesc141(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Estructura del carro',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Xstryctyrz dx ly mytxrgx',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problema',1,False)
- 
-        result = aAcc.searchObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problema')
-        self.assertFalse(result, "Objective Encontrada.")
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj   = objective()
+        oObj.insertObjective(20*'Llxmxry'+'s',1,False)
+        result = oObj.searchObjective(20*'Llxmxry'+'s',1)
+        self.assertFalse(result, "Objective no encontrado")
+        oBacklog.deleteProduct('Xstryctyrzs')
   
     # Caso Normal
       
     # Prueba 26
      def testsearchObjectiveDescNotExist(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Relacion con el cliente',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Rxlyczvn',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.searchObjective('Comunicarse via correo electronico')
+        oObj   = objective()
+        result = oObj.searchObjective('Cxmznycxrsd vyx cxrrzy',1)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
   
     # Casos Maliciosos
        
      # Prueba 27
      def testsearchObjectiveNotString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Viajes',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Vxcxcyznvs',1)
         # Inicio de la prueba. 
-        aAcc   = objective()
-        aAcc.insertObjective(4350,1,True)
-        result = aAcc.searchObjective(4350)
-        self.assertEqual(result, [],'Objective Encontrada')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj   = objective()
+        oObj.insertObjective(4350,1,True)
+        result = oObj.searchObjective(4350,1)
+        self.assertEqual(result, [],'Objectivo encontrado')
+        oBacklog.deleteProduct('Xstryctyrzs')
  
     # Prueba 28 
      def testSearchNameNoneString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rapidez',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Rxpydzz',1)
         # Inicio de la prueba.   
-        aAcc   = objective()
-        result = aAcc.searchObjective(None)
-        self.assertEqual(result, [],'Objective Encontrada')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj   = objective()
+        result = oObj.searchObjective(None,1)
+        self.assertEqual(result, [],'objective encontrado')
+        oBacklog.deleteProduct('Xstryctyrzs')
           
     #############################################      
     #   Suite de Pruebas para searchIdObjective#
@@ -355,87 +369,87 @@ class TestObjectives(unittest.TestCase):
           
     # Prueba 29  
      def testsearchIdObjectiveExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,True)
-        aAcc.searchIdObjective(1)
+        oObj = objective()
+        oObj.insertObjective('Szbxr xndxcy',1,True)
+        oObj.searchIdObjective(1)
 
     # Caso Normal
           
     # Prueba 30 
      def testsearchValidIdObjective(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,False)
-        result = aAcc.searchIdObjective(1)
+        oObj = objective()
+        oObj.insertObjective('Szbxr xndxcy',1,False)
+        result = oObj.searchIdObjective(1)
         self.assertNotEqual([],result)
-        aAcc.deleteObjective('Permite reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
-
+        oObj.deleteObjective('Szbxr xndxcy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
+              
     # Caso Frontera
           
     # Prueba 31 
      def testsearchIdObjective(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,True)
-        result = aAcc.searchIdObjective(1)
+        oObj = objective()
+        oObj.insertObjective('Szbxr xndxcy',1,True)
+        result = oObj.searchIdObjective(1)
         self.assertNotEqual([],result)
-        aAcc.deleteObjective('Permite reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Szbxr xndxcy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
           
     # Prueba 32
      def testsearchInValidIdObjective(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,False)
-        result = aAcc.searchIdObjective(5)
+        oObj = objective()
+        oObj.insertObjective('Szbxr xndxcy',1,False)
+        result = oObj.searchIdObjective(5)
         self.assertEqual([],result)
-        aAcc.deleteObjective('Permite reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Szbxr xndxcy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 33
      def testSearchIdEmpty(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
         oObjective   = objective()
         oObjective.insertObjective('',1,True)
         result = oObjective.searchIdObjective(0)
-        self.assertEqual(result,[], "Elemento no encontrado")
-        aBackLog.deleteProduct('Taxi seguro')
+        self.assertEqual(result,[],"Elemento no encontrado")
+        oBacklog.deleteProduct('Xstryctyrzs')
                     
     # Casos Maliciosos
      
     # Prueba 34
      def testSearchIdString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Ruedas de cara blanca',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Pxsydzllxs yl drrmyr',1)
         # Inicio de la prueba.
         oObjective   = objective()
         oObjective.insertObjective(1254,1,False)
         result = oObjective.searchIdObjective('')
         self.assertEqual(result,[],"Elemento Insertado") 
-        aBackLog.deleteProduct('Taxi seguro')       
+        oBacklog.deleteProduct('Xstryctyrzs')       
 
     # Prueba 35
      def testSearchIdNoneString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rapidez',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxscxplxny',1)
         # Inicio de la prueba.        
         oObjective   = objective()
         oObjective.insertObjective(None,1,False)
         result = oObjective.searchIdObjective(None)
         self.assertEqual(result,[],"Válido")    
-        aBackLog.deleteProduct('Taxi seguro')           
+        oBacklog.deleteProduct('Xstryctyrzs')           
          
     #############################################      
     #   Suite de Pruebas para updateObjective   #
@@ -444,227 +458,209 @@ class TestObjectives(unittest.TestCase):
       
     # Prueba 36
      def testupdateObjectiveExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Descripcion',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxscrypcyzn',1)
         # Inicio de la prueba.   
-        aAcc   = objective()
-        aAcc.insertObjective('Reservar un taxi.',1,True)
-        aAcc.updateObjective('Reservar un taxi','Reservar un taxi o varios',False)
-        aBackLog.deleteProduct('Taxi seguro')  
+        oObj   = objective()
+        oObj.insertObjective('Pxsxr cyn ctncy',1,True)
+        oObj.updateObjective('Pxsxr cyn ctncy','Pxsxr cyn czncy',False,1)
+        oBacklog.deleteProduct('Xstryctyrzs')  
 
     # Casos Normales
       
     # Prueba 37
      def testupdateObjectiveDesc(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Carretera',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Xnyvzrsydvd',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Permite elegir',1,True)
-        result = aAcc.updateObjective('Permite elegir','Atención las 24 horas del día',False)
+        oObj   = objective()
+        oObj.insertObjective('Xstzdyzr',1,True)
+        result = oObj.updateObjective('Xstzdyzr','Cxnsyltzas',False,1)
         self.assertTrue(result)
-        aAcc.deleteObjective('Atención las 24 horas del día')
-        aBackLog.deleteProduct('Taxi seguro')                                  
+        oObj.deleteObjective('Cxnsyltzas',1)
+        oBacklog.deleteProduct('Xstryctyrzs')                                  
            
     # Prueba 38     
      def testupdateObjectiveDescNotExist(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        result = aAcc.updateObjective('Llegar lo mas pronto posible','Ir comodo y seguro',True)
+        oObj = objective()
+        result = oObj.updateObjective('LLxgyr sxgzrj','Yr pxr lx szgvrx',True,1)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Casos Fronteras
         
     # Prueba 39
      def testupdateObjectiveLeftLen1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rapidez',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Bxsqxydz',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('A',1,False)
-        result = aAcc.updateObjective('A','Buscar al cliente donde esté',True)
+        oObj   = objective()
+        oObj.insertObjective('A',1,False)
+        result = oObj.updateObjective('A','Bxscyr yl przft',True,1)
         self.assertTrue(result)
-        aAcc.deleteObjective('Buscar al cliente donde esté')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Bxscyr yl przft',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 40
      def testupdateObjectiveLeftLong1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Desplazamiento',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Bxsqxydz',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Buscar al cliente donde esté',1, False)
-        result = aAcc.updateObjective('Buscar al cliente donde esté','A',True)
+        oObj   = objective()
+        oObj.insertObjective('Bxscyr yl przft',1, False)
+        result = oObj.updateObjective('Bxscyr yl przft','A',True,1)
         self.assertTrue(result)
-        aAcc.deleteObjective('A')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('A',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 41         
      def testupdateObjectiveRightLen140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Carretera',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Mxchys mytzrvys',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Atención las 24 horas del día',1,True)
-        result = aAcc.updateObjective('Atención las 24 horas del día',140*'T',False)
+        oObj   = objective()
+        oObj.insertObjective('Cxrsyr fn pyrylflx',1,True)
+        result = oObj.updateObjective('Cxrsyr fn pyrylflx',140*'T',False,1)
         self.assertTrue(result)    
-        aAcc.deleteObjective(140*'T')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective(140*'T',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
                                   
     # Prueba 42
      def testupdateObjectiveLeftLen140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Tipo de taxi',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzxs',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective(140*'T',1, False)
-        result = aAcc.updateObjective(140*'T','Atención las 24 horas del día',True)
+        oObj   = objective()
+        oObj.insertObjective(140*'T',1, False)
+        result = oObj.updateObjective(140*'T','Mxtyrzxs x cfrsxr',True,1)
         self.assertTrue(result)
-        aAcc.deleteObjective('Atención las 24 horas del día')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Mxtyrzxs x cfrsxr',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Casos Esquinas
        
     # Prueba 43
      def testupdateObjectiveLeftLen1RightLen140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Neumàticos de cara negra',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Vxrly',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('A',1,False)
-        result = aAcc.updateObjective('A',140*'Us',True)
-        self.assertFalse(result)
-        aAcc.deleteObjective('A')
-        aBackLog.deleteProduct('Taxi seguro') 
+        oObj   = objective()
+        oObj.insertObjective('A',1,False)
+        result = oObj.updateObjective('A',70*'Us',True,1)
+        self.assertTrue(result)
+        oObj.deleteObjective('A',1)
+        oBacklog.deleteProduct('Xstryctyrzs') 
 
     # Prueba 44
      def testupdateObjectiveLeftLen140RightLen140(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Ruedas de cara blanca',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzxs',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective(140*'Us',1,True)
-        result = aAcc.updateObjective(140*'Us', 140*'Ma',False)
-        self.assertFalse(result) 
-        aAcc.deleteObjective(140*'Us')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj   = objective()
+        oObj.insertObjective(140*'U',1,True)
+        result = oObj.updateObjective(140*'U', 140*'M',False,1)
+        self.assertTrue(result) 
+        oObj.deleteObjective(140*'M',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 45
      def testupdateObjectiveLeftLen140RightLen1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rueda 250 km',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Qxtry crzdytfs',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problem',1,True)
-        result = aAcc.updateObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                       'cualquier hora del dia, para poder dirigirse a '+
-                                       'cualquier lugar de la ciudad sin problem','M',False)
+        oObj   = objective()
+        oObj.insertObjective(20*'Llxmxry',1,True)
+        result = oObj.updateObjective(20*'Llxmxry','M',False,1)
         self.assertTrue(result)
-        aAcc.deleteObjective('M')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('M',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 46
      def testupdateObjectiveLeftLen1RightLen1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Semàforo',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Prxfysxrys',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('X',1,True)
-        result = aAcc.updateObjective('X','U',False)
+        oObj   = objective()
+        oObj.insertObjective('X',1,True)
+        result = oObj.updateObjective('X','U',False,1)
         self.assertTrue(result)
-        aAcc.deleteObjective('U')
-        aBackLog.deleteProduct('Taxi seguro') 
+        oObj.deleteObjective('U',1)
+        oBacklog.deleteProduct('Xstryctyrzs') 
            
     # Casos Maliciosos
        
     # Prueba 47
      def testupdateSameName(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Partes de un taxi',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Txmys',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Reservar un taxi',1,True)
-        result = aAcc.updateObjective('Reservar un taxi','Reservar un taxi',False)
+        oObj   = objective()
+        oObj.insertObjective('Pxsxr cyn ctncy',1,True)
+        result = oObj.updateObjective('Pxsxr cyn ctncy','Pxsxr cyn ctncy',False,1)
         self.assertTrue(result)
-        aAcc.deleteObjective('Reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Pxsxr cyn ctncy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 48
-     def testupdateObjectiveLeftLen0RightLen141(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+     def testupdateObjectiveLeftLen1RightLen141(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('',1,False)
-        result = aAcc.updateObjective('','Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problems',True)
+        oObj   = objective()
+        oObj.insertObjective('A',1,False)
+        result = oObj.updateObjective('',20*'Llxmxry'+'s',True,1)
         self.assertFalse(result, "Modificación válida") 
-        aAcc.deleteObjective('')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('A',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
  
     # Prueba 49
-     def testupdateObjectiveLeftLen141RightLen141(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Ruedas',1)
+     def testupdateObjectiveLeftLen140RightLen141(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Rxddxs',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problema',1,False)
-        result = aAcc.updateObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problema',25*'Ma' + 's',False)
+        oObj   = objective()
+        oObj.insertObjective(20*'Llxmxry',1,False)
+        result = oObj.updateObjective(20*'Llxmxry',70*'Ma' + 's',False,1)
         self.assertFalse(result, "Modificación Válida") 
-        aAcc.deleteObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problema')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective(20*'Llxmxry',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 50
-     def testupdateObjectiveLeftLen141RightLen0(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Ruedas caras',1)
+     def testupdateObjectiveLeftLen140RightLen0(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx vxlzdx',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problemas',1,True)
-        result = aAcc.updateObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problemas','',False)
+        oObj   = objective()
+        oObj.insertObjective(20*'Llxmxry',1,True)
+        result = oObj.updateObjective(20*'Llxmxry','',False,1)
         self.assertFalse(result, "Modificación válida") 
-        aAcc.deleteObjective('Llamar al centro de atencion de servicios de taxis a '+
-                                      'cualquier hora del dia, para poder dirigirse a '+
-                                      'cualquier lugar de la ciudad sin problemas')
-        aBackLog.deleteProduct('Taxi seguro')  
+        oObj.deleteObjective(20*'Llxmxry',1)
+        oBacklog.deleteProduct('Xstryctyrzs')  
 
     # Prueba 51
      def testupdateObjectiveLeftNoneRightValidString(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Recorrer ciudades',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Rxcorrxr dyxgrxmx',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.updateObjective(None,'Comunicarse via correo electronico',True)
+        oObj   = objective()
+        result = oObj.updateObjective(None,'Cxmznycxrsd vyx cxrrzy',True,1)
         self.assertFalse(result,"Modificación válida") 
-        aBackLog.deleteProduct('Taxi seguro')  
+        oBacklog.deleteProduct('Xstryctyrzs')  
  
     # Prueba 52
      def testupdateObjectiveLeftValidStringRightNone(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Recorrer estados',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Rxcorrxr dyxgrxmx',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Reservar un taxi',1,False)
-        result = aAcc.updateObjective('Reservar un taxi',None,True)
+        oObj   = objective()
+        oObj.insertObjective('Pxsxr cyn ctncy',1,False)
+        result = oObj.updateObjective('Pxsxr cyn ctncy',None,True,1)
         self.assertFalse(result, "Modificación válida") 
-        aAcc.deleteObjective('Reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')    
+        oObj.deleteObjective('Pxsxr cyn ctncy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')    
 
     #############################################      
     #    Suite de Pruebas para deleteObjective  #
@@ -674,84 +670,84 @@ class TestObjectives(unittest.TestCase):
        
     # Prueba 53
      def testDeleteObjectiveExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movimiento Lineal',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx Dyscrxtz',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Reservar un Taxi',1,True)
-        aAcc.deleteObjective('Reservar un Taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj   = objective()
+        oObj.insertObjective('Rxsxrvyr czpk',1,True)
+        oObj.deleteObjective('Rxsxrvyr czpk',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
            
         # Casos Normales
    
     # Prueba 54
      def testDeleteObjective(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Asiento',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Cxrsyr',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('U',1,False)
-        result = aAcc.deleteObjective('U')
+        oObj   = objective()
+        oObj.insertObjective('U',1,False)
+        result = oObj.deleteObjective('U',1)
         self.assertTrue(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Casos Fronteras
 
     # Prueba 55
      def testDeleteObjective1(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Peatones',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Fxltxn dzs',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('A',1,True)
-        result = aAcc.deleteObjective('A')
+        oObj   = objective()
+        oObj.insertObjective('A',1,True)
+        result = oObj.deleteObjective('A',1)
         self.assertTrue(result)
-        aBackLog.deleteProduct('Taxi seguro')          
+        oBacklog.deleteProduct('Xstryctyrzs')          
   
     # Prueba 56      
      def testDeleteObjectiveNoObjective(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rayado',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzfs dy cxdynx',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('yyy',1,True)
-        result = aAcc.deleteObjective('xxx')
+        oObj   = objective()
+        oObj.insertObjective('yyy',1,True)
+        result = oObj.deleteObjective('xxx',1)
         self.assertFalse(result)
-        aAcc.deleteObjective('yyy')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('yyy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
      
     # Casos Maliciosos
   
     # Prueba 57
      def testDeleteObjectiveInvalid(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.deleteObjective('')
+        oObj   = objective()
+        result = oObj.deleteObjective('',1)
         self.assertFalse(result,"Id no válido")
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 58
      def testDeleteObjectiveNotString(self):
-       aBackLog = backLog()
-       aBackLog.insertBackLog('Taxi seguro','Desplazamiento',1)
+       oBacklog = backlog()
+       oBacklog.insertBacklog('Xstryctyrzs','Determinacion',1)
        # Inicio de la prueba.
-       aAcc   = objective()
-       aAcc.insertObjective(12345,1,False)
-       result = aAcc.deleteObjective(12345)
+       oObj   = objective()
+       oObj.insertObjective(12345,1,False)
+       result = oObj.deleteObjective(12345,1)
        self.assertFalse(result,"Id no válido")
-       aBackLog.deleteProduct('Taxi seguro')
+       oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 59    
      def testDeleteObjectiveNotExist(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
-        aAcc   = objective()
-        result = aAcc.deleteObjective('Llegar rápido')
+        oObj   = objective()
+        result = oObj.deleteObjective('Txrmynzr dx pzszr',1)
         self.assertFalse(result)
-        aBackLog.deleteProduct('Taxi seguro')
+        oBacklog.deleteProduct('Xstryctyrzs')
          
     ###################################################      
     # Suite de Pruebas para VerifyObjectiveTransverse #
@@ -761,90 +757,66 @@ class TestObjectives(unittest.TestCase):
   
     # Prueba 60
      def testVerifyObjectiveExists(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Mueve personas',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Mxyvy przmedxz',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Reservar un taxi',1,True)
-        transverse = aAcc.verifyObjectiveTransverse(1)
+        oObj = objective()
+        oObj.insertObjective('Pxsxr cyn ctncy',1,True)
+        transverse = oObj.verifyObjectiveTransverse(1)
         self.assertTrue(transverse)
-        aAcc.deleteObjective('Reservar un Taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Pxsxr cyn ctncy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
         
     # Caso Normal
           
     # Prueba 61 
      def testVerifyValidIdObjectiveTransverse(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,False)
-        transverse = aAcc.verifyObjectiveTransverse(1)
+        oObj = objective()
+        oObj.insertObjective('Szbxr xndxcy',1,False)
+        transverse = oObj.verifyObjectiveTransverse(1)
         self.assertTrue(transverse)
-        aAcc.deleteObjective('Permite reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj.deleteObjective('Szbxr xndxcy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
 
     # Caso Frontera
           
     # Prueba 62 
      def testVerifyIdObjectiveTransverse(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,True)
-        transverse = aAcc.verifyObjectiveTransverse(1)
+        oObj = objective()
+        oObj.insertObjective('Szbxr xndxcy',1,True)
+        transverse = oObj.verifyObjectiveTransverse(1)
         self.assertTrue(transverse)
-        aAcc.deleteObjective('Permite reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
-          
+        oObj.deleteObjective('Szbxr xndxcy',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
+              # Casos Maliciosos
+     
     # Prueba 63
-     def testVerifyInvalidIdObjectiveTransverse(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
+     def testVerifyIdStringObjectiveTransverse(self):
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Cxnjzntxs',1)
         # Inicio de la prueba.
-        aAcc = objective()
-        aAcc.insertObjective('Permite reservar un taxi',1,False)
-        transverse = aAcc.verifyObjectiveTransverse(5)
-        self.assertEqual([],transverse)
-        aAcc.deleteObjective('Permite reservar un taxi')
-        aBackLog.deleteProduct('Taxi seguro')
+        oObj   = objective()
+        oObj.insertObjective('Xsygzrxr trsmxstrx',1,False)
+        transverse = oObj.verifyObjectiveTransverse('')
+        self.assertFalse([],transverse) 
+        oObj.deleteObjective('Xsygzrxr trsmxstrx',1)
+        oBacklog.deleteProduct('Xstryctyrzs')       
 
     # Prueba 64
-     def testVerifyIdEmptyObjectiveTransverse(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Movilidad',1)
-        # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Terminar todo',1,True)
-        transverse = aAcc.verifyObjectiveTransverse(0)
-        self.assertEqual([],transverse)
-        aAcc.deleteObjective('Terminar todo')        
-        aBackLog.deleteProduct('Taxi seguro')
-                    
-    # Casos Maliciosos
-     
-    # Prueba 65
-     def testVerifyIdStringObjectiveTransverse(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Ruedas de cara blanca',1)
-        # Inicio de la prueba.
-        aAcc   = objective()
-        aAcc.insertObjective('Asegurar el cinturon',1,False)
-        transverse = aAcc.verifyObjectiveTransverse('')
-        self.assertFalse([],transverse) 
-        aAcc.deleteObjective('Asegurar el cinturon')
-        aBackLog.deleteProduct('Taxi seguro')       
-
-    # Prueba 66
      def testVerifyIdNoneStringObjectiveTransverse(self):
-        aBackLog = backLog()
-        aBackLog.insertBackLog('Taxi seguro','Rapidez',1)
+        oBacklog = backlog()
+        oBacklog.insertBacklog('Xstryctyrzs','Cxnxcymyzntx',1)
         # Inicio de la prueba.        
-        aAcc   = objective()
-        aAcc.insertObjective('Desarrollar partes de un carro',1,False)
-        transverse = aAcc.searchIdObjective(None)
+        oObj   = objective()
+        oObj.insertObjective('Dvsxrryllzr conjzntys',1,False)
+        transverse = oObj.searchIdObjective(None)
         self.assertEqual([],transverse)    
-        aAcc.deleteObjective('Desarrollar partes de un carro')
-        aBackLog.deleteProduct('Taxi seguro')                   
+        oObj.deleteObjective('Dvsxrryllzr conjzntys',1)
+        oBacklog.deleteProduct('Xstryctyrzs')
+'''
