@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.backLog import *
+import sys
+# Ruta que permite utilizar el módulo backlog.py
+sys.path.append('app/scrum')
+
+from backLog import *
 
 # Declaracion de constantes.
 MIN_ID                 = 1
@@ -19,7 +23,7 @@ class accions(object):
         if checkTypeDescription and checkTypeId:
             checkLongAccionDescription = MIN_ACCION_DESCRIPTION <= len(accionDescription) <= MAX_ACCION_DESCRIPTION
             checkLongId                = MIN_ID <= idBacklog
-            
+        
             if checkLongAccionDescription and checkLongId:
                 foundBacklog = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).all()                      
                 
@@ -63,6 +67,7 @@ class accions(object):
             foundAccion = clsAccion.query.filter_by(AC_idAccion  = idAccion).all()
         
         return foundAccion
+    
             
     def updateAccion(self, accionDescription,newDescription,idBacklog):
         '''Permite actualizar la descripcion de una accion'''   
