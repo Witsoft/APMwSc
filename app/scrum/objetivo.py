@@ -46,14 +46,15 @@ def ACrearObjetivo():
 @objetivo.route('/objetivo/AElimObjetivo')
 def AElimObjetivo():
     #GET parameter
-    #idObjetivo = request.args['idObjetivo']
     results = [{'label':'/VProducto', 'msg':['Objetivo eliminado']}, {'label':'/VProducto', 'msg':['No se pudo eliminar este objetivo']}, ]
     res = results[1]
     #Action code goes here, res should be a list with a label and a message
     
     # Obtenemos el id del Producto.
-    idPila  = int(session['idPila'])
+    idPila       = int(session['idPila'])
     idObjective  = int(session['idObjective'])
+    print('idPila AElimObjetivo', idPila)
+    print('idActor AElimObjetivo', idObjective)
     
     # Conseguimos el objetivo a eliminar  
     oObjetivo    = objective()
@@ -61,8 +62,8 @@ def AElimObjetivo():
     
     oObjUserHistory = objectivesUserHistory()
     result = oObjUserHistory.searchidUserHistoryIdObjective(idObjective)
+    
     # Verificamos si el objetivo esta asociado a una historia
-    print("result",result)
     if (result == []):
         deleted = oObjetivo.deleteObjective(found[0].O_descObjective,idPila) 
 

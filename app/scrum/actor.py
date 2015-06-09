@@ -49,7 +49,7 @@ def AElimActor():
     # Obtenemos el id del producto y de la accion.
     idPila   = int(session['idPila'])
     idActor  = int(session['idActor'])
-    print('idPila', idPila)
+    print('idPila AElimActor', idPila)
     print('idActor AElimActor', idActor)
     
     # Conseguimos el actor a eliminar 
@@ -57,13 +57,11 @@ def AElimActor():
     found  = oActor.findIdActor(idActor)
     
     oActorUserHistory = actorsUserHistory()
-    result = oActorUserHistory.searchidUserHistoryIdActors(idActor)
-    print("algo",result)
-    # Verificamos si el actor esta asociado a una historia
+    result            = oActorUserHistory.searchidUserHistoryIdActors(idActor)
 
+    # Verificamos si el actor esta asociado a una historia
     if (result == []):
         deleted = oActor.deleteActor(found[0].A_nameActor,idPila)
-        print("otor",deleted) 
     
         if deleted:
             res = results[0]
