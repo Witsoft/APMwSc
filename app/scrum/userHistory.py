@@ -196,6 +196,14 @@ class userHistory(object):
             return found
         return([])
     
+    def searchidUserHistoryIdAccion(self, idAccion):
+        '''Permite obtener los ids de las historias de usuario que contiene el idAccion'''
+        checkIdAccion = type(idAccion) == int and idAccion >= CONST_MIN_ID
+ 
+        if checkIdAccion:
+            result = clsUserHistory.query.filter_by(UH_idAccion  = idAccion).all()
+        return result
+    
     
     def deleteUserHistory(self,codeUserHistory):
         '''Permite eliminar una historia segun su codigo'''
