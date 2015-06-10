@@ -1804,4 +1804,125 @@ class TestHistory(unittest.TestCase):
         aHist.deleteUserHistory('H1')
         aAcc.deleteAccion('Cualquier cosa2')
         aBackLog.deleteProduct('Taxi seguro.')
+        
+    # Prueba
+    def testSearchTaskNotString(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+            
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+            
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('H1')
+        idFound1 = searchHist[0].id_userHistory
+          
+        aTarea = task()
+        aTarea.insertTask('Tarea1',idFound1)
+        result = aTarea.searchTask(88)
+        self.assertFalse(result)
+        
+                    
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('Tarea1')
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+    # Prueba
+    def testSearchTaskArray(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+            
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+            
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('H1')
+        idFound1 = searchHist[0].id_userHistory
+          
+        aTarea = task()
+        aTarea.insertTask('Tarea1',idFound1)
+        result = aTarea.searchTask([])
+        self.assertFalse(result)
+        
+                    
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('Tarea1')
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
     
+    # Prueba
+    def testSearchTaskDisctionary(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+            
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+            
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('H1')
+        idFound1 = searchHist[0].id_userHistory
+          
+        aTarea = task()
+        aTarea.insertTask('Tarea1',idFound1)
+        result = aTarea.searchTask({})
+        self.assertFalse(result)
+        
+                    
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('Tarea1')
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+    # Prueba
+    def testSearchTaskStringLong(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+            
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Cualquier cosa2',1)
+        search = aAcc.searchAccion('Cualquier cosa2')
+        idFound = search[0].idaccion
+            
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('H1',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('H1')
+        idFound1 = searchHist[0].id_userHistory
+          
+        aTarea = task()
+        aTarea.insertTask('Tarea1',idFound1)
+        result = aTarea.searchTask('a'*((2^31)-1))
+        self.assertFalse(result)
+        
+                    
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('Tarea1')
+        aHist.deleteUserHistory('H1')
+        aAcc.deleteAccion('Cualquier cosa2')
+        aBackLog.deleteProduct('Taxi seguro.')
+        
+        
