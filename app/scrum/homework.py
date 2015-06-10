@@ -35,7 +35,7 @@ class homework(object):
             long_HW_description = minHomeworkDescription <= len(HW_description) <= maxHomeworkDescription
             
             if long_HW_description:
-                oUserHistory = clsUserHistory.query.filter_by(id_userHistory = id_userHistory).all()
+                oUserHistory = clsUserHistory.query.filter_by(UH_idUserHistory = id_userHistory).all()
                 oHomework = clsHomework.query.filter_by(HW_description = HW_description).all()
                 if (oUserHistory != []) and (oHomework == []):
                     new_homework = clsHomework(HW_description = HW_description,HW_refUserHistory = id_userHistory)

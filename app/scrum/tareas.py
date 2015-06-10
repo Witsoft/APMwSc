@@ -16,7 +16,7 @@ def ACrearTarea():
     idHistoria  = int(session['idHistoria'])
     #print('idHistoria AcrearTarea',idHistoria)
     #idHistoria    = 1
-    oBackLog = backLog()
+    oBackLog = backlog()
     oHistory = userHistory()
     userHistoriesList = oBackLog.userHistoryAsociatedToProduct(1)  
     oHomework = homework()
@@ -106,7 +106,6 @@ def AModifTarea():
     return json.dumps(res)
 
 
-
 @tareas.route('/tareas/VCrearTarea')
 def VCrearTarea():
     #GET parameter
@@ -138,7 +137,7 @@ def VTarea():
     #GET parameter
     idTarea = request.args['idTarea']
     idHistoria = int(session['idHistoria'])
-    found = clsUserHistory.query.filter_by(id_userHistory = idHistoria).first()
+    found = clsUserHistory.query.filter_by(UH_idUserHistory = idHistoria).first()
     codHistoria = found.cod_userHistory
     
     res = {}
