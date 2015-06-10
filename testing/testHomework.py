@@ -135,7 +135,7 @@ class TestHistory(unittest.TestCase):
            
          
     # Prueba 5
-    def testInsertHistoryShortDesc1(self):
+    def testInsertHomeworkShortDesc1(self):
         
         # Insertamos Producto
         aBackLog = backLog()
@@ -164,7 +164,7 @@ class TestHistory(unittest.TestCase):
         aBackLog.deleteProduct('Taxi seguro.')
          
     # Prueba 6
-    def test4InsertHistoryShortDesc140(self):
+    def test4InsertHomeworkShortDesc140(self):
       
         # Insertamos Producto
         aBackLog = backLog()
@@ -220,7 +220,7 @@ class TestHistory(unittest.TestCase):
         aBackLog.deleteProduct('Taxi seguro.')
            
     # Prueba 8
-    def testInsertHistoryId0(self):
+    def testInsertHomeworkId0(self):
         # Insertamos Producto    
         aBackLog = backLog()
         aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
@@ -331,69 +331,83 @@ class TestHistory(unittest.TestCase):
         aAcc.deleteAccion('Otra Accion')
         aBackLog.deleteProduct('Taxi seguro.')
          
-#     # Prueba 12
-#     def testinsertUserHistoryLongDesc11AndIdBackLogNoExists(self):
-#         # Insertamos Producto
-#         aBackLog = backLog()
-#         aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
-#           
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa')
-#         idFound = search[0].idaccion
-#           
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         result = aHist.insertUserHistory('H'*11,0, 2,idFound, 3,1)
-#         self.assertFalse(result)
-#                   
-#         # Eliminamos historia, accion y producto
-#         aAcc.deleteAccion('Otra Accion')
-#         aBackLog.deleteProduct('Taxi seguro.')
-#   
-#     # Prueba 14
-#     def testinsertUserHistoryLongCod11AndIdBackLogBig(self):
-#         # Insertamos Producto
-#         aBackLog = backLog()
-#         aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
-#           
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa')
-#         idFound = search[0].idaccion
-#           
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         result = aHist.insertUserHistory('H'*11,0, 2,idFound, 1*((2^31)-1),1)
-#         self.assertFalse(result)
-#                   
-#         # Eliminamos historia, accion y producto
-#         aAcc.deleteAccion('Otra Accion')
-#         aBackLog.deleteProduct('Taxi seguro.')
-#           
-#     # Prueba 15
-#     def testinsertUserHistoryLongCod11AndTypeBig(self):
-#         # Insertamos Producto
-#         aBackLog = backLog()
-#         aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
-#           
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa')
-#         idFound = search[0].idaccion
-#           
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         result = aHist.insertUserHistory('H'*11,0, 2*((2^31)-1),idFound, 1,1)
-#         self.assertFalse(result)
-#                   
-#         # Eliminamos historia, accion y producto
-#         aAcc.deleteAccion('Otra Accion')
-#         aBackLog.deleteProduct('Taxi seguro.')
-#         
+    # Prueba 12
+    def testInsertHomework140Id1(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+           
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa')
+        idFound = search[0].idaccion
+           
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('H2',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('H2')
+        idFound1 = searchHist[0].id_userHistory
+        
+        aTarea = homework()
+        result  = aTarea.insertHomework(140*'A',idFound1)
+        self.assertTrue(result)
+        
+        # Eliminamos historia, accion y producto
+        aTarea.deleteHomework(140*'A')
+        aHist.deleteUserHistory('H2')
+        aAcc.deleteAccion('Otra Accion')
+        aBackLog.deleteProduct('Taxi seguro.')
+   
+    # Prueba 14
+    def testInsertUserHistoryLongCod11AndIdBackLogBig(self):
+                # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+           
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa')
+        idFound = search[0].idaccion
+           
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('H2',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('H2')
+        idFound1 = searchHist[0].id_userHistory
+        
+        aTarea = homework()
+        result  = aTarea.insertHomework('Tarea1',idFound1)
+        self.assertTrue(result)
+        
+        # Eliminamos historia, accion y producto
+        aTarea.deleteHomework('Tarea1')
+        aHist.deleteUserHistory('H2')
+        aAcc.deleteAccion('Otra Accion')
+        aBackLog.deleteProduct('Taxi seguro.')
+'''           
+    # Prueba 15
+    def testinsertUserHistoryLongCod11AndTypeBig(self):
+        # Insertamos Producto
+        aBackLog = backLog()
+        aBackLog.insertBackLog('Taxi seguro.','Descripcion',1)
+           
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa')
+        idFound = search[0].idaccion
+           
+        # Insertamos la historia
+        aHist = userHistory()
+        result = aHist.insertUserHistory('H'*11,0, 2*((2^31)-1),idFound, 1,1)
+        self.assertFalse(result)
+                   
+        # Eliminamos historia, accion y producto
+        aAcc.deleteAccion('Otra Accion')
+        aBackLog.deleteProduct('Taxi seguro.')
+         
 #     # Prueba 16
 #     def testinsertUserHistory0Cod11AndTypeBig(self):
 #         # Insertamos Producto
@@ -2610,3 +2624,4 @@ class TestHistory(unittest.TestCase):
 #         aHist.deleteUserHistory('H1')
 #         aAcc.deleteAccion('Cualquier cosa2')
 #         aBackLog.deleteProduct('Taxi seguro.')
+'''
