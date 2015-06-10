@@ -154,7 +154,8 @@ class clsUserHistory(db.Model):
 	UH_scale             = db.Column(db.Integer, index = True)
 	UH_refActorsUserHist = db.relationship('clsActorsUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")
 	UH_refObjUserHist    = db.relationship('clsObjectivesUserHistory', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")	
- 	
+ 	UH_refTareaUserHist  = db.relationship('clsHomework', backref = 'userHistory',lazy = 'dynamic', cascade = "all, delete, delete-orphan")	
+
 	def __init__(self,codeUserHistory,idSuperHistory,accionType,idAccion,idBacklog,scale):
 		self.UH_codeUserHistory = codeUserHistory
 		self.UH_idSuperHistory  = idSuperHistory 
@@ -162,7 +163,8 @@ class clsUserHistory(db.Model):
 		self.UH_idAccion        = idAccion
 		self.UH_idBacklog       = idBacklog
 		self.UH_scale		    = scale
- 		
+ 
+		
 	def __repr__(self):
 		'''Representacion en string de la Historia de Usuario'''
 		return '<idUserHistory %r, codeUserHistory %r, scale %r>' % (self.UH_idUserHistory ,self.UH_codeUserHistory, self.UH_scale)
@@ -180,7 +182,22 @@ class clsActorsUserHistory(db.Model):
 	def __init__(self, idActor, idUserHistory):
 		self.AUH_idActor       = idActor
 		self.AUH_idUserHistory = idUserHistory
- 		
+		return '<id_userHistory %r, cod_userHistory %r, UH_scale %r>' % (self.id_userHistory,self.cod_userHistory, self.UH_scale)
+	
+	
+	
+class clsRolesUserHistory(db.Model):
+	'''Clase que define el modelo de tabla rolesUserHistory'''
+	
+	__tablename__ = 'rolesUserHistory'
+	id_roleUserHistory = db.Column(db.Integer, primary_key = True, index = True) 
+	ref_idrole         = db.Column(db.Integer, db.ForeignKey('roles.idrole'))
+	ref_idUserHistory  = db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'))
+	
+	def __init__(self, ref_idrole, ref_idUserHistory):
+		self.ref_idrole        = ref_idrole
+		self.ref_idUserHistory = ref_idUserHistory
+		
 	def __repr__(self):
 		'''Representacion en string de los id's a los roles y sus historias'''
 		return '<idActor %r, idUserHistory %r>' % (self.AUH_idActor, self.AUH_idUserHistory)
@@ -203,7 +220,22 @@ class clsObjectivesUserHistory(db.Model):
 		'''Representacion en string de los id's a los roles y sus historias'''
 		return '<idObjective %r, idUserHistory %r>' % (self.OUH_idObjective, self.OUH_idUserHistory)
 		
-		
+class clsHomework(db.Model):
+	'''Clase que define el modelo de la tabla HomeWork'''
+	
+	__tablename__ = 'homeWork'
+	HW_idHomework  		= db.Column(db.Integer, primary_key = True, index = True)
+	HW_description 		= db.Column(db.String(140),unique = True , index = True) 
+	HW_refUserHistory	= db.Column(db.Integer, db.ForeignKey('userHistory.id_userHistory'))
+
+	def __init__(self,HW_description,HW_refUserHistory):
+		self.HW_description	= HW_description
+		self.HW_refUserHistory  = HW_refUserHistory 
+
+	def __repr__(self):
+		'''Representacion en string de la Tarea'''
+		return '<HW_ idHomework  %r, HW_refUserHistory %r>' % (self.HW_idHomework,self.HW_refUserHistory)
+	
 migrate = Migrate(app, db)
 manager = Manager(app)
 

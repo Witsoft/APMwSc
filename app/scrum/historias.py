@@ -8,6 +8,7 @@ from app.scrum.accions               import *
 from app.scrum.objective             import *   
 from app.scrum.objectivesUserHistory import *
 from app.scrum.actorsUserHistory     import * 
+from app.scrum.homework              import *
 from sqlalchemy.ext.baked import Result
 
 historias = Blueprint('historias', __name__)
@@ -110,26 +111,6 @@ def ACrearHistoria():
 
 
 
-@historias.route('/historias/AElimHistoria')
-def AElimHistoria():
-    #GET parameter
-    idHistoria = request.args['idHistoria']
-    results = [{'label':'/VHistorias', 'msg':['Historia eliminada']}, {'label':'/VHistoria', 'msg':['No se pudo eliminar esta historia']}, ]
-    res = results[0]
-    #Action code goes here, res should be a list with a label and a message
-
-    res['label'] = res['label'] + '/1'
-
-    #Action code ends here
-    if "actor" in res:
-        if res['actor'] is None:
-            session.pop("actor", None)
-        else:
-            session['actor'] = res['actor']
-    return json.dumps(res)
-
-
-
 @historias.route('/historias/AModifHistoria', methods=['POST'])
 def AModifHistoria():
     #POST/PUT parameters
@@ -206,11 +187,6 @@ def VCrearHistoria():
     
     if "actor" in session:
         res['actor']=session['actor']
-    
-    if 'usuario' not in session:
-      res['logout'] = '/'
-      return json.dumps(res)
-    res['usuario'] = session['usuario']
         
     scale = {1:'Alta',2:'Media',3:'Baja'}
     
@@ -260,6 +236,7 @@ def VCrearHistoria():
 
 @historias.route('/historias/VHistoria')
 def VHistoria():
+
     #GET parameter
     res = {}
     
@@ -277,10 +254,15 @@ def VHistoria():
       return json.dumps(res)
     res['usuario'] = session['usuario']
 
+    # Obtenemos el id de la historia
+    idHistoria = request.args.get('idHistoria')  
+    idHistoria = int(idHistoria)
+
     scale = {1:'Alta',2:'Media',3:'Baja'}
         
     oBacklog      = backlog() 
     oObjective    = objective()
+    oTarea        = homework()
     oUserHist     = userHistory()
     oActUserHist  = actorsUserHistory()
     oObjUserHist  = objectivesUserHistory()
@@ -308,6 +290,7 @@ def VHistoria():
         if int(transverse) == 1:
             objectiveList.remove(object)
 
+    homeworkList = oTarea.getAllHomework(idHistoria)
     # Obtenemos los actores asociados a una historia de usuario.
     actors = oActUserHist.idActorsAsociatedToUserHistory(idHistory)
 
@@ -337,11 +320,10 @@ def VHistoria():
     res['fHistoria'] = {'super':history.UH_idSuperHistory , 'idHistoria':idHistory, 'idPila':history.UH_idBacklog, 'codigo':history.UH_codeUserHistory,
        'actores':actors, 'accion':history.UH_idAccion, 'objetivos':objectives, 'tipo':history.UH_accionType ,
        'prioridad':history.UH_scale}
-
-    res['data2'] = [ 
-      {'idTarea':1, 'descripcion':'Sacarle jugo a una piedra'},
-      {'idTarea':2, 'descripcion':'Pelar un mango'},
-    ]
+   
+    res['data2'] = [{'idTarea':tarea.HW_idHomework, 'descripcion':tarea.HW_description}for tarea in homeworkList]
+   
+    session['idHistoria'] = idHistoria
     res['idHistoria'] = idHistory
     res['idPila']     = idPila   
 
@@ -350,6 +332,7 @@ def VHistoria():
 
 @historias.route('/historias/VHistorias')
 def VHistorias():
+
     #GET parameter
     res = {}
     
@@ -359,11 +342,6 @@ def VHistorias():
     
     if "actor" in session:
         res['actor'] = session['actor']
-        
-    if 'usuario' not in session:
-      res['logout'] = '/'
-      return json.dumps(res)
-    res['usuario'] = session['usuario']
     
     oActor            = role()
     oAccion           = accions()
@@ -460,7 +438,7 @@ def VHistorias():
                           'enunciado' :'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in historiesSortedByPriority]
     session['idPila'] = idPila
     res['idPila']     = idPila 
-    
+
     return json.dumps(res)
 
 
@@ -481,8 +459,8 @@ def VPrioridades():
       res['logout'] = '/'
       return json.dumps(res)
     res['usuario'] = session['usuario']
-
-
+    
+    #Action code goes here, res should be a JSON structure
     oActor            = role()
     oAccion           = accions()
     oObjective        = objective()
@@ -576,13 +554,3 @@ def VPrioridades():
     res['idPila']       = idPila
  
     return json.dumps(res)
-
-
-
-
-
-#Use case code starts here
-
-
-#Use case code ends here
-
