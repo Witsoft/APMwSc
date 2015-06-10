@@ -7,7 +7,7 @@ from app.scrum.accions               import *
 from app.scrum.objective             import *   
 from app.scrum.objectivesUserHistory import *
 from app.scrum.actorsUserHistory     import * 
-from app.scrum.homework              import *
+from app.scrum.task              import *
 from sqlalchemy.ext.baked import Result
 
 historias = Blueprint('historias', __name__)
@@ -222,7 +222,7 @@ def VHistoria():
     # Obtenemos todas las acciones, actores y objetivos asociados al producto.
     oBacklog      = backLog() 
     oObjective    = objective()
-    oTarea        = homework()
+    oTarea        = task()
     oUserHist     = userHistory()
     oActUserHist  = actorsUserHistory()
     oObjUserHist  = objectivesUserHistory()
@@ -244,7 +244,7 @@ def VHistoria():
         if (int(transverse) == 1):
             objectiveList.remove(object)
 
-    homeworkList = oTarea.getAllHomework(idHistoria)
+    taskList = oTarea.getAllTask(idHistoria)
     # Obtenemos los actores asociados a una historia de usuario.
     actors = oActUserHist.idActorsAsociatedToUserHistory(idHistoria)
 
@@ -274,7 +274,7 @@ def VHistoria():
        'actores':actors, 'accion':history.ref_idaccion, 'objetivos':objectives, 'tipo':history.type_accion,
        'prioridad':history.UH_scale}
 
-    res['data2'] = [{'idTarea':tarea.HW_idHomework, 'descripcion':tarea.HW_description}for tarea in homeworkList]
+    res['data2'] = [{'idTarea':tarea.HW_idTask, 'descripcion':tarea.HW_description}for tarea in taskList]
     
     res['idPila']  = 1   
     session['idHistoria'] = idHistoria

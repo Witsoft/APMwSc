@@ -2,7 +2,7 @@
 from flask import request, session, Blueprint, json
 from app.scrum.backLog               import *
 from app.scrum.userHistory           import *
-from app.scrum.homework              import *
+from app.scrum.task              import *
 tareas = Blueprint('tareas', __name__)
 
 
@@ -19,11 +19,11 @@ def ACrearTarea():
     oBackLog = backLog()
     oHistory = userHistory()
     userHistoriesList = oBackLog.userHistoryAsociatedToProduct(1)  
-    oHomework = homework()
+    oTask = task()
     
     descTarea = params['descripcion']
     
-    insert = oHomework.insertHomework(descTarea,idHistoria)
+    insert = oTask.insertTask(descTarea,idHistoria)
     
     if insert == True:        
         res = results[0]
@@ -52,9 +52,9 @@ def AElimTarea():
 
     idHistoria  = int(session['idHistoria'])
     idTarea     = int(session['idTarea'])
-    oTarea   = homework()
-    result   = clsHomework.query.filter_by(HW_idHomework = idTarea).first()
-    delete   = oTarea.deleteHomework(result.HW_description)
+    oTarea   = task()
+    result   = clsTask.query.filter_by(HW_idTask = idTarea).first()
+    delete   = oTarea.deleteTask(result.HW_description)
     
     if delete == True:
         res = results[0]
@@ -86,9 +86,9 @@ def AModifTarea():
     new_description = params['descripcion']
     idTarea         = params['idTarea']
         
-    oTarea   = homework()
-    result   = clsHomework.query.filter_by(HW_idHomework = idTarea).first()
-    modify   = oTarea.updateHomework(result.HW_description,new_description)
+    oTarea   = task()
+    result   = clsTask.query.filter_by(HW_idTask = idTarea).first()
+    modify   = oTarea.updateTask(result.HW_description,new_description)
     
     if modify:
         res = results[0]
@@ -146,7 +146,7 @@ def VTarea():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
     idTarea = request.args.get('idTarea')
-    result   = clsHomework.query.filter_by(HW_idHomework = idTarea).first()
+    result   = clsTask.query.filter_by(HW_idTask = idTarea).first()
     res['fTarea'] = {'idTarea': idTarea,'descripcion': result.HW_description}
     
     if 'usuario' not in session:
