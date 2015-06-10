@@ -286,7 +286,7 @@ class TestObjectives(unittest.TestCase):
         idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.        
         oObj   = objective()
-        result = oObj.searchObjective('',idBAcklog)
+        result = oObj.searchObjective('',idBacklog)
         self.assertFalse(result)
         oBacklog.deleteProduct('Xstryctyrzs')
       
@@ -819,4 +819,3 @@ class TestObjectives(unittest.TestCase):
         self.assertEqual([],transverse)    
         oObj.deleteObjective('Dvsxrryllzr conjzntys',1)
         oBacklog.deleteProduct('Xstryctyrzs')
-'''
