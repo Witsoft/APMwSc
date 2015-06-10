@@ -240,7 +240,7 @@ def VHistoria():
     #GET parameter
     res = {}
     
-    # Obtenemos el id del producto y de la accion.
+    # Obtenemos el id del producto y de la historia.
     idPila    = int(session['idPila'])
     idHistory = int(request.args.get('idHistoria'))
     print('idPila VHistoria',idPila)
@@ -253,10 +253,6 @@ def VHistoria():
       res['logout'] = '/'
       return json.dumps(res)
     res['usuario'] = session['usuario']
-
-    # Obtenemos el id de la historia
-    idHistoria = request.args.get('idHistoria')  
-    idHistoria = int(idHistoria)
 
     scale = {1:'Alta',2:'Media',3:'Baja'}
         
@@ -290,7 +286,7 @@ def VHistoria():
         if int(transverse) == 1:
             objectiveList.remove(object)
 
-    homeworkList = oTarea.getAllHomework(idHistoria)
+    homeworkList = oTarea.getAllHomework(idHistory)
     # Obtenemos los actores asociados a una historia de usuario.
     actors = oActUserHist.idActorsAsociatedToUserHistory(idHistory)
 
@@ -323,7 +319,6 @@ def VHistoria():
    
     res['data2'] = [{'idTarea':tarea.HW_idHomework, 'descripcion':tarea.HW_description}for tarea in homeworkList]
    
-    session['idHistoria'] = idHistoria
     res['idHistoria'] = idHistory
     res['idPila']     = idPila   
 
