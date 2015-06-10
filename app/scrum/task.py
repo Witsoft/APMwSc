@@ -55,7 +55,12 @@ class task(object):
     
     def searchTask(self, HW_description):
         '''Permite buscar Tasks por su descripcion'''
-        oTask = clsTask.query.filter_by(HW_description = HW_description).all()
+        typedescription = (type(HW_description) == str)
+        
+        if typedescription:
+            oTask = clsTask.query.filter_by(HW_description = HW_description).all()
+        else:
+            oTask = False
         return oTask
     
     def updateTask(self, HW_description,newDescription):
