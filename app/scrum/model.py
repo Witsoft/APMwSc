@@ -169,8 +169,7 @@ class clsUserHistory(db.Model):
 		'''Representacion en string de la Historia de Usuario'''
 		return '<idUserHistory %r, codeUserHistory %r, scale %r>' % (self.UH_idUserHistory ,self.UH_codeUserHistory, self.UH_scale)
  	
- 	
- 	
+	
 class clsActorsUserHistory(db.Model):
 	'''Clase que define el modelo de tabla actorsUserHistory'''
  	
@@ -186,7 +185,7 @@ class clsActorsUserHistory(db.Model):
 	def __repr__(self):
 		'''Representacion en string de los id's a los actores y sus historias'''
 		return '<idActor %r, idUserHistory %r>' % (self.AUH_idActor, self.AUH_idUserHistory)
-	
+ 
 class clsObjectivesUserHistory(db.Model):
 	'''Clase que define el modelo de tabla ObjectivesUserHistory'''
  	
@@ -207,17 +206,17 @@ class clsHomework(db.Model):
 	'''Clase que define el modelo de la tabla HomeWork'''
 	
 	__tablename__ = 'homework'
-	HW_idHomework  		= db.Column(db.Integer, primary_key = True, index = True)
-	HW_description 		= db.Column(db.String(140),unique = True , index = True) 
-	HW_refUserHistory	= db.Column(db.Integer, db.ForeignKey('userHistory.UH_idUserHistory'))
-
-	def __init__(self,HW_description,HW_refUserHistory):
-		self.HW_description	= HW_description
-		self.HW_refUserHistory  = HW_refUserHistory 
+	HW_idHomework    = db.Column(db.Integer, primary_key = True, index = True)
+	HW_description 	 = db.Column(db.String(140),unique = True , index = True) 
+	HW_idUserHistory = db.Column(db.Integer, db.ForeignKey('userHistory.UH_idUserHistory'))
+	
+	def __init__(self,description,idUserHistory):
+		self.HW_description	  = description
+		self.HW_idUserHistory = idUserHistory 
 
 	def __repr__(self):
 		'''Representacion en string de la Tarea'''
-		return '<HW_ idHomework  %r, HW_refUserHistory %r>' % (self.HW_idHomework,self.HW_refUserHistory)
+		return '<HW_ idHomework  %r, HW_refUserHistory %r>' % (self.HW_idHomework,self.HW_idUserHistory)
 	
 migrate = Migrate(app, db)
 manager = Manager(app)
