@@ -2,37 +2,40 @@
 from flask import request, session, Blueprint, json
 from app.scrum.backLog               import *
 from app.scrum.userHistory           import *
-from app.scrum.homework              import *
+from app.scrum.task              import *
 tareas = Blueprint('tareas', __name__)
 
 
 @tareas.route('/tareas/ACrearTarea', methods=['POST'])
 def ACrearTarea():
     #POST/PUT parameters
-    params = request.get_json()
+    params  = request.get_json()
     results = [{'label':'/VHistoria', 'msg':['Tarea creada']}, {'label':'/VCrearTarea', 'msg':['No se pudo crear tarea.']}, ]
+
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
-    idHistoria  = int(session['idHistoria'])
-    #print('idHistoria AcrearTarea',idHistoria)
-    #idHistoria    = 1
-    oBackLog = backLog()
-    oHistory = userHistory()
-    userHistoriesList = oBackLog.userHistoryAsociatedToProduct(1)  
-    oHomework = homework()
     
-    descTarea = params['descripcion']
+    # Obtenemos el id de la historia actual
+    idHistory = int(session['idHistoria'])
+    print('idHistoria AcrearTarea',idHistory)
+
+    # Extraemos los parametros
+    TaskDesc = params['descripcion']
+        
+    oBackLog  = backlog()
+    oHistory  = userHistory()
+    oTask = task()
+       
+    userHistoriesList = oBackLog.userHistoryAsociatedToProduct(idHistory)  
+    insert            = oTask.insertTask(TaskDesc,idHistory)
     
-    insert = oHomework.insertHomework(descTarea,idHistoria)
-    
-    if insert == True:        
+    if insert:        
         res = results[0]
     else:
         res = results[1]
         
-    res['label'] = res['label'] + '/' + repr(idHistoria)
+    res['label'] = res['label'] + '/' + repr(idHistory)
 
-    #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -52,9 +55,9 @@ def AElimTarea():
 
     idHistoria  = int(session['idHistoria'])
     idTarea     = int(session['idTarea'])
-    oTarea   = homework()
-    result   = clsHomework.query.filter_by(HW_idHomework = idTarea).first()
-    delete   = oTarea.deleteHomework(result.HW_description)
+    oTarea   = task()
+    result   = clsTask.query.filter_by(HW_idTask = idTarea).first()
+    delete   = oTarea.deleteTask(result.HW_description)
     
     if delete == True:
         res = results[0]
@@ -86,9 +89,9 @@ def AModifTarea():
     new_description = params['descripcion']
     idTarea         = params['idTarea']
         
-    oTarea   = homework()
-    result   = clsHomework.query.filter_by(HW_idHomework = idTarea).first()
-    modify   = oTarea.updateHomework(result.HW_description,new_description)
+    oTarea   = task()
+    result   = clsTask.query.filter_by(HW_idTask = idTarea).first()
+    modify   = oTarea.updateTask(result.HW_description,new_description)
     
     if modify:
         res = results[0]
@@ -106,29 +109,30 @@ def AModifTarea():
     return json.dumps(res)
 
 
-
 @tareas.route('/tareas/VCrearTarea')
 def VCrearTarea():
     #GET parameter
-    idHistoria  = int(session['idHistoria'])
-    print('idHistoria VCrearTarea',idHistoria)
     
-    idHistoria = request.args['idHistoria']
+    # Obtenemos el id de la historia actual.
+    idHistory = int(request.args.get('idHistoria'))
+    print('idHistoria VCrearTarea',idHistory)  
+    
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
-    #Action code goes here, res should be a JSON structure
 
     if 'usuario' not in session:
       res['logout'] = '/'
       return json.dumps(res)
-    res['usuario'] = session['usuario']
-    res['codHistoria'] = 'H01'
+  
+    # Buscamos la historia actual.
+    oUserHistory = userHistory()
+    hist         = oUserHistory.searchIdUserHistory(idHistory)
     
-    res['idHistoria'] = idHistoria
+    res['usuario']        = session['usuario']
+    res['codHistoria']    = hist[0].UH_codeUserHistory
+    session['idHistoria'] = idHistory
 
-
-    #Action code ends here
     return json.dumps(res)
 
 
@@ -136,17 +140,20 @@ def VCrearTarea():
 @tareas.route('/tareas/VTarea')
 def VTarea():
     #GET parameter
-    idTarea = request.args['idTarea']
+    
+    # Obtenemos el id de la historia y de la tarea.
+    idTarea    = int(request.args['idTarea'])
     idHistoria = int(session['idHistoria'])
-    found = clsUserHistory.query.filter_by(id_userHistory = idHistoria).first()
-    codHistoria = found.cod_userHistory
+
+    found = clsUserHistory.query.filter_by(UH_idUserHistory = idHistoria).first()
+    codHistoria = found.UH_codeUserHistory
     
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
-    #Action code goes here, res should be a JSON structure
+
     idTarea = request.args.get('idTarea')
-    result   = clsHomework.query.filter_by(HW_idHomework = idTarea).first()
+    result   = clsTask.query.filter_by(HW_idTask = idTarea).first()
     res['fTarea'] = {'idTarea': idTarea,'descripcion': result.HW_description}
     
     if 'usuario' not in session:
@@ -158,7 +165,6 @@ def VTarea():
     session['idTarea'] = idTarea
     res['idTarea'] = idTarea
 
-    #Action code ends here
     return json.dumps(res)
 
 
