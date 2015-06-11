@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.role import *
+import sys
+
+# Ruta que permite utilizar el módulo role.py
+sys.path.append('app/scrum')
+from role import *
 
 # Definicion de constantes
 CONST_MIN_ID = 1
@@ -31,7 +35,7 @@ class actorsUserHistory(object):
         
         idsList = []
         if checkIdUserHistory:
-            result = clsActorsUserHistory.query.filter_by(AUH_idUserHistory = id_userHistory)
+            result = clsActorsUserHistory.query.filter_by(AUH_idUserHistory = id_userHistory).all()
             
             for act in result:
                 idsList.append(act.AUH_idActor)
@@ -44,7 +48,7 @@ class actorsUserHistory(object):
         
         if checkIdActor:
             result = clsActorsUserHistory.query.filter_by(AUH_idActor = idActor).all()
-        return result
+            return result
                   
         
     def deleteActorAsociatedInUserHistory(self,id_Actor, id_userHistory):

@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.backLog import *
+import sys
+
+# Ruta que permite utilizar el módulo backlog.py
+sys.path.append('app/scrum')
+
+from backLog import *
 
 # Declaracion de constantes
 CONST_MAX_COD    = 11
@@ -202,7 +207,7 @@ class userHistory(object):
  
         if checkIdAccion:
             result = clsUserHistory.query.filter_by(UH_idAccion  = idAccion).all()
-        return result
+            return result
     
     
     def deleteUserHistory(self,codeUserHistory):

@@ -8,6 +8,7 @@ from app.scrum.accions               import *
 from app.scrum.objective             import *   
 from app.scrum.objectivesUserHistory import *
 from app.scrum.actorsUserHistory     import * 
+from app.scrum.task              import *
 from sqlalchemy.ext.baked import Result
 
 historias = Blueprint('historias', __name__)
@@ -242,11 +243,6 @@ def VCrearHistoria():
     
     if "actor" in session:
         res['actor']=session['actor']
-    
-    if 'usuario' not in session:
-      res['logout'] = '/'
-      return json.dumps(res)
-    res['usuario'] = session['usuario']
         
     scale = {1:'Alta',2:'Media',3:'Baja'}
     
@@ -296,10 +292,11 @@ def VCrearHistoria():
 
 @historias.route('/historias/VHistoria')
 def VHistoria():
+
     #GET parameter
     res = {}
     
-    # Obtenemos el id del producto y de la accion.
+    # Obtenemos el id del producto y de la historia.
     idPila    = int(session['idPila'])
     idHistory = int(request.args.get('idHistoria'))
     print('idPila VHistoria',idPila)
@@ -317,6 +314,7 @@ def VHistoria():
         
     oBacklog      = backlog() 
     oObjective    = objective()
+    oTarea        = task()
     oUserHist     = userHistory()
     oActUserHist  = actorsUserHistory()
     oObjUserHist  = objectivesUserHistory()
@@ -344,6 +342,7 @@ def VHistoria():
         if int(transverse) == 1:
             objectiveList.remove(object)
 
+    taskList = oTarea.getAllTask(idHistory)
     # Obtenemos los actores asociados a una historia de usuario.
     actors = oActUserHist.idActorsAsociatedToUserHistory(idHistory)
 
@@ -373,11 +372,9 @@ def VHistoria():
     res['fHistoria'] = {'super':history.UH_idSuperHistory , 'idHistoria':idHistory, 'idPila':history.UH_idBacklog, 'codigo':history.UH_codeUserHistory,
        'actores':actors, 'accion':history.UH_idAccion, 'objetivos':objectives, 'tipo':history.UH_accionType ,
        'prioridad':history.UH_scale}
-
-    res['data2'] = [ 
-      {'idTarea':1, 'descripcion':'Sacarle jugo a una piedra'},
-      {'idTarea':2, 'descripcion':'Pelar un mango'},
-    ]
+   
+    res['data2'] = [{'idTarea':tarea.HW_idTask, 'descripcion':tarea.HW_description}for tarea in taskList]
+   
     res['idHistoria'] = idHistory
     res['idPila']     = idPila  
     session['idHistoria'] = idHistory 
@@ -387,6 +384,7 @@ def VHistoria():
 
 @historias.route('/historias/VHistorias')
 def VHistorias():
+
     #GET parameter
     res = {}
     
@@ -396,11 +394,6 @@ def VHistorias():
     
     if "actor" in session:
         res['actor'] = session['actor']
-        
-    if 'usuario' not in session:
-      res['logout'] = '/'
-      return json.dumps(res)
-    res['usuario'] = session['usuario']
     
     oActor            = role()
     oAccion           = accions()
@@ -497,7 +490,7 @@ def VHistorias():
                           'enunciado' :'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in historiesSortedByPriority]
     session['idPila'] = idPila
     res['idPila']     = idPila 
-    
+
     return json.dumps(res)
 
 
@@ -518,8 +511,8 @@ def VPrioridades():
       res['logout'] = '/'
       return json.dumps(res)
     res['usuario'] = session['usuario']
-
-
+    
+    #Action code goes here, res should be a JSON structure
     oActor            = role()
     oAccion           = accions()
     oObjective        = objective()
@@ -613,13 +606,3 @@ def VPrioridades():
     res['idPila']       = idPila
  
     return json.dumps(res)
-
-
-
-
-
-#Use case code starts here
-
-
-#Use case code ends here
-

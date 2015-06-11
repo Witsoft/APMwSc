@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.objective import *
+import sys
+
+# Ruta que permite utilizar el módulo objective.py
+sys.path.append('app/scrum')
+from objective import *
 
 # Definicion de constantes
 CONST_MIN_ID = 1
@@ -45,8 +49,7 @@ class objectivesUserHistory(object):
 
         if checkIdObjective:
             result = clsObjectivesUserHistory.query.filter_by(OUH_idObjective  = idObjective).all()
- 
-        return result
+            return result
 
     def deleteObjectiveAsociatedInUserHistory(self,id_Objective, id_userHistory):
         '''Permite eliminar un actor de una historia de usuario'''
