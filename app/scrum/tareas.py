@@ -16,7 +16,9 @@ def ACrearTarea():
 
     # Obtenemos el id de la historia actual
     idHistory = int(session['idHistoria'])
+    #idPila    = int(session['idPila'])
     print('idHistoria AcrearTarea',idHistory)
+    #print('idPila AcrearTarea',idPila)
 
     # Extraemos los parametros
     TaskDesc = params['descripcion']
@@ -30,27 +32,8 @@ def ACrearTarea():
     
     if insert:        
         res = results[0]
-    else:
-        res = results[1]
-        
-    res['label'] = res['label'] + '/' + repr(idHistory)
 
-    # Extraemos los parametros
-    TaskDesc = params['descripcion']
-        
-    oBackLog  = backlog()
-    oHistory  = userHistory()
-    oTask = task()
-       
-    userHistoriesList = oBackLog.userHistoryAsociatedToProduct(idHistory)  
-    insert            = oTask.insertTask(TaskDesc,idHistory)
-    
-    if insert:        
-        res = results[0]
-        
-    print(res['label'] + '/' + str(idHistory))
     res['label'] = res['label'] + '/' + str(idHistory)
-
 
     if "actor" in res:
         if res['actor'] is None:
@@ -114,7 +97,7 @@ def AModifTarea():
     else:
         res = results[1]
          
-    res['label'] = res['label'] + '/' + repr(idHistoria)
+    res['label'] = res['label'] + '/' + str(idHistoria)
 
     #Action code ends here
     if "actor" in res:
@@ -147,9 +130,8 @@ def VCrearTarea():
     
     res['usuario']        = session['usuario']
     res['codHistoria']    = hist[0].UH_codeUserHistory
-
     session['idHistoria'] = idHistory
-    res['idHistoria'] = idHistory
+    res['idHistoria']     = idHistory
 
 
     return json.dumps(res)
@@ -183,6 +165,7 @@ def VTarea():
 
     session['idTarea'] = idTarea
     res['idTarea'] = idTarea
+    res['idHistoria'] = idHistoria
 
     return json.dumps(res)
 

@@ -24,18 +24,17 @@ class task(object):
         typeid          = (type(UH_idUserHistory) == int)
         
         oHistory = userHistory()
-        epic  =  oHistory.isEpic(UH_idUserHistory)
-        if epic:
-            if (typedescription and typeid):
-                long_HW_description = minTaskDescription <= len(HW_description) <= maxTaskDescription
-                if long_HW_description:
-                    oUserHistory = clsUserHistory.query.filter_by(UH_idUserHistory = UH_idUserHistory).all()
-                    oTask = clsTask.query.filter_by(HW_description = HW_description).all()
-                    if (oUserHistory != []) and (oTask == []):
-                        new_task = clsTask(HW_description,UH_idUserHistory)
-                        db.session.add(new_task)
-                        db.session.commit()
-                        return True
+
+        if (typedescription and typeid):
+            long_HW_description = minTaskDescription <= len(HW_description) <= maxTaskDescription
+            if long_HW_description:
+                oUserHistory = clsUserHistory.query.filter_by(UH_idUserHistory = UH_idUserHistory).all()
+                oTask = clsTask.query.filter_by(HW_description = HW_description).all()
+                if (oUserHistory != []) and (oTask == []):
+                    new_task = clsTask(HW_description,UH_idUserHistory)
+                    db.session.add(new_task)
+                    db.session.commit()
+                    return True
         return False
     
     def deleteTask(self, HW_description):

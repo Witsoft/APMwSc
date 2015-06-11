@@ -8,8 +8,8 @@ from app.scrum.accions               import *
 from app.scrum.objective             import *   
 from app.scrum.objectivesUserHistory import *
 from app.scrum.actorsUserHistory     import * 
-from app.scrum.task              import *
-from sqlalchemy.ext.baked import Result
+from app.scrum.task                  import *
+from sqlalchemy.ext.baked            import Result
 
 historias = Blueprint('historias', __name__)
 
@@ -96,12 +96,8 @@ def ACrearHistoria():
                 actorsList     = oActUserHist.idActorsAsociatedToUserHistory(idInserted)
                 objectivesList = oObjUserHist.idObjectivesAsociatedToUserHistory(idInserted)
                 
-                if actorsList != [] and objectivesList != []:
-                    
-                    result = oUserHistory.updatePriority(idSuperHist,0)
-    
-                    if result:
-                        res = results[0]  
+                if actorsList != [] and objectivesList != []:    
+                    res = results[0]  
          
     res['label'] = res['label'] + '/'+str(idPila)
             
@@ -385,6 +381,7 @@ def VHistoria():
 
     session['idHistoria'] = idHistory
     res['idHistoria'] = idHistory
+    session['idPila'] = idPila
     res['idPila']     = idPila   
  
     return json.dumps(res)

@@ -168,10 +168,8 @@ class userHistory(object):
         '''Permite actualizar la prioridad de una historia de usuario'''
         checkIdHistory  = type(idHistory) == int and CONST_MIN_ID <= idHistory
         checkPriority   = type(priority) == int and 0 <= priority
-        print('Hlaaaaaaaaaaaaaaas')
         if checkIdHistory and checkPriority:
             found = clsUserHistory.query.filter_by(UH_idUserHistory = idHistory).first()
-            print('found ',found)
             if found != None:
                 found.UH_scale = priority
                 db.session.commit()
