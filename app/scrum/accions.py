@@ -68,8 +68,7 @@ class accions(object):
             if checkId:
                 foundAccion = clsAccion.query.filter_by(AC_idAccion  = idAccion).all()
 
-        return foundAccion
-    
+        return foundAccion  
             
     def updateAccion(self, accionDescription,newDescription,idBacklog):
         '''Permite actualizar la descripcion de una accion'''   

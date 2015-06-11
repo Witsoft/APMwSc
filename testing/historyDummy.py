@@ -75,7 +75,7 @@ class userHistory(object):
             checkIdHistory         = type(id_History) == int and id_History >= const_min_idHist
             
             if checkCodUserHistory and checkLenCodUserHistory and checkIdHistory:
-                oUserHistory = clsUserHistory.query.filter_by(id_userHistory = id_History).all()
+                oUserHistory = clsUserHistory.query.filter_by(userHistory = id_History).all()
                 
                 if oUserHistory !=[] or id_History == 0:
                     checkTypeAccion = type_accion in arrayType

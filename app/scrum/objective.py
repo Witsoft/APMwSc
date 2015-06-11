@@ -156,9 +156,11 @@ class objective(object):
             if checkLenDescription and checkLongIdBacklog :
                 found = clsObjective.query.filter_by(O_descObjective = descObjective,O_idBacklog = idBacklog).all()
                 
-                if found != []:
-                    for i in found:    
-                        db.session.delete(i)          
+
+                if found != []:  
+                    tupla = clsObjective.query.filter_by(O_descObjective = descObjective).first()   
+                    db.session.delete(tupla)     
+
                     db.session.commit()
                     return True
         return False 

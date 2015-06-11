@@ -111,6 +111,62 @@ def ACrearHistoria():
 
 
 
+@historias.route('/historias/AElimHistoria')
+def AElimHistoria():
+    #GET parameter
+    results = [{'label':'/VHistorias', 'msg':['Historia eliminada']}, {'label':'/VHistorias', 'msg':['No se pudo eliminar esta historia']}, ]
+    res = results[1]
+    #Action code goes here, res should be a list with a label and a message
+
+    # Obtenemos el id del producto y de la historia.
+    idPila      = int(session['idPila'])
+    idHistoria  = int(session['idHistoria'])
+    print('idPila AElimHistoria', idPila)
+    print('idHistoria AElimHistoria', idHistoria)
+    
+    # Conseguimos la historia a eliminar 
+    oUserHistory = userHistory()
+    found        = oUserHistory.searchIdUserHistory(idHistoria)
+    
+    if (found != []):
+        # Verificamos si la historia no es una épica
+        if (not oUserHistory.isEpic(idHistoria)):
+            # Conseguimos los actores asosciados a la historia
+            oActorsUserHistory = actorsUserHistory()
+            resultActors = oActorsUserHistory.idActorsAsociatedToUserHistory(idHistoria)
+        
+            if (resultActors != []):
+                # Eliminamos los actores asociados a la historia
+                for actor in resultActors:
+                    oActorsUserHistory.deleteActorAsociatedInUserHistory(actor, idPila)
+        
+                # Conseguimos los objetivos asosciados a la historia
+                oObjUserHistory = objectivesUserHistory()
+                resultObjectives = oObjUserHistory.idObjectivesAsociatedToUserHistory(idHistoria)
+        
+                if (resultObjectives != []):
+                    # Eliminamos los objetivos asociados a la historia
+                    for objetivo in resultObjectives:
+                        oObjUserHistory.deleteObjectiveAsociatedInUserHistory(objetivo, idPila)
+        
+                    # Eliminamos la historia de usuario
+                    deleted = oUserHistory.deleteUserHistory(found[0].UH_codeUserHistory) 
+        
+                    if deleted:
+                        res = results[0]
+
+    res['label'] = res['label'] + '/' + str(idPila)
+
+    #Action code ends here
+    if "actor" in res:
+        if res['actor'] is None:
+            session.pop("actor", None)
+        else:
+            session['actor'] = res['actor']
+    return json.dumps(res)
+
+
+
 @historias.route('/historias/AModifHistoria', methods=['POST'])
 def AModifHistoria():
     #POST/PUT parameters
@@ -320,7 +376,8 @@ def VHistoria():
     res['data2'] = [{'idTarea':tarea.HW_idTask, 'descripcion':tarea.HW_description}for tarea in taskList]
    
     res['idHistoria'] = idHistory
-    res['idPila']     = idPila   
+    res['idPila']     = idPila  
+    session['idHistoria'] = idHistory 
 
     return json.dumps(res)
 
