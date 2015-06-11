@@ -2,7 +2,7 @@
 
 import sys
 
-# Ruta que permite utilizar el módulo rile.py
+# Ruta que permite utilizar el módulo role.py
 sys.path.append('app/scrum')
 from role import *
 

@@ -1191,3 +1191,521 @@ class TestActorsUserHistory(unittest.TestCase):
         aHist.deleteUserHistory('lllzz')
         aAcc.deleteAccion('pppp',idBacklog)
         aBacklog.deleteProduct('hhJJkkk')   
+        
+    ###############################################################      
+    #   Suite de Pruebas para deleteActorAsociatedInUserHistory   #
+    ###############################################################
+    
+    # Caso Inicial     
+    
+    # Prueba 30
+     
+    def testDeleteUserHistoryIdActors(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('hhJJkkk','oooLLLLaa',1)
+        findId = aBacklog.findName('hhJJkkk')
+        idBacklog = findId[0].BL_idBacklog
+ 
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('pppp',idBacklog)
+        search = aAcc.searchAccion('pppp',idBacklog)
+        idFound = search[0].AC_idAccion
+         
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('lllzz',0, 1,idFound, idBacklog,1)
+        searchHist = aHist.searchUserHistory('lllzz')
+        idFound1 = searchHist[0].UH_idUserHistory
+         
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertActor('SSS', 'Ddd', idBacklog)
+        searchAct = aAct.findNameActor('SSS',idBacklog)
+        idFound2 = searchAct[0].A_idActor 
+                  
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+         
+        # Inicio de caso de prueba
+        # Buscamos id's de historias que contengan asociado un objetivo        
+        aAccAs = actorsUserHistory()
+        aAccAs.deleteActorAsociatedInUserHistory(idFound2,idFound1) 
+         
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('lllzz')
+        aAcc.deleteAccion('pppp',idBacklog)
+        aBacklog.deleteProduct('hhJJkkk')   
+        
+    # Casos Frontera
+    
+    # Prueba 31
+    
+    def testidUserHistoryIdActorsNotExistAndIdUserHistoryExists(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('hhJJkkk','oooLLLLaa',1)
+        findId = aBacklog.findName('hhJJkkk')
+        idBacklog = findId[0].BL_idBacklog
+ 
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('pppp',idBacklog)
+        search = aAcc.searchAccion('pppp',idBacklog)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('lllzz',0, 1,idFound, idBacklog,1)
+        searchHist = aHist.searchUserHistory('lllzz')
+        idFound1 = searchHist[0].UH_idUserHistory
+         
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertActor('SSS', 'Ddd', idBacklog)
+        searchAct = aAct.findNameActor('SSS',idBacklog)
+        idFound2 = searchAct[0].A_idActor 
+                  
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+         
+        # Inicio de caso de prueba
+        # Buscamos id's de historias que contengan asociado un objetivo        
+        aAccAs = actorsUserHistory()
+        res    = aAccAs.deleteActorAsociatedInUserHistory(0,idFound1) 
+        self.assertFalse(res)
+         
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('lllzz')
+        aAcc.deleteAccion('pppp',idBacklog)
+        aBacklog.deleteProduct('hhJJkkk')   
+        
+    # Caso 32
+        
+    def testidUserHistoryIdActoraExistAndIdUserHistoryNotExists(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('hhJJkkk','oooLLLLaa',1)
+        findId = aBacklog.findName('hhJJkkk')
+        idBacklog = findId[0].BL_idBacklog
+ 
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('pppp',idBacklog)
+        search = aAcc.searchAccion('pppp',idBacklog)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('lllzz',0, 1,idFound, idBacklog,1)
+        searchHist = aHist.searchUserHistory('lllzz')
+        idFound1 = searchHist[0].UH_idUserHistory
+         
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertActor('SSS', 'Ddd', idBacklog)
+        searchAct = aAct.findNameActor('SSS',idBacklog)
+        idFound2 = searchAct[0].A_idActor 
+                  
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+         
+        # Inicio de caso de prueba
+        # Buscamos id's de historias que contengan asociado un objetivo        
+        aAccAs = actorsUserHistory()
+        res    = aAccAs.deleteActorAsociatedInUserHistory(idFound2, 0) 
+        self.assertFalse(res)
+         
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('lllzz')
+        aAcc.deleteAccion('pppp',idBacklog)
+        aBacklog.deleteProduct('hhJJkkk')   
+        
+    # Prueba 33
+    
+    def testidUserHistoryIdActorsOneAndIdUserHistoryValid(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('hhJJkkk','oooLLLLaa',1)
+        findId = aBacklog.findName('hhJJkkk')
+        idBacklog = findId[0].BL_idBacklog
+
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('pppp',idBacklog)
+        search = aAcc.searchAccion('pppp',idBacklog)
+        idFound = search[0].AC_idAccion
+         
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('lllzz',0, 1,idFound, idBacklog,1)
+        searchHist = aHist.searchUserHistory('lllzz')
+        idFound1 = searchHist[0].UH_idUserHistory
+        
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertActor('SSS', 'Ddd', idBacklog)
+        searchAct = aAct.findNameActor('SSS',idBacklog)
+        idFound2 = searchAct[0].A_idActor 
+                  
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+         
+        # Inicio de caso de prueba
+        # Buscamos id's de historias que contengan asociado un objetivo        
+        aAccAs = actorsUserHistory()
+        res    = aAccAs.deleteActorAsociatedInUserHistory(1, idFound1) 
+        self.assertTrue(res)
+         
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('lllzz')
+        aAcc.deleteAccion('pppp',idBacklog)
+        aBacklog.deleteProduct('hhJJkkk')   
+         
+    # Prueba 34
+    
+    def testidUserHistoryIdObjectivesValidAndIdUserHistoryOne(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('hhJJkkk','oooLLLLaa',1)
+        findId = aBacklog.findName('hhJJkkk')
+        idBacklog = findId[0].BL_idBacklog
+
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('pppp',idBacklog)
+        search = aAcc.searchAccion('pppp',idBacklog)
+        idFound = search[0].AC_idAccion
+         
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('lllzz',0, 1,idFound, idBacklog,1)
+        searchHist = aHist.searchUserHistory('lllzz')
+        idFound1 = searchHist[0].UH_idUserHistory
+        
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertActor('SSS', 'Ddd', idBacklog)
+        searchAct = aAct.findNameActor('SSS',idBacklog)
+        idFound2 = searchAct[0].A_idActor 
+                  
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+         
+        # Inicio de caso de prueba
+        # Buscamos id's de historias que contengan asociado un objetivo        
+        aAccAs = actorsUserHistory()
+        res    = aAccAs.deleteActorAsociatedInUserHistory(idFound2, 1) 
+        self.assertTrue(res)
+         
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('lllzz')
+        aAcc.deleteAccion('pppp',idBacklog)
+        aBacklog.deleteProduct('hhJJkkk')   
+        
+    # Prueba 35
+    
+    def testidUserHistoryIdActorsBigAndIdUserHistoryValid(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('hhJJkkk','oooLLLLaa',1)
+        findId = aBacklog.findName('hhJJkkk')
+        idBacklog = findId[0].BL_idBacklog
+
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('pppp',idBacklog)
+        search = aAcc.searchAccion('pppp',idBacklog)
+        idFound = search[0].AC_idAccion
+          
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('lllzz',0, 1,idFound, idBacklog,1)
+        searchHist = aHist.searchUserHistory('lllzz')
+        idFound1 = searchHist[0].UH_idUserHistory
+        
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertActor('SSS', 'Ddd', idBacklog)
+        searchAct = aAct.findNameActor('SSS',idBacklog)
+        idFound2 = searchAct[0].A_idActor 
+                  
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+         
+        # Inicio de caso de prueba
+        # Buscamos id's de historias que contengan asociado un objetivo        
+        aAccAs = actorsUserHistory()
+        res    = aAccAs.deleteActorAsociatedInUserHistory(2**28, idFound1) 
+        self.assertFalse(res)
+         
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('lllzz')
+        aAcc.deleteAccion('pppp',idBacklog)
+        aBacklog.deleteProduct('hhJJkkk')   
+        
+    # Casos Esquinas
+    
+    # Caso 37
+    
+    def testidUserHistoryIdActorsNotExistAndIdUserHistoryNotExists(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('hhJJkkk','oooLLLLaa',1)
+        findId = aBacklog.findName('hhJJkkk')
+        idBacklog = findId[0].BL_idBacklog
+ 
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('pppp',idBacklog)
+        search = aAcc.searchAccion('pppp',idBacklog)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('lllzz',0, 1,idFound, idBacklog,1)
+        searchHist = aHist.searchUserHistory('lllzz')
+        idFound1 = searchHist[0].UH_idUserHistory
+         
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertActor('SSS', 'Ddd', idBacklog)
+        searchAct = aAct.findNameActor('SSS',idBacklog)
+        idFound2 = searchAct[0].A_idActor 
+                  
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+         
+        # Inicio de caso de prueba
+        # Buscamos id's de historias que contengan asociado un objetivo        
+        aAccAs = actorsUserHistory()
+        res    = aAccAs.deleteActorAsociatedInUserHistory(0,0) 
+        self.assertFalse(res)
+         
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('lllzz')
+        aAcc.deleteAccion('pppp',idBacklog)
+        aBacklog.deleteProduct('hhJJkkk')  
+        
+    # Prueba 38
+    
+    def testidUserHistoryIdOneAndIdUserHistoryOne(self):
+
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('hhJJkkk','oooLLLLaa',1)
+        findId = aBacklog.findName('hhJJkkk')
+        idBacklog = findId[0].BL_idBacklog
+ 
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('pppp',idBacklog)
+        search = aAcc.searchAccion('pppp',idBacklog)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('lllzz',0, 1,idFound, idBacklog,1)
+        searchHist = aHist.searchUserHistory('lllzz')
+        idFound1 = searchHist[0].UH_idUserHistory
+         
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertActor('SSS', 'Ddd', idBacklog)
+        searchAct = aAct.findNameActor('SSS',idBacklog)
+        idFound2 = searchAct[0].A_idActor 
+                  
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+         
+        # Inicio de caso de prueba
+        # Buscamos id's de historias que contengan asociado un objetivo        
+        aAccAs = actorsUserHistory()
+        res    = aAccAs.deleteActorAsociatedInUserHistory(1,1) 
+        self.assertTrue(res)
+         
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('lllzz')
+        aAcc.deleteAccion('pppp',idBacklog)
+        aBacklog.deleteProduct('hhJJkkk')  
+        
+    # Prueba 39
+    
+    def testidUserHistoryIdActorsBigAndIdUserHistoryBig(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('hhJJkkk','oooLLLLaa',1)
+        findId = aBacklog.findName('hhJJkkk')
+        idBacklog = findId[0].BL_idBacklog
+ 
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('pppp',idBacklog)
+        search = aAcc.searchAccion('pppp',idBacklog)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('lllzz',0, 1,idFound, idBacklog,1)
+        searchHist = aHist.searchUserHistory('lllzz')
+        idFound1 = searchHist[0].UH_idUserHistory
+         
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertActor('SSS', 'Ddd', idBacklog)
+        searchAct = aAct.findNameActor('SSS',idBacklog)
+        idFound2 = searchAct[0].A_idActor 
+                  
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+         
+        # Inicio de caso de prueba
+        # Buscamos id's de historias que contengan asociado un objetivo        
+        aAccAs = actorsUserHistory()
+        res    = aAccAs.deleteActorAsociatedInUserHistory(2**28,2**28) 
+        self.assertFalse(res)
+         
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('lllzz')
+        aAcc.deleteAccion('pppp',idBacklog)
+        aBacklog.deleteProduct('hhJJkkk')  
+
+    # Casos Malicia
+    
+    # Prueba 40
+    
+    def testidUserHistoryIdActorsNotValidAndIdUserHistoryNotValid(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('hhJJkkk','oooLLLLaa',1)
+        findId = aBacklog.findName('hhJJkkk')
+        idBacklog = findId[0].BL_idBacklog
+ 
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('pppp',idBacklog)
+        search = aAcc.searchAccion('pppp',idBacklog)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('lllzz',0, 1,idFound, idBacklog,1)
+        searchHist = aHist.searchUserHistory('lllzz')
+        idFound1 = searchHist[0].UH_idUserHistory
+         
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertActor('SSS', 'Ddd', idBacklog)
+        searchAct = aAct.findNameActor('SSS',idBacklog)
+        idFound2 = searchAct[0].A_idActor 
+                  
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+         
+        # Inicio de caso de prueba
+        # Buscamos id's de historias que contengan asociado un objetivo        
+        aAccAs = actorsUserHistory()
+        res    = aAccAs.deleteActorAsociatedInUserHistory(-3,-2) 
+        self.assertFalse(res)
+         
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('lllzz')
+        aAcc.deleteAccion('pppp',idBacklog)
+        aBacklog.deleteProduct('hhJJkkk')  
+         
+      # Prueba 41
+    
+    def testidUserHistoryIdActorStringAndIdUserHistoryNotValid(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('hhJJkkk','oooLLLLaa',1)
+        findId = aBacklog.findName('hhJJkkk')
+        idBacklog = findId[0].BL_idBacklog
+ 
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('pppp',idBacklog)
+        search = aAcc.searchAccion('pppp',idBacklog)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('lllzz',0, 1,idFound, idBacklog,1)
+        searchHist = aHist.searchUserHistory('lllzz')
+        idFound1 = searchHist[0].UH_idUserHistory
+         
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertActor('SSS', 'Ddd', idBacklog)
+        searchAct = aAct.findNameActor('SSS',idBacklog)
+        idFound2 = searchAct[0].A_idActor 
+                  
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+         
+        # Inicio de caso de prueba
+        # Buscamos id's de historias que contengan asociado un objetivo        
+        aAccAs = actorsUserHistory()
+        res    = aAccAs.deleteActorAsociatedInUserHistory('3',-2) 
+        self.assertFalse(res)
+         
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('lllzz')
+        aAcc.deleteAccion('pppp',idBacklog)
+        aBacklog.deleteProduct('hhJJkkk')  
+        
+    # Prueba 42
+    
+    def testidUserHistoryIdActorValidAndIdUserHistoryNone(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('hhJJkkk','oooLLLLaa',1)
+        findId = aBacklog.findName('hhJJkkk')
+        idBacklog = findId[0].BL_idBacklog
+ 
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('pppp',idBacklog)
+        search = aAcc.searchAccion('pppp',idBacklog)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('lllzz',0, 1,idFound, idBacklog,1)
+        searchHist = aHist.searchUserHistory('lllzz')
+        idFound1 = searchHist[0].UH_idUserHistory
+         
+        # Insertamos Actor
+        aAct = role()
+        aAct.insertActor('SSS', 'Ddd', idBacklog)
+        searchAct = aAct.findNameActor('SSS',idBacklog)
+        idFound2 = searchAct[0].A_idActor 
+                  
+        # Insertamos Actor asociado
+        aAccAs = actorsUserHistory()
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+         
+        # Inicio de caso de prueba
+        # Buscamos id's de historias que contengan asociado un objetivo        
+        aAccAs = actorsUserHistory()
+        res    = aAccAs.deleteActorAsociatedInUserHistory(idFound2,None) 
+        self.assertFalse(res)
+         
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory('lllzz')
+        aAcc.deleteAccion('pppp',idBacklog)
+        aBacklog.deleteProduct('hhJJkkk')  
+         
+ 
