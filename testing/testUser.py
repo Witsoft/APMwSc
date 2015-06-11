@@ -343,7 +343,7 @@ class TestUsers(unittest.TestCase):
         user1 = user()
         role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
         result = user1.insertUser('pat', 'ehfer_23','12316789qwertyuai', '2@ls',1)
-        self.assertFalse(result)
+        self.assertTrue(result)
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
    

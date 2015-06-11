@@ -9,10 +9,10 @@ from model import *
 # Declaracion de constantes.
 CONST_MAX_USER     = 16
 CONST_MAX_FULLNAME = 50
-CONST_MAX_PASSWORD = 16
+CONST_MAX_PASSWORD = 200
 CONST_MAX_EMAIL    = 30
 CONST_MIN_LONG     = 1
-CONST_MIN_PASSWORD = 8
+CONST_MIN_PASSWORD = 1
 
 class user(object):
     '''Clase que permite manejar usuarios de manera persistente'''
