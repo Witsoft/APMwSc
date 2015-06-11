@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.backLog import *
+import sys
+# Ruta que permite utilizar el módulo model.py
+sys.path.append('app/scrum')
+
+from backLog import *
 
 # Declaracion de constantes
 CONST_MAX_COD    = 11
