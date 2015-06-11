@@ -163,7 +163,6 @@ class clsUserHistory(db.Model):
 		self.UH_idAccion        = idAccion
 		self.UH_idBacklog       = idBacklog
 		self.UH_scale		    = scale
- 
 		
 	def __repr__(self):
 		'''Representacion en string de la Historia de Usuario'''
@@ -216,8 +215,8 @@ class clsTask(db.Model):
 
 	def __repr__(self):
 		'''Representacion en string de la Tarea'''
-		return '<HW_ idTask  %r, HW_refUserHistory %r>' % (self.HW_idTask,self.HW_idUserHistory)
-	
+		return '<HW_ idTask  %r, HW_idUserHistory %r>' % (self.HW_idTask,self.HW_idUserHistory)
+
 migrate = Migrate(app, db)
 manager = Manager(app)
 

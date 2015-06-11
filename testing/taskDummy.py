@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.userHistory import *
+from historyDummy import *
 
 # Declaracion de constantes.
 minId = 1
@@ -10,32 +10,30 @@ maxTaskDescription = 140
 class task(object):
     '''Clase que permite manejar los tasks de manera persistente'''
 
-    def getAllTask(self,HW_idUserHistory):
-        typeId  = (type(HW_idUserHistory) == int)
-        if (typeId  and HW_idUserHistory  >= minId):
-            otask = clsTask.query.filter_by(HW_idUserHistory = HW_idUserHistory).all()
+    def getAllTask(self,HW_refUserHistory):
+        typeId  = (type(HW_refUserHistory) == int)
+        if (typeId  and HW_refUserHistory  >= minId):
+            otask = clsTask.query.filter_by(HW_refUserHistory = HW_refUserHistory).all()
             return otask
         return ([])
     
-    def insertTask(self,HW_description, UH_idUserHistory):
+    def insertTask(self,HW_description, id_userHistory):
         '''Permite insertar un Task'''
-        
+                   
         typedescription = (type(HW_description) == str)
-        typeid          = (type(UH_idUserHistory) == int)
+        typeid = (type(id_userHistory) == int)
         
-        oHistory = userHistory()
-        epic  =  oHistory.isEpic(UH_idUserHistory)
-        if epic:
-            if (typedescription and typeid):
-                long_HW_description = minTaskDescription <= len(HW_description) <= maxTaskDescription
-                if long_HW_description:
-                    oUserHistory = clsUserHistory.query.filter_by(UH_idUserHistory = UH_idUserHistory).all()
-                    oTask = clsTask.query.filter_by(HW_description = HW_description).all()
-                    if (oUserHistory != []) and (oTask == []):
-                        new_task = clsTask(HW_description,UH_idUserHistory)
-                        db.session.add(new_task)
-                        db.session.commit()
-                        return True
+        if (typedescription and typeid):
+            long_HW_description = minTaskDescription <= len(HW_description) <= maxTaskDescription
+            
+            if long_HW_description:
+                oUserHistory = clsUserHistory.query.filter_by(id_userHistory = id_userHistory).all()
+                oTask = clsTask.query.filter_by(HW_description = HW_description).all()
+                if (oUserHistory != []) and (oTask == []):
+                    new_task = clsTask(HW_description = HW_description,HW_refUserHistory = id_userHistory)
+                    db.session.add(new_task)
+                    db.session.commit()
+                    return True
         return False
     
     def deleteTask(self, HW_description):

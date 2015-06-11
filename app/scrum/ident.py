@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from flask           import request, session, Blueprint, json
 from app.scrum.role  import *
 from app.scrum.user  import *
@@ -8,26 +9,26 @@ ident = Blueprint('ident', __name__)
 
 @ident.route('/ident/AIdentificar', methods=['POST'])
 def AIdentificar():
-    #POST/PUT parameters
+    #POST/PUT parameters.
     params  = request.get_json()
     results = [{'label':'/VProductos', 'msg':['Bienvenido dueño de producto'], "actor":"duenoProducto"}, {'label':'/VMaestroScrum', 'msg':['Bienvenido Maestro Scrum'], "actor":"maestroScrum"}, {'label':'/VDesarrollador', 'msg':['Bienvenido Desarrollador'], "actor":"desarrollador"}, {'label':'/VLogin', 'msg':['Datos de identificación incorrectos']}, ]
     
     if request.method == 'POST':
-        newUser     = params['usuario']
-        newPassword = params['clave']
-        oUser       = user()
-
-        # Buscamos el usuario en la base de datos
-        userLogin   = oUser.searchUser(newUser)
+        userName     = params['usuario']
+        userPassword = params['clave']
+        
+        # Buscamos el usuario en la base de datos.
+        oUser     = user()
+        userLogin = oUser.searchUser(userName)
 
         if userLogin:
-            encriptPassword = userLogin[0].password
-            # Creamos instancia de la clase login
-            logPass = clsLogin();
-            isValid = logPass.check_password(encriptPassword, newPassword)
+            encriptPassword = userLogin[0].U_password
+            # Chequeamos el password.
+            oLogin  = login();
+            isValid = oLogin.check_password(encriptPassword, userPassword)
 
             if isValid:
-                session['usuario'] = {'nombre':userLogin[0].fullname.title()}
+                session['usuario'] = {'nombre':userLogin[0].U_fullname.title()}
                 res = results[0]
             else:
                 res = results[3]
@@ -47,49 +48,50 @@ def AIdentificar():
 def ARegistrar():
     #POST/PUT parameters
     params = request.get_json()
-    results = [{'label':'/VLogin', 'msg':['Felicitaciones, Ya estás registrado en la aplicación']}, {'label':'/VRegistro', 'msg':['Error al tratar de registrarse']}, ]
+    results = [{'label':'/VLogin', 'msg':['Felicitaciones, Ya estás registrado en la aplicación']}, {'label':'/VRegistro', 'msg':['Error al tratar de registrarse']}, {'label':'/VRegistro', 'msg':['Error al tratar de registrarse']}, ]
 
     if request.method == 'POST':
         # Se precargan valores en la base de datos.
-        oRole    = role()
-        oBackLog = backLog()
+        oActor   = role()
+        oBacklog = backlog()
 
-        isEmpty  = oRole.emptyTable()
+        isEmpty  = oActor.emptyTable()
         if isEmpty:
-            result1 = oBackLog.insertBackLog('Taxi Seguro','Mejor forma de operar un taxi',1)
-            result2 = oRole.insertRole('Product Owner','Encargado de las decisiones de diseno del producto.',1)
-            result3 = oRole.insertRole('Scrum Master','Encargado de orientar y ayudar al equipo desarrollador del producto.',1)
-            result  = oRole.insertRole('Team Member','Equipo encargado del desarrollo del producto.',1)
-            
-        print('Valores de BackLog:')
-        print(clsBackLog.query.all())
-        print('Valores de Role:')
-        print(clsRole.query.all())
-        print('Valores de Usuario:')
-        print(clsUser.query.all())
+            result1 = oBacklog.insertBacklog('Taxi Seguro','Mejor forma de operar un taxi',1)
+            result2 = oActor.insertActor('Product Owner','Encargado de las decisiones de diseno del producto.',1)
+            result3 = oActor.insertActor('Scrum Master','Encargado de orientar y ayudar al equipo desarrollador del producto.',1)
+            result  = oActor.insertActor('Team Member','Equipo encargado del desarrollo del producto.',1)
 
+        # Extraemos los datos.
         newName     = params['nombre']
         newUser     = params['usuario']
         newPassword = params['clave']
         newEmail    = params['correo']
 
-        login = clsLogin()
-        oUser = user()
+        oLogin = login()
+        oUser  = user()
 
-        checkNewUser      = oUser.isFound(newUser)
-        checkNewEmail     = oUser.findEmail(newEmail)
-        checkNewPassword  = login.validPassword(newPassword)
-        encriptPassword   = login.encript(newPassword)
+        checkNewUser     = oUser.isFound(newUser)
+        checkNewEmail    = oUser.findEmail(newEmail)
+        checkNewPassword = oLogin.validPassword(newPassword)
+        encriptPassword  = oLogin.encript(newPassword)
+        
+        print('Que esta mal?')
+        
+        res = results[1]
         
         if (not checkNewUser) and checkNewPassword and (not checkNewEmail):
-            result = oUser.insertUser(newName,newUser,encriptPassword,newEmail,1)          
+            result = oUser.insertUser(newName,newUser,encriptPassword,newEmail,1)  
+            
+            print('Valores de Backlog:')
+            print(clsBacklog.query.all())
+            print('Valores de Actor:')
+            print(clsActor.query.all())
+            print('Valores de Usuario:')
+            print(clsUser.query.all()) 
+             
             if result: 
-                print('Se registro satisfactoriamente el Usuario')
-            res = results[0]
-        else:
-            res = results[1]
-    else:
-        res = results[1]
+                res = results[0]
 
     if "actor" in res:
         if res['actor'] is None:
@@ -123,9 +125,6 @@ def VRegistro():
 
     #Action code ends here
     return json.dumps(res)
-
-
-
 
 
 #Use case code starts here

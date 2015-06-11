@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.userHistory import *
+from historyDummy import *
 
 # Declaracion de constantes.
 minId = 1

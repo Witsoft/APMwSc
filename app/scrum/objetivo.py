@@ -10,26 +10,26 @@ objetivo = Blueprint('objetivo', __name__)
 @objetivo.route('/objetivo/ACrearObjetivo', methods=['POST'])
 def ACrearObjetivo():
     #POST/PUT parameters
-
-    params = request.get_json()
+    params  = request.get_json()
     results = [{'label':'/VProducto', 'msg':['Objetivo creado']}, {'label':'/VCrearObjetivo', 'msg':['Error al crear objetivo']}, ]
+    res     = results[1]
+    
+    # Obtenemos el id del producto.
+    idPila  = int(session['idPila'])
+    print('idPila ACrearObjetivo',idPila) 
     
     if request.method == 'POST':
     
-        oObjective = objective()
-        newDescription = params['descripcion']
+        # Extraemos los parametros.
+        newDescription      = params['descripcion']
         transverseObjective = params['transversal']
-                
-        result = oObjective.insertObjective(newDescription,1,transverseObjective)
+        
+        oObjective = objective()
+        result     = oObjective.insertObjective(newDescription,idPila,transverseObjective)
 
         if result:
             res = results[0]
-        else:
-            res = results[1]
-    else:
-            res = results[1]
 
-    idPila = 1
     res['label'] = res['label'] + '/' + str(idPila)
     
     if "actor" in res:
@@ -37,6 +37,7 @@ def ACrearObjetivo():
             session.pop("actor", None)
         else:
             session['actor'] = res['actor']
+            
     return json.dumps(res)
 
 
@@ -66,59 +67,51 @@ def AModifObjetivo():
     #POST/PUT parameters
     params  = request.get_json()
     results = [{'label':'/VProducto', 'msg':['Objetivo actualizado']}, {'label':'/VObjetivo', 'msg':['Error al modificar objetivo']}, ]
-    idPila  = 1
-
-    idObjetivo     = params['idObjetivo']  #Obtenemos el id del objetivo
-    newDescription = params['descripcion'] #Obtenemos la nueva descripción del objetivo
-    newType        = params['transversal'] #Obtenemos el tipo de objetivo(transversal,no transversal)
-    objetivoDesc = clsObjective.query.filter_by(idobjective = idObjetivo).first() #Conseguimos el objetivo a modificar
-    print("Antes",objetivoDesc.obj_type)
+    res     = results[1] 
+    
+    # Obtenemos el id del Producto.
+    idPila  = int(session['idPila'])
+    print('idPila AModifAccion',idPila) 
+    
+    # Extraemos los parametros.
+    idObjetivo     = params['idObjetivo']  # Obtenemos el id del objetivo
+    newDescription = params['descripcion'] # Obtenemos la nueva descripción del objetivo
+    newType        = params['transversal'] # Obtenemos el tipo de objetivo(transversal,no transversal)
+    
     oObjetivo    = objective()
-    result       = oObjetivo.updateObjective(objetivoDesc.descObjective, newDescription,newType) #Modificamos la descripción del objetivo
+    # Conseguimos el objetivo a modificar.
+    objetivoDesc = oObjetivo.searchIdObjective(idObjetivo) 
+    #Modificamos la descripción del objetivo.    
+    result       = oObjetivo.updateObjective(objetivoDesc[0].O_descObjective , newDescription,newType,idPila) 
 
     if result:
         res = results[0]
-        res['label'] = res['label'] + '/' + str(idPila)
-    else:
-        res = results[1]
+        
+    res['label'] = res['label'] + '/' + str(idPila)
 
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
         else:
             session['actor'] = res['actor']
+            
     return json.dumps(res)
 
-
-
-@objetivo.route('/objetivo/VCrearObjetivo')
-def VCrearObjetivo():
-    #GET parameter
-    idPila = request.args['idPila']
-    res = {}
-    if "actor" in session:
-        res['actor']=session['actor']
-        
-    if 'usuario' not in session:
-      res['logout'] = '/'
-      return json.dumps(res)
-    res['usuario'] = session['usuario']
-   
-    #Datos de prueba
-    res['idPila'] = 1
-    res['fObjetivo_opcionesTransversalidad'] = [
-      {'key':True, 'value':'Si'},{'key':False, 'value':'No'},
-    ]   
-
-    return json.dumps(res)
 
 
 @objetivo.route('/objetivo/VObjetivo')
 def VObjetivo():
     #GET parameter
-    idObjetivo = request.args['idObjetivo']
     res = {}
+    
+    # Obtenemos el id del producto y del objetivo.
+    idPila      = int(session['idPila'])
+    idObjective = int(request.args.get('idObjetivo'))
+    print('idPila VObjetivo',idPila)
+    print('idObjetivo VObjetivo',idObjective)
+    
     boolean = {0:False,1:True}
+    
     if "actor" in session:
         res['actor']=session['actor']
         
@@ -128,26 +121,43 @@ def VObjetivo():
   
     res['usuario'] = session['usuario']
     
-    #Action code goes here, res should be a JSON structure
-    idObjetivo = request.args.get('idObjetivo')
-    
-    result   = clsObjective.query.filter_by(idobjective = idObjetivo).first()
-    entero   = int(result.obj_type)
-    istrans  = boolean[entero]
+    oObjective = objective()
+    result     = oObjective.searchIdObjective(idObjective)
+    number     = int(result[0].O_objType)
+    istransver = boolean[number]
 
-    res['idPila'] = 1 
-    res['fObjetivo_opcionesTransversalidad'] = [
-      {'key':True, 'value':'Si'},{'key':False, 'value':'No'}]
-    res['fObjetivo'] = {'idObjetivo':idObjetivo, 'descripcion':result.descObjective, 'transversal':istrans}    
-    res['idObjetivo'] = 1
-    
-    #Action code ends here
+    res['fObjetivo_opcionesTransversalidad'] = [{'key':True, 'value':'Si'},{'key':False, 'value':'No'}]
+    res['fObjetivo'] = {'idObjetivo':idObjective, 'descripcion':result[0].O_descObjective , 'transversal':istransver}    
+    res['idPila']    = idPila
+
     return json.dumps(res)
 
 
 
+@objetivo.route('/objetivo/VCrearObjetivo')
+def VCrearObjetivo():
+    #GET parameter
+    res = {}
+    
+    # Obtenemos el id del producto.
+    idPila = request.args.get('idPila',1)
+    print('idPila VCrearObjetivo',idPila)
+    
+    if "actor" in session:
+        res['actor']=session['actor']
+        
+    if 'usuario' not in session:
+      res['logout'] = '/'
+      return json.dumps(res)
+    res['usuario'] = session['usuario']
+   
+    res['fObjetivo_opcionesTransversalidad'] = [{'key':True, 'value':'Si'},
+                                                {'key':False, 'value':'No'},
+                                                {'key':0,'value':'Seleccione una opción'}]
+    res['fObjetivo'] = {'transversal':0} 
+    res['idPila']    = idPila   
 
-
+    return json.dumps(res)
 
 
 

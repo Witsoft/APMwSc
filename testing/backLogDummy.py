@@ -60,11 +60,7 @@ class backLog(object):
             if long_d and long_n and long_New and checkScale:
                 aName = self.findName(name)
                 aNewName = self.findName(new_name)
-<<<<<<< HEAD
                 if (aName != [] and (aNewName == [] or new_name == name)):
-=======
-                if (aName != [] and aNewName == []):
->>>>>>> refs/remotes/origin/Historia_4b
                     new_n = clsBackLog.query.filter_by(BL_name = name).first()
                     new_n.BL_name        = new_name 
                     new_n.BL_description = new_description
@@ -133,9 +129,5 @@ class backLog(object):
         if checkTypeId: 
             found = clsUserHistory.query.filter_by(id_backLog=productId).all()
             return found
-<<<<<<< HEAD
         return([])                                
 
-=======
-        return([])                                
->>>>>>> refs/remotes/origin/Historia_4b

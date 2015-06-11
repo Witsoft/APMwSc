@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.model import *
+import sys
+# Ruta que permite utilizar el módulo model.py
+sys.path.append('app/scrum')
+
+from model import *
 
 # Declaracion de constantes.
-const_maxUser     = 16
-const_maxFullname = 50
-const_maxPassword = 200
-const_maxEmail    = 30
-const_min_long    = 1
+CONST_MAX_USER     = 16
+CONST_MAX_FULLNAME = 50
+CONST_MAX_PASSWORD = 200
+CONST_MAX_EMAIL    = 30
+CONST_MIN_LONG     = 1
+CONST_MIN_PASSWORD = 1
 
 class user(object):
     '''Clase que permite manejar usuarios de manera persistente'''
@@ -18,99 +23,92 @@ class user(object):
             return []
         else:
             long_username = len(username)
-            if (long_username >const_maxUser or long_username < const_min_long):
+            if (long_username >CONST_MAX_USER or long_username < CONST_MIN_LONG):
                 return []
             else:
-                auser = clsUser.query.filter_by(username = username).all()
+                auser = clsUser.query.filter_by(U_username = username).all()
                 return auser
-
-
+ 
+ 
     def findEmail(self,email):
         '''Permite saber si un email esta en la base de datos'''
-        aemail = clsUser.query.filter_by(email=email).all()
+        aemail = clsUser.query.filter_by(U_email=email).all()
         return aemail != []
-
-
+ 
+ 
     def isFound(self,username):
         '''Permite saber si un usuario esta en la base de datos'''
-        auser = clsUser.query.filter_by(username=username).all()
+        auser = clsUser.query.filter_by(U_username = username).all()
         return auser != []
 
-    def insertUser(self, fullname, username, password, email, idrole):
+
+    def insertUser(self, fullname, username, password, email, idActor):
         '''Permite insertar un usuario en la tabla'''
-        if (type(fullname) != str or type(username) != str or type(password) != str or type(email) != str or\
-             type(idrole) != int):
-            return False
-        else:
-            auser = clsUser.query.filter_by(username=username).all()
-            if auser == []:
-                new_user     = clsUser(fullname = fullname, username = username, password = password, email =email, idrole = idrole)
-                longUser     = len(new_user.username)
-                longFullname = len(new_user.fullname)
-                longPassword = len(new_user.password)
-                longEmail    = len(new_user.email)
-                if  (longUser >const_maxUser or longFullname > const_maxFullname or longPassword > const_maxPassword \
-                     or longEmail>const_maxEmail or longEmail<const_min_long or longPassword<const_min_long or longUser<const_min_long\
-                     or longFullname< const_min_long):
-                    return False
-                else:
-                    role1 = clsRole.query.filter_by(idrole = idrole).all()
-                    if (role1 == []):
-                        return False
-                    else:
-                        db.session.add(new_user)
-                        db.session.commit()
-                        return True
-            else:
-                return False
+
+        checkName     = type(fullname) == str
+        checkUserName = type(username) == str
+        checkPassword = type(password) == str
+        checkEmail    = type(email) == str
+        checkActor    = type(idActor) == int
         
-    def updateUser(self, new_fullname, username, new_password, new_email, new_idrole):   
-        '''Permite actualizar los valores de un usuario'''    
-        if type(username) != str:
-            return False
-        else:
-            auser = clsUser.query.filter_by(username=username).all()
-            if auser == []:
-                return False
-            else:
-                auser = clsUser.query.filter_by(username=username).first()
-                if ((type(new_fullname) != str or type(new_password) != str or type(new_email) != str\
-                      or type(new_idrole) != int)):
-                    return False
-                else:
-                    longFullname = len(new_fullname)
-                    longPassword = len(new_password)
-                    longEmail = len(new_email)
-                    if (longFullname>const_maxFullname or longPassword>const_maxPassword or longEmail>const_maxEmail\
-                      or longFullname<const_min_long or longPassword<const_min_long or longEmail<const_min_long):
-                        return False
-                    else:
-                        role1 = clsRole.query.filter_by(idrole = new_idrole).all()
-                        if (role1 == []):
-                            return False
-                        else:
-                            auser.fullname = new_fullname
-                            auser.password = new_password
-                            auser.email = new_email
-                            auser.idrole= new_idrole
-                            db.session.commit()
-                            return True
-                        
+        if checkName and checkUserName and checkPassword and checkEmail and checkActor:
+            checkLongUser     = CONST_MIN_LONG <= len(username) <= CONST_MAX_USER
+            checkLongFullname = CONST_MIN_LONG <= len(fullname) <= CONST_MAX_FULLNAME
+            checkLongPassword = CONST_MIN_PASSWORD <= len(password) <=  CONST_MAX_PASSWORD
+            checkLongEmail    = CONST_MIN_LONG <= len(email) <= CONST_MAX_EMAIL
+
+            if checkLongUser and checkLongFullname and checkLongPassword and checkLongEmail:
+                auser = clsUser.query.filter_by(U_username = username).all()
+                checkIdActor = clsActor.query.filter_by(A_idActor = idActor).all()
+
+                if auser == [] and checkIdActor != []:
+                    newUser = clsUser(fullname,username,password,email,idActor)
+                    db.session.add(newUser)
+                    db.session.commit()
+                    return True
+        return False
+        
+
+    def updateUser(self, username, new_fullname, new_password, new_email, new_idActor):   
+        '''Permite actualizar los datos de un usuario'''  
+        
+        checkUsername    = type(username) == str  
+        checkNewFullname = type(new_fullname) == str
+        checkNewPassword = type(new_password) == str
+        checkNewEmail    = type(new_email) == str
+        checkNewActor    = type(new_idActor) == int
+
+        if checkUsername and checkNewFullname and checkNewPassword and checkNewEmail and checkNewActor:
+            checkLongNewFullname = CONST_MIN_LONG <= len(new_fullname) <= CONST_MAX_FULLNAME
+            checkLongNewPassword = CONST_MIN_LONG <= len(new_password) <=  CONST_MAX_PASSWORD
+            checkLongNewEmail    = CONST_MIN_LONG <= len(new_email) <= CONST_MAX_EMAIL
+ 
+            if checkLongNewFullname and checkLongNewPassword and  checkLongNewEmail:
+                auser    = clsUser.query.filter_by(U_username = username).all()        
+                checkIdActor = clsActor.query.filter_by(A_idActor = new_idActor).all()        
+
+                if auser != []  and checkIdActor != []:
+                    checkUauser[0].U_fullname = new_fullname
+                    auser[0].U_password = new_password
+                    auser[0].U_email    = new_email
+                    auser[0].U_idActor  = new_idActor
+                    db.session.commit()
+                    return True
+        return False     
+     
     def deleteUser(self,username):
         '''Permite eliminar un usuario de la tabla'''
-        if type(username) != str:
-            return False
-        else:
-            long_username = len(username)
-            if long_username > const_maxUser or long_username < const_min_long:
-                return False
-            else:
-                auser = clsUser.query.filter_by(username=username).all()
-                if auser == []:
-                    return False
-                else:
+        checkUsername = type(username) == str  
+        
+        if checkUsername:
+            checkLongUser = CONST_MIN_LONG <= len(username) <= CONST_MAX_USER
+            if checkLongUser: 
+                auser = clsUser.query.filter_by(U_username = username).all()
+                if auser != []: 
                     for i in auser:    
                         db.session.delete(i)
                     db.session.commit()
                     return True
+        return False
+        
 # Fin Clase user
