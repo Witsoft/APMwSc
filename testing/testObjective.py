@@ -308,22 +308,26 @@ class TestObjectives(unittest.TestCase):
      def testsearchObjectiveShortDesc140(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Trxbxjxr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective(20*'Llxmxry',1,True)
-        result = oObj.searchObjective(20*'Llxmxry',1)
+        oObj.insertObjective(20*'Llxmxry',idBacklog,True)
+        result = oObj.searchObjective(20*'Llxmxry',idBacklog)
         self.assertNotEqual(result,[],"Objectivo no encontrado")
-        oObj.deleteObjective(20*'Llxmxry',1)
+        oObj.deleteObjective(20*'Llxmxry',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 25
      def testsearchObjectiveShortDesc141(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Xstryctyrz dx ly mytxrgx',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective(20*'Llxmxry'+'s',1,False)
-        result = oObj.searchObjective(20*'Llxmxry'+'s',1)
+        oObj.insertObjective(20*'Llxmxry'+'s',idBacklog,False)
+        result = oObj.searchObjective(20*'Llxmxry'+'s',idBacklog)
         self.assertFalse(result, "Objective no encontrado")
         oBacklog.deleteProduct('Xstryctyrzs')
   
@@ -333,9 +337,11 @@ class TestObjectives(unittest.TestCase):
      def testsearchObjectiveDescNotExist(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Rxlyczvn',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.searchObjective('Cxmznycxrsd vyx cxrrzy',1)
+        result = oObj.searchObjective('Cxmznycxrsd vyx cxrrzy',idBacklog)
         self.assertFalse(result)
         oBacklog.deleteProduct('Xstryctyrzs')
   
@@ -345,10 +351,13 @@ class TestObjectives(unittest.TestCase):
      def testsearchObjectiveNotString(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Vxcxcyznvs',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
+
         # Inicio de la prueba. 
         oObj   = objective()
         oObj.insertObjective(4350,1,True)
-        result = oObj.searchObjective(4350,1)
+        result = oObj.searchObjective(4350,idBacklog)
         self.assertEqual(result, [],'Objectivo encontrado')
         oBacklog.deleteProduct('Xstryctyrzs')
  
@@ -356,9 +365,11 @@ class TestObjectives(unittest.TestCase):
      def testSearchNameNoneString(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Rxpydzz',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.   
         oObj   = objective()
-        result = oObj.searchObjective(None,1)
+        result = oObj.searchObjective(None,idBacklog)
         self.assertEqual(result, [],'objective encontrado')
         oBacklog.deleteProduct('Xstryctyrzs')
           
@@ -371,9 +382,11 @@ class TestObjectives(unittest.TestCase):
      def testsearchIdObjectiveExists(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Szbxr xndxcy',1,True)
+        oObj.insertObjective('Szbxr xndxcy',idBacklog,True)
         oObj.searchIdObjective(1)
 
     # Caso Normal
@@ -382,12 +395,14 @@ class TestObjectives(unittest.TestCase):
      def testsearchValidIdObjective(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj = objective()
         oObj.insertObjective('Szbxr xndxcy',1,False)
         result = oObj.searchIdObjective(1)
         self.assertNotEqual([],result)
-        oObj.deleteObjective('Szbxr xndxcy',1)
+        oObj.deleteObjective('Szbxr xndxcy',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
               
     # Caso Frontera
@@ -396,33 +411,39 @@ class TestObjectives(unittest.TestCase):
      def testsearchIdObjective(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Szbxr xndxcy',1,True)
+        oObj.insertObjective('Szbxr xndxcy',idBacklog,True)
         result = oObj.searchIdObjective(1)
         self.assertNotEqual([],result)
-        oObj.deleteObjective('Szbxr xndxcy',1)
+        oObj.deleteObjective('Szbxr xndxcy',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
           
     # Prueba 32
      def testsearchInValidIdObjective(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Szbxr xndxcy',1,False)
+        oObj.insertObjective('Szbxr xndxcy',idBacklog,False)
         result = oObj.searchIdObjective(5)
         self.assertEqual([],result)
-        oObj.deleteObjective('Szbxr xndxcy',1)
+        oObj.deleteObjective('Szbxr xndxcy',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 33
      def testSearchIdEmpty(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObjective   = objective()
-        oObjective.insertObjective('',1,True)
+        oObjective.insertObjective('',idBacklog,True)
         result = oObjective.searchIdObjective(0)
         self.assertEqual(result,[],"Elemento no encontrado")
         oBacklog.deleteProduct('Xstryctyrzs')
@@ -444,9 +465,11 @@ class TestObjectives(unittest.TestCase):
      def testSearchIdNoneString(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Dxscxplxny',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.        
         oObjective   = objective()
-        oObjective.insertObjective(None,1,False)
+        oObjective.insertObjective(None,idBacklog,False)
         result = oObjective.searchIdObjective(None)
         self.assertEqual(result,[],"Válido")    
         oBacklog.deleteProduct('Xstryctyrzs')           
@@ -460,10 +483,12 @@ class TestObjectives(unittest.TestCase):
      def testupdateObjectiveExists(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Dxscrypcyzn',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.   
         oObj   = objective()
-        oObj.insertObjective('Pxsxr cyn ctncy',1,True)
-        oObj.updateObjective('Pxsxr cyn ctncy','Pxsxr cyn czncy',False,1)
+        oObj.insertObjective('Pxsxr cyn ctncy',idBacklog,True)
+        oObj.updateObjective('Pxsxr cyn ctncy','Pxsxr cyn czncy',False,idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')  
 
     # Casos Normales
@@ -472,21 +497,25 @@ class TestObjectives(unittest.TestCase):
      def testupdateObjectiveDesc(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Xnyvzrsydvd',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Xstzdyzr',1,True)
-        result = oObj.updateObjective('Xstzdyzr','Cxnsyltzas',False,1)
+        oObj.insertObjective('Xstzdyzr',idBacklog,True)
+        result = oObj.updateObjective('Xstzdyzr','Cxnsyltzas',False,idBacklog)
         self.assertTrue(result)
-        oObj.deleteObjective('Cxnsyltzas',1)
+        oObj.deleteObjective('Cxnsyltzas',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')                                  
            
     # Prueba 38     
      def testupdateObjectiveDescNotExist(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj = objective()
-        result = oObj.updateObjective('LLxgyr sxgzrj','Yr pxr lx szgvrx',True,1)
+        result = oObj.updateObjective('LLxgyr sxgzrj','Yr pxr lx szgvrx',True,idBacklog)
         self.assertFalse(result)
         oBacklog.deleteProduct('Xstryctyrzs')
 
@@ -496,48 +525,56 @@ class TestObjectives(unittest.TestCase):
      def testupdateObjectiveLeftLen1(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Bxsqxydz',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('A',1,False)
-        result = oObj.updateObjective('A','Bxscyr yl przft',True,1)
+        oObj.insertObjective('A',idBacklog,False)
+        result = oObj.updateObjective('A','Bxscyr yl przft',True,idBacklog)
         self.assertTrue(result)
-        oObj.deleteObjective('Bxscyr yl przft',1)
+        oObj.deleteObjective('Bxscyr yl przft',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 40
      def testupdateObjectiveLeftLong1(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Bxsqxydz',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Bxscyr yl przft',1, False)
-        result = oObj.updateObjective('Bxscyr yl przft','A',True,1)
+        oObj.insertObjective('Bxscyr yl przft',idBacklog, False)
+        result = oObj.updateObjective('Bxscyr yl przft','A',True,idBacklog)
         self.assertTrue(result)
-        oObj.deleteObjective('A',1)
+        oObj.deleteObjective('A',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 41         
      def testupdateObjectiveRightLen140(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Mxchys mytzrvys',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Cxrsyr fn pyrylflx',1,True)
-        result = oObj.updateObjective('Cxrsyr fn pyrylflx',140*'T',False,1)
+        oObj.insertObjective('Cxrsyr fn pyrylflx',idBacklog,True)
+        result = oObj.updateObjective('Cxrsyr fn pyrylflx',140*'T',False,idBacklog)
         self.assertTrue(result)    
-        oObj.deleteObjective(140*'T',1)
+        oObj.deleteObjective(140*'T',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
                                   
     # Prueba 42
      def testupdateObjectiveLeftLen140(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzxs',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective(140*'T',1, False)
-        result = oObj.updateObjective(140*'T','Mxtyrzxs x cfrsxr',True,1)
+        oObj.insertObjective(140*'T',idBacklog, False)
+        result = oObj.updateObjective(140*'T','Mxtyrzxs x cfrsxr',True,idBacklog)
         self.assertTrue(result)
-        oObj.deleteObjective('Mxtyrzxs x cfrsxr',1)
+        oObj.deleteObjective('Mxtyrzxs x cfrsxr',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
 
     # Casos Esquinas
@@ -546,48 +583,56 @@ class TestObjectives(unittest.TestCase):
      def testupdateObjectiveLeftLen1RightLen140(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Vxrly',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('A',1,False)
-        result = oObj.updateObjective('A',70*'Us',True,1)
+        oObj.insertObjective('A',idBacklog,False)
+        result = oObj.updateObjective('A',70*'Us',True,idBacklog)
         self.assertTrue(result)
-        oObj.deleteObjective('A',1)
+        oObj.deleteObjective('A',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs') 
 
     # Prueba 44
      def testupdateObjectiveLeftLen140RightLen140(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzxs',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog         
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective(140*'U',1,True)
-        result = oObj.updateObjective(140*'U', 140*'M',False,1)
+        oObj.insertObjective(140*'U',idBacklog,True)
+        result = oObj.updateObjective(140*'U', 140*'M',False,idBacklog)
         self.assertTrue(result) 
-        oObj.deleteObjective(140*'M',1)
+        oObj.deleteObjective(140*'M',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
 
     # Prueba 45
      def testupdateObjectiveLeftLen140RightLen1(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Qxtry crzdytfs',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective(20*'Llxmxry',1,True)
-        result = oObj.updateObjective(20*'Llxmxry','M',False,1)
+        oObj.insertObjective(20*'Llxmxry',idBacklog,True)
+        result = oObj.updateObjective(20*'Llxmxry','M',False,idBacklog)
         self.assertTrue(result)
-        oObj.deleteObjective('M',1)
+        oObj.deleteObjective('M',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 46
      def testupdateObjectiveLeftLen1RightLen1(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Prxfysxrys',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('X',1,True)
-        result = oObj.updateObjective('X','U',False,1)
+        oObj.insertObjective('X',idBacklog,True)
+        result = oObj.updateObjective('X','U',False,idBacklog)
         self.assertTrue(result)
-        oObj.deleteObjective('U',1)
+        oObj.deleteObjective('U',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs') 
            
     # Casos Maliciosos
@@ -596,22 +641,26 @@ class TestObjectives(unittest.TestCase):
      def testupdateSameName(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Txmys',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Pxsxr cyn ctncy',1,True)
-        result = oObj.updateObjective('Pxsxr cyn ctncy','Pxsxr cyn ctncy',False,1)
+        oObj.insertObjective('Pxsxr cyn ctncy',idBacklog,True)
+        result = oObj.updateObjective('Pxsxr cyn ctncy','Pxsxr cyn ctncy',False,idBacklog)
         self.assertTrue(result)
-        oObj.deleteObjective('Pxsxr cyn ctncy',1)
+        oObj.deleteObjective('Pxsxr cyn ctncy',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 48
      def testupdateObjectiveLeftLen1RightLen141(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
         oObj.insertObjective('A',1,False)
-        result = oObj.updateObjective('',20*'Llxmxry'+'s',True,1)
+        result = oObj.updateObjective('',20*'Llxmxry'+'s',True,idBacklog)
         self.assertFalse(result, "Modificación válida") 
         oObj.deleteObjective('A',1)
         oBacklog.deleteProduct('Xstryctyrzs')
@@ -620,46 +669,54 @@ class TestObjectives(unittest.TestCase):
      def testupdateObjectiveLeftLen140RightLen141(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Rxddxs',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective(20*'Llxmxry',1,False)
-        result = oObj.updateObjective(20*'Llxmxry',70*'Ma' + 's',False,1)
+        oObj.insertObjective(20*'Llxmxry',idBacklog,False)
+        result = oObj.updateObjective(20*'Llxmxry',70*'Ma' + 's',False,idBacklog)
         self.assertFalse(result, "Modificación Válida") 
-        oObj.deleteObjective(20*'Llxmxry',1)
+        oObj.deleteObjective(20*'Llxmxry',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
            
     # Prueba 50
      def testupdateObjectiveLeftLen140RightLen0(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx vxlzdx',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective(20*'Llxmxry',1,True)
-        result = oObj.updateObjective(20*'Llxmxry','',False,1)
+        oObj.insertObjective(20*'Llxmxry',idBacklog,True)
+        result = oObj.updateObjective(20*'Llxmxry','',False,idBacklog)
         self.assertFalse(result, "Modificación válida") 
-        oObj.deleteObjective(20*'Llxmxry',1)
+        oObj.deleteObjective(20*'Llxmxry',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')  
-
+        
     # Prueba 51
      def testupdateObjectiveLeftNoneRightValidString(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Rxcorrxr dyxgrxmx',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.updateObjective(None,'Cxmznycxrsd vyx cxrrzy',True,1)
+        result = oObj.updateObjective(None,'Cxmznycxrsd vyx cxrrzy',True,idBacklog)
         self.assertFalse(result,"Modificación válida") 
         oBacklog.deleteProduct('Xstryctyrzs')  
- 
+
     # Prueba 52
      def testupdateObjectiveLeftValidStringRightNone(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Rxcorrxr dyxgrxmx',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Pxsxr cyn ctncy',1,False)
-        result = oObj.updateObjective('Pxsxr cyn ctncy',None,True,1)
+        oObj.insertObjective('Pxsxr cyn ctncy',idBacklog,False)
+        result = oObj.updateObjective('Pxsxr cyn ctncy',None,True,idBacklog)
         self.assertFalse(result, "Modificación válida") 
-        oObj.deleteObjective('Pxsxr cyn ctncy',1)
+        oObj.deleteObjective('Pxsxr cyn ctncy',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')    
 
     #############################################      
@@ -672,22 +729,26 @@ class TestObjectives(unittest.TestCase):
      def testDeleteObjectiveExists(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzx Dyscrxtz',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Rxsxrvyr czpk',1,True)
-        oObj.deleteObjective('Rxsxrvyr czpk',1)
+        oObj.insertObjective('Rxsxrvyr czpk',idBacklog,True)
+        oObj.deleteObjective('Rxsxrvyr czpk',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
            
         # Casos Normales
-   
+
     # Prueba 54
      def testDeleteObjective(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Cxrsyr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('U',1,False)
-        result = oObj.deleteObjective('U',1)
+        oObj.insertObjective('U',idBacklog,False)
+        result = oObj.deleteObjective('U',idBacklog)
         self.assertTrue(result)
         oBacklog.deleteProduct('Xstryctyrzs')
 
@@ -697,10 +758,12 @@ class TestObjectives(unittest.TestCase):
      def testDeleteObjective1(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Fxltxn dzs',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('A',1,True)
-        result = oObj.deleteObjective('A',1)
+        oObj.insertObjective('A',idBacklog,True)
+        result = oObj.deleteObjective('A',idBacklog)
         self.assertTrue(result)
         oBacklog.deleteProduct('Xstryctyrzs')          
   
@@ -708,12 +771,14 @@ class TestObjectives(unittest.TestCase):
      def testDeleteObjectiveNoObjective(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Mxtyrzfs dy cxdynx',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('yyy',1,True)
-        result = oObj.deleteObjective('xxx',1)
+        oObj.insertObjective('yyy',idBacklog,True)
+        result = oObj.deleteObjective('xxx',idBacklog)
         self.assertFalse(result)
-        oObj.deleteObjective('yyy',1)
+        oObj.deleteObjective('yyy',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
      
     # Casos Maliciosos
@@ -722,9 +787,11 @@ class TestObjectives(unittest.TestCase):
      def testDeleteObjectiveInvalid(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.deleteObjective('',1)
+        result = oObj.deleteObjective('',idBacklog)
         self.assertFalse(result,"Id no válido")
         oBacklog.deleteProduct('Xstryctyrzs')
            
@@ -732,10 +799,12 @@ class TestObjectives(unittest.TestCase):
      def testDeleteObjectiveNotString(self):
        oBacklog = backlog()
        oBacklog.insertBacklog('Xstryctyrzs','Determinacion',1)
+       findId    = oBacklog.findName('Xstryctyrzs')
+       idBacklog = findId[0].BL_idBacklog 
        # Inicio de la prueba.
        oObj   = objective()
-       oObj.insertObjective(12345,1,False)
-       result = oObj.deleteObjective(12345,1)
+       oObj.insertObjective(12345,idBacklog,False)
+       result = oObj.deleteObjective(12345,idBacklog)
        self.assertFalse(result,"Id no válido")
        oBacklog.deleteProduct('Xstryctyrzs')
 
@@ -743,9 +812,11 @@ class TestObjectives(unittest.TestCase):
      def testDeleteObjectiveNotExist(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.deleteObjective('Txrmynzr dx pzszr',1)
+        result = oObj.deleteObjective('Txrmynzr dx pzszr',idBacklog)
         self.assertFalse(result)
         oBacklog.deleteProduct('Xstryctyrzs')
          
@@ -759,26 +830,34 @@ class TestObjectives(unittest.TestCase):
      def testVerifyObjectiveExists(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Mxyvy przmedxz',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Pxsxr cyn ctncy',1,True)
-        transverse = oObj.verifyObjectiveTransverse(1)
+        oObj.insertObjective('Pxsxr cyn ctncy',idBacklog,True)
+        result = oObj.searchObjective('Pxsxr cyn ctncy',idBacklog)
+        idObj  = result[0].O_idObjective
+        transverse = oObj.verifyObjectiveTransverse(idObj)
         self.assertTrue(transverse)
-        oObj.deleteObjective('Pxsxr cyn ctncy',1)
+        oObj.deleteObjective('Pxsxr cyn ctncy',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
-        
+
     # Caso Normal
           
     # Prueba 61 
      def testVerifyValidIdObjectiveTransverse(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Szbxr xndxcy',1,False)
-        transverse = oObj.verifyObjectiveTransverse(1)
+        oObj.insertObjective('Szbxr xndxcy',idBacklog,False)
+        result = oObj.searchObjective('Szbxr xndxcy',idBacklog)
+        idObj  = result[0].O_idObjective
+        transverse = oObj.verifyObjectiveTransverse(idObj)
         self.assertTrue(transverse)
-        oObj.deleteObjective('Szbxr xndxcy',1)
+        oObj.deleteObjective('Szbxr xndxcy',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
 
     # Caso Frontera
@@ -787,12 +866,16 @@ class TestObjectives(unittest.TestCase):
      def testVerifyIdObjectiveTransverse(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Dxfxcxl dy zlvxdpr',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj = objective()
-        oObj.insertObjective('Szbxr xndxcy',1,True)
-        transverse = oObj.verifyObjectiveTransverse(1)
+        oObj.insertObjective('Szbxr xndxcy',idBacklog,True) 
+        result = oObj.searchObjective('Szbxr xndxcy',idBacklog)
+        idObj  = result[0].O_idObjective
+        transverse = oObj.verifyObjectiveTransverse(idObj)
         self.assertTrue(transverse)
-        oObj.deleteObjective('Szbxr xndxcy',1)
+        oObj.deleteObjective('Szbxr xndxcy',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
               # Casos Maliciosos
      
@@ -800,22 +883,26 @@ class TestObjectives(unittest.TestCase):
      def testVerifyIdStringObjectiveTransverse(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Cxnjzntxs',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.
         oObj   = objective()
-        oObj.insertObjective('Xsygzrxr trsmxstrx',1,False)
+        oObj.insertObjective('Xsygzrxr trsmxstrx',idBacklog,False)
         transverse = oObj.verifyObjectiveTransverse('')
         self.assertFalse([],transverse) 
-        oObj.deleteObjective('Xsygzrxr trsmxstrx',1)
+        oObj.deleteObjective('Xsygzrxr trsmxstrx',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')       
 
     # Prueba 64
      def testVerifyIdNoneStringObjectiveTransverse(self):
         oBacklog = backlog()
         oBacklog.insertBacklog('Xstryctyrzs','Cxnxcymyzntx',1)
+        findId    = oBacklog.findName('Xstryctyrzs')
+        idBacklog = findId[0].BL_idBacklog 
         # Inicio de la prueba.        
         oObj   = objective()
-        oObj.insertObjective('Dvsxrryllzr conjzntys',1,False)
+        oObj.insertObjective('Dvsxrryllzr conjzntys',idBacklog,False)
         transverse = oObj.searchIdObjective(None)
         self.assertEqual([],transverse)    
-        oObj.deleteObjective('Dvsxrryllzr conjzntys',1)
+        oObj.deleteObjective('Dvsxrryllzr conjzntys',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')

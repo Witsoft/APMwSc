@@ -9,6 +9,10 @@ encoding//app/scrum/actorsUserHistory.py=utf-8
 encoding//app/scrum/backLog.py=utf-8
 encoding//app/scrum/dev.py=utf-8
 encoding//app/scrum/historias.py=utf-8
+<<<<<<< HEAD
+=======
+encoding//app/scrum/homework.py=utf-8
+>>>>>>> refs/remotes/origin/Historias_5a_5b_5c
 encoding//app/scrum/ident.py=utf-8
 encoding//app/scrum/login.py=utf-8
 encoding//app/scrum/mast.py=utf-8
@@ -18,15 +22,14 @@ encoding//app/scrum/objectivesUserHistory.py=utf-8
 encoding//app/scrum/objetivo.py=utf-8
 encoding//app/scrum/prod.py=utf-8
 encoding//app/scrum/role.py=utf-8
+encoding//app/scrum/tareas.py=utf-8
 encoding//app/scrum/user.py=utf-8
 encoding//app/scrum/userHistory.py=utf-8
 encoding//testing/actorsUserHistoryDummy.py=utf-8
 encoding//testing/backLogDummy.py=utf-8
 encoding//testing/historyDummy.py=utf-8
 encoding//testing/modelDummy.py=utf-8
-encoding//testing/objectiveDummy.py=utf-8
 encoding//testing/objectivesUserHistoryDummy.py=utf-8
-encoding//testing/roleDummy.py=utf-8
 encoding//testing/testAccions.py=utf-8
 encoding//testing/testActorsUserHistory.py=utf-8
 encoding//testing/testBackLog.py=utf-8
@@ -36,4 +39,3 @@ encoding//testing/testObjective.py=utf-8
 encoding//testing/testObjectivesUserHistory.py=utf-8
 encoding//testing/testRole.py=utf-8
 encoding//testing/testUser.py=utf-8
-encoding//testing/userDummy.py=utf-8

@@ -4,6 +4,7 @@ import sys
 
 # Ruta que permite utilizar el módulo backlog.py
 sys.path.append('app/scrum')
+
 from backLog import *
 
 # Declaracion de constantes
