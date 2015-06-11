@@ -15,6 +15,7 @@ CONST_MIN_SCALE  = 1
 CONST_MAX_SCALE  = 20
 
 arrayType = [1,2]
+options   = {1:'podria ',2:'puede '}
 
 class userHistory(object):
     '''Clase que permite manejar las historias de manera persistente'''
@@ -137,7 +138,7 @@ class userHistory(object):
         
         if checkCodUserHistory and checkLenCodUserHistory and checkIdHistory and checkScale:
             oUserHistory = clsUserHistory.query.filter_by(UH_idUserHistory  = newIdSuperHistory).all()
-            
+                      
             if oUserHistory !=[] or newIdSuperHistory == 0:
                 checkTypeAccion = newAccionType in arrayType
                 checkIdAccion   = type(newIdAccion) == int and newIdAccion >= CONST_MIN_ID
@@ -156,6 +157,7 @@ class userHistory(object):
                             result[0].UH_scale           = newScale
                             if checkSuperHistory == []:
                                 result[0].UH_idSuperHistory = newIdSuperHistory
+
                             db.session.commit()
                         return True
         return False
@@ -164,17 +166,17 @@ class userHistory(object):
     def updatePriority(self,idHistory,priority):
         '''Permite actualizar la prioridad de una historia de usuario'''
         checkIdHistory  = type(idHistory) == int and CONST_MIN_ID <= idHistory
-        checkPriority   = type(priority) == int and CONST_MIN_SCALE <= priority
-        
+        checkPriority   = type(priority) == int and 0 <= priority
+        print('Hlaaaaaaaaaaaaaaas')
         if checkIdHistory and checkPriority:
             found = clsUserHistory.query.filter_by(UH_idUserHistory = idHistory).first()
-            
+            print('found ',found)
             if found != None:
                 found.UH_scale = priority
                 db.session.commit()
                 return True
         return False
-    
+
     
     def scaleType(self,historyId):
         '''Permite saber el tipo de escala seleccionada para un producto'''
@@ -219,4 +221,73 @@ class userHistory(object):
                     return True
         return False 
 
+
+    def transformUserHistory(self,idUserHistory):
+        ''''''
+        
+        historyDict   = {}
+        # Buscamos la historia de usuario.
+        foundHistory = clsUserHistory.query.filter_by(UH_idUserHistory = idUserHistory).first()
+        
+        # Guardamos el id de la historia.
+        historyDict['idHistory'] = foundHistory.UH_idUserHistory 
+        
+        # Almacenamos en el diccionario el valor de la escala correspondiente.
+        historyDict['priority'] = foundHistory.UH_scale
+        
+        # Obtenemos los id de los actores que componen la historia.
+        result = clsActorsUserHistory.query.filter_by(AUH_idUserHistory = idUserHistory)
+        idActorsList = []
+        for act in result:
+            idActorsList.append(act.AUH_idActor)
+              
+        missingActors = len(idActorsList)
+        actorsString  = ''
+        
+        # Almacenamos los actores asociados a la historia en el diccionario de la historia.
+        for act in idActorsList:
+            result       = clsActor.query.filter_by(A_idActor = act).all()
+            actorsString = actorsString + ' ' + str(result[0].A_nameActor) + ' '
+            
+            if missingActors != 1:
+                actorsString = actorsString + ',' 
+                 
+            missingActors = missingActors - 1   
+        historyDict['actors'] = actorsString.lower()
+        
+        # Almacenamos la accion asociada la historia en el diccionario de la historia.
+        idAccions   = clsUserHistory.query.filter_by(UH_idUserHistory = idUserHistory).all()
+        foundAccion = clsAccion.query.filter_by(AC_idAccion  = idAccions[0].UH_idAccion).all()
+    
+        # Obtenemos el tipo de accion de la historia.
+        option    = foundHistory.UH_accionType
+        historyDict['accions'] = ' ' + options[option] + str(foundAccion[0].AC_accionDescription).lower() + ' ' 
+
+        # Obtenemos los id de los objetivos que componen la historia.
+        result  = clsObjectivesUserHistory.query.filter_by(OUH_idUserHistory = idUserHistory)
+        idObjectivesList  = []
+        
+        for obj in result:
+            idObjectivesList.append(obj.OUH_idObjective)
+    
+        missingObjectives = len(idObjectivesList)
+        objectivesString  = ''
+        
+        # Almacenamos los objetivos asociados a la historia en el diccionario de la historia.
+        for obj in idObjectivesList: 
+            result           = clsObjective.query.filter_by(O_idObjective = obj).all()
+            objectivesString = objectivesString + ' ' + str(result[0].O_descObjective)
+            
+            if missingObjectives != 1:
+                objectivesString = ' ' + objectivesString + ',' 
+                 
+            if missingObjectives == 1: 
+                objectivesString = objectivesString + '.'  
+                
+            missingObjectives = missingObjectives - 1
+            
+        historyDict['objectives'] = objectivesString.lower()
+        
+        return historyDict
+            
 # Fin Clase userHistory
