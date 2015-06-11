@@ -79,7 +79,6 @@ class backlog(object):
             if checkLongName and checkLongNewName and checkLongNewDesc and checkNewScale:
                 foundName    = self.findName(name)
                 foundNewName = self.findName(new_name)
-                
                 if foundName != [] and (foundNewName == [] or new_name == name):
                     idBacklog        = foundName[0].BL_idBacklog
                     foundUserHistory = clsUserHistory.query.filter_by(UH_idBacklog  = idBacklog).all()
@@ -101,20 +100,17 @@ class backlog(object):
     def deleteProduct(self, name):
         '''Permite eliminar un producto de la tabla'''
         checkTypeName = type(name) == str
-        checkLongName = CONST_MIN_NAME > len(name) > CONST_MAX_NAME
-        
-        if (not checkTypeName) and checkLongName:
-            return False
-        else:
+
+        if checkTypeName:
+            checkLongName = CONST_MIN_NAME <= len(name) <= CONST_MAX_NAME
             foundName = self.findName(name)
-            if foundName == []:
-                return False
-            else:
+
+            if foundName != []:
                 tupla = clsBacklog.query.filter_by(BL_name = name).first()    
                 db.session.delete(tupla)
                 db.session.commit()
                 return True
-            
+        return False            
 
     def scaleType(self,idBacklog):
         '''Permite obtener el tipo de escala seleccionado para un producto'''
