@@ -207,7 +207,7 @@ class userHistory(object):
  
         if checkIdAccion:
             result = clsUserHistory.query.filter_by(UH_idAccion  = idAccion).all()
-        return result
+            return result
     
     
     def deleteUserHistory(self,codeUserHistory):
