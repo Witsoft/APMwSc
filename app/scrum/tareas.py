@@ -10,11 +10,10 @@ tareas = Blueprint('tareas', __name__)
 def ACrearTarea():
     #POST/PUT parameters
     params  = request.get_json()
-    results = [{'label':'/VHistoria', 'msg':['Tarea creada']}, {'label':'/VCrearTarea', 'msg':['No se pudo crear tarea.']}, ]
 
-    res = results[0]
-    #Action code goes here, res should be a list with a label and a message
-    
+    results = [{'label':'/VHistoria', 'msg':['Tarea creada']}, {'label':'/VHistoria', 'msg':['No se pudo crear tarea.']}, ]
+    res     = results[1]
+
     # Obtenemos el id de la historia actual
     idHistory = int(session['idHistoria'])
     print('idHistoria AcrearTarea',idHistory)
@@ -35,6 +34,23 @@ def ACrearTarea():
         res = results[1]
         
     res['label'] = res['label'] + '/' + repr(idHistory)
+
+    # Extraemos los parametros
+    TaskDesc = params['descripcion']
+        
+    oBackLog  = backlog()
+    oHistory  = userHistory()
+    oTask = task()
+       
+    userHistoriesList = oBackLog.userHistoryAsociatedToProduct(idHistory)  
+    insert            = oTask.insertTask(TaskDesc,idHistory)
+    
+    if insert:        
+        res = results[0]
+        
+    print(res['label'] + '/' + str(idHistory))
+    res['label'] = res['label'] + '/' + str(idHistory)
+
 
     if "actor" in res:
         if res['actor'] is None:
@@ -131,7 +147,10 @@ def VCrearTarea():
     
     res['usuario']        = session['usuario']
     res['codHistoria']    = hist[0].UH_codeUserHistory
+
     session['idHistoria'] = idHistory
+    res['idHistoria'] = idHistory
+
 
     return json.dumps(res)
 

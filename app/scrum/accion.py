@@ -3,6 +3,8 @@
 from flask import request, session, Blueprint, json
 from app.scrum.accions import *
 from app.scrum.backLog import *
+from app.scrum.actorsUserHistory import *
+from app.scrum.userHistory import *
 
 accion = Blueprint('accion', __name__)
 
@@ -44,12 +46,31 @@ def ACrearAccion():
 @accion.route('/accion/AElimAccion')
 def AElimAccion():
     #GET parameter
-    idAccion = request.args['idAccion']
-    results  = [{'label':'/VProducto', 'msg':['Accion eliminada']}, {'label':'/VAccion', 'msg':['No se pudo eliminar esta acción']}, ]
-    res      = results[0]
-    #Action code goes here, res should be a list with a label and a message
-
-    res['label'] = res['label'] + '/1'
+  
+    results  = [{'label':'/VProducto', 'msg':['Accion eliminada']}, {'label':'/VProducto', 'msg':['No se pudo eliminar esta acción']}, ]
+    res      = results[1]
+  
+    # Obtenemos el id del producto y de la accion.
+    idPila   = int(session['idPila'])
+    idAccion  = int(session['idAccion'])
+    print('idPila AElimActor', idPila)
+    print('idActor AElimActor', idAccion)
+    
+    # Conseguimos la accion a eliminar 
+    oAccion = accions()
+    found   = oAccion.searchIdAccion(idAccion)
+    
+    oAccionUserHist = userHistory()
+    result  = oAccionUserHist.searchidUserHistoryIdAccion(idAccion)
+  
+    # Verificamos si la accion esta asociado a una historia   
+    if (result == []):
+        deleted = oAccion.deleteAccion(found[0].AC_accionDescription, idPila)
+        
+        if deleted:
+            res = results[0]
+            
+    res['label'] = res['label'] + '/' + str(idPila)
 
     #Action code ends here
     if "actor" in res:
@@ -120,6 +141,7 @@ def VAccion():
     
     res['fAccion'] = {'idAccion':idAccion, 'descripcion':result[0].AC_accionDescription}
     res['idPila']  = idPila
+    session['idAccion'] = idAccion
 
     return json.dumps(res)
 

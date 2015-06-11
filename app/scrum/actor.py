@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask          import request, session, Blueprint, json
 from app.scrum.role import *
+from app.scrum.actorsUserHistory import *
 
 actor = Blueprint('actor', __name__)
 
@@ -42,12 +43,31 @@ def ACrearActor():
 @actor.route('/actor/AElimActor')
 def AElimActor():
     #GET parameter
-    idActor = request.args['idActor']
-    results = [{'label':'/VProducto', 'msg':['Actor eliminado']}, {'label':'/VActor', 'msg':['No se pudo eliminar este actor']}, ]
-    res = results[0]
-    #Action code goes here, res should be a list with a label and a message
+    results = [{'label':'/VProducto', 'msg':['Actor eliminado']}, {'label':'/VProducto', 'msg':['No se pudo eliminar este actor']}, ]
+    res = results[1]
+    
+    # Obtenemos el id del producto y de la accion.
+    idPila   = int(session['idPila'])
+    idActor  = int(session['idActor'])
+    print('idPila AElimActor', idPila)
+    print('idActor AElimActor', idActor)
+    
+    # Conseguimos el actor a eliminar 
+    oActor = role()
+    found  = oActor.findIdActor(idActor)
+    
+    oActorUserHistory = actorsUserHistory()
+    result            = oActorUserHistory.searchidUserHistoryIdActors(idActor)
 
-    res['label'] = res['label'] + '/1'
+    # Verificamos si el actor esta asociado a una historia
+    if (result == []):
+        deleted = oActor.deleteActor(found[0].A_nameActor,idPila)
+    
+        if deleted:
+            res = results[0]
+
+    res['label'] = res['label'] + '/' + str(idPila)
+    
 
     #Action code ends here
     if "actor" in res:
@@ -95,7 +115,9 @@ def AModifActor():
             session.pop("actor", None)
         else:
             session['actor'] = res['actor']
-            
+    
+     
+       
     return json.dumps(res)
 
 
@@ -124,6 +146,7 @@ def VActor():
     
     res['fActor'] = {'idActor':idActor, 'nombre':result[0].A_nameActor, 'descripcion':result[0].A_actorDescription}    
     res['idPila'] = idPila
+    session['idActor'] = idActor
    
     return json.dumps(res)
 
