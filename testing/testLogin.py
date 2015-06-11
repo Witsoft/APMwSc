@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-. 
 
+import sys
 import unittest
 
-from loginDummy import *
+# Ruta que permite utilizar el módulo objective.py
+sys.path.append('../app/scrum')
 
+from login import *
 
 class clsLoginTester(unittest.TestCase):
 
     def testclsLoginEncriptFalse(self):
-        aclsLogin = clsLogin() 
+        aclsLogin = login() 
      
         #Caso malicia
         c0 = ""         #longitud 0
@@ -166,7 +169,7 @@ class clsLoginTester(unittest.TestCase):
         self.assertEqual("", aclsLogin.encript(c54))
     
     def testclsLoginEncriptTrue(self): 
-        aclsLogin = clsLogin() 
+        aclsLogin = login() 
         
         c19= "pa$$w0rD"  #longitud 8    caracteres validos
         self.assertNotEqual("", aclsLogin.encript(c19))
@@ -181,7 +184,7 @@ class clsLoginTester(unittest.TestCase):
         self.assertNotEqual("", aclsLogin.encript(c46))
         
     def testclsLoginCheck_passwordEncriptFalse(self):
-        aclsLogin = clsLogin() 
+        aclsLogin = login() 
         c0 = ""         #longitud 0
         mensajeEncriptado = aclsLogin.encript(c0)
         self.assertFalse(aclsLogin.check_password(mensajeEncriptado,c0))
@@ -387,7 +390,7 @@ class clsLoginTester(unittest.TestCase):
         self.assertFalse(aclsLogin.check_password(mensajeEncriptado,c54))
             
     def testclsLoginCheck_passwordTrue(self):
-        aclsLogin = clsLogin() 
+        aclsLogin = login() 
         
         c19= "pa$$w0rD"  #longitud 8    caracteres validos
         mensajeEncriptado = aclsLogin.encript(c19)
@@ -406,7 +409,7 @@ class clsLoginTester(unittest.TestCase):
         self.assertTrue(aclsLogin.check_password(mensajeEncriptado,c46))
         
     def testclsLoginLength_password(self):
-        aclsLogin = clsLogin() 
+        aclsLogin = login() 
         
         c0 = ""
         self.assertEqual(0, aclsLogin.length_password(c0))

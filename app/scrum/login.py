@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from   app.scrum.model import *
+import sys
+# Ruta que permite utilizar el módulo model.py
+sys.path.append('app/scrum')
+
+from   model import *
 import uuid
 import hashlib
 import re
