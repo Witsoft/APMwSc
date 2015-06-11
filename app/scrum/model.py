@@ -222,4 +222,5 @@ manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)
 
+
 db.create_all() # Creamos la base de datos

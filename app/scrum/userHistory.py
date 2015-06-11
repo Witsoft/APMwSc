@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-. 
 
 import sys
-# Ruta que permite utilizar el módulo model.py
+
+# Ruta que permite utilizar el módulo backlog.py
 sys.path.append('app/scrum')
 
 from backLog import *
@@ -199,6 +200,14 @@ class userHistory(object):
             found = clsUserHistory.query.filter_by(UH_idUserHistory = userHistoryId).all()
             return found
         return([])
+    
+    def searchidUserHistoryIdAccion(self, idAccion):
+        '''Permite obtener los ids de las historias de usuario que contiene el idAccion'''
+        checkIdAccion = type(idAccion) == int and idAccion >= CONST_MIN_ID
+ 
+        if checkIdAccion:
+            result = clsUserHistory.query.filter_by(UH_idAccion  = idAccion).all()
+            return result
     
     
     def deleteUserHistory(self,codeUserHistory):

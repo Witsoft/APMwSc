@@ -1035,4 +1035,3 @@ class TestclsBackLog(unittest.TestCase):
         self.assertEqual([],result)
         oObjective.deleteObjective('nuevo objectives1')
         aBackLog.deleteProduct('Taxi Seguro')     
-      
