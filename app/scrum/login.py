@@ -1,12 +1,15 @@
-'''
-Created on 30/4/2015
-'''
-from   app.scrum.model import *
+# -*- coding: utf-8 -*-
+
+import sys
+# Ruta que permite utilizar el módulo model.py
+sys.path.append('app/scrum')
+
+from   model import *
 import uuid
 import hashlib
 import re
 
-class clsLogin(object):
+class login(object):
     '''Permite manejar la seguridad de una clave'''
     
     def __init__(self):
@@ -70,4 +73,3 @@ class clsLogin(object):
         '''Permite verificar el tamano de un password'''
         # uuid es usado para generar numeros random
         return len(user_password)
-

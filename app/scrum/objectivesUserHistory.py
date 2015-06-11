@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.objective import *
+import sys
+
+# Ruta que permite utilizar el módulo objective.py
+sys.path.append('app/scrum')
+from objective import *
 
 # Definicion de constantes
-const_min_id = 1
+CONST_MIN_ID = 1
 
 
 class objectivesUserHistory(object):
@@ -11,30 +15,50 @@ class objectivesUserHistory(object):
     
     def insertObjectiveAsociatedInUserHistory(self,id_Objective, id_userHistory):
         '''Permite insertar un objetivo a una historia de usuario'''
-        
-        checkIdObjective = type(id_Objective) == int and id_Objective >= const_min_id
-        checkUserHistory = type(id_userHistory) == int and id_userHistory >= const_min_id
+        checkIdObjective = type(id_Objective) == int and id_Objective >= CONST_MIN_ID
+        checkUserHistory = type(id_userHistory) == int and id_userHistory >= CONST_MIN_ID
         
         if checkIdObjective and checkUserHistory:
-            oObjective     = clsObjective.query.filter_by(idobjective = id_Objective).all()
-            oIdUserHistory = clsUserHistory.query.filter_by(id_userHistory = id_userHistory).all()
+            oObjective     = clsObjective.query.filter_by(O_idObjective = id_Objective).all()
+            oIdUserHistory = clsUserHistory.query.filter_by(UH_idUserHistory  = id_userHistory).all()
             
             if oObjective != [] and oIdUserHistory != []:
-                newObj = clsObjectivesUserHistory(ref_idobjective = id_Objective, ref_idUserHistory = id_userHistory)
+                newObj = clsObjectivesUserHistory(id_Objective,id_userHistory)
                 db.session.add(newObj)
                 db.session.commit()
                 return True
         return False
 
 
+    def idObjectivesAsociatedToUserHistory(self,id_userHistory):
+        '''Permite obtener los ids de los objetivos asociados a una historia de usuario'''
+        checkIdUserHistory = type(id_userHistory) == int and id_userHistory >= CONST_MIN_ID
+        
+        idsList = []
+        if checkIdUserHistory:
+            result  = clsObjectivesUserHistory.query.filter_by(OUH_idUserHistory = id_userHistory)
+            
+            for obj in result:
+                idsList.append(obj.OUH_idObjective)
+        return idsList
+        
+        
+    def searchidUserHistoryIdObjective(self, idObjective):
+        '''Permite obtener los ids de las historias de usuario que contiene el idObjective'''
+        checkIdObjective = type(idObjective) == int and idObjective >= CONST_MIN_ID
+
+        if checkIdObjective:
+            result = clsObjectivesUserHistory.query.filter_by(OUH_idObjective  = idObjective).all()
+            return result
+
     def deleteObjectiveAsociatedInUserHistory(self,id_Objective, id_userHistory):
         '''Permite eliminar un actor de una historia de usuario'''
         
-        checkIdObjective     = type(id_Objective) == int and id_Objective >= const_min_id
-        checkUserHistory = type(id_userHistory) == int and id_userHistory >= const_min_id
+        checkIdObjective = type(id_Objective) == int and id_Objective >= CONST_MIN_ID
+        checkUserHistory = type(id_userHistory) == int and id_userHistory >= CONST_MIN_ID
 
         if checkIdObjective and checkUserHistory:
-            oObjective = clsObjectivesUserHistory.query.filter_by(ref_idobjective = id_Objective,ref_idUserHistory = id_userHistory).all()
+            oObjective = clsObjectivesUserHistory.query.filter_by(OUH_idObjective = id_Objective,OUH_idUserHistory = id_userHistory).all()
             
             if oObjective != []:
                 for i in oObjective:
@@ -43,14 +67,4 @@ class objectivesUserHistory(object):
                 return True
         return False
     
-        
-    def idObjectivesAsociatedToUserHistory(self,id_userHistory):
-        '''Permite obtener los ids de los objetivos asociados a una historia de usuario'''
-        
-        checkIdUserHistory = type(id_userHistory) == int and id_userHistory >= const_min_id
-        if checkIdUserHistory:
-            result  = clsObjectivesUserHistory.query.filter_by(ref_idUserHistory = id_userHistory)
-            idsList = []
-            for obj in result:
-                idsList.append(obj.ref_idobjective)
-            return idsList
+# Fin Clase objectivesUserHistory

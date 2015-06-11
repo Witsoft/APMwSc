@@ -37,6 +37,16 @@ class actorsUserHistory(object):
                 idsList.append(act.ref_idrole)
             return idsList
         
+        
+    def searchidUserHistoryIdActors(self, idActor):
+        '''Permite obtener los ids de las historias de usuario que contiene el idActor'''
+        checkIdActor = type(idActor) == int and idActor >= CONST_MIN_ID
+        
+        if checkIdActor:
+            result = clsActorsUserHistory.query.filter_by(AUH_idActor = idActor).all()
+        return result
+
+        
     def deleteActorAsociatedInUserHistory(self,id_Actor, id_userHistory):
         '''Permite eliminar un actor de una historia de usuario'''
         
