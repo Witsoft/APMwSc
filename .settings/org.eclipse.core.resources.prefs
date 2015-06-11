@@ -9,6 +9,10 @@ encoding//app/scrum/actorsUserHistory.py=utf-8
 encoding//app/scrum/backLog.py=utf-8
 encoding//app/scrum/dev.py=utf-8
 encoding//app/scrum/historias.py=utf-8
+<<<<<<< HEAD
+=======
+encoding//app/scrum/homework.py=utf-8
+>>>>>>> refs/remotes/origin/Historias_5a_5b_5c
 encoding//app/scrum/ident.py=utf-8
 encoding//app/scrum/login.py=utf-8
 encoding//app/scrum/mast.py=utf-8
@@ -18,6 +22,7 @@ encoding//app/scrum/objectivesUserHistory.py=utf-8
 encoding//app/scrum/objetivo.py=utf-8
 encoding//app/scrum/prod.py=utf-8
 encoding//app/scrum/role.py=utf-8
+encoding//app/scrum/tareas.py=utf-8
 encoding//app/scrum/user.py=utf-8
 encoding//app/scrum/userHistory.py=utf-8
 encoding//testing/actorsUserHistoryDummy.py=utf-8
