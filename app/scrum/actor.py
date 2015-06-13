@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask          import request, session, Blueprint, json
-from app.scrum.role import *
+from flask                       import request, session, Blueprint, json
+from app.scrum.role              import *
 from app.scrum.actorsUserHistory import *
 
 actor = Blueprint('actor', __name__)
@@ -44,11 +44,11 @@ def ACrearActor():
 def AElimActor():
     #GET parameter
     results = [{'label':'/VProducto', 'msg':['Actor eliminado']}, {'label':'/VProducto', 'msg':['No se pudo eliminar este actor']}, ]
-    res = results[1]
+    res     = results[1]
     
     # Obtenemos el id del producto y de la accion.
-    idPila   = int(session['idPila'])
-    idActor  = int(session['idActor'])
+    idPila  = int(session['idPila'])
+    idActor = int(session['idActor'])
     print('idPila AElimActor', idPila)
     print('idActor AElimActor', idActor)
     
@@ -68,8 +68,6 @@ def AElimActor():
 
     res['label'] = res['label'] + '/' + str(idPila)
     
-
-    #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -116,8 +114,6 @@ def AModifActor():
         else:
             session['actor'] = res['actor']
     
-     
-       
     return json.dumps(res)
 
 
@@ -126,9 +122,10 @@ def AModifActor():
 def VActor():
     #GET parameter
     res = {}
+    
     # Obtenemos el id del producto y de la accion.
-    idPila   = int(session['idPila'])
-    idActor  = int(request.args.get('idActor'))
+    idPila  = int(session['idPila'])
+    idActor = int(request.args.get('idActor'))
     print('idPila VActor',idPila)
     print('idActor VActor',idActor)
     
@@ -172,8 +169,6 @@ def VCrearActor():
     res['idPila'] = idPila
 
     return json.dumps(res)
-
-
 
 
 

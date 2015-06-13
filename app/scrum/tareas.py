@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-from flask import request, session, Blueprint, json
-from app.scrum.backLog               import *
-from app.scrum.userHistory           import *
-from app.scrum.task              import *
+
+from flask                 import request, session, Blueprint, json
+from app.scrum.backLog     import *
+from app.scrum.userHistory import *
+from app.scrum.task        import *
+
 tareas = Blueprint('tareas', __name__)
 
 
@@ -10,25 +12,20 @@ tareas = Blueprint('tareas', __name__)
 def ACrearTarea():
     #POST/PUT parameters
     params  = request.get_json()
-
     results = [{'label':'/VHistoria', 'msg':['Tarea creada']}, {'label':'/VHistoria', 'msg':['No se pudo crear tarea.']}, ]
     res     = results[1]
 
     # Obtenemos el id de la historia actual
     idHistory = int(session['idHistoria'])
-    #idPila    = int(session['idPila'])
     print('idHistoria AcrearTarea',idHistory)
-    #print('idPila AcrearTarea',idPila)
 
     # Extraemos los parametros
     TaskDesc = params['descripcion']
         
-    oBackLog  = backlog()
-    oHistory  = userHistory()
-    oTask = task()
+    oBackLog = backlog()
+    oTask    = task()
        
-    userHistoriesList = oBackLog.userHistoryAsociatedToProduct(idHistory)  
-    insert            = oTask.insertTask(TaskDesc,idHistory)
+    insert   = oTask.insertTask(TaskDesc,idHistory)
     
     if insert:        
         res = results[0]
@@ -47,25 +44,25 @@ def ACrearTarea():
 @tareas.route('/tareas/AElimTarea')
 def AElimTarea():
     #POST/PUT parameters
-    params = request.get_json()
-    results = [{'label':'/VHistoria', 'msg':['Tarea borrada']}, {'label':'/VTarea', 'msg':['No se pudo eliminar esta tarea']}, ]
-    res = results[0]
-    #Action code goes here, res should be a list with a label and a message
+    params  = request.get_json()
+    results = [{'label':'/VHistoria', 'msg':['Tarea borrada']}, {'label':'/VHistoria', 'msg':['No se pudo eliminar la tarea']}, ]
+    res     = results[1]
 
-    idHistoria  = int(session['idHistoria'])
-    idTarea     = int(session['idTarea'])
-    oTarea   = task()
-    result   = clsTask.query.filter_by(HW_idTask = idTarea).first()
-    delete   = oTarea.deleteTask(result.HW_description)
-    
-    if delete == True:
+    # Obtenemos los parametros.
+    idHistoria = int(session['idHistoria'])
+    idTarea    = int(session['idTarea'])
+    print('idHistoria AElimTarea',idHistoria)
+    print('idTarea AElimTarea',idTarea)
+
+    oTarea     = task()
+    result     = clsTask.query.filter_by(HW_idTask = idTarea).first()
+    delete     = oTarea.deleteTask(result.HW_description)
+
+    if delete:
         res = results[0]
-    else:
-        res = results[1]
-    
+
     res['label'] = res['label'] + '/' + str(idHistoria)
 
-    #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -78,11 +75,10 @@ def AElimTarea():
 @tareas.route('/tareas/AModifTarea', methods=['POST'])
 def AModifTarea():
     #POST/PUT parameters
-    params = request.get_json()
+    params  = request.get_json()
     results = [{'label':'/VHistoria', 'msg':['Tarea modificada']}, {'label':'/VCrearTarea', 'msg':['No se pudo modificar esta tarea.']}, ]
-    res = results[0]
-    #Action code goes here, res should be a list with a label and a message
-    
+    res     = results[0]
+
     idHistoria  = int(session['idHistoria'])
     
     new_description = params['descripcion']
@@ -99,7 +95,6 @@ def AModifTarea():
          
     res['label'] = res['label'] + '/' + str(idHistoria)
 
-    #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -111,12 +106,11 @@ def AModifTarea():
 @tareas.route('/tareas/VCrearTarea')
 def VCrearTarea():
     #GET parameter
-    
+    res = {}    
     # Obtenemos el id de la historia actual.
     idHistory = int(request.args.get('idHistoria'))
     print('idHistoria VCrearTarea',idHistory)  
     
-    res = {}
     if "actor" in session:
         res['actor']=session['actor']
 
@@ -130,6 +124,17 @@ def VCrearTarea():
     
     res['usuario']        = session['usuario']
     res['codHistoria']    = hist[0].UH_codeUserHistory
+
+    res['fTarea_opcionesCategoria'] = [
+      {'key':1, 'value':'Crear una acción (1)', 'peso':1},
+      {'key':2, 'value':'Migrar la base de datos (2)', 'peso':2},
+      {'key':3, 'value':'Escribir el manual en línea de una vista (1)', 'peso':1},
+      {'key':4, 'value':'Crear un criterio de aceptación (1)', 'peso':1},
+      {'key':5, 'value':'Crear una prueba de aceptación (2)', 'peso':2},
+      {'key':6, 'value':'Crear una regla de negocio compleja (3)', 'peso':3},
+    ]
+    res['fTarea'] = {'idHistoria':idHistory}
+
     session['idHistoria'] = idHistory
     res['idHistoria']     = idHistory
 
@@ -160,12 +165,25 @@ def VTarea():
     if 'usuario' not in session:
       res['logout'] = '/'
       return json.dumps(res)
-    res['usuario'] = session['usuario']
+
+    res['usuario']      = session['usuario']
     res['codHistoria'] = codHistoria
 
+    res['fTarea_opcionesCategoria'] = [
+      {'key':1, 'value':'Crear una acción (1)', 'peso':1},
+      {'key':2, 'value':'Migrar la base de datos (2)', 'peso':2},
+      {'key':3, 'value':'Escribir el manual en línea de una vista (1)', 'peso':1},
+      {'key':4, 'value':'Crear un criterio de aceptación (1)', 'peso':1},
+      {'key':5, 'value':'Crear una prueba de aceptación (2)', 'peso':2},
+      {'key':6, 'value':'Crear una regla de negocio compleja (3)', 'peso':3},
+    ]
+    res['fTarea'] = {'idHistoria':1, 'idTarea':int(idTarea),
+                     'descripcion':'Sacarle jugo a una piedra',
+                    'categoria':4, 'peso':1}
+
     session['idTarea'] = idTarea
-    res['idTarea'] = idTarea
-    res['idHistoria'] = idHistoria
+    res['idTarea']     = idTarea
+    res['idHistoria']  = idHistoria
 
     return json.dumps(res)
 

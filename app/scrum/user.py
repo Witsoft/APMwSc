@@ -94,7 +94,8 @@ class user(object):
                     auser[0].U_idActor  = new_idActor
                     db.session.commit()
                     return True
-        return False     
+        return False    
+     
      
     def deleteUser(self,username):
         '''Permite eliminar un usuario de la tabla'''

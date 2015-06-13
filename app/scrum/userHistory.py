@@ -201,6 +201,7 @@ class userHistory(object):
             return found
         return([])
     
+    
     def searchidUserHistoryIdAccion(self, idAccion):
         '''Permite obtener los ids de las historias de usuario que contiene el idAccion'''
         checkIdAccion = type(idAccion) == int and idAccion >= CONST_MIN_ID
@@ -230,7 +231,7 @@ class userHistory(object):
 
 
     def transformUserHistory(self,idUserHistory):
-        ''''''
+        '''Permite construir una estructura para representar una historia de usuario'''
         
         historyDict   = {}
         # Buscamos la historia de usuario.

@@ -35,7 +35,6 @@ def ACrearProducto():
             session.pop("actor", None)
         else:
             session['actor'] = res['actor']
-            
     return json.dumps(res)
 
 
@@ -67,7 +66,6 @@ def AModifProducto():
             session.pop("actor", None)
         else:
             session['actor'] = res['actor']
-            
     return json.dumps(res)
 
 

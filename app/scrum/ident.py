@@ -107,10 +107,9 @@ def VLogin():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
-    #Action code goes here, res should be a JSON structure
 
     session.pop('usuario', None)
-    #Action code ends here
+
     return json.dumps(res)
 
 
@@ -120,10 +119,7 @@ def VRegistro():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
-    #Action code goes here, res should be a JSON structure
 
-
-    #Action code ends here
     return json.dumps(res)
 
 

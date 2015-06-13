@@ -47,8 +47,7 @@ def ACrearObjetivo():
 def AElimObjetivo():
     #GET parameter
     results = [{'label':'/VProducto', 'msg':['Objetivo eliminado']}, {'label':'/VProducto', 'msg':['No se pudo eliminar este objetivo']}, ]
-    res = results[1]
-    #Action code goes here, res should be a list with a label and a message
+    res     = results[1] 
     
     # Obtenemos el id del Producto.
     idPila       = int(session['idPila'])
@@ -72,7 +71,6 @@ def AElimObjetivo():
 
     res['label'] = res['label'] +  '/' + str(idPila)
 
-    #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)

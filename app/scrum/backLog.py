@@ -33,6 +33,7 @@ class backlog(object):
                 return oBacklog
         return []
     
+    
     def findIdProduct(self,idBacklog):
         '''Permite buscar un elemento por su id'''
         checkTypeId = type(idBacklog) == int
@@ -40,6 +41,7 @@ class backlog(object):
         if checkTypeId:
             found = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).first()
         return found
+    
     
     def insertBacklog(self,name,description,scale):
         '''Permite insertar un producto'''
