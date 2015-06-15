@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from flask import request, session, Blueprint, json
 
 cates = Blueprint('cates', __name__)

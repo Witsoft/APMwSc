@@ -210,7 +210,7 @@ class clsTask(db.Model):
 	'''Clase que define el modelo de la tabla HomeWork'''
 	
 	__tablename__ = 'task'
-	HW_idTask    = db.Column(db.Integer, primary_key = True, index = True)
+	HW_idTask        = db.Column(db.Integer, primary_key = True, index = True)
 	HW_description 	 = db.Column(db.String(140),unique = True , index = True) 
 	HW_idUserHistory = db.Column(db.Integer, db.ForeignKey('userHistory.UH_idUserHistory'))
 	
@@ -220,9 +220,25 @@ class clsTask(db.Model):
 
 	def __repr__(self):
 		'''Representacion en string de la Tarea'''
-		return '<HW_ idTask  %r, HW_idUserHistory %r>' % (self.HW_idTask,self.HW_idUserHistory)
+		return '<HW_idTask  %r, HW_idUserHistory %r>' % (self.HW_idTask,self.HW_idUserHistory)
 
 
+
+class clsCategory(db.Model):
+	'''Clase que define el modelo de la tabla Category'''
+	
+	__tablename__ = 'category'
+	C_idCategory     = db.Column(db.Integer, primary_key = True, index = True)
+	C_nameCate     	 = db.Column(db.String(50),unique = True , index = True)
+	C_weight         = db.Column(db.Integer, index = True) 
+	
+	def __init__(self,nameCate,weight):
+		self.C_nameCate	  = nameCate
+		self.C_weight     = weight 
+
+	def __repr__(self):
+		'''Representacion en string de la Categoria'''
+		return '<C_idCategory  %r, C_nameCate %r, C_weight %r>' % (self.C_idCategory,self.C_nameCate,self.C_weight)
 
 migrate = Migrate(app, db)
 manager = Manager(app)
