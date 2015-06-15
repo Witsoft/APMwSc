@@ -294,7 +294,7 @@ class TestUsers(unittest.TestCase):
         role1 = role()
         user1 = user()
         role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sxhyd Pxtrycyx', 'tdd_1 ','12d2345678', '@', 1)
+        result = user1.insertUser('sxhyd Pxtrycyx', 'tdd_1','12d2345678','@', 1)
         self.assertTrue(result)
         user1.deleteUser('tdd_1')
         role1.deleteActor('Xsxyrvz',idBacklog)
@@ -333,7 +333,7 @@ class TestUsers(unittest.TestCase):
         aBacklog.deleteProduct('Pxrsynzjxs')
            
     # Prueba 21
-    def testUserInsertPassword17(self):
+    def testUserInsertPassword201(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
         findId    = aBacklog.findName('Pxrsynzjxs')
@@ -342,8 +342,8 @@ class TestUsers(unittest.TestCase):
         role1 = role()
         user1 = user()
         role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('pat', 'ehfer_23','12316789qwertyuai', '2@ls',1)
-        self.assertTrue(result)
+        result = user1.insertUser('pat', 'ehfer_23',100*'12' + 'e', '2@ls',1)
+        self.assertFalse(result)
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
    
@@ -363,7 +363,7 @@ class TestUsers(unittest.TestCase):
         aBacklog.deleteProduct('Pxrsynzjxs')
           
     # Prueba 23
-    def testUserInsertPassword15(self):
+    def testUserInsertPassword199(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
         findId    = aBacklog.findName('Pxrsynzjxs')
@@ -372,14 +372,14 @@ class TestUsers(unittest.TestCase):
         role1 = role()
         user1 = user()
         role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sah', 'ehf_1','eifko09olpedft5', 'po@rls', 1)
+        result = user1.insertUser('sah', 'ehf_1',199*'e', 'po@rls', 1)
         self.assertTrue(result)
         user1.deleteUser('ehf_1')
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
           
     # Prueba 24
-    def testUserInsertPassword8(self):
+    def testUserInsertPassword1(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
         findId    = aBacklog.findName('Pxrsynzjxs')
@@ -388,14 +388,14 @@ class TestUsers(unittest.TestCase):
         role1 = role()
         user1 = user()
         role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sr', 'er3r_1','12345678', 'desm@ld.s', 1)
+        result = user1.insertUser('sr', 'er3r_1','1', 'desm@ld.s', 1)
         self.assertTrue(result)
         user1.deleteUser('er3r_1')
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
           
     # Prueba 25
-    def testUserInsertPassword16(self):
+    def testUserInsertPassword2(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
         findId    = aBacklog.findName('Pxrsynzjxs')
@@ -404,29 +404,13 @@ class TestUsers(unittest.TestCase):
         role1 = role()
         user1 = user()
         role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sah', 'frkfe_1','qiejdp0t4jmds21l', 'fefef_t@l.ss', 1)
+        result = user1.insertUser('sah', 'frkfe_1','qi', 'fefef_t@l.ss', 1)
         self.assertTrue(result)
         user1.deleteUser('frkfe_1')
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
            
     # Prueba 26
-    def testUserInsertPassword8(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sah','lowdn','kdiopw34','efmefm@l.c',1)
-        self.assertTrue(result)
-        user1.deleteUser('lowdn')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
-
-    # Prueba 27
     def testUserInsertNoRole(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -441,8 +425,8 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
    
-    # Prueba 28
-    def testUserInsertNoRole(self):
+    # Prueba 27
+    def testUserInsertnNoRoleString(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
         findId    = aBacklog.findName('Pxrsynzjxs')
@@ -456,9 +440,9 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
            
-    #Caso Malicia
+    # Caso Malicia
 
-    # Prueba 29
+    # Prueba 28
     def testUserInsertidroleChar(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -473,7 +457,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
            
-    # Prueba 30
+    # Prueba 29
     def testUserInsertNochar(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -488,7 +472,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
        
-    # Prueba 31
+    # Prueba 30
     def testUserInsertNoParam(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -505,7 +489,7 @@ class TestUsers(unittest.TestCase):
                       
     # Caso esquina
 
-    # Prueba 32
+    # Prueba 31
     def testUserInsertNoForeign(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -526,7 +510,7 @@ class TestUsers(unittest.TestCase):
       
     # Caso Inicial
 
-    # Prueba 33
+    # Prueba 32
     def testsearchUserExist(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -538,7 +522,7 @@ class TestUsers(unittest.TestCase):
   
     #Caso Frontera
     
-    # Prueba 34
+    # Prueba 33
     def testsearchUserTrue(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -555,7 +539,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
              
-    # Prueba 35
+    # Prueba 34
     def testsearchUser1Char(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -572,7 +556,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
      
-    # Prueba 36
+    # Prueba 35
     def testsearchUser16Char(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -589,7 +573,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
   
-    # Prueba 37
+    # Prueba 36
     def testSearchUserNotChar(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -604,7 +588,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
       
-    # Prueba 38
+    # Prueba 37
     def testsearchUser17Char(self):  
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -620,9 +604,9 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
   
-    #Caso Esquina
+    # Caso Esquina
 
-    # Prueba 39
+    # Prueba 38
     def testsearchUserNotInsert(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -637,7 +621,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
   
-    # Prueba 40
+    # Prueba 39
     def testsearchUser8Char(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -654,9 +638,9 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
   
-    #caso Malicia 
+    # Caso Malicia 
 
-    # Prueba 41
+    # Prueba 40
     def testsearchUserNoChar(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -671,7 +655,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 42            
+    # Prueba 41            
     def testsearchUserNoParam(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -692,7 +676,7 @@ class TestUsers(unittest.TestCase):
 
     # Caso Inicial
 
-    # Prueba 43        
+    # Prueba 42        
     def testupdateUserTrue(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -711,7 +695,7 @@ class TestUsers(unittest.TestCase):
 
     # Caso Frontera
 
-    # Prueba 44 
+    # Prueba 43 
     def testupdateUserFalse(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -728,7 +712,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 45    
+    # Prueba 44    
     def testupdateUserNonepass(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -745,7 +729,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 46        
+    # Prueba 45        
     def testupdateUserNonedescription(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -762,7 +746,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 47           
+    # Prueba 46           
     def testupdateUserIntermedio(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -779,7 +763,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 48    
+    # Prueba 47    
     def testupdateUserNorole(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -796,7 +780,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 49
+    # Prueba 48
     def testupdateUserChar(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -811,7 +795,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')    
 
-    # Prueba 50     
+    # Prueba 49     
     def testupdateUserNoUser(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -828,7 +812,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 51     
+    # Prueba 50     
     def testupdateUserBlancs(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -845,7 +829,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 52     
+    # Prueba 51     
     def testupdateUserNoParam(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -862,7 +846,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 53     
+    # Prueba 52     
     def testupdateUserNoChange(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -879,7 +863,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 54     
+    # Prueba 53     
     def testupdateUsermaxchar(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -896,7 +880,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 55 
+    # Prueba 54 
     def testupdateUserFronteraExt(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -913,7 +897,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 56     
+    # Prueba 55     
     def testupdateUserFronteraInt(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -930,7 +914,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 57     
+    # Prueba 56     
     def testupdateUserNotfound(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -953,7 +937,7 @@ class TestUsers(unittest.TestCase):
      
     # Caso Inicial
 
-    # Prueba 58     
+    # Prueba 57     
     def testUserDeleteExist(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -963,9 +947,9 @@ class TestUsers(unittest.TestCase):
         user1 = user()
         user1.deleteUser('ehfah')
 
-    #Caso Frontera
+    #vCaso Frontera
 
-    # Prueba 59     
+    # Prueba 58     
     def testUserDeleteTrue(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -981,7 +965,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
       
-    # Prueba 60     
+    # Prueba 59     
     def testUserDeleteFalse(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -996,7 +980,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
               
-    # Prueba 61         
+    # Prueba 60         
     def testUserDelete1char(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -1012,7 +996,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
           
-    # Prueba 62       
+    # Prueba 61       
     def testUserDelete16char(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -1028,7 +1012,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
               
-    # Prueba 63       
+    # Prueba 62       
     def testUserDelete17char(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -1043,7 +1027,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
               
-    # Prueba 64
+    # Prueba 63
     def testUserDelete15char(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -1061,7 +1045,7 @@ class TestUsers(unittest.TestCase):
 
     # Caso Malicia
 
-    # Prueba 65     
+    # Prueba 64     
     def testUserDeleteNoUser(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -1076,7 +1060,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
               
-    # Prueba 66         
+    # Prueba 65         
     def testUserDeleteNoParam(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -1091,7 +1075,7 @@ class TestUsers(unittest.TestCase):
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')     
      
-    # Prueba 67     
+    # Prueba 66     
     def testUserDeleteNoChar(self):
         aBacklog = backlog()
         aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
@@ -1105,3 +1089,331 @@ class TestUsers(unittest.TestCase):
         self.assertFalse(result)
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs') 
+
+    ##########################################      
+    #   Suite de Pruebas para findEmail      #
+    ##########################################
+    
+    # Caso Inicial
+ 
+    # Prueba 67      
+    def testUserFindEmailExist(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfah','al', '@ls', 1)
+        result = user1.findEmail('@ls')
+        user1.deleteUser('ehfah')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+
+    # Caso normal
+
+    # Prueba 68   
+    def testUserFindEmailTrue(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfahw','alir893b1','@ls',1)
+        result = user1.findEmail('@ls')
+        self.assertTrue(result)
+        user1.deleteUser('ehfahw')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+
+    # Caso frontera
+                   
+    # Prueba 69
+    def testUserFindEmailString1(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfahw','alir893b1','l',1)
+        result = user1.findEmail('l')
+        self.assertTrue(result)
+        user1.deleteUser('ehfahw')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+           
+    # Prueba 70
+    def testUserFindEmailString2(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfahw','alir893b1','ls',1)
+        result = user1.findEmail('ls')
+        self.assertTrue(result)
+        user1.deleteUser('ehfahw')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+            
+    # Prueba 71
+    def testUserFindEmailString30(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfahw','alir893b1',10*'@ls',1)
+        result = user1.findEmail(10*'@ls')
+        self.assertTrue(result)
+        user1.deleteUser('ehfahw')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+   
+    # Prueba 72
+    def testUserFindEmailString29(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfahw','alir893b1',7*'@las'+ 's',1)
+        result = user1.findEmail(7*'@las'+ 's')
+        self.assertTrue(result)
+        user1.deleteUser('ehfahw')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+
+    # Caso Malicia
+    
+    # Prueba 73
+    def testUserFindEmailString0(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfahw','alir893b1',7*'@las'+ 's',1)
+        result = user1.findEmail('')
+        self.assertFalse(result)
+        user1.deleteUser('ehfahw')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+           
+    # Prueba 74
+    def testUserFindEmailNone(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfahw','alir893b1','alas',1)
+        result = user1.findEmail(None)
+        self.assertFalse(result)
+        user1.deleteUser('ehfahw')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+
+    # Prueba 75
+    def testUserFindEmailInteger(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfahw','alir893b1','alas',1)
+        result = user1.findEmail(1)
+        self.assertFalse(result)
+        user1.deleteUser('ehfahw')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+
+    ##########################################      
+    #   Suite de Pruebas para isFound        #
+    ##########################################
+    
+    # Caso Inicial
+ 
+    # Prueba 76
+    def testUserIsFoundExist(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfah','al', '@ls', 1)
+        result = user1.isFound('ehfah')
+        user1.deleteUser('ehfah')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+
+    # Caso normal
+
+    # Prueba 77   
+    def testUserIsFoundTrue(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfahw','alir893b1','@ls',1)
+        result = user1.isFound('ehfahw')
+        self.assertTrue(result)
+        user1.deleteUser('ehfahw')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+
+    # Caso frontera
+                   
+    # Prueba 78
+    def testUserIsFoundString1(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','e','alir893b1','ldddf',1)
+        result = user1.isFound('e')
+        self.assertTrue(result)
+        user1.deleteUser('e')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+           
+    # Prueba 79
+    def testUserIsFoundString2(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','eh','alir893b1','lfdfs',1)
+        result = user1.isFound('eh')
+        self.assertTrue(result)
+        user1.deleteUser('eh')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+            
+    # Prueba 80
+    def testUserFindEmailString16(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah',4*'ehfa','alir893b1','@ls',1)
+        result = user1.isFound(4*'ehfa')
+        self.assertTrue(result)
+        user1.deleteUser(4*'ehfa')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+   
+    # Prueba 81
+    def testUserIsFoundString15(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah',3*'ehfah','alir893b1','@las',1)
+        result = user1.isFound(3*'ehfah')
+        self.assertTrue(result)
+        user1.deleteUser(3*'ehfah')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+
+    # Caso Malicia
+    
+    # Prueba 82
+    def testUserIsFoundString0(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfahw','alir893b1',7*'@las'+ 's',1)
+        result = user1.isFound('')
+        self.assertFalse(result)
+        user1.deleteUser('ehfahw')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+           
+    # Prueba 83
+    def testUserIsFoundNone(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfahw','alir893b1','alas',1)
+        result = user1.isFound(None)
+        self.assertFalse(result)
+        user1.deleteUser('ehfahw')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
+
+    # Prueba 84
+    def testUserIsFoundInteger(self):
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = aBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        # Inicio de la prueba. 
+        role1 = role()
+        user1 = user()
+        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        user1.insertUser('sah','ehfahw','alir893b1','alas',1)
+        result = user1.isFound(1)
+        self.assertFalse(result)
+        user1.deleteUser('ehfahw')
+        role1.deleteActor('Xsxyrvz',idBacklog)
+        aBacklog.deleteProduct('Pxrsynzjxs')
