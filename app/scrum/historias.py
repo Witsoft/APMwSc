@@ -144,6 +144,15 @@ def AElimHistoria():
                     # Eliminamos los objetivos asociados a la historia
                     for objetivo in resultObjectives:
                         oObjUserHistory.deleteObjectiveAsociatedInUserHistory(objetivo, idPila)
+                        
+                    # Conseguimos las tareas asosciadas a la historia
+                    aTarea     = task()
+                    resultTask = aTarea.taskAsociatedToUserHistory(idHistoria) 
+                
+                    if (resultTask != []):
+                        # Eliminamos las tareas asociados a la historia
+                        for tasky in resultTask:
+                            aTarea.deleteTask(tasky.HW_description)
         
                     # Eliminamos la historia de usuario
                     deleted = oUserHistory.deleteUserHistory(found[0].UH_codeUserHistory) 

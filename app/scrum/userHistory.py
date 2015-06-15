@@ -297,5 +297,7 @@ class userHistory(object):
         historyDict['objectives'] = objectivesString.lower()
         
         return historyDict
+    
+    
             
 # Fin Clase userHistory
