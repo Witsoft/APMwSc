@@ -14,18 +14,20 @@ def ACrearTarea():
     params  = request.get_json()
     results = [{'label':'/VHistoria', 'msg':['Tarea creada']}, {'label':'/VHistoria', 'msg':['No se pudo crear tarea.']}, ]
     res     = results[1]
-
+    print(params)
     # Obtenemos el id de la historia actual
     idHistory = int(session['idHistoria'])
     print('idHistoria AcrearTarea',idHistory)
 
     # Extraemos los parametros
-    TaskDesc = params['descripcion']
-        
-    oBackLog = backlog()
-    oTask    = task()
-       
-    insert   = oTask.insertTask(TaskDesc,idHistory)
+    taskDesc    = params['descripcion']
+    idCategoria = params['categoria']
+    taskPeso    = paramas['peso']
+    oBackLog    = backlog()
+    oTask       = task()
+    
+    insert   = oTask.insertTask(taskDesc, idHistory)   
+    #insert   = oTask.insertTask(taskDesc, idCategoria, taskPeso, idHistory)
     
     if insert:        
         res = results[0]
@@ -80,12 +82,14 @@ def AModifTarea():
     res     = results[0]
 
     idHistoria  = int(session['idHistoria'])
-    
     new_description = params['descripcion']
     idTarea         = params['idTarea']
+    new_idCategoria = params['categoria']
+    new_taskPeso    = params['peso']
         
     oTarea   = task()
     result   = clsTask.query.filter_by(HW_idTask = idTarea).first()
+    #modify   = oTarea.updateTask(result.HW_description,new_description)
     modify   = oTarea.updateTask(result.HW_description,new_description)
     
     if modify:
@@ -124,8 +128,11 @@ def VCrearTarea():
     
     res['usuario']        = session['usuario']
     res['codHistoria']    = hist[0].UH_codeUserHistory
+    
+    #categoryList     = clsCategory.query.all()
 
     res['fTarea_opcionesCategoria'] = [
+     #{'key':cat.C_IdCategory ,'value':cat.C_descripcion+" ("+str(cat.C_peso)+")"}for cat in categoryList]                                  
       {'key':1, 'value':'Crear una acción (1)', 'peso':1},
       {'key':2, 'value':'Migrar la base de datos (2)', 'peso':2},
       {'key':3, 'value':'Escribir el manual en línea de una vista (1)', 'peso':1},

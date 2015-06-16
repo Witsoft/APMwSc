@@ -210,8 +210,10 @@ class clsTask(db.Model):
 	'''Clase que define el modelo de la tabla HomeWork'''
 	
 	__tablename__ = 'task'
-	HW_idTask    = db.Column(db.Integer, primary_key = True, index = True)
+	HW_idTask        = db.Column(db.Integer, primary_key = True, index = True)
 	HW_description 	 = db.Column(db.String(140),unique = True , index = True) 
+	#HW_weight        = db.Column(db.Integer)
+	#HW_idCategory    = db.Column(db.Integer, db.ForeignKey('CATEGORIA'))
 	HW_idUserHistory = db.Column(db.Integer, db.ForeignKey('userHistory.UH_idUserHistory'))
 	
 	def __init__(self,description,idUserHistory):
