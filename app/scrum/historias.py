@@ -175,7 +175,7 @@ def AElimHistoria():
 def AModifHistoria():
     #POST/PUT parameters
     params  = request.get_json()
-    results = [{'label':'/VHistorias', 'msg':['Historia modificada']}, {'label':'/VHistoria', 'msg':['Error al modificar historia']}, ]
+    results = [{'label':'/VHistorias', 'msg':['Historia modificada']}, {'label':'/VHistorias', 'msg':['Error al modificar historia']}, ]
     res     = results[1]
     
     # Obtenemos el id del Producto.
@@ -223,7 +223,7 @@ def AModifHistoria():
             for id in idObjectives:
                 insertedAct = oObjUserHist.insertObjectiveAsociatedInUserHistory(id,idHistory)
             
-            if not isEpic:
+            if not oUserHist.isEpic:
                 result = oUserHist.updatePriority(priority)
         
             res = results[0]
@@ -315,7 +315,7 @@ def VHistoria():
       return json.dumps(res)
     res['usuario'] = session['usuario']
 
-    scale = {1:'Alta',2:'Media',3:'Baja'}
+    scale = {0:'No tiene escala asignada por ser Épica',1:'Alta',2:'Media',3:'Baja'}
         
     oBacklog      = backlog() 
     oObjective    = objective()
@@ -354,16 +354,22 @@ def VHistoria():
 
     # Obtenemos los objetivos asociados a una historia de usuario.
     objectives = oObjUserHist.idObjectivesAsociatedToUserHistory(idHistory)            
+
+    # Obtenemos la escala asociada a la historia (la que se selecciono para el producto)
+    typeScale = oBacklog.scaleType(idPila)
     
-    # Obtenemos la escala a mostrar
+    # Obtenemos la escala asignada a la historia actual
+    numScale  = history.UH_scale 
     
-    typeScale = oUserHist.scaleType(idHistory)
-    # Obtenemos el tipo de escala asociado al producto (id,valor)
     resultScale = []
-    if typeScale == 1:
-        resultScale = [(i,scale[i]) for i in range(1,3+1)]
-    elif typeScale == 2:
-        resultScale = [(i,i) for i in range(1,20+1)]
+    if numScale == 0:
+        resultScale = [(0,scale[0])]
+    else:
+        # Obtenemos el tipo de escala asociado al producto (id,valor)
+        if typeScale == 1:
+            resultScale = [(i,scale[i]) for i in range(1,3+1)]
+        elif typeScale == 2:
+            resultScale = [(i,i) for i in range(1,20+1)]
     
     
     res['fHistoria_opcionesHistorias']     = [{'key':hist.UH_idUserHistory,'value':hist.UH_codeUserHistory}for hist in historias] 
@@ -375,9 +381,9 @@ def VHistoria():
     res['fHistoria_opcionesPrioridad']     = [{'key':scale[0], 'value':scale[1]}for scale in resultScale]
     
     
-    res['fHistoria'] = {'super':history.UH_idSuperHistory , 'idHistoria':idHistory, 'idPila':history.UH_idBacklog, 'codigo':history.UH_codeUserHistory,
-       'actores':actors, 'accion':history.UH_idAccion, 'objetivos':objectives, 'tipo':history.UH_accionType ,
-       'prioridad':history.UH_scale}
+    res['fHistoria'] = {'super':history.UH_idSuperHistory , 'idHistoria':idHistory, 'idPila':history.UH_idBacklog, 
+                        'codigo':history.UH_codeUserHistory,'actores':actors, 'accion':history.UH_idAccion, 
+                        'objetivos':objectives, 'tipo':history.UH_accionType, 'prioridad':history.UH_scale}
    
     res['data2'] = [{'idTarea':tarea.HW_idTask, 'descripcion':tarea.HW_description}for tarea in taskList]
 
@@ -412,9 +418,11 @@ def VHistorias():
     # Obtenemos las historias asociadas al producto idPila.
     userHistoriesList = oBacklog.userHistoryAsociatedToProduct(idPila)  
              
-    userHistories = []
-    options       = {1:'podria ',2:'puede '}
-    priorities    = {1:'Alta',2:'Media',3:'Baja'}
+    userHistories  = []
+    options        = {1:'podria ',2:'puede '}
+    priorities     = {0:'Epica',1:'Alta',2:'Media',3:'Baja'}
+    priorities2    = {i:str(i)for i in range(1,20+1)}
+    priorities2[0] = 'Epica'
     
     # Obtenemos el tipo de escala seleccionada en el producto asociado a la historia.
     typeScale = oBacklog.scaleType(idPila)
@@ -441,6 +449,8 @@ def VHistorias():
                 # Convertimos a escala Alta, Media, Baja si es necesario
                 if typeScale == 1:
                     hist['priority'] = priorities[i]
+                elif typeScale == 2:
+                    hist['priority'] = priorities2[i]
                 historiesSortedByPriority.append(hist)
                 # Almacenamos los ids de las historias ordenadas
                 idsHistories.append(hist['idHistory'])
@@ -497,23 +507,21 @@ def VPrioridades():
     # Obtenemos el tipo de escala asociada al producto.
     typeScale = oBacklog.scaleType(idPila)
     
-    # Obtenemos el tipo de escala asociado al producto (id,valor)
+    # Obtenemos el tipo de escala asociado al producto (id,valor) y elvalor maximo de la escala
     if typeScale == 1:
+        iterations  = 3
         resultScale = [(i,scale[i]) for i in range(1,3+1)]
     elif typeScale == 2:
+        iterations  = 20
         resultScale = [(i,i) for i in range(1,20+1)]
 
     # Obtenemos los valores de cada historia en un diccionario y almacenamos esos
     # diccionarios en un arreglo.
     for hist in userHistoriesList:
-        result = oUserHistory.transformUserHistory(hist.UH_idUserHistory)
-        userHistories.append(result)
-        
-    # Obtenemos el maximo de la escala
-    if typeScale == 1:
-        iterations = 3
-    elif typeScale == 2:
-        iterations = 20
+        epic = oUserHistory.isEpic(hist.UH_idUserHistory)
+        if not epic:
+            result = oUserHistory.transformUserHistory(hist.UH_idUserHistory)
+            userHistories.append(result)        
 
     historiesSortedByPriority = []
     # Ordenamos las tuplas por prioridad

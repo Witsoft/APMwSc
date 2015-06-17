@@ -99,27 +99,17 @@ class user(object):
                     return True
         return False
 
+
     def findEmail(self,email):
         '''Permite saber si un email esta en la base de datos'''
-        checkEmail = type(email) == str  
-        if checkEmail:
-            checkLongEmail = CONST_MIN_LONG <= len(email) <= CONST_MAX_EMAIL
-            if checkLongEmail:
-                aemail = clsUser.query.filter_by(U_email=email).all()
-                return True
-        return False
+        aemail = clsUser.query.filter_by(U_email=email).all()
+        return aemail != []
         
  
     def isFound(self,username):
         '''Permite saber si un usuario esta en la base de datos'''
-        checkUsername = type(username) == str  
-        
-        if checkUsername:
-            checkLongUser = CONST_MIN_LONG <= len(username) <= CONST_MAX_USER
-            if checkLongUser: 
-                auser = clsUser.query.filter_by(U_username = username).all()
-                return True
-        return False
+        auser = clsUser.query.filter_by(U_username = username).all()
+        return auser != []
         
         
 # Fin Clase user

@@ -22,7 +22,6 @@ def AIdentificar():
     if request.method == 'POST':
         userName     = params['usuario']
         userPassword = params['clave']
-        
         # Buscamos el usuario en la base de datos.
         oUser     = user()
         userLogin = oUser.searchUser(userName)
@@ -61,6 +60,7 @@ def ARegistrar():
     results = [{'label':'/VLogin'   , 'msg':['Felicitaciones, Ya estás registrado en la aplicación']}, 
                {'label':'/VRegistro', 'msg':['Error al tratar de registrarse']} ]
     res     = results[1]
+
     
     if request.method == 'POST':
 
@@ -69,7 +69,7 @@ def ARegistrar():
         newUser     = params['usuario']
         newPassword = params['clave']
         newEmail    = params['correo']
-        newActor    = 1 
+        newActor    = params['actorScrum']
 
         oLogin = login()
         oUser  = user()
@@ -78,6 +78,8 @@ def ARegistrar():
         checkNewEmail    = oUser.findEmail(newEmail)
         checkNewPassword = oLogin.validPassword(newPassword)
         encriptPassword  = oLogin.encript(newPassword)
+        
+        print(checkNewUser,checkNewPassword,checkNewEmail)
 
         if (not checkNewUser) and checkNewPassword and (not checkNewEmail):
             result = oUser.insertUser(newName,newUser,encriptPassword,newEmail,newActor)  
@@ -150,6 +152,14 @@ def VRegistro():
     res = {}
     if "actor" in session:
         res['actor'] = session['actor']
+
+    res['fUsuario_opcionesActorScrum'] = [
+      {'key':2,'value':'Maestro Scrum'},
+      {'key':1,'value':'Dueño de producto'},
+      {'key':3,'value':'Miembro del equipo de desarrollo'},
+      {'key':0,'value':'Seleccione un rol'}
+    ]
+
     return json.dumps(res)
 
 

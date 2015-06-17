@@ -28,6 +28,7 @@ encoding//testing/testAccions.py=utf-8
 encoding//testing/testActorsUserHistory.py=utf-8
 encoding//testing/testBackLog.py=utf-8
 encoding//testing/testHistory.py=utf-8
+encoding//testing/testInterface.py=utf-8
 encoding//testing/testLogin.py=utf-8
 encoding//testing/testObjective.py=utf-8
 encoding//testing/testObjectivesUserHistory.py=utf-8

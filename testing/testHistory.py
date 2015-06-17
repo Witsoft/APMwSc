@@ -3565,7 +3565,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H1',0,1,idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'H1',0,1,idFound,1)
         self.assertTrue(result)
                     
         # Eliminamos historia, accion y producto
@@ -3594,7 +3594,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H2',0,1,idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'H2',0,1,idFound,1)
         self.assertTrue(result)
                    
         # Eliminamos historia, accion y producto
@@ -3625,7 +3625,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('',0, 1,idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'',0, 1,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos accion y producto
@@ -3654,7 +3654,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H',0, 1,idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'H',0, 1,idFound,1)
         self.assertTrue(result)
                    
         # Eliminamos historia, accion y producto
@@ -3683,7 +3683,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*11,0,1,idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'H'*11,0,1,idFound,1)
         self.assertTrue(result)
                    
         # Eliminamos historia, accion y producto
@@ -3712,7 +3712,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H3',0,2,idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'H3',0,2,idFound,1)
         self.assertTrue(result)
                    
         # Eliminamos historia, accion y producto
@@ -3741,7 +3741,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*((2^31)-1),0, 2,idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'H'*((2^31)-1),0, 2,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -3770,7 +3770,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H',0, 2*((2^31)-1),idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'H',0, 2*((2^31)-1),idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -3801,7 +3801,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*11,0, 2*((2^31)-1),idFound,idFound,1)
+        result = aHist.updateUserHistory(idFound1,'H'*11,0, 2*((2^31)-1),idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -3830,7 +3830,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('',0, 2*((2^31)-1),idFound,idBacklog,1)
+        result = aHist.updateUserHistory(idFound1,'',0, 2*((2^31)-1),idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -3859,7 +3859,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*11,0, 2*((2^31)-1),idFound, 0,1)
+        result = aHist.updateUserHistory(0,'H'*11,0, 2*((2^31)-1),idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -3888,7 +3888,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('',0, 2*((2^31)-1),idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'',0, 2*((2^31)-1),idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -3917,7 +3917,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*11,0, 0,idFound, 0,1)
+        result = aHist.updateUserHistory(0,'H'*11,0, 0,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -3946,7 +3946,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H',0, 0,idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'H',0, 0,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -3975,7 +3975,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('',0, 0,idFound, 0,1)
+        result = aHist.updateUserHistory(0,'',0, 0,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4004,7 +4004,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*((2^31)-1),0, 0,idFound, 0,1)
+        result = aHist.updateUserHistory(0,'H'*((2^31)-1),0, 0,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4033,7 +4033,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*((2^31)-1),0, 1*((2^31)-1),idFound, 0,1)
+        result = aHist.updateUserHistory(0,'H'*((2^31)-1),0, 1*((2^31)-1),idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4062,7 +4062,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H',0, 1*((2^31)-1),idFound, 1*((2^31)-1),1)
+        result = aHist.updateUserHistory(1*((2^31)-1),'H',0, 1*((2^31)-1),idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4091,7 +4091,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('',0, 1,idFound, 1*((2^31)-1),1)
+        result = aHist.updateUserHistory(1*((2^31)-1),'',0, 1,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4120,7 +4120,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H',0, 0,idFound, 1*((2^31)-1),1)
+        result = aHist.updateUserHistory(1*((2^31)-1),'H',0, 0,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4149,7 +4149,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H',0, 0,idFound,idBacklog,1)
+        result = aHist.updateUserHistory(idFound1,'H',0, 0,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4178,7 +4178,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*11,0, 0,idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'H'*11,0, 0,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4207,7 +4207,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*11,0, 0,idFound,0,1)
+        result = aHist.updateUserHistory(0,'H'*11,0,0,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4236,7 +4236,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*11,0, 1,idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'H'*11,0, 1,idFound,1)
         self.assertTrue(result)
                    
         # Eliminamos historia, accion y producto
@@ -4265,7 +4265,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*11,0, 1*((2^31)-1),idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'H'*11,0, 1*((2^31)-1),idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4294,7 +4294,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*11,0, 0,idFound, 1*((2^31)-1),1)
+        result = aHist.updateUserHistory(1*((2^31)-1),'H'*11,0, 0,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4323,7 +4323,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*11,0, 1*((2^31)-1),idFound, 0,1)
+        result = aHist.updateUserHistory(0,'H'*11,0, 1*((2^31)-1),idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4352,7 +4352,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*11,0, 1*((2^31)-1),idFound, 1*((2^31)-1),1)
+        result = aHist.updateUserHistory(1*((2^31)-1),'H'*11,0, 1*((2^31)-1),idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4381,7 +4381,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H'*((2^31)-1),0, 1*((2^31)-1),idFound, 1*((2^31)-1),1)
+        result = aHist.updateUserHistory(1*((2^31)-1),'H'*((2^31)-1),0, 1*((2^31)-1),idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4412,7 +4412,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory(123,0, 1,idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,123,0, 1,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4441,7 +4441,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory(None,0, 1,idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,None,0,1,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4470,7 +4470,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H2',0, None,idFound,idFound,1)
+        result = aHist.updateUserHistory(idFound1,'H2',0, None,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4499,7 +4499,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H3',0, 1,idFound, None,1)
+        result = aHist.updateUserHistory(None,'H3',0, 1,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4528,7 +4528,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H3',0, None,idFound, None,1)
+        result = aHist.updateUserHistory(None,'H3',0, None,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4557,7 +4557,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory(None,0, None,idFound, None,1)
+        result = aHist.updateUserHistory(None,None,0, None,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4586,7 +4586,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('H3',0, None,idFound, '1',1)
+        result = aHist.updateUserHistory('1','H3',0, None,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -4615,7 +4615,7 @@ class TestHistory(unittest.TestCase):
         idFound1 = searchHist[0].UH_idUserHistory
         
         # Actualizamos una historia
-        result = aHist.updateUserHistory('H3',0, [],idFound,idFound1,1)
+        result = aHist.updateUserHistory(idFound1,'H3',0,[],idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto

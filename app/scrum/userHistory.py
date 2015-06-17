@@ -49,10 +49,10 @@ class userHistory(object):
         return False
     
     
-    def succesors(self,id,succ = [],visit = []):
+    def succesors(self,idUserHistory,succ = [],visit = []):
         '''Permite encontrar los sucesores de una historia de usuario'''
-        if (id != 0):
-            result = clsUserHistory.query.filter_by(UH_idSuperHistory = id).all()
+        if (idUserHistory!= 0):
+            result = clsUserHistory.query.filter_by(UH_idSuperHistory = idUserHistory).all()
             idHistories = []
             for elem in result:
                 idHistories.append(elem.UH_idUserHistory)
@@ -108,6 +108,9 @@ class userHistory(object):
                         newUserHistory = clsUserHistory(codeUserHistory,idSuperHistory,accionType,idAccion,idBacklog,priority)
                         db.session.add(newUserHistory)
                         db.session.commit()
+
+                        if idSuperHistory != 0:
+                            self.updatePriority(idSuperHistory,0)
                         return True
         return False
     
@@ -138,7 +141,7 @@ class userHistory(object):
         return ([])    
     
 
-    def updateUserHistory(self,newCodeUserHistory,newIdSuperHistory,newAccionType,newIdAccion,idUserHist,newScale):
+    def updateUserHistory(self,idUserHist,newCodeUserHistory,newIdSuperHistory,newAccionType,newIdAccion,newScale):
         '''Permite modificar una Historia de usuario'''
         checkCodUserHistory = type(newCodeUserHistory) == str
         checkIdSuperHistory = type(newIdSuperHistory) == int
@@ -162,15 +165,32 @@ class userHistory(object):
                         result            = clsUserHistory.query.filter_by(UH_idUserHistory  = idUserHist).all()
                         checkSuperHistory = clsUserHistory.query.filter_by(UH_idSuperHistory = idUserHist).all()
 
+                        print(result)
                         if result != []:
                             result[0].UH_codeUserHistory = newCodeUserHistory
                             result[0].UH_accionType      = newAccionType
                             result[0].UH_idAccion        = newIdAccion
                             result[0].UH_scale           = newScale
-                            if checkSuperHistory == []:
+                             
+                            # Consideramosel caso en que una historia deje de ser epica y se le asigna un valor
+                            # arbitrario a la escala
+                            if result[0].UH_idSuperHistory != 0 and (checkSuperHistory == [] or newIdSuperHistory == 0):
+                                # Almacenamos el valor de la super historia
+                                idOldSuperHist              = result[0].UH_idSuperHistory
                                 result[0].UH_idSuperHistory = newIdSuperHistory
-
+                                
+                                # Verificamos si la vieja historia sigue siendo epica
+                                epic = self.isEpic(idOldSuperHist)
+                                if not epic:
+                                    self.updatePriority(idOldSuperHist,1)                          
+                            # Consideramos el caso normal de modificacion de la historia mas general        
+                            elif checkSuperHistory == [] or newIdSuperHistory == 0:
+                                result[0].UH_idSuperHistory = newIdSuperHistory
                             db.session.commit()
+                            
+                            # Consideramos el caso en que la historia mas general se convierte en epica
+                            if newIdSuperHistory != 0:
+                                self.updatePriority(newIdSuperHistory,0)                          
                         return True
         return False
     
@@ -191,24 +211,6 @@ class userHistory(object):
                     return True
         return False
 
-    
-    def scaleType(self,historyId):
-        '''Permite saber el tipo de escala seleccionada para un producto'''
-        checkTypeId = type(historyId) == int    
-        scale = None                    
-        if checkTypeId: 
-            checkLongScale = CONST_MIN_SCALE <= historyId
-            
-            if checkLongScale:
-                found = clsUserHistory.query.filter_by(UH_idUserHistory = historyId).first()
-                
-                if found != None:
-                    productId = found.UH_idBacklog 
-                    oBacklog  = clsBacklog.query.filter_by(BL_idBacklog = productId).first()
-                    scale     = oBacklog.BL_scaleType
-                    return scale
-        return scale
-
 
     def accionsAsociatedToUserHistory(self,userHistoryId):
         ''' Permite obtener una lista de los Acciones asociados a una historia de usuario'''
@@ -221,6 +223,7 @@ class userHistory(object):
                 found = clsUserHistory.query.filter_by(UH_idUserHistory = userHistoryId).all()
                 return found
         return([])    
+    
     
     def searchidUserHistoryIdAccion(self, idAccion):
         '''Permite obtener los ids de las historias de usuario que contiene el idAccion'''
@@ -326,7 +329,31 @@ class userHistory(object):
                     historyDict['objectives'] = objectivesString.lower()
                     
                     return historyDict
-        return historyDict        
+        return historyDict 
     
+    
+    def getTreeStructure(self,begin,epics,histories,treeStructure = []):
+        '''Permite almacenar una estructura de arbol'''
+
+        if epics != []:
+            treeStructure.append(epics[begin])
+            subEpics     = epics[begin]['subEpics']
+            subHIstories = epics[begin]['subHist']
+            del epics[begin]
+            
+            if histories != []:
+                for each in subHIstories:
+                    result = self.searchIdUserHistory(each)
+        
+                    if result[0].UH_idSuperHistory == begin:
+                        treeStructure.append(histories[each])
+                        del histories[each]
+                     
+                for each in subEpics:
+                    (treeStructure,epics,histories) = self.getTreeStructure(each, epics, histories, treeStructure)
+
+        return (treeStructure,epics,histories)
+             
+
             
 # Fin Clase userHistory
