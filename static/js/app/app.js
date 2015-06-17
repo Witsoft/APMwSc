@@ -9,7 +9,7 @@ scrumModule.config(function ($routeProvider) {
 });
 scrumModule.controller('scrumController_',  ['$scope', '$http', '$location',
 function($scope) {
-    $scope.title = "Aplicación";
+    $scope.title = "APMwSc: A supporting tool the process of Agile Project Management with Scrum";
 }]);
 scrumModule.directive('sameAs', [function () {
     return {
