@@ -49,10 +49,10 @@ class userHistory(object):
         return False
     
     
-    def succesors(self,id,succ = [],visit = []):
+    def succesors(self,idUserHistory,succ = [],visit = []):
         '''Permite encontrar los sucesores de una historia de usuario'''
-        if (id != 0):
-            result = clsUserHistory.query.filter_by(UH_idSuperHistory = id).all()
+        if (idUserHistory!= 0):
+            result = clsUserHistory.query.filter_by(UH_idSuperHistory = idUserHistory).all()
             idHistories = []
             for elem in result:
                 idHistories.append(elem.UH_idUserHistory)
@@ -68,42 +68,50 @@ class userHistory(object):
     def historySuccesors(self, idUserHistory):
         '''Permite saber las subhistorias que componen a una historia mas general'''
         succ = []
-        checkIdHistory = type(idUserHistory) == int and CONST_MIN_ID <= idUserHistory
+        checkIdHistory = type(idUserHistory) == int
         
         if checkIdHistory:
-            existId = clsUserHistory.query.filter_by(UH_idUserHistory = idUserHistory).all()
-            if existId != []:
-                visited = []
-                self.succesors(idUserHistory,succ,visited)
+            checkLonIdHistory = CONST_MIN_ID <= idUserHistory
+
+            if checkLonIdHistory:
+                existId = clsUserHistory.query.filter_by(UH_idUserHistory = idUserHistory).all()
+                if existId != []:
+                    visited = []
+                    self.succesors(idUserHistory,succ,visited)
         return succ
-                
+               
                 
     def insertUserHistory(self,codeUserHistory,idSuperHistory,accionType,idAccion,idBacklog, priority):
         '''Permite insertar una Historia de usuario'''
         checkCodUserHistory = type(codeUserHistory) == str
-        checkPriority       = type(priority) == int and CONST_MIN_SCALE <= priority <= CONST_MAX_SCALE
-        
-        if checkCodUserHistory and checkPriority:
+        checkIdSuperHistory = type(idSuperHistory) == int
+        checkTypeAccion     = accionType in arrayType
+        checkIdAccion       = type(idAccion) == int
+        checkIdBacklog      = type(idBacklog) == int
+        checkPriority       = type(priority) == int
+
+        if checkCodUserHistory and checkIdSuperHistory and checkTypeAccion and checkIdAccion and checkIdBacklog and checkPriority:
             checkLenCodUserHistory = CONST_MIN_COD <= len(codeUserHistory) <= CONST_MAX_COD
-            checkIdSuperHistory    = type(idSuperHistory) == int and idSuperHistory >= CONST_MIN_IDHIST
+            checkIdSuperHistory = CONST_MIN_IDHIST <= idSuperHistory 
+            checkIdAccion       = CONST_MIN_ID <= idAccion 
+            checkIdBacklog      = CONST_MIN_ID <= idBacklog 
+            checkCodPriority =  CONST_MIN_SCALE <= priority <= CONST_MAX_SCALE
             
-            if checkCodUserHistory and checkLenCodUserHistory and checkIdSuperHistory:
+            if checkLenCodUserHistory and checkIdSuperHistory and checkIdAccion and checkIdBacklog and checkCodPriority:
                 oUserHistory = clsUserHistory.query.filter_by(UH_idUserHistory = idSuperHistory).all()
                 
                 if oUserHistory !=[] or idSuperHistory == 0:
-                    checkTypeAccion = accionType in arrayType
-                    checkIdAccion   = type(idAccion) == int and idAccion >= CONST_MIN_ID
-                    checkIdBacklog  = type(idBacklog) == int and idBacklog >= CONST_MIN_ID
-                    
-                    if checkTypeAccion and checkIdAccion and checkIdBacklog:
-                        oHistorys = clsAccion.query.filter_by(AC_idAccion = idAccion).all()
-                        oBacklog  = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).all()
-                
-                        if oBacklog != [] and oHistorys != []:                         
-                            newUserHistory = clsUserHistory(codeUserHistory,idSuperHistory,accionType,idAccion,idBacklog,priority)
-                            db.session.add(newUserHistory)
-                            db.session.commit()
-                            return True
+                    oHistorys = clsAccion.query.filter_by(AC_idAccion = idAccion).all()
+                    oBacklog  = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).all()
+            
+                    if oBacklog != [] and oHistorys != []:                         
+                        newUserHistory = clsUserHistory(codeUserHistory,idSuperHistory,accionType,idAccion,idBacklog,priority)
+                        db.session.add(newUserHistory)
+                        db.session.commit()
+
+                        if idSuperHistory != 0:
+                            self.updatePriority(idSuperHistory,0)
+                        return True
         return False
     
         
@@ -113,6 +121,7 @@ class userHistory(object):
         
         if typecod:
             checkLenCodeUserHistory = len(codeUserHistory) <= CONST_MAX_COD
+ 
             if checkLenCodeUserHistory:
                 found = clsUserHistory.query.filter_by(UH_codeUserHistory = codeUserHistory).all()
                 return found
@@ -121,99 +130,116 @@ class userHistory(object):
     
     def searchIdUserHistory(self,idUserHistory):
         '''Permite encontrar una historia de usuario por su id'''
-        checkTypeId           = type(idUserHistory) == int
-        checkLenIdUserHistory = idUserHistory >= CONST_MIN_ID
+        checkTypeId = type(idUserHistory) == int
         
-        if checkTypeId and checkLenIdUserHistory:
-            found = clsUserHistory.query.filter_by(UH_idUserHistory = idUserHistory).all()
-            return found
-        return ([])
+        if checkTypeId:
+            checkLenIdUserHistory = idUserHistory >= CONST_MIN_ID
+
+            if checkLenIdUserHistory:            
+                found = clsUserHistory.query.filter_by(UH_idUserHistory = idUserHistory).all()
+                return found
+        return ([])    
     
-    
+
     def updateUserHistory(self,idUserHist,newCodeUserHistory,newIdSuperHistory,newAccionType,newIdAccion,newScale):
         '''Permite modificar una Historia de usuario'''
-        checkCodUserHistory    = type(newCodeUserHistory) == str
-        checkScale             = type(newScale) == int
-        checkLenCodUserHistory = CONST_MIN_COD <= len(newCodeUserHistory) <= CONST_MAX_COD
-        checkIdHistory         = type(newIdSuperHistory) == int and newIdSuperHistory >= CONST_MIN_IDHIST
-        
-        if checkCodUserHistory and checkLenCodUserHistory and checkIdHistory and checkScale:
-            oUserHistory = clsUserHistory.query.filter_by(UH_idUserHistory  = newIdSuperHistory).all()
-                      
-            if oUserHistory !=[] or newIdSuperHistory == 0:
-                checkTypeAccion = newAccionType in arrayType
-                checkIdAccion   = type(newIdAccion) == int and newIdAccion >= CONST_MIN_ID
+        checkCodUserHistory = type(newCodeUserHistory) == str
+        checkIdSuperHistory = type(newIdSuperHistory) == int
+        checkTypeAccion     = newAccionType in arrayType
+        checkIdAccion       = type(newIdAccion) == int
+        checkIdUser         = type(idUserHist) == int
+        checkPriority       = type(newScale) == int
                 
-                if checkTypeAccion and checkIdAccion:
+        if checkCodUserHistory and checkIdSuperHistory and checkTypeAccion and checkIdAccion and checkIdUser and checkPriority:
+            checkLenCodUserHistory = CONST_MIN_COD <= len(newCodeUserHistory) <= CONST_MAX_COD
+            checkIdHistory         = newIdSuperHistory >= CONST_MIN_IDHIST
+            checkIdAccion          = newIdAccion >= CONST_MIN_ID
+
+            if checkLenCodUserHistory and checkIdHistory and checkIdAccion:            
+                oUserHistory = clsUserHistory.query.filter_by(UH_idUserHistory  = newIdSuperHistory).all()
+                      
+                if oUserHistory !=[] or newIdSuperHistory == 0:
                     oAccions = clsAccion.query.filter_by(AC_idAccion  = newIdAccion).all()
                     
                     if oAccions != []:
                         result            = clsUserHistory.query.filter_by(UH_idUserHistory  = idUserHist).all()
                         checkSuperHistory = clsUserHistory.query.filter_by(UH_idSuperHistory = idUserHist).all()
-                        
+
+                        print(result)
                         if result != []:
                             result[0].UH_codeUserHistory = newCodeUserHistory
                             result[0].UH_accionType      = newAccionType
                             result[0].UH_idAccion        = newIdAccion
                             result[0].UH_scale           = newScale
-                            if checkSuperHistory == []:
+                             
+                            # Consideramosel caso en que una historia deje de ser epica y se le asigna un valor
+                            # arbitrario a la escala
+                            if result[0].UH_idSuperHistory != 0 and (checkSuperHistory == [] or newIdSuperHistory == 0):
+                                # Almacenamos el valor de la super historia
+                                idOldSuperHist              = result[0].UH_idSuperHistory
                                 result[0].UH_idSuperHistory = newIdSuperHistory
-
+                                
+                                # Verificamos si la vieja historia sigue siendo epica
+                                epic = self.isEpic(idOldSuperHist)
+                                if not epic:
+                                    self.updatePriority(idOldSuperHist,1)                          
+                            # Consideramos el caso normal de modificacion de la historia mas general        
+                            elif checkSuperHistory == [] or newIdSuperHistory == 0:
+                                result[0].UH_idSuperHistory = newIdSuperHistory
                             db.session.commit()
+                            
+                            # Consideramos el caso en que la historia mas general se convierte en epica
+                            if newIdSuperHistory != 0:
+                                self.updatePriority(newIdSuperHistory,0)                          
                         return True
         return False
     
-    
     def updatePriority(self,idHistory,priority):
         '''Permite actualizar la prioridad de una historia de usuario'''
-        checkIdHistory  = type(idHistory) == int and CONST_MIN_ID <= idHistory
-        checkPriority   = type(priority) == int and 0 <= priority
-        if checkIdHistory and checkPriority:
-            found = clsUserHistory.query.filter_by(UH_idUserHistory = idHistory).first()
-            if found != None:
-                found.UH_scale = priority
-                db.session.commit()
-                return True
-        return False
+        checkIdHistory  = type(idHistory) == int 
+        checkPriority   = type(priority) == int 
 
-    
-    def scaleType(self,historyId):
-        '''Permite saber el tipo de escala seleccionada para un producto'''
-        checkTypeId = type(historyId) == int    
-        
-        if checkTypeId: 
-            found = clsUserHistory.query.filter_by(UH_idUserHistory = historyId).first()
-            
-            if found != None:
-                productId = found.UH_idBacklog 
-                oBacklog  = clsBacklog.query.filter_by(BL_idBacklog = productId).first()
-                scale     = oBacklog.BL_scaleType
-                return scale
-        return (None)
+        if checkIdHistory and checkPriority:
+            checkLonIdHistory = CONST_MIN_ID <= idHistory
+            checkLonPriority  = 0 <= priority
+
+            if  checkLonIdHistory and checkLonPriority:
+                found = clsUserHistory.query.filter_by(UH_idUserHistory = idHistory).first()
+                if found != None:
+                    found.UH_scale = priority
+                    db.session.commit()
+                    return True
+        return False
 
 
     def accionsAsociatedToUserHistory(self,userHistoryId):
         ''' Permite obtener una lista de los Acciones asociados a una historia de usuario'''
-        checkTypeId = type(userHistoryId) == int and userHistoryId >= CONST_MIN_ID
+        checkTypeId = type(userHistoryId) == int
         
-        if checkTypeId: 
-            found = clsUserHistory.query.filter_by(UH_idUserHistory = userHistoryId).all()
-            return found
-        return([])
+        if checkTypeId:
+            checkLonId = CONST_MIN_ID <= userHistoryId
+            
+            if checkLonId:
+                found = clsUserHistory.query.filter_by(UH_idUserHistory = userHistoryId).all()
+                return found
+        return([])    
     
     
     def searchidUserHistoryIdAccion(self, idAccion):
         '''Permite obtener los ids de las historias de usuario que contiene el idAccion'''
-        checkIdAccion = type(idAccion) == int and idAccion >= CONST_MIN_ID
+        checkIdAccion = type(idAccion) == int
  
         if checkIdAccion:
-            result = clsUserHistory.query.filter_by(UH_idAccion  = idAccion).all()
-            return result
+            checkLonIdAccion = idAccion >= CONST_MIN_ID
+            
+            if checkLonIdAccion:
+                result = clsUserHistory.query.filter_by(UH_idAccion  = idAccion).all()
+                return result
+        return  ([])
     
     
     def deleteUserHistory(self,codeUserHistory):
         '''Permite eliminar una historia segun su codigo'''
-        
         checkTypeCodeHistory = type(codeUserHistory) == str
         
         if checkTypeCodeHistory:
@@ -232,70 +258,102 @@ class userHistory(object):
 
     def transformUserHistory(self,idUserHistory):
         '''Permite construir una estructura para representar una historia de usuario'''
+        historyDict = {}
+        checkTypeId = type(idUserHistory) == int
         
-        historyDict   = {}
-        # Buscamos la historia de usuario.
-        foundHistory = clsUserHistory.query.filter_by(UH_idUserHistory = idUserHistory).first()
-        
-        # Guardamos el id de la historia.
-        historyDict['idHistory'] = foundHistory.UH_idUserHistory 
-        
-        # Almacenamos en el diccionario el valor de la escala correspondiente.
-        historyDict['priority'] = foundHistory.UH_scale
-        
-        # Obtenemos los id de los actores que componen la historia.
-        result = clsActorsUserHistory.query.filter_by(AUH_idUserHistory = idUserHistory)
-        idActorsList = []
-        for act in result:
-            idActorsList.append(act.AUH_idActor)
-              
-        missingActors = len(idActorsList)
-        actorsString  = ''
-        
-        # Almacenamos los actores asociados a la historia en el diccionario de la historia.
-        for act in idActorsList:
-            result       = clsActor.query.filter_by(A_idActor = act).all()
-            actorsString = actorsString + ' ' + str(result[0].A_nameActor) + ' '
-            
-            if missingActors != 1:
-                actorsString = actorsString + ',' 
-                 
-            missingActors = missingActors - 1   
-        historyDict['actors'] = actorsString.lower()
-        
-        # Almacenamos la accion asociada la historia en el diccionario de la historia.
-        idAccions   = clsUserHistory.query.filter_by(UH_idUserHistory = idUserHistory).all()
-        foundAccion = clsAccion.query.filter_by(AC_idAccion  = idAccions[0].UH_idAccion).all()
-    
-        # Obtenemos el tipo de accion de la historia.
-        option    = foundHistory.UH_accionType
-        historyDict['accions'] = ' ' + options[option] + str(foundAccion[0].AC_accionDescription).lower() + ' ' 
+        if checkTypeId:
+            checkLonId = CONST_MIN_ID <= idUserHistory
 
-        # Obtenemos los id de los objetivos que componen la historia.
-        result  = clsObjectivesUserHistory.query.filter_by(OUH_idUserHistory = idUserHistory)
-        idObjectivesList  = []
-        
-        for obj in result:
-            idObjectivesList.append(obj.OUH_idObjective)
+            if checkLonId:    
+                # Buscamos la historia de usuario.
+                foundHistory = clsUserHistory.query.filter_by(UH_idUserHistory = idUserHistory).first()
     
-        missingObjectives = len(idObjectivesList)
-        objectivesString  = ''
-        
-        # Almacenamos los objetivos asociados a la historia en el diccionario de la historia.
-        for obj in idObjectivesList: 
-            result           = clsObjective.query.filter_by(O_idObjective = obj).all()
-            objectivesString = objectivesString + ' ' + str(result[0].O_descObjective)
-            
-            if missingObjectives != 1:
-                objectivesString = ' ' + objectivesString + ',' 
-                 
-            if missingObjectives == 1: 
-                objectivesString = objectivesString + '.'  
+                if foundHistory != None:               
+                    # Guardamos el id de la historia.
+                    historyDict['idHistory'] = foundHistory.UH_idUserHistory 
+                    
+                    # Almacenamos en el diccionario el valor de la escala correspondiente.
+                    historyDict['priority'] = foundHistory.UH_scale
+                    
+                    # Obtenemos los id de los actores que componen la historia.
+                    result = clsActorsUserHistory.query.filter_by(AUH_idUserHistory = idUserHistory)
+                    idActorsList = []
+                    for act in result:
+                        idActorsList.append(act.AUH_idActor)
+                          
+                    missingActors = len(idActorsList)
+                    actorsString  = ''
+                    
+                    # Almacenamos los actores asociados a la historia en el diccionario de la historia.
+                    for act in idActorsList:
+                        result       = clsActor.query.filter_by(A_idActor = act).all()
+                        actorsString = actorsString + ' ' + str(result[0].A_nameActor) + ' '
+                        
+                        if missingActors != 1:
+                            actorsString = actorsString + ',' 
+                             
+                        missingActors = missingActors - 1   
+                    historyDict['actors'] = actorsString.lower()
+                    
+                    # Almacenamos la accion asociada la historia en el diccionario de la historia.
+                    idAccions   = clsUserHistory.query.filter_by(UH_idUserHistory = idUserHistory).all()
+                    foundAccion = clsAccion.query.filter_by(AC_idAccion  = idAccions[0].UH_idAccion).all()
                 
-            missingObjectives = missingObjectives - 1
+                    # Obtenemos el tipo de accion de la historia.
+                    option    = foundHistory.UH_accionType
+                    historyDict['accions'] = ' ' + options[option] + str(foundAccion[0].AC_accionDescription).lower() + ' ' 
             
-        historyDict['objectives'] = objectivesString.lower()
+                    # Obtenemos los id de los objetivos que componen la historia.
+                    result  = clsObjectivesUserHistory.query.filter_by(OUH_idUserHistory = idUserHistory)
+                    idObjectivesList  = []
+                    
+                    for obj in result:
+                        idObjectivesList.append(obj.OUH_idObjective)
+                
+                    missingObjectives = len(idObjectivesList)
+                    objectivesString  = ''
+                    
+                    # Almacenamos los objetivos asociados a la historia en el diccionario de la historia.
+                    for obj in idObjectivesList: 
+                        result           = clsObjective.query.filter_by(O_idObjective = obj).all()
+                        objectivesString = objectivesString + ' ' + str(result[0].O_descObjective)
+                        
+                        if missingObjectives != 1:
+                            objectivesString = ' ' + objectivesString + ',' 
+                             
+                        if missingObjectives == 1: 
+                            objectivesString = objectivesString + '.'  
+                            
+                        missingObjectives = missingObjectives - 1
+                        
+                    historyDict['objectives'] = objectivesString.lower()
+                    
+                    return historyDict
+        return historyDict 
+    
+    
+    def getTreeStructure(self,begin,epics,histories,treeStructure = []):
+        '''Permite almacenar una estructura de arbol'''
+
+        if epics != []:
+            treeStructure.append(epics[begin])
+            subEpics     = epics[begin]['subEpics']
+            subHIstories = epics[begin]['subHist']
+            del epics[begin]
+            
+            if histories != []:
+                for each in subHIstories:
+                    result = self.searchIdUserHistory(each)
         
-        return historyDict
+                    if result[0].UH_idSuperHistory == begin:
+                        treeStructure.append(histories[each])
+                        del histories[each]
+                     
+                for each in subEpics:
+                    (treeStructure,epics,histories) = self.getTreeStructure(each, epics, histories, treeStructure)
+
+        return (treeStructure,epics,histories)
+             
+
             
 # Fin Clase userHistory

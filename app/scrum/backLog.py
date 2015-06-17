@@ -11,6 +11,7 @@ CONST_MAX_DESCRIPTION = 140
 CONST_MIN_DESCRIPTION = 1
 CONST_MAX_NAME        = 50
 CONST_MIN_NAME        = 1
+CONST_MIN_ID          = 1
 
 scale_type = [1,2]
 
@@ -159,6 +160,6 @@ class backlog(object):
         if checkTypeId: 
             found = clsUserHistory.query.filter_by(UH_idBacklog  = idBacklog).all()
             return found
-        return([])                                
+        return([])                             
 
 # Fin Clase Backlog
