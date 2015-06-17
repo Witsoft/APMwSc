@@ -166,7 +166,7 @@ class clsUserHistory(db.Model):
 
 	def __repr__(self):
 		'''Representacion en string de la Historia de Usuario'''
-		return '<idUserHistory %r, codeUserHistory %r, scale %r>' % (self.UH_idUserHistory ,self.UH_codeUserHistory, self.UH_scale)
+		return '<idUserHistory %r, codeUserHistory %r, idSuperHistory %r, scale %r>' % (self.UH_idUserHistory ,self.UH_codeUserHistory,self.UH_idSuperHistory,self.UH_scale)
  	
 
 	

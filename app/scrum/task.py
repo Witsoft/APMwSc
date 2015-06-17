@@ -140,4 +140,14 @@ class task(object):
                     return True
         return False
     
+    
+    def taskAsociatedToUserHistory(self,idUserHistory):
+        ''' Permite obtener una lista de las tareas asociadas a una historia de usuario'''
+        checkTypeId = type(idUserHistory) == int    
+        if checkTypeId: 
+            found = clsTask.query.filter_by(HW_idUserHistory  = idUserHistory).all()
+            return found
+        return([])                                
+
+    
 #Fin clase Task
