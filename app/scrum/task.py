@@ -133,9 +133,10 @@ class task(object):
                 if ((foundTask != []) and ((foundNew == [])or(HW_description == newDescription))):
                     oTask = clsTask.query.filter_by(HW_description = HW_description).first()
                     oTask.HW_description = newDescription
-                    oTask.C_idCategory   = C_idCategory
+                    oTask.HW_idCategory   = C_idCategory
                     oTask.HW_weight      = HW_weight
                     db.session.commit()
+                    print("update: ",HW_description, newDescription, C_idCategory, HW_weight)
                     return True
         return False
     

@@ -26,8 +26,6 @@ def ACrearTarea():
     oBackLog    = backlog()
     oTask       = task()
     
-    #insert   = oTask.insertTask(taskDesc, idHistory)   
-    
     insert   = oTask.insertTask(taskDesc, idCategoria, taskPeso, idHistory)
     
     if insert:        
@@ -87,10 +85,10 @@ def AModifTarea():
     idTarea         = params['idTarea']
     new_idCategoria = params['categoria']
     new_taskPeso    = params['peso']
-        
+  
     oTarea   = task()
     result   = clsTask.query.filter_by(HW_idTask = idTarea).first()
-    #modify   = oTarea.updateTask(result.HW_description,new_description)
+ 
     modify   = oTarea.updateTask(result.HW_description,new_description,new_idCategoria,new_taskPeso)
     
     if modify:
@@ -99,7 +97,7 @@ def AModifTarea():
         res = results[1]
          
     res['label'] = res['label'] + '/' + str(idHistoria)
-    print(new_idCategoria)
+
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -114,7 +112,6 @@ def VCrearTarea():
     res = {}    
     # Obtenemos el id de la historia actual.
     idHistory = int(request.args.get('idHistoria'))
-    print('idHistoria VCrearTarea',idHistory)  
     
     if "actor" in session:
         res['actor']=session['actor']
@@ -134,13 +131,7 @@ def VCrearTarea():
 
     res['fTarea_opcionesCategoria'] = [
      {'key':cat.C_idCategory ,'value':cat.C_nameCate+" ("+str(cat.C_weight)+")",'peso':cat.C_weight}for cat in categoryList]                                  
-    #  {'key':1, 'value':'Crear una acción (1)', 'peso':1},
-    #  {'key':2, 'value':'Migrar la base de datos (2)', 'peso':2},
-    #  {'key':3, 'value':'Escribir el manual en línea de una vista (1)', 'peso':1},
-    #  {'key':4, 'value':'Crear un criterio de aceptación (1)', 'peso':1},
-    #  {'key':5, 'value':'Crear una prueba de aceptación (2)', 'peso':2},
-    #  {'key':6, 'value':'Crear una regla de negocio compleja (3)', 'peso':3},
-    #]
+
     res['fTarea'] = {'idHistoria':idHistory}
 
     session['idHistoria'] = idHistory
@@ -175,18 +166,10 @@ def VTarea():
       return json.dumps(res)
 
     res['usuario']      = session['usuario']
-    res['codHistoria'] = codHistoria
-
+    res['codHistoria']  = codHistoria
 
     res['fTarea_opcionesCategoria'] = [
       {'key':cat.C_idCategory ,'value':cat.C_nameCate+" ("+str(cat.C_weight)+")",'peso':result.HW_weight}for cat in categoryList]
-    #  {'key':1, 'value':'Crear una acción (1)', 'peso':1},
-    #  {'key':2, 'value':'Migrar la base de datos (2)', 'peso':2},
-    #  {'key':3, 'value':'Escribir el manual en línea de una vista (1)', 'peso':1},
-    #  {'key':4, 'value':'Crear un criterio de aceptación (1)', 'peso':1},
-    #  {'key':5, 'value':'Crear una prueba de aceptación (2)', 'peso':2},
-    #  {'key':6, 'value':'Crear una regla de negocio compleja (3)', 'peso':3},
-    #]
 
     res['fTarea'] = {'idHistoria':idHistoria,'idTarea': idTarea,'descripcion': result.HW_description, 'categoria': result.HW_idCategory, 'peso':result.HW_weight}
 
