@@ -2,8 +2,10 @@
  
 import sys
 import unittest
- 
+
+# Ruta que permite utilizar el módulo user.py
 sys.path.append('../app/scrum')
+
 from backLog                import *
 from actorsUserHistory      import *
 from userHistory            import *
@@ -11,6 +13,7 @@ from accions                import *
 from model                  import *  
 from task                   import *
 from category               import *
+
 class TestTask(unittest.TestCase):
        
     #############################################      
