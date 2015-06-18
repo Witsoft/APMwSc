@@ -35,28 +35,26 @@ class category(object):
                     return True                                           
         return False
 
-    def updateCategory(self,nameCategory,newNameCategory,weight,newWeight):
+    def updateCategory(self,nameCategory,newNameCategory,newWeight):
         '''Permite modificar el nombre y el peso de una categoría'''
     
         checkTypeNameCategory    = type(nameCategory) == str
         checkTypeNewNameCategory = type(newNameCategory) == str
-        checkTypeWeight          = type(Weight) == int
         checkTypeNewWeight       = type(newWeight) == int
     
-        if checkTypeNameCategory and checkTypeNewNameCategory and checkTypeWeight and checkTypeNewWeight:
+        if checkTypeNameCategory and checkTypeNewNameCategory and checkTypeNewWeight:
             checkLongNameCategory    = CONST_MIN_NAME_CATEGORY <= len(nameCategory) <= CONST_MAX_NAME_CATEGORY
             checkLongNewNameCategory = CONST_MIN_NAME_CATEGORY <= len(newNameCategory) <= CONST_MAX_NAME_CATEGORY
-            checkWeight          = CONST_MIN_WEIGHT <= weight
             checkNewWeight       = CONST_MIN_WEIGHT <= newWeight 
             
-            if checkLongNameCategory and checkLongNewNameCategory and checkWeight and checkNewWeight:    
+            if checkLongNameCategory and checkLongNewNameCategory and checkNewWeight:    
                 foundNameCategory = clsCategory.query.filter_by(C_nameCate = nameCategory).all()
                 foundNewNameCategory  = clsActor.query.filter_by(C_nameCate = newNameCategory).all()
                 
-                if foundNameCategory != [] and foundNewNameCategory == []:
-                    updateActor = clsCategory.query.filter_by(C_nameCate = nameCategory).first()
-                    updateActor.C_nameCategoy = newNameCategory
-                    updateActor.C_weight      = newWeight
+                if foundNameCategory != [] and (foundNewNameCategory == [] or foundNameCategory.C_nameCate == nameCategory):
+                    updateCategory = clsCategory.query.filter_by(C_nameCate = nameCategory).first()
+                    updateCategory.C_nameCategoy = newNameCategory
+                    updateCategory.C_weight      = newWeight
                     db.session.commit()
                     return True
         return False   
