@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-. 
 
-from app.scrum.userHistory import *
+import sys
+# Ruta que permite utilizar el módulo backlog.py
+sys.path.append('app/scrum')
+
+from userHistory import *
 
 # Declaracion de constantes.
 MIN_ID               = 1

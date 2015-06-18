@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from flask import request, session, Blueprint, json
 
 cates = Blueprint('cates', __name__)
@@ -113,4 +114,3 @@ def VCategorias():
 
 
 #Use case code ends here
-
