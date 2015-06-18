@@ -22,26 +22,6 @@ class task(object):
             return otask
         return ([])
     
-    
-#     def insertTask(self,HW_description, UH_idUserHistory):
-#         '''Permite insertar un Task'''
-#          
-#         typedescription = (type(HW_description) == str)
-#         typeid          = (type(UH_idUserHistory) == int)
-#          
-#         oHistory = userHistory()
-#  
-#         if (typedescription and typeid):
-#             long_HW_description = MIN_TASK_DESCRIPTION <= len(HW_description) <= MAX_TASK_DESCRIPTION
-#             if long_HW_description:
-#                 oUserHistory = clsUserHistory.query.filter_by(UH_idUserHistory = UH_idUserHistory).all()
-#                 oTask = clsTask.query.filter_by(HW_description = HW_description).all()
-#                 if (oUserHistory != []) and (oTask == []):
-#                     new_task = clsTask(HW_description,UH_idUserHistory)
-#                     db.session.add(new_task)
-#                     db.session.commit()
-#                     return True
-#         return False
 
     def insertTask(self, HW_description, C_idCategory, HW_weight, UH_idUserHistory):
         '''Permite insertar un Task'''
@@ -96,26 +76,6 @@ class task(object):
             oTask = False
         return oTask
     
-    
-#     def updateTask(self, HW_description,newDescription):
-#         '''Permite actualizar la descripcion de un Task'''
-#             
-#         typedescription = (type(HW_description) == str)
-#         typeNewdescription = (type(newDescription) == str)
-#          
-#         if (typedescription and typeNewdescription):
-#             long_HW_description = MIN_TASK_DESCRIPTION <= len(HW_description) <= MAX_TASK_DESCRIPTION
-#             long_newDescription = MIN_TASK_DESCRIPTION <= len(newDescription) <= MAX_TASK_DESCRIPTION
-#              
-#             if (long_HW_description and long_newDescription):
-#                 foundTask = self.searchTask(HW_description)
-#                 foundNew = self.searchTask(newDescription)
-#                 if ((foundTask != []) and ((foundNew == [])or(HW_description == newDescription))):
-#                     oTask = clsTask.query.filter_by(HW_description = HW_description).first()
-#                     oTask.HW_description = newDescription
-#                     db.session.commit()
-#                     return True
-#         return False
 
     def updateTask(self, HW_description, newDescription, C_idCategory, HW_weight):
         '''Permite actualizar la descripcion de un Task'''
@@ -153,5 +113,16 @@ class task(object):
             return found
         return([])                                
 
-    
+    def historyWeight(self,idUserHistory):
+        checkTypeId = type(idUserHistory) == int    
+        if checkTypeId: 
+            oTask = task()
+            taskList = oTask.taskAsociatedToUserHistory(idUserHistory)
+            if taskList != []:
+                for i in taskList:
+                    peso = 0 + i.HW_weight
+                return peso
+        return (0)
+                
+                
 #Fin clase Task
