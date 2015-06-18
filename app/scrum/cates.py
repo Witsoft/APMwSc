@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from flask import request, session, Blueprint, json
+from app.scrum.category import *
+from app.scrum.model    import *
+from _operator import length_hint
 
 cates = Blueprint('cates', __name__)
 
@@ -13,7 +16,17 @@ def ACrearCategoria():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
-
+    if params != {}:    
+        # Extraemos los parametros.
+        cateName    = params['nombre']
+        cateWeight  = params['peso']
+        
+        cCategory = category()
+        inserted = cCategory.insertCategory(cateName,cateWeight)
+        
+        if inserted:
+            res = results[0]    
+            
     #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
@@ -52,6 +65,20 @@ def AModifCategoria():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
+    # Obtenemos el id de la categoría
+    idCategoria = request.args['idCategoria']
+
+    # Obtenemos los paràmetros    
+    newNameCategory = params['nombre']
+    newWeidght      = params['peso']
+
+    cCategory = category()    
+
+    # Buscamos la categoriaía a modificar
+    showCate = cCategory.seachIdCategory(idCategory)
+    
+
+
 
     #Action code ends here
     if "actor" in res:
@@ -77,8 +104,13 @@ def VCategoria():
       return json.dumps(res)
     res['usuario'] = session['usuario']
     res['idCategoria'] = int(idCategoria)
-    res['fCategoria'] = {'idCategoria':1, 'peso':3, 
-                         'nombre':'Reparacíon edl motor'}
+
+    # Buscamos la tupla asociada al id capturado
+    cCategory = category()
+    showCate  = cCategory.searchIdCategory(idCategoria)
+        
+    res['fCategoria'] = {'idCategoria':showCate.C_idCategory, 'peso':showCate.C_nameCate, 
+                         'nombre':showCate.C_weight}
 
 
     #Action code ends here
@@ -97,11 +129,15 @@ def VCategorias():
       res['logout'] = '/'
       return json.dumps(res)
     res['usuario'] = session['usuario']
-    res['data0'] = [
-      {'idCategoria':1, 'peso':1, 'nombre':'Reparación del parachoques' },
-      {'idCategoria':2, 'peso':2, 'nombre':'Reparación de la carrocería' },
-      {'idCategoria':3, 'peso':3, 'nombre':'Reparación del motor' },
-    ]
+    
+    # Obtenemos una lista con los datos asociados a las categorías.
+    cateList  = clsCategory.query.all()        
+    
+    # Mostramos los datos en la vista.
+    res['data0'] = [{'idCategoria':cat.C_idCategory,'nombre':cat.C_nameCate,'peso':cat.C_weight} for cat in cateList]
+
+
+
 
     #Action code ends here
     return json.dumps(res)

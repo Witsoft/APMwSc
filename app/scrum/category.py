@@ -79,15 +79,25 @@ class category(object):
                     return True
         return False
     
-    def searchTask(self, C_nameCate):
+    def searchCategory(self, C_nameCate):
         '''Permite buscar categorias por su nombre'''
         
         typeNameCategory = (type(C_nameCate) == str)
         
+        cCategory = []
         if typeNameCategory:
             cCategory = clsCategory.query.filter_by(C_nameCate = C_nameCate).all()
-        else:
-            cCategory = False
         return cCategory
+
+    def searchIdCategory(self, idCategory):
+        '''Permite buscar categorias por su id'''
+        
+        typeIdCategory = (type(idCategory) == int)
+        
+        cCategory = []
+        if typeIdCategory:
+            cCategory = clsCategory.query.filter_by(C_idCategory = idCategory).all()
+        return cCategory
+
     
 # Fin Clase Category

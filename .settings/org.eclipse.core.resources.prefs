@@ -8,6 +8,7 @@ encoding//app/scrum/actor.py=utf-8
 encoding//app/scrum/actorsUserHistory.py=utf-8
 encoding//app/scrum/backLog.py=utf-8
 encoding//app/scrum/categorias.py=utf-8
+encoding//app/scrum/category.py=utf-8
 encoding//app/scrum/cates.py=utf-8
 encoding//app/scrum/dev.py=utf-8
 encoding//app/scrum/historias.py=utf-8
