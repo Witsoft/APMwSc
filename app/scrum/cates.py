@@ -14,7 +14,6 @@ def ACrearCategoria():
     params = request.get_json()
     results = [{'label':'/VCategorias', 'msg':['Categoría creada.']}, {'label':'/VCategorias', 'msg':['Error al intentar crear categoría.']}, ]
     res = results[0]
-    #Action code goes here, res should be a list with a label and a message
 
     if params != {}:    
         # Extraemos los parametros.
@@ -44,10 +43,20 @@ def AElimCategoria():
     print('idCategoria AElimCategoria',idCategoria)
     results = [{'label':'/VCategorias', 'msg':['Categoría eliminada.']}, {'label':'/VCategorias', 'msg':['Error al intentar eliminar categoría.']}, ]
     res = results[0]
-    #Action code goes here, res should be a list with a label and a message
 
+    # Convertimos parámetro del id a entero
+    idCate = int(idCategoria)
+    
+    # Buscamos la categoría que vamos a eliminar.
+    cCategory = category()
+    cateFound = cCategory.searchIdCategory(idCate)
 
-    #Action code ends here
+    # Eliminamos la categoría
+    if (cateFound != []):
+        deleted = cCategory.deleteCategory(cateFound[0].C_nameCate)  
+        if deleted:
+            res = results[0]
+    
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -63,24 +72,21 @@ def AModifCategoria():
     params = request.get_json()
     results = [{'label':'/VCategorias', 'msg':['Categoría actualizada.']}, {'label':'/VCategorias', 'msg':['Error al intentar modificar categoría.']}, ]
     res = results[0]
-    #Action code goes here, res should be a list with a label and a message
 
-    # Obtenemos el id de la categoría
-    idCategoria = request.args['idCategoria']
-
-    # Obtenemos los paràmetros    
+    # Obtenemos los parámetros    
     newNameCategory = params['nombre']
-    newWeidght      = params['peso']
-
-    cCategory = category()    
-
-    # Buscamos la categoriaía a modificar
-    showCate = cCategory.seachIdCategory(idCategory)
+    newWeight       = params['peso']
+    idCategory      = params['idCategoria']
     
+    # Buscamos la categoría a modificar
+    cCategory = category()    
+    showCate = cCategory.searchIdCategory(idCategory)
+    print(showCate)
+    result  = cCategory.updateCategory(showCate[0].C_nameCate,newNameCategory,newWeight)
 
+    if result:
+        res = results[0]    
 
-
-    #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -97,7 +103,6 @@ def VCategoria():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
-    #Action code goes here, res should be a JSON structure
 
     if 'usuario' not in session:
       res['logout'] = '/'
@@ -105,15 +110,20 @@ def VCategoria():
     res['usuario'] = session['usuario']
     res['idCategoria'] = int(idCategoria)
 
+    # Obtenemos el id de la Categoría
+    idCate = int(idCategoria)
+    
     # Buscamos la tupla asociada al id capturado
     cCategory = category()
-    showCate  = cCategory.searchIdCategory(idCategoria)
-        
-    res['fCategoria'] = {'idCategoria':showCate.C_idCategory, 'peso':showCate.C_nameCate, 
-                         'nombre':showCate.C_weight}
+    showCate  = cCategory.searchIdCategory(idCate)
+    
+    # Mostramos los datos en la vista     
+    res['fCategoria'] = {'idCategoria':showCate[0].C_idCategory, 'peso':showCate[0].C_weight, 
+                         'nombre':showCate[0].C_nameCate}
 
-
-    #Action code ends here
+    # Guardamos el id de la categora
+    session['idCategoria'] = int(idCategoria)
+    
     return json.dumps(res)
 
 
@@ -123,7 +133,6 @@ def VCategorias():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
-    #Action code goes here, res should be a JSON structure
 
     if 'usuario' not in session:
       res['logout'] = '/'
@@ -136,13 +145,7 @@ def VCategorias():
     # Mostramos los datos en la vista.
     res['data0'] = [{'idCategoria':cat.C_idCategory,'nombre':cat.C_nameCate,'peso':cat.C_weight} for cat in cateList]
 
-
-
-
-    #Action code ends here
     return json.dumps(res)
-
-
 
 
 
@@ -150,4 +153,3 @@ def VCategorias():
 
 
 #Use case code ends here
-
