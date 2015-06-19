@@ -32,4 +32,5 @@ encoding//testing/testLogin.py=utf-8
 encoding//testing/testObjective.py=utf-8
 encoding//testing/testObjectivesUserHistory.py=utf-8
 encoding//testing/testRole.py=utf-8
+encoding//testing/testTask.py=utf-8
 encoding//testing/testUser.py=utf-8

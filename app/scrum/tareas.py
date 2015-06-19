@@ -30,7 +30,8 @@ def ACrearTarea():
     
     if insert:        
         res = results[0]
-
+    else:
+        res = results[1]
     res['label'] = res['label'] + '/' + str(idHistory)
 
     if "actor" in res:
