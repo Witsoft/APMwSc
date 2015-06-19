@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-. 
 
 import sys
+
 # Ruta que permite utilizar el módulo backlog.py
 sys.path.append('app/scrum')
 
@@ -40,7 +41,9 @@ class task(object):
                 oUserHistory = clsUserHistory.query.filter_by(UH_idUserHistory = UH_idUserHistory).all()
                 oCategory    = clsCategory.query.filter_by(C_idCategory = C_idCategory).all()
                 oTask = clsTask.query.filter_by(HW_description = HW_description).all()
-                if (oUserHistory != []) and (oCategory != []) and (oTask == []):
+                oHistory = userHistory()
+                esEpica = (oHistory.isEpic(UH_idUserHistory))
+                if ((oUserHistory != []) and (oCategory != []) and (oTask == []) and (not esEpica)):
                     new_task = clsTask(HW_description,C_idCategory,HW_weight,UH_idUserHistory)
                     db.session.add(new_task)
                     db.session.commit()
@@ -94,13 +97,13 @@ class task(object):
             if (long_HW_description and long_newDescription and min_C_idCategory and min_HW_weight):
                 foundTask = self.searchTask(HW_description)
                 foundNew  = self.searchTask(newDescription)
-                if ((foundTask != []) and ((foundNew == [])or(HW_description == newDescription))):
+                foundCat  = clsCategory.query.filter_by(C_idCategory = C_idCategory).all()
+                if ((foundTask != []) and (foundCat != []) and ((foundNew == [])or(HW_description == newDescription))):
                     oTask = clsTask.query.filter_by(HW_description = HW_description).first()
                     oTask.HW_description = newDescription
                     oTask.HW_idCategory   = C_idCategory
                     oTask.HW_weight      = HW_weight
                     db.session.commit()
-                    print("update: ",HW_description, newDescription, C_idCategory, HW_weight)
                     return True
         return False
     
@@ -114,15 +117,23 @@ class task(object):
         return([])                                
 
     def historyWeight(self,idUserHistory):
-        checkTypeId = type(idUserHistory) == int    
-        if checkTypeId: 
-            oTask = task()
-            taskList = oTask.taskAsociatedToUserHistory(idUserHistory)
-            if taskList != []:
-                for i in taskList:
-                    peso = 0 + i.HW_weight
-                return peso
-        return (0)
-                
-                
+        checkTypeId = type(idUserHistory) == int
+        peso = 0 
+        oUserHistory = userHistory()
+        esEpica = oUserHistory.isEpic(idUserHistory)
+        if not esEpica:   
+            if checkTypeId: 
+                taskList = self.taskAsociatedToUserHistory(idUserHistory)
+                if taskList != []:
+                    for task in taskList:
+                        peso = peso + task.HW_weight
+        else:
+            peso = ''
+        return peso
+    
+    def lookup(self,tupleList,idUserHistory): 
+        for tuple in tupleList:
+            if tuple[0] == idUserHistory:
+                return tuple[1]
+        return ('')
 #Fin clase Task
