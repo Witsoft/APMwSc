@@ -45,16 +45,16 @@ class category(object):
         if checkTypeNameCategory and checkTypeNewNameCategory and checkTypeNewWeight:
             checkLongNameCategory    = CONST_MIN_NAME_CATEGORY <= len(nameCategory) <= CONST_MAX_NAME_CATEGORY
             checkLongNewNameCategory = CONST_MIN_NAME_CATEGORY <= len(newNameCategory) <= CONST_MAX_NAME_CATEGORY
-            checkNewWeight       = CONST_MIN_WEIGHT <= newWeight 
+            checkNewWeight           = CONST_MIN_WEIGHT <= newWeight 
             
             if checkLongNameCategory and checkLongNewNameCategory and checkNewWeight:    
-                foundNameCategory = clsCategory.query.filter_by(C_nameCate = nameCategory).all()
-                foundNewNameCategory  = clsActor.query.filter_by(C_nameCate = newNameCategory).all()
+                foundNameCategory     = clsCategory.query.filter_by(C_nameCate = nameCategory).all()
+                foundNewNameCategory  = clsCategory.query.filter_by(C_nameCate = newNameCategory).all()
                 
-                if foundNameCategory != [] and (foundNewNameCategory == [] or foundNameCategory.C_nameCate == nameCategory):
+                if foundNameCategory != [] and (foundNewNameCategory == [] or nameCategory == newNameCategory):
                     updateCategory = clsCategory.query.filter_by(C_nameCate = nameCategory).first()
-                    updateCategory.C_nameCategoy = newNameCategory
-                    updateCategory.C_weight      = newWeight
+                    updateCategory.C_nameCate = newNameCategory
+                    updateCategory.C_weight   = newWeight
                     db.session.commit()
                     return True
         return False   
@@ -76,16 +76,6 @@ class category(object):
                     db.session.commit()
                     return True
         return False
-    
-    def searchCategory(self, C_nameCate):
-        '''Permite buscar categorias por su nombre'''
-        
-        typeNameCategory = (type(C_nameCate) == str)
-        
-        cCategory = []
-        if typeNameCategory:
-            cCategory = clsCategory.query.filter_by(C_nameCate = C_nameCate).all()
-        return cCategory
 
     def searchIdCategory(self, idCategory):
         '''Permite buscar categorias por su id'''
