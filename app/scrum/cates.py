@@ -134,8 +134,19 @@ def VCategorias():
     cateList  = clsCategory.query.all()        
     
     # Mostramos los datos en la vista.
-    res['data0'] = [{'idCategoria':cat.C_idCategory,'nombre':cat.C_nameCate,'peso':cat.C_weight} for cat in cateList]
+    
+    ListaCompleta = []
+    for i in cateList:
+        ListaCompleta.append((i.C_idCategory,i.C_nameCate,i.C_weight))
+    
+    decorated = [(tup[2], tup) for tup in ListaCompleta]
+    decorated.sort()
 
+    #ListaCompleta.sorted(key=lambda tup: tup[2]) 
+    
+    res['data0'] = [{'idCategoria':cat[1][0],'nombre':cat[1][1],'peso':cat[1][2]} for cat in decorated]
+
+    #sorted(cateList, key=lambda category: category[2])
 
 
 
