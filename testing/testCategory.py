@@ -16,7 +16,8 @@ class TestCategory(unittest.TestCase):
     
     # Caso Inicial
   
-    def testInserCategory(self):
+    # Prueba 1
+    def testInsertCategory(self):
         aCategory = category()
         aCategory.insertCategory('Category1',21)
  
@@ -25,8 +26,8 @@ class TestCategory(unittest.TestCase):
          
     # Casos Frontera
      
-    # Prueba
-    def testInserCategoryExists(self):
+    # Prueba 2
+    def testInsertCategoryExists(self):
         aCategory = category()
         result    = aCategory.insertCategory('Category1',21)
         self.assertTrue(result)
@@ -34,8 +35,8 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Category1')
          
-    # Prueba
-    def testInserCategory1Exists(self):
+    # Prueba 3
+    def testInsertCategory1Exists(self):
         aCategory = category()
         result    = aCategory.insertCategory('A',1)
         self.assertTrue(result)
@@ -43,8 +44,8 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('A')
          
-    # Prueba
-    def testInserCategory50Exists(self):
+    # Prueba 4
+    def testInsertCategory50Exists(self):
         aCategory = category()
         result    = aCategory.insertCategory('A'*50,2)
         self.assertTrue(result)
@@ -52,26 +53,26 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('A'*50)
          
-    # Prueba
-    def testInserCategory0Exists(self):
+    # Prueba 5
+    def testInsertCategory0Exists(self):
         aCategory = category()
         result    = aCategory.insertCategory('',1)
         self.assertFalse(result)
  
-    # Prueba
-    def testInserCategory51Exists(self):
+    # Prueba 6
+    def testInsertCategory51Exists(self):
         aCategory = category()
         result    = aCategory.insertCategory('A'*51,1)
         self.assertFalse(result)
  
-    # Prueba
-    def testInserCategoryLongExists(self):
+    # Prueba 7
+    def testInsertCategoryLongExists(self):
         aCategory = category()
         result    = aCategory.insertCategory('A'*((2**28)-1),1)
         self.assertFalse(result)
          
-    # Prueba
-    def testInserCategoryEquals(self):
+    # Prueba 8
+    def testInsertCategoryEquals(self):
         aCategory = category()
         result    = aCategory.insertCategory('Categoria',2)
         result1   = aCategory.insertCategory('Categoria',3)
@@ -80,8 +81,8 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')
          
-    # Prueba
-    def testInserCategory1Equals(self):
+    # Prueba 9
+    def testInsertCategory1Equals(self):
         aCategory = category()
         result    = aCategory.insertCategory('C',2)
         result1   = aCategory.insertCategory('C',3)
@@ -90,8 +91,8 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('C')
      
-    # Prueba
-    def testInserCategory50Equals(self):
+    # Prueba 10
+    def testInsertCategory50Equals(self):
         aCategory = category()
         result    = aCategory.insertCategory('C'*50,2)
         result1   = aCategory.insertCategory('C'*50,3)
@@ -100,8 +101,8 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('C'*50)
          
-    # Prueba
-    def testInserCategoryWeight1(self):
+    # Prueba 11
+    def testInsertCategoryWeight1(self):
         aCategory = category()
         result    = aCategory.insertCategory('Categoria',1)
         self.assertTrue(result)
@@ -109,8 +110,8 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')
          
-    # Prueba
-    def testInserCategoryWeight50(self):
+    # Prueba 12
+    def testInsertCategoryWeight50(self):
         aCategory = category()
         result    = aCategory.insertCategory('Categoria',((2**28)-1))
         self.assertTrue(result)
@@ -118,8 +119,8 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')
          
-    # Prueba
-    def testInserCategoryWeight0(self):
+    # Prueba 13
+    def testInsertCategoryWeight0(self):
         aCategory = category()
         result    = aCategory.insertCategory('Categoria',0)
         self.assertTrue(result)
@@ -129,14 +130,14 @@ class TestCategory(unittest.TestCase):
          
     # Casos Esquina
      
-    # Prueba
-    def testInserCategoryName0Weight0(self):
+    # Prueba 14
+    def testInsertCategoryName0Weight0(self):
         aCategory = category()
         result    = aCategory.insertCategory('',0)
         self.assertFalse(result)
          
-    # Prueba
-    def testInserCategoryName1Weight0(self):
+    # Prueba 15
+    def testInsertCategoryName1Weight0(self):
         aCategory = category()
         result    = aCategory.insertCategory('A',0)
         self.assertTrue(result)
@@ -144,8 +145,8 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('A')
          
-    # Prueba
-    def testInserCategoryName50Weight0(self):
+    # Prueba 16
+    def testInsertCategoryName50Weight0(self):
         aCategory = category()
         result    = aCategory.insertCategory('A'*50,0)
         self.assertTrue(result)
@@ -153,8 +154,8 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('A'*50)
          
-    # Prueba
-    def testInserCategoryName1WeightLong(self):
+    # Prueba 17
+    def testInsertCategoryName1WeightLong(self):
         aCategory = category()
         result    = aCategory.insertCategory('A',((2**28)-1))
         self.assertTrue(result)
@@ -162,16 +163,16 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('A')
          
-    # Prueba
-    def testInserCategoryName0WeightLong(self):
+    # Prueba 18
+    def testInsertCategoryName0WeightLong(self):
         aCategory = category()
         result    = aCategory.insertCategory('',((2**28)-1))
         self.assertFalse(result)
          
     # Casos Malicia
      
-    # Prueba
-    def testInserCategorySpaceExists(self):
+    # Prueba 19
+    def testInsertCategorySpaceExists(self):
         aCategory = category()
         result    = aCategory.insertCategory(' ',2)
         self.assertTrue(result)
@@ -179,8 +180,8 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory(' ')
          
-    # Prueba
-    def testInserCategoryEnieExists(self):
+    # Prueba 20
+    def testInsertCategoryEnieExists(self):
         aCategory = category()
         result    = aCategory.insertCategory('ñ',2)
         self.assertTrue(result)
@@ -188,38 +189,38 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('ñ')
          
-    # Prueba
-    def testInserCategoryNumber(self):
+    # Prueba 21
+    def testInsertCategoryNumber(self):
         aCategory = category()
         result    = aCategory.insertCategory(12,2)
         self.assertFalse(result)
  
-    # Prueba
-    def testInserCategoryArray(self):
+    # Prueba 22
+    def testInsertCategoryArray(self):
         aCategory = category()
         result    = aCategory.insertCategory([],2)
         self.assertFalse(result)
          
-    # Prueba
-    def testInserCategoryDictionari(self):
+    # Prueba 23
+    def testInsertCategoryDictionari(self):
         aCategory = category()
         result    = aCategory.insertCategory({},2)
         self.assertFalse(result)
          
-    # Prueba
-    def testInserCategoryWeightString(self):
+    # Prueba 24
+    def testInsertCategoryWeightString(self):
         aCategory = category()
         result    = aCategory.insertCategory('categoria','1')
         self.assertFalse(result)
      
-    # Prueba
-    def testInserCategoryWeightArray(self):
+    # Prueba 25
+    def testInsertCategoryWeightArray(self):
         aCategory = category()
         result    = aCategory.insertCategory('categoria',[])
         self.assertFalse(result)
-         
-    # Prueba
-    def testInserCategoryWeightDictionari(self):
+          
+    # Prueba 26
+    def testInsertCategoryWeightDictionari(self):
         aCategory = category()
         result    = aCategory.insertCategory('categoria',{})
         self.assertFalse(result)
@@ -231,7 +232,7 @@ class TestCategory(unittest.TestCase):
      
     # Caso Normal
      
-    # Prueba
+    # Prueba 27
     def testUpdateCategoryExist(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -241,7 +242,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Nueva Categoria')
          
-    # Prueba
+    # Prueba 28
     def testUpdateCategoryNotExist(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -253,7 +254,7 @@ class TestCategory(unittest.TestCase):
          
     # Casos Frontera
      
-    # Prueba
+    # Prueba 29
     def testUpdateCategoryName1Newname1(self):
         aCategory = category()
         aCategory.insertCategory('C',1)
@@ -263,7 +264,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('N')
          
-    # Prueba
+    # Prueba 30
     def testUpdateCategoryName1Newname(self):
         aCategory = category()
         aCategory.insertCategory('C',1)
@@ -273,14 +274,14 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Nueva Categoria') 
          
-    # Prueba
+    # Prueba 31
     def testUpdateCategoryName0(self):
         aCategory = category()
         aCategory.insertCategory('',1)
         result    = aCategory.updateCategory('', 'N', 2)
         self.assertFalse(result)
          
-    # Prueba
+    # Prueba 32
     def testUpdateCategoryNameNewname1(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -290,7 +291,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('N')
          
-    # Prueba
+    # Prueba 33
     def testUpdateCategoryName50Newname(self):
         aCategory = category()
         aCategory.insertCategory('C'*50,1)
@@ -300,7 +301,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Nueva Categoria')
          
-    # Prueba
+    # Prueba 34
     def testUpdateCategoryNameNewname50(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -310,7 +311,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('N'*50)
      
-    # Prueba
+    # Prueba 35
     def testUpdateCategoryNewname51(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -320,7 +321,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')
          
-    # Prueba
+    # Prueba 36
     def testUpdateCategoryNameNewname0(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -330,7 +331,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')
          
-    # Prueba
+    # Prueba 37
     def testUpdateCategoryNewnameLong(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -340,7 +341,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')
          
-    # Prueba
+    # Prueba 38
     def testUpdateCategoryWeight0(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -350,7 +351,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Nueva Categoria')
          
-    # Prueba
+    # Prueba 39
     def testUpdateCategoryWeightLong(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -362,14 +363,14 @@ class TestCategory(unittest.TestCase):
          
     # Casos Esquina
      
-    # Prueba
+    # Prueba 40
     def testUpdateCategoryName0Newname0Weight0(self):
         aCategory = category()
         aCategory.insertCategory('',1)
         result    = aCategory.updateCategory('', '', 0)
         self.assertFalse(result)
  
-    # Prueba
+    # Prueba 41
     def testUpdateCategoryName1Newname0Weight0(self):
         aCategory = category()
         aCategory.insertCategory('C',1)
@@ -379,7 +380,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')
          
-    # Prueba
+    # Prueba 42
     def testUpdateCategoryName50Newname0Weight0(self):
         aCategory = category()
         aCategory.insertCategory('C'*50,1)
@@ -389,49 +390,49 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('C'*50)
          
-    # Prueba
+    # Prueba 43
     def testUpdateCategoryNameLongNewname0Weight0(self):
         aCategory = category()
         aCategory.insertCategory('C'*((2**28)-1),1)
         result    = aCategory.updateCategory('C'*((2**28)-1), '', 0)
         self.assertFalse(result)
          
-    # Prueba
+    # Prueba 44
     def testUpdateCategoryName0Newname1Weight0(self):
         aCategory = category()
         aCategory.insertCategory('',1)
         result    = aCategory.updateCategory('', 'N', 0)
         self.assertFalse(result)
              
-    # Prueba
+    # Prueba 45
     def testUpdateCategoryName0Newname50Weight0(self):
         aCategory = category()
         aCategory.insertCategory('',1)
         result    = aCategory.updateCategory('', 'N'*50, 0)
         self.assertFalse(result)
  
-    # Prueba
+    # Prueba 46
     def testUpdateCategoryName0NewnameLongWeight0(self):
         aCategory = category()
         aCategory.insertCategory('',1)
         result    = aCategory.updateCategory('', 'N'*((2**28)-1), 0)
         self.assertFalse(result)
          
-    # Prueba
+    # Prueba 47
     def testUpdateCategoryName0Newname0Weight1(self):
         aCategory = category()
         aCategory.insertCategory('',1)
         result    = aCategory.updateCategory('', '', 1)
         self.assertFalse(result)
          
-    # Prueba
+    # Prueba 48
     def testUpdateCategoryName0Newname0WeightLong(self):
         aCategory = category()
         aCategory.insertCategory('',1)
         result    = aCategory.updateCategory('', '', (2**28)-1)
         self.assertFalse(result)
          
-    # Prueba
+    # Prueba 49
     def testUpdateCategoryName1Newname1WeightLong1(self):
         aCategory = category()
         aCategory.insertCategory('C',1)
@@ -441,7 +442,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('N')
          
-    # Prueba
+    # Prueba 50
     def testUpdateCategoryName50Newname1WeightLong1(self):
         aCategory = category()
         aCategory.insertCategory('C'*50,1)
@@ -451,14 +452,14 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('N')
          
-    # Prueba
+    # Prueba 51
     def testUpdateCategoryNameLongNewname1WeightLong1(self):
         aCategory = category()
         aCategory.insertCategory('C'*((2**28)-1),1)
         result    = aCategory.updateCategory('C'*((2**28)-1), 'N', 1)
         self.assertFalse(result)
            
-    # Prueba
+    # Prueba 52
     def testUpdateCategoryName1Newname50WeightLong1(self):
         aCategory = category()
         aCategory.insertCategory('C',1)
@@ -468,7 +469,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('N'*50)
          
-    # Prueba
+    # Prueba 53
     def testUpdateCategoryName1NewnameLongWeightLong1(self):
         aCategory = category()
         aCategory.insertCategory('C',1)
@@ -478,7 +479,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('C')
          
-    # Prueba
+    # Prueba 54
     def testUpdateCategoryName1Newname1WeightLong(self):
         aCategory = category()
         aCategory.insertCategory('C',1)
@@ -488,7 +489,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('N')
          
-    # Prueba
+    # Prueba 55
     def testUpdateCategoryName50Newname50WeightLong(self):
         aCategory = category()
         aCategory.insertCategory('C'*50,1)
@@ -498,7 +499,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('N'*50)
          
-    # Prueba
+    # Prueba 56
     def testUpdateCategoryName50NewnameLongWeightLong1(self):
         aCategory = category()
         aCategory.insertCategory('C'*50,1)
@@ -510,7 +511,7 @@ class TestCategory(unittest.TestCase):
          
     # Casos Malicia
      
-    # Prueba
+    # Prueba 57
     def testUpdateCategoryNameNewnameEnieWeight(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -520,7 +521,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('ñ')
          
-    # Prueba
+    # Prueba 58
     def testUpdateCategoryNameNewnameArrayWeight(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -530,7 +531,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')
          
-    # Prueba
+    # Prueba 59
     def testUpdateCategoryNameNewnameDictionaryWeight(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -540,7 +541,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')
          
-    # Prueba
+    # Prueba 60
     def testUpdateCategoryNameNewnameNumberWeight(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -550,7 +551,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')
          
-    # Prueba
+    # Prueba 61
     def testUpdateCategoryNameNewnameWeightNegativeNumber(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -566,7 +567,7 @@ class TestCategory(unittest.TestCase):
         
     # Caso Normal
     
-    # Prueba
+    # Prueba 62
     def testSearchIdCategoryExist(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -576,7 +577,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')
         
-    # Prueba
+    # Prueba 63
     def testSearchIdCategoryNotExist(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -588,7 +589,7 @@ class TestCategory(unittest.TestCase):
     
     # Casos Frontera    
         
-    # Prueba
+    # Prueba 64
     def testSearchIdCategory0(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -598,7 +599,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')    
         
-    # Prueba
+    # Prueba 65
     def testSearchIdCategoryLong(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -610,7 +611,7 @@ class TestCategory(unittest.TestCase):
     
     # Casos Malicia
         
-    # Prueba
+    # Prueba 66
     def testSearchIdCategoryString(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -620,7 +621,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')
         
-    # Prueba
+    # Prueba 67
     def testSearchIdCategoryArray(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -630,7 +631,7 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         aCategory.deleteCategory('Categoria')
         
-    # Prueba
+    # Prueba 68
     def testSearchIdCategoryDictionary(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -647,7 +648,7 @@ class TestCategory(unittest.TestCase):
         
     # Caso Normal
 
-    # Prueba
+    # Prueba 69
     def testDeleteCategoryExist(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -656,7 +657,7 @@ class TestCategory(unittest.TestCase):
         result = aCategory.deleteCategory('Categoria')
         self.assertTrue(result)
         
-    # Prueba
+    # Prueba 70
     def testDeleteCategoryNotExist(self):
         aCategory = category()
         aCategory.insertCategory('Categoria',1)
@@ -668,7 +669,7 @@ class TestCategory(unittest.TestCase):
         
     # Casos Frontera
     
-    # Prueba
+    # Prueba 71
     def testDeleteCategoryName0(self):
         aCategory = category()
         aCategory.insertCategory('',1)
@@ -677,7 +678,7 @@ class TestCategory(unittest.TestCase):
         result = aCategory.deleteCategory('')
         self.assertFalse(result)
         
-    # Prueba
+    # Prueba 72
     def testDeleteCategoryName1(self):
         aCategory = category()
         aCategory.insertCategory('C',1)
@@ -686,7 +687,7 @@ class TestCategory(unittest.TestCase):
         result = aCategory.deleteCategory('C')
         self.assertTrue(result)
         
-    # Prueba
+    # Prueba 73
     def testDeleteCategoryName50(self):
         aCategory = category()
         aCategory.insertCategory('C'*50,1)
@@ -695,7 +696,7 @@ class TestCategory(unittest.TestCase):
         result = aCategory.deleteCategory('C'*50)
         self.assertTrue(result)
         
-    # Prueba
+    # Prueba 74
     def testDeleteCategoryName51(self):
         aCategory = category()
         aCategory.insertCategory('C'*51,1)
@@ -704,7 +705,7 @@ class TestCategory(unittest.TestCase):
         result = aCategory.deleteCategory('C'*51)
         self.assertFalse(result)
         
-    # Prueba
+    # Prueba 75
     def testDeleteCategoryNameLong(self):
         aCategory = category()
         aCategory.insertCategory('C'*((2**28)-1),1)
@@ -715,7 +716,7 @@ class TestCategory(unittest.TestCase):
         
     # Casos Malicia
     
-    # Prueba
+    # Prueba 76
     def testDeleteCategoryNameEnie(self):
         aCategory = category()
         aCategory.insertCategory('ñ',1)
@@ -724,7 +725,7 @@ class TestCategory(unittest.TestCase):
         result = aCategory.deleteCategory('ñ')
         self.assertTrue(result)
         
-    # Prueba
+    # Prueba 77
     def testDeleteCategoryNameNumber(self):
         aCategory = category()
         aCategory.insertCategory(88,1)
@@ -733,7 +734,7 @@ class TestCategory(unittest.TestCase):
         result = aCategory.deleteCategory(88)
         self.assertFalse(result)
         
-    # Prueba
+    # Prueba 78
     def testDeleteCategoryNameArray(self):
         aCategory = category()
         aCategory.insertCategory([],1)
@@ -742,7 +743,7 @@ class TestCategory(unittest.TestCase):
         result = aCategory.deleteCategory([])
         self.assertFalse(result)
         
-    # Prueba
+    # Prueba 79
     def testDeleteCategoryNameStringArray(self):
         aCategory = category()
         aCategory.insertCategory('[]',1)
@@ -751,7 +752,7 @@ class TestCategory(unittest.TestCase):
         result = aCategory.deleteCategory('[]')
         self.assertTrue(result)
         
-    # Prueba
+    # Prueba 80
     def testDeleteCategoryNameDictionary(self):
         aCategory = category()
         aCategory.insertCategory({},1)
@@ -760,7 +761,7 @@ class TestCategory(unittest.TestCase):
         result = aCategory.deleteCategory({})
         self.assertFalse(result)
         
-    # Prueba
+    # Prueba 81
     def testDeleteCategoryNameStringDictionary(self):
         aCategory = category()
         aCategory.insertCategory('{}',1)
@@ -768,18 +769,3 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         result = aCategory.deleteCategory('{}')
         self.assertTrue(result)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
