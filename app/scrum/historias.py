@@ -407,6 +407,7 @@ def VHistorias():
     if "actor" in session:
         res['actor'] = session['actor']
     
+    oTask             = task()
     oActor            = role()
     oAccion           = accions()
     oObjective        = objective()
@@ -417,7 +418,7 @@ def VHistorias():
     
     # Obtenemos las historias asociadas al producto idPila.
     userHistoriesList = oBacklog.userHistoryAsociatedToProduct(idPila)  
-             
+    pesos          = []         
     userHistories  = []
     options        = {1:'podria ',2:'puede '}
     priorities     = {0:'Epica',1:'Alta',2:'Media',3:'Baja'}
@@ -432,7 +433,9 @@ def VHistorias():
     for hist in userHistoriesList:
         result = oUserHistory.transformUserHistory(hist.UH_idUserHistory)
         userHistories.append(result)
-
+        tupla = (hist.UH_idUserHistory,oTask.historyWeight(hist.UH_idUserHistory))
+        pesos.append(tupla)
+        
     # Obtenemos el maximo de la escala
     if typeScale == 1:
         iterations = 3
@@ -461,9 +464,11 @@ def VHistorias():
                 if hist['idHistory'] == id:
                     userHistories.remove(hist)
                     break
- 
+    
+    
     res['data0']      = [{'idHistoria':hist['idHistory'], 
                           'prioridad' :hist['priority'],
+                          'peso'      :oTask.lookup(pesos,hist['idHistory']),
                           'enunciado' :'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in historiesSortedByPriority]
     session['idPila'] = idPila
     res['idPila']     = idPila 
@@ -545,4 +550,3 @@ def VPrioridades():
 
 
 #Use case code ends here
-
