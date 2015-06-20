@@ -128,19 +128,26 @@ def VCrearTarea():
     res['usuario']        = session['usuario']
     res['codHistoria']    = hist[0].UH_codeUserHistory
     
-    categoryList     = clsCategory.query.all()
+    # Obtenemos una lista con los datos asociados a las categorías
+    cateList  = clsCategory.query.all()        
+    
+    # Mostramos los datos en la vista
+    ListaCompleta = []
+    for i in cateList:
+        ListaCompleta.append((i.C_idCategory,i.C_nameCate,i.C_weight))
+    
+    decorated = [(tup[2], tup) for tup in ListaCompleta]
+    decorated.sort()
 
     res['fTarea_opcionesCategoria'] = [
-     {'key':cat.C_idCategory ,'value':cat.C_nameCate+" ("+str(cat.C_weight)+")",'peso':cat.C_weight}for cat in categoryList]                                  
+     {'key':cat[1][0] ,'value':cat[1][1]+" ("+str(cat[1][2])+")",'peso':cat[1][2]} for cat in decorated]                                 
 
     res['fTarea'] = {'idHistoria':idHistory}
 
     session['idHistoria'] = idHistory
     res['idHistoria']     = idHistory
 
-
     return json.dumps(res)
-
 
 
 @tareas.route('/tareas/VTarea')

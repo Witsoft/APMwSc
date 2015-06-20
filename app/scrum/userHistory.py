@@ -204,9 +204,13 @@ class userHistory(object):
             checkLonPriority  = 0 <= priority
 
             if  checkLonIdHistory and checkLonPriority:
-                found = clsUserHistory.query.filter_by(UH_idUserHistory = idHistory).first()
+                found     = clsUserHistory.query.filter_by(UH_idUserHistory = idHistory).first()
+                foundTask = clsTask.query.filter_by(HW_idUserHistory = idHistory).all()
                 if found != None:
                     found.UH_scale = priority
+                    if foundTask != []:
+                        for task in foundTask:    
+                            db.session.delete(task)
                     db.session.commit()
                     return True
         return False
