@@ -1685,590 +1685,590 @@ class TestTask(unittest.TestCase):
 #     #############################################      
 #     #   Suite de Pruebas para updateTask    #
 #     #############################################
-#               
-#     # Caso Inicial
-#           
-#     # Prueba 
-#     def testUpdateTaskExists(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#               
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('cinrohbwidia',1)
-#         search = aAcc.searchAccion('cinrohbwidia',1)
-#         idFound = search[0].AC_idAccion
-#               
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('BIEEIEB1')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#             
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)   
-#              
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         aTarea.updateTask('dwidjw','diifneo',1,1)
-#                     
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('diifneo')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('BIEEIEB1')
-#         aAcc.deleteAccion('cinrohbwidia',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-#              
-#     # Prueba 2
-#   
-#     def testUpdateTaskTrue(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#              
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#              
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#           
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)  
-#           
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('dwidjw','diifneo',1,1)
-#         self.assertTrue(result)
-#           
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('diifneo')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-#                  
-#                
-#     # Casos Fronteras
-#             
-#     # Prueba 
-#     def testUpdateTaskShortDesc0(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#               
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#               
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#            
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1) 
-#            
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('','diifneo',1,1)
-#         self.assertFalse(result)
-#                    
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('dwidjw')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-#         aTarea = task()
-#    
-#         # Eliminamos accion y producto
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-#               
-#             
-#     # Prueba 
-#     def testUpdateTaskShortDesc1(self):
-#            
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#               
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#               
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#            
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1) 
-#          
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('dwidjw','T',1,1)
-#         self.assertTrue(result)
-#            
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('T')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-#             
-#     # Prueba 
-#     def testUpdateTaskShortDesc140(self):
-#          
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#               
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#               
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#          
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)
-#            
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('dwidjw',140*'T',1,1)
-#         self.assertTrue(result)
-#            
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask(140*'T')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-#               
-#     # Prueba 7
-#     def testUpdateHistoryLong141(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#               
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#               
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#          
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)
-#            
-#         aTarea = task()
-#         aTarea.insertTask(141*'T',idFound1,1,1)
-#         result  = aTarea.updateTask(141*'T',140*'T',1,1)        
-#         self.assertFalse(result)
-#            
-#         # Eliminamos historia, accion y producto
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-#               
-#     # Prueba 
-#     def testUpdateTaskNew0(self):
-#         # Insertamos Producto    
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#               
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#               
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#          
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)
-#          
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('dwidjw','',1,1)        
-#         self.assertFalse(result)
-#            
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('dwidjw')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-#    
-#               
-#     # Prueba 
-#     def testUpdateTaskNoDesc(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#               
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#               
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#            
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)
-#          
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('OEdfeenfr','diifneo',1,1)
-#         self.assertFalse(result)
-#            
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('dwidjw')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-#       
-#     # Prueba 
-#     def testUpdateTaskLongNew(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#               
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#               
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#          
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)  
-#            
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('dwidjw',140*'T',1,1)
-#         self.assertTrue(result)
-#            
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask(140*'T')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-# 
-# 
-#     def testUpdateTaskCategory0(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#              
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#              
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#           
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)  
-#           
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('dwidjw','diifneo',0,1)
-#         self.assertFalse(result)
-#           
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('dwidjw')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-# 
-#     def testUpdateTaskNoCategory(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#              
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#              
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#           
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)  
-#           
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('dwidjw','diifneo',2,1)
-#         self.assertFalse(result)
-#           
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('dwidjw')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-# 
-#     def testUpdateTaskNoneCategory(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#              
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#              
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#           
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)  
-#           
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('dwidjw','diifneo',None,1)
-#         self.assertFalse(result)
-#           
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('dwidjw')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-# 
-#     def testUpdateTaskStringCategory(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#              
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#              
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#           
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)  
-#           
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('dwidjw','diifneo','',1)
-#         self.assertFalse(result)
-#           
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('dwidjw')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-# 
-#     def testUpdateTaskWeight0(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#              
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#              
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#           
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)  
-#           
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('dwidjw','diifneo',1,0)
-#         self.assertFalse(result)
-#           
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('dwidjw')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-#     
-#     def testUpdateTaskWeightMax(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#              
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#              
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#           
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)  
-#           
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('dwidjw','diifneo',1,2**32)
-#         self.assertTrue(result)
-#           
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('dwidjw')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-# 
-#     def testUpdateTaskNoneWeight(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#              
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#              
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#           
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)  
-#           
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('dwidjw','diifneo',1,None)
-#         self.assertFalse(result)
-#           
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('dwidjw')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
-#         
-#     def testUpdateTaskStringWeight(self):
-#         # Insertamos Producto
-#         aBacklog = backlog()
-#         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
-#              
-#         # Insertamos la accion
-#         aAcc = accions()
-#         aAcc.insertAccion('Otra cosa',1)
-#         search = aAcc.searchAccion('Otra cosa',1)
-#         idFound = search[0].AC_idAccion
-#              
-#         # Insertamos la historia
-#         aHist = userHistory()
-#         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
-#         searchHist = aHist.searchUserHistory('hIDBW')
-#         idFound1 = searchHist[0].UH_idUserHistory 
-#           
-#         #Insertamos la categoria
-#         aCategory = category()
-#         aCategory.insertCategory('wofhweoifh',1)  
-#           
-#         aTarea = task()
-#         aTarea.insertTask('dwidjw',1,1,idFound1)
-#         result  = aTarea.updateTask('dwidjw','diifneo',1,'')
-#         self.assertFalse(result)
-#           
-#         # Eliminamos historia, accion y producto
-#         aTarea.deleteTask('dwidjw')
-#         aCategory.deleteCategory('wofhweoifh')
-#         aHist.deleteUserHistory('hIDBW')
-#         aAcc.deleteAccion('Otra Accion',1)
-#         aBacklog.deleteProduct('Podn fjdd.')
+               
+    # Caso Inicial
+           
+    # Prueba 
+    def testUpdateTaskExists(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+               
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('BIEEIEB1')
+        idFound1 = searchHist[0].UH_idUserHistory 
+             
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)   
+              
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        aTarea.updateTask('dwidjw','diifneo',1,1)
+                     
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('diifneo')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('BIEEIEB1')
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+              
+    # Prueba 2
+   
+    def testUpdateTaskTrue(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+           
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)  
+           
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw','diifneo',1,1)
+        self.assertTrue(result)
+           
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('diifneo')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+                  
+                
+    # Casos Fronteras
+             
+    # Prueba 
+    def testUpdateTaskShortDesc0(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+               
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+            
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1) 
+            
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('','diifneo',1,1)
+        self.assertFalse(result)
+                    
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        aTarea = task()
+    
+        # Eliminamos accion y producto
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+               
+             
+    # Prueba 
+    def testUpdateTaskShortDesc1(self):
+            
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+               
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+            
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1) 
+          
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw','T',1,1)
+        self.assertTrue(result)
+            
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+             
+    # Prueba 
+    def testUpdateTaskShortDesc140(self):
+          
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+               
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+          
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+            
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw',140*'T',1,1)
+        self.assertTrue(result)
+            
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+               
+    # Prueba 7
+    def testUpdateHistoryLong141(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+               
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+          
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+            
+        aTarea = task()
+        aTarea.insertTask(141*'T',idFound1,1,1)
+        result  = aTarea.updateTask(141*'T',140*'T',1,1)        
+        self.assertFalse(result)
+            
+        # Eliminamos historia, accion y producto
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+               
+    # Prueba 
+    def testUpdateTaskNew0(self):
+        # Insertamos Producto    
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+               
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+          
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+          
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw','',1,1)        
+        self.assertFalse(result)
+            
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+    
+               
+    # Prueba 
+    def testUpdateTaskNoDesc(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+               
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+            
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+          
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('OEdfeenfr','diifneo',1,1)
+        self.assertFalse(result)
+            
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+       
+    # Prueba 
+    def testUpdateTaskLongNew(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+               
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+               
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+          
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)  
+            
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw',140*'T',1,1)
+        self.assertTrue(result)
+            
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+ 
+ 
+    def testUpdateTaskCategory0(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+           
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)  
+           
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw','diifneo',0,1)
+        self.assertFalse(result)
+           
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+ 
+    def testUpdateTaskNoCategory(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+           
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)  
+           
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw','diifneo',2,1)
+        self.assertFalse(result)
+           
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+ 
+    def testUpdateTaskNoneCategory(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+           
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)  
+           
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw','diifneo',None,1)
+        self.assertFalse(result)
+           
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+ 
+    def testUpdateTaskStringCategory(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+           
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)  
+           
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw','diifneo','',1)
+        self.assertFalse(result)
+           
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+ 
+    def testUpdateTaskWeight0(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+           
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)  
+           
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw','diifneo',1,0)
+        self.assertFalse(result)
+           
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+     
+    def testUpdateTaskWeightMax(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+           
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)  
+           
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw','diifneo',1,2**32)
+        self.assertTrue(result)
+           
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+ 
+    def testUpdateTaskNoneWeight(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+           
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)  
+           
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw','diifneo',1,None)
+        self.assertFalse(result)
+           
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+         
+    def testUpdateTaskStringWeight(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+           
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)  
+           
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw','diifneo',1,'')
+        self.assertFalse(result)
+           
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
           
      # Casos Esquinas
             
@@ -2434,7 +2434,7 @@ class TestTask(unittest.TestCase):
         aTarea.insertTask('',1,1,idFound1)
         result  = aTarea.updateTask('','T',1,1)
         self.assertFalse(result)
-#########################################################################################################          
+
         # Eliminamos historia, accion y producto
         aCategory.deleteCategory('wofhweoifh')
         aHist.deleteUserHistory('hIDBW')
@@ -2464,8 +2464,8 @@ class TestTask(unittest.TestCase):
         aCategory.insertCategory('wofhweoifh',1)
           
         aTarea = task()
-        aTarea.insertTask('T',idFound1)
-        result  = aTarea.updateTask('T','')        
+        aTarea.insertTask('T',1,1,idFound1)
+        result  = aTarea.updateTask('T','',1,1)        
         self.assertFalse(result)
           
         # Eliminamos historia, accion y producto
@@ -2498,7 +2498,7 @@ class TestTask(unittest.TestCase):
         aCategory.insertCategory('wofhweoifh',1)
           
         aTarea = task()
-        result  = aTarea.updateTask(141*'T','')        
+        result  = aTarea.updateTask(141*'T','',1,1)        
         self.assertFalse(result)
           
         # Eliminamos historia, accion y producto
@@ -2530,8 +2530,8 @@ class TestTask(unittest.TestCase):
         aCategory.insertCategory('wofhweoifh',1)
           
         aTarea = task()
-        aTarea.insertTask(140*'T',idFound1)
-        result  = aTarea.updateTask(140*'T','T')        
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask(140*'T','T',1,1)        
         self.assertTrue(result)
           
         # Eliminamos historia, accion y producto
@@ -2566,8 +2566,8 @@ class TestTask(unittest.TestCase):
         aCategory.insertCategory('wofhweoifh',1)
           
         aTarea = task()
-        aTarea.insertTask('OEdfeenfr',idFound1)
-        result  = aTarea.updateTask('','')
+        aTarea.insertTask('OEdfeenfr',1,1,idFound1)
+        result  = aTarea.updateTask('','',1,1)
         self.assertFalse(result)
           
         # Eliminamos historia, accion y producto
@@ -2600,8 +2600,8 @@ class TestTask(unittest.TestCase):
         aCategory.insertCategory('wofhweoifh',1)
           
         aTarea = task()
-        aTarea.insertTask('dwidjw',idFound1)
-        result  = aTarea.updateTask(None,None)
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask(None,None,1,1)
         self.assertFalse(result)
           
         # Eliminamos historia, accion y producto
@@ -2634,8 +2634,8 @@ class TestTask(unittest.TestCase):
         aCategory.insertCategory('wofhweoifh',1)
         
         aTarea = task()
-        aTarea.insertTask('dwidjw',idFound1)
-        result  = aTarea.updateTask(None,'diifneo')
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask(None,'diifneo',1,1)
         self.assertFalse(result)
           
         # Eliminamos historia, accion y producto
@@ -2668,8 +2668,8 @@ class TestTask(unittest.TestCase):
         aCategory.insertCategory('wofhweoifh',1)
           
         aTarea = task()
-        aTarea.insertTask('dwidjw',idFound1)
-        result  = aTarea.updateTask('dwidjw',1234)
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        result  = aTarea.updateTask('dwidjw',1234,1,1)
         self.assertFalse(result)
           
         # Eliminamos historia, accion y producto
@@ -2678,7 +2678,739 @@ class TestTask(unittest.TestCase):
         aHist.deleteUserHistory('hIDBW')
         aAcc.deleteAccion('Otra Accion',1)
         aBacklog.deleteProduct('Podn fjdd.')
+
+    # Prueba
+    def testUpdateTaskMaxValues(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
   
+        aTarea = task()
+        aTarea.insertTask('T',1,1,idFound1)
+        result  = aTarea.updateTask('T',140*'A',1,2**31)
+        self.assertTrue(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'A')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+
+    #Prueba
+    
+    def testUpdateTaskMaxWeightMaxString(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask(140*'T',140*'A',1,2**31)
+        self.assertTrue(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'A')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    #Prueba
+    
+    def testUpdateTaskMaxDescMaxWeight(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(141*'T',1,1,idFound1)
+        result  = aTarea.updateTask(141*'T','A',1,2**31)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    #Prueba
+    
+    def testUpdateTaskMaxNewMaxWeight(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask('T',1,1,idFound1)
+        result  = aTarea.updateTask('T',141*'A',1,2**31)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    #Prueba
+    
+    def testUpdateTaskMaxNoCategory(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask(140*'T',140*'A',2**31,2**31)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+
+    #Prueba
+    
+    def testUpdateTaskMaxNoWeight(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(141*'T',1,1,idFound1)
+        result  = aTarea.updateTask(141*'T',141*'A',2**31,1)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+
+    #Prueba
+    
+    def testUpdateTaskMaxNoDesc(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask('T',1,1,idFound1)
+        result  = aTarea.updateTask('T',141*'A',2**31,2**31)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+
+    #Prueba
+    
+    def testUpdateTaskLong0(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask('T',1,1,idFound1)
+        result  = aTarea.updateTask('T','',1,2**31)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask('T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+  
+    #Prueba
+    
+    def testUpdateTaskLong0All(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask('',1,1,idFound1)
+        result  = aTarea.updateTask('','',1,2**31)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    #Prueba
+    
+    def testUpdateTaskNUm0(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask(140*'T',140*'A',0,2**31)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')  
+        
+    #Prueba
+    
+    def testUpdateTaskNum0All(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask(140*'T',140*'A',0,0)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')        
+
+    #Prueba
+    
+    def testUpdateTask1None(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask(140*'T',140*'A',1,None)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    #Prueba
+    
+    def testUpdateTask2None(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask(140*'T',140*'A',None,None)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+
+    #Prueba
+    
+    def testUpdateTask3None(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask(140*'T',None,None,None)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+
+    #Prueba
+    
+    def testUpdateTaskMinAllParams(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask('',1,1,idFound1)
+        result  = aTarea.updateTask('','',0,0)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    #Prueba
+    
+    def testUpdateTask2String(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask(140*'T',140*'A',140*'a',140*'a')
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')   
+        
+    #Prueba
+    
+    def testUpdateTask1String(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask(140*'T',140*'A',1,140*'A')
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    #Prueba
+    
+    def testUpdateTask1StringLeft(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask(140*'T',140*'A',140*'A',1)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+
+    # Casos Malicia
+    
+    #Prueba
+    
+    def testUpdateTaskNoParams(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask('','','','')
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+    
+    #Prueba
+    
+    def testUpdateAllNone(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask(None,None,None,None)
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+
+    #Prueba
+    
+    def testUpdateAllString(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+             
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('Otra cosa',1)
+        search = aAcc.searchAccion('Otra cosa',1)
+        idFound = search[0].AC_idAccion
+             
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+        searchHist = aHist.searchUserHistory('hIDBW')
+        idFound1 = searchHist[0].UH_idUserHistory 
+       
+        #Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+  
+        aTarea = task()
+        aTarea.insertTask(140*'T',1,1,idFound1)
+        result  = aTarea.updateTask(140*'T',140*'A',140*'S',140*'R')
+        self.assertFalse(result)
+          
+        # Eliminamos historia, accion y producto
+        aTarea.deleteTask(140*'T')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('hIDBW')
+        aAcc.deleteAccion('Otra Accion',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+
 #     #############################################      
 #     #   Suite de Pruebas para searchTask        #
 #     #############################################
