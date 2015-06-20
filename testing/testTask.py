@@ -67,8 +67,8 @@ class TestTask(unittest.TestCase):
                 
          # Insertamos la accion
          aAcc = accions()
-         aAcc.insertAccion('Otra Accion',idFound0)
-         search = aAcc.searchAccion('Otra Accion',idFound0)
+         aAcc.insertAccion('eirnbodn',idFound0)
+         search = aAcc.searchAccion('eirnbodn',idFound0)
          idFound = search[0].AC_idAccion
                 
          # Insertamos la historia
@@ -90,7 +90,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion', idFound0)
+         aAcc.deleteAccion('eirnbodn', idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
                  
      # Prueba 3
@@ -166,7 +166,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')                           
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion', idFound0)
+         aAcc.deleteAccion('eirnbodn', idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
                
                
@@ -204,7 +204,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
              
      # Prueba 6
@@ -241,7 +241,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion', idFound0)
+         aAcc.deleteAccion('eirnbodn', idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
                
      # Prueba 7
@@ -276,7 +276,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')        
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
                
      # Prueba 8
@@ -311,7 +311,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
                
      # Prueba 9
@@ -340,13 +340,13 @@ class TestTask(unittest.TestCase):
  
          # Insertamos la tarea    
          aTarea = task()
-         result = aTarea.insertTask('dwidjw',1,1,3)
+         result = aTarea.insertTask('dwidjw',1,1,100)
          self.assertFalse(result)
  
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
        
      # Prueba 10
@@ -381,7 +381,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
  
      # Prueba 11
@@ -416,7 +416,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
                
      # Prueba 12
@@ -451,7 +451,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
        
      # Prueba 13
@@ -486,7 +486,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')        
  
      # Prueba 14
@@ -521,7 +521,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
                
      # Prueba 15
@@ -556,7 +556,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
        
      # Prueba 16
@@ -592,7 +592,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')        
             
      # Casos Esquinas
@@ -630,7 +630,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('T')
          aCategory.deleteCategory('wofhweoifh')  
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion', idFound0)
+         aAcc.deleteAccion('eirnbodn', idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
             
      # Prueba 18
@@ -666,7 +666,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'A')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
       
      # Prueba 19
@@ -695,13 +695,13 @@ class TestTask(unittest.TestCase):
             
          # Insertamos la tarea  
          aTarea = task()
-         result  = aTarea.insertTask(141*'A',1,1,3)
+         result  = aTarea.insertTask(141*'A',1,1,100)
          self.assertFalse(result)        
             
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
               
      # Prueba 20
@@ -730,13 +730,13 @@ class TestTask(unittest.TestCase):
             
          # Insertamos la tarea  
          aTarea = task()
-         result = aTarea.insertTask(140*'H',1,1,3)
+         result = aTarea.insertTask(140*'H',1,1,100)
          self.assertFalse(result)        
             
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
             
      # Prueba 21
@@ -771,7 +771,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
             
      # Prueba 22
@@ -806,7 +806,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
               
      # Prueba 23
@@ -841,7 +841,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
            
      # Prueba 24
@@ -878,7 +878,7 @@ class TestTask(unittest.TestCase):
          aCategory.deleteCategory('wofhweoifh')
          aTarea.deleteTask(140*'T')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
  
      # Prueba 25
@@ -913,7 +913,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')  
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion', idFound0)
+         aAcc.deleteAccion('eirnbodn', idFound0)
          aBacklog.deleteProduct('Podn fjdd.')     
  
      # Prueba 26
@@ -948,7 +948,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')  
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion', idFound0)
+         aAcc.deleteAccion('eirnbodn', idFound0)
          aBacklog.deleteProduct('Podn fjdd.')     
  
      # Prueba 27
@@ -983,7 +983,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')  
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion', idFound0)
+         aAcc.deleteAccion('eirnbodn', idFound0)
          aBacklog.deleteProduct('Podn fjdd.')  
  
      # Prueba 28
@@ -1018,7 +1018,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')  
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion', idFound0)
+         aAcc.deleteAccion('eirnbodn', idFound0)
          aBacklog.deleteProduct('Podn fjdd.')             
    
      # Prueba 29
@@ -1053,7 +1053,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')  
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion', idFound0)
+         aAcc.deleteAccion('eirnbodn', idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
  
      # Prueba 30
@@ -1088,7 +1088,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')  
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion', idFound0)
+         aAcc.deleteAccion('eirnbodn', idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
  
      # Prueba 31
@@ -1123,7 +1123,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')  
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion', idFound0)
+         aAcc.deleteAccion('eirnbodn', idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
  
  
@@ -1159,7 +1159,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')  
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion', idFound0)
+         aAcc.deleteAccion('eirnbodn', idFound0)
          aBacklog.deleteProduct('Podn fjdd.')        
  
      # Casos Malicia
@@ -1196,7 +1196,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
             
      # Prueba 34
@@ -1231,7 +1231,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')  
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
            
      # Prueba 35
@@ -1266,7 +1266,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
               
      # Prueba 36
@@ -1301,7 +1301,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
  
      # Prueba 37
@@ -1336,7 +1336,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')        
  
      # Prueba 38
@@ -1371,7 +1371,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')
  
  # Prueba 39
@@ -1406,7 +1406,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')        
  
      # Prueba 40
@@ -1441,7 +1441,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos la categoria, historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',idFound0)
+         aAcc.deleteAccion('eirnbodn',idFound0)
          aBacklog.deleteProduct('Podn fjdd.')                
                           
      #############################################      
@@ -1480,7 +1480,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
      
      # Prueba 42
@@ -1514,7 +1514,7 @@ class TestTask(unittest.TestCase):
          aCategory.deleteCategory('wofhweoifh')
          aTarea.deleteTask('dwidjw')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.') 
      
      # Prueba 43
@@ -1541,14 +1541,14 @@ class TestTask(unittest.TestCase):
             
          aTarea = task()
          aTarea.insertTask('dwidjw',1,1,idFound1)
-         result = aTarea.getAllTask(2)
+         result = aTarea.getAllTask(100)
          self.assertEqual(result,[])
             
          # Eliminamos historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aTarea.deleteTask('dwidjw')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')  
             
      # Prueba 44
@@ -1580,7 +1580,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.') 
     
      # Prueba 45
@@ -1614,7 +1614,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
     
      # Casos Malicia
@@ -1650,7 +1650,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
             
      # Prueba 47
@@ -1684,7 +1684,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')      
         
      # Prueba 48
@@ -1718,7 +1718,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.') 
     
      #############################################      
@@ -1791,7 +1791,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('diifneo')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
                    
                  
@@ -1828,12 +1828,12 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
          aTarea = task()
      
          # Eliminamos accion y producto
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
                 
      # Prueba 52
@@ -1868,7 +1868,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
               
      # Prueba 53
@@ -1903,7 +1903,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
                 
      # Prueba 54
@@ -1936,7 +1936,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
                 
      # Prueba 55
@@ -1970,7 +1970,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
      
                 
@@ -2005,7 +2005,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
         
      # Prueba 57
@@ -2039,7 +2039,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
   
      #Prueba 58
@@ -2073,7 +2073,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
   
      #Prueba 59
@@ -2100,14 +2100,14 @@ class TestTask(unittest.TestCase):
             
          aTarea = task()
          aTarea.insertTask('dwidjw',1,1,idFound1)
-         result  = aTarea.updateTask('dwidjw','diifneo',2,1)
+         result  = aTarea.updateTask('dwidjw','diifneo',1000,1)
          self.assertFalse(result)
             
          # Eliminamos historia, accion y producto
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
   
      #Prueba 60
@@ -2141,7 +2141,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
   
      #Prueba 61
@@ -2175,7 +2175,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
   
      #Prueba 62
@@ -2209,7 +2209,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
       
      #Prueba 63
@@ -2243,7 +2243,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
   
      #Prueba 64
@@ -2277,7 +2277,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
     
      #Prueba 65
@@ -2311,7 +2311,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
            
       # Casos Esquinas
@@ -2347,7 +2347,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('A')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
             
      # Prueba 67
@@ -2381,7 +2381,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'A')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
    
      # Prueba 68
@@ -2415,7 +2415,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'A')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
               
      # Prueba 69
@@ -2449,7 +2449,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'H')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
             
      # Prueba 70
@@ -2482,7 +2482,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
             
      # Prueba 71
@@ -2516,7 +2516,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
               
      # Prueba 72
@@ -2548,7 +2548,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
            
      # Prueba 73
@@ -2582,7 +2582,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
    
      # Casos Malicia
@@ -2618,7 +2618,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('OEdfeenfr')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
             
      # Prueba 75
@@ -2652,7 +2652,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
            
      # Prueba 76
@@ -2686,7 +2686,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
               
      # Prueba 77
@@ -2720,7 +2720,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('dwidjw')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
  
      # Prueba 78
@@ -2754,7 +2754,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'A')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
  
      #Prueba 79
@@ -2788,7 +2788,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'A')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
          
      #Prueba 80
@@ -2821,7 +2821,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
          
      #Prueba 81
@@ -2855,7 +2855,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
          
      #Prueba 82
@@ -2889,7 +2889,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
  
      #Prueba 83
@@ -2922,7 +2922,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
  
      #Prueba 84
@@ -2956,7 +2956,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
  
      #Prueba 85
@@ -2990,7 +2990,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask('T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
    
      #Prueba 86
@@ -3023,7 +3023,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
          
      #Prueba 87
@@ -3057,7 +3057,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')  
          
      #Prueba 88
@@ -3091,7 +3091,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')        
  
      #Prueba 89
@@ -3125,7 +3125,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
          
      #Prueba 90
@@ -3159,7 +3159,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
  
      #Prueba 91
@@ -3193,7 +3193,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
  
      #Prueba 92
@@ -3226,7 +3226,7 @@ class TestTask(unittest.TestCase):
          # Eliminamos historia, accion y producto
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
          
      #Prueba 93
@@ -3260,7 +3260,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')   
          
      #Prueba 94
@@ -3294,7 +3294,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
          
      #Prueba 95
@@ -3328,7 +3328,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
  
      # Casos Malicia
@@ -3364,7 +3364,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
      
      #Prueba 97
@@ -3398,7 +3398,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
  
      #Prueba 98
@@ -3432,7 +3432,7 @@ class TestTask(unittest.TestCase):
          aTarea.deleteTask(140*'T')
          aCategory.deleteCategory('wofhweoifh')
          aHist.deleteUserHistory('hIDBW')
-         aAcc.deleteAccion('Otra Accion',1)
+         aAcc.deleteAccion('eirnbodn',1)
          aBacklog.deleteProduct('Podn fjdd.')
  
      #############################################      
@@ -4496,9 +4496,10 @@ class TestTask(unittest.TestCase):
         # Insertamos la historia
         aHist = userHistory()
         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
-        aHist.insertUserHistory('BIEEIEB12',1, 1,idFound, idFound0,1)
         searchHist = aHist.searchUserHistory('BIEEIEB1')
         idFound1 = searchHist[0].UH_idUserHistory 
+        aHist.insertUserHistory('BIEEIEB12',idFound1, 1,idFound, idFound0,1)
+        
         searchHist2 = aHist.searchUserHistory('BIEEIEB12')
         idFound2 = searchHist2[0].UH_idUserHistory
     
@@ -4513,7 +4514,7 @@ class TestTask(unittest.TestCase):
 
         # Obtenemos el peso de la historia
         result = aTarea.historyWeight(idFound1)
-        self.assertEqual("", result)
+        self.assertEqual('', result)
                       
         # Eliminamos la tarea, categoria, historia, accion y producto
         aTarea.deleteTask('dwasidjw')
@@ -4834,7 +4835,7 @@ class TestTask(unittest.TestCase):
          
          aTarea = task()
          aTarea.insertTask('T',1,1,idFound1)     
-         l = [(1,1),(2,2)]
+         l = [(1,1),(2,2),(idFound1,20)]
          result  = aTarea.lookup(l,idFound1)    
          self.assertNotEqual('',result)
          
@@ -4899,7 +4900,7 @@ class TestTask(unittest.TestCase):
          aTarea = task()
          aTarea.insertTask('T',1,1,idFound1)     
          l = [(1,1),(2,2)]
-         result  = aTarea.lookup(l,3)    
+         result  = aTarea.lookup(l,100)    
          self.assertEqual('',result)
          
          #ELiminamos la historia, tarea, accion y backlog
