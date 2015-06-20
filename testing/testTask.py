@@ -4254,3 +4254,390 @@ class TestTask(unittest.TestCase):
 #         aHist.deleteUserHistory('BIEEIEB1')
 #         aAcc.deleteAccion('cinrohbwidia',1)
 #         aBacklog.deleteProduct('Podn fjdd.')
+
+    #########################################################      
+    #         Suite de Pruebas para historyWeight           #
+    #########################################################     
+      
+    # Caso Inicial 
+       
+    # Prueba 
+    def testHistoryWeightExists(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+    
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',idFound0)
+        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        idFound = search[0].AC_idAccion
+
+        # Insertamos la historia
+        aHist = userHistory()   
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
+        searchHist = aHist.searchUserHistory('BIEEIEB1')
+        idFound1 = searchHist[0].UH_idUserHistory 
+        
+        # Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+        
+        # Insertamos las tareas    
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+
+        # Obtenemos el peso de la historia
+        result = aTarea.historyWeight(idFound1)
+        self.assertEqual(1, result)
+                      
+        # Eliminamos la tarea, categoria, historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('BIEEIEB1')
+        aAcc.deleteAccion('cinrohbwidia', idFound0)
+        aBacklog.deleteProduct('Podn fjdd.')
+         
+    # Casos Frontera
+
+    # Prueba 
+    def testHistoryWeightNotExists(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+    
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',idFound0)
+        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        idFound = search[0].AC_idAccion
+
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
+        searchHist = aHist.searchUserHistory('BIEEIEB1')
+        idFound1 = searchHist[0].UH_idUserHistory 
+        
+        # Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+        
+        # Insertamos las tareas    
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+
+        # Obtenemos el peso de la historia
+        result = aTarea.historyWeight(0)
+        self.assertEqual(0, result)
+                      
+        # Eliminamos la tarea, categoria, historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('BIEEIEB1')
+        aAcc.deleteAccion('cinrohbwidia', idFound0)
+        aBacklog.deleteProduct('Podn fjdd.')
+
+    # Prueba 
+    def testHistoryWeightIdOneEpic(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+    
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',idFound0)
+        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
+        aHist.insertUserHistory('BIEEIEB12',1, 1,idFound, idFound0,1)
+        searchHist = aHist.searchUserHistory('BIEEIEB1')
+        idFound1 = searchHist[0].UH_idUserHistory 
+        searchHist2 = aHist.searchUserHistory('BIEEIEB12')
+        idFound2 = searchHist2[0].UH_idUserHistory
+    
+        
+        # Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+        
+        # Insertamos las tareas    
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound2)
+        aTarea.insertTask('dwasidjw',1,5,idFound2)
+
+        # Obtenemos el peso de la historia
+        result = aTarea.historyWeight(idFound1)
+        self.assertEqual("", result)
+                      
+        # Eliminamos la tarea, categoria, historia, accion y producto
+        aTarea.deleteTask('dwasidjw')
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('BIEEIEB12')
+        aHist.deleteUserHistory('BIEEIEB1')
+        aAcc.deleteAccion('cinrohbwidia', idFound0)
+        aBacklog.deleteProduct('Podn fjdd.')
+
+    # Prueba 
+    def testHistoryWeightIdOneNotEpic(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+    
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',idFound0)
+        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
+        searchHist = aHist.searchUserHistory('BIEEIEB1')
+        idFound1 = searchHist[0].UH_idUserHistory 
+        
+        # Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+        aCategory.insertCategory('uweuwwqe',6)
+        
+        # Insertamos las tareas    
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+        aTarea.insertTask('dwasidjw',1,5,idFound1)
+        aTarea.insertTask('uyrwuwry',2,9,idFound1)
+        aTarea.insertTask('iophkjmbnb',2,6,idFound1)
+        aTarea.insertTask('qazxc',1,8,idFound1)
+
+        # Obtenemos el peso de la historia
+        result = aTarea.historyWeight(idFound1)
+        self.assertEqual(29, result)
+                      
+        # Eliminamos la tarea, categoria, historia, accion y producto
+        aTarea.deleteTask('qazxc')
+        aTarea.deleteTask('iophkjmbnb')
+        aTarea.deleteTask('uyrwuwry')
+        aTarea.deleteTask('dwasidjw')
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('uweuwwqe')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('BIEEIEB1')
+        aAcc.deleteAccion('cinrohbwidia', idFound0)
+        aBacklog.deleteProduct('Podn fjdd.')
+
+    # Prueba 
+    def testHistoryWeightNotEpic(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+    
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',idFound0)
+        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
+        aHist.insertUserHistory('BIEEIEB12',1, 1,idFound, idFound0,1)
+        searchHist = aHist.searchUserHistory('BIEEIEB1')
+        idFound1 = searchHist[0].UH_idUserHistory 
+        searchHist2 = aHist.searchUserHistory('BIEEIEB12')
+        idFound2 = searchHist2[0].UH_idUserHistory
+    
+        
+        # Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+        aCategory.insertCategory('jiokl',6)
+        
+        # Insertamos las tareas    
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound2)
+        aTarea.insertTask('dwasidjw',2,6,idFound2)
+
+        # Obtenemos el peso de la historia
+        result = aTarea.historyWeight(idFound2)
+        self.assertEqual(7, result)
+                      
+        # Eliminamos la tarea, categoria, historia, accion y producto
+        aTarea.deleteTask('dwasidjw')
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('jiokl')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('BIEEIEB12')
+        aHist.deleteUserHistory('BIEEIEB1')
+        aAcc.deleteAccion('cinrohbwidia', idFound0)
+        aBacklog.deleteProduct('Podn fjdd.')
+
+    # Prueba 
+    def testHistoryWeightIdBig(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+    
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',idFound0)
+        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        idFound = search[0].AC_idAccion
+
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
+        searchHist = aHist.searchUserHistory('BIEEIEB1')
+        idFound1 = searchHist[0].UH_idUserHistory 
+        
+        # Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+        
+        # Insertamos las tareas    
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+
+        # Obtenemos el peso de la historia
+        result = aTarea.historyWeight(2**31)
+        self.assertEqual(0, result)
+                      
+        # Eliminamos la tarea, categoria, historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('BIEEIEB1')
+        aAcc.deleteAccion('cinrohbwidia', idFound0)
+        aBacklog.deleteProduct('Podn fjdd.')
+              
+    # Casos Malicia
+
+    # Prueba 
+    def testHistoryWeightIdString(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+    
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',idFound0)
+        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        idFound = search[0].AC_idAccion
+
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
+        searchHist = aHist.searchUserHistory('BIEEIEB1')
+        idFound1 = searchHist[0].UH_idUserHistory 
+        
+        # Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+        
+        # Insertamos las tareas    
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+
+        # Obtenemos el peso de la historia
+        result = aTarea.historyWeight('uasshj')
+        self.assertEqual(0, result)
+                      
+        # Eliminamos la tarea, categoria, historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('BIEEIEB1')
+        aAcc.deleteAccion('cinrohbwidia', idFound0)
+        aBacklog.deleteProduct('Podn fjdd.')
+                 
+    # Prueba 
+    def testHistoryWeightIdInvalid(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+    
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',idFound0)
+        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        idFound = search[0].AC_idAccion
+
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
+        searchHist = aHist.searchUserHistory('BIEEIEB1')
+        idFound1 = searchHist[0].UH_idUserHistory 
+        
+        # Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+        
+        # Insertamos las tareas    
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+
+        # Obtenemos el peso de la historia
+        result = aTarea.historyWeight(-215848774)
+        self.assertEqual(0, result)
+                      
+        # Eliminamos la tarea, categoria, historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('BIEEIEB1')
+        aAcc.deleteAccion('cinrohbwidia', idFound0)
+        aBacklog.deleteProduct('Podn fjdd.')
+
+    # Prueba 
+    def testHistoryWeightIdNone(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+    
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',idFound0)
+        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        idFound = search[0].AC_idAccion
+
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
+        searchHist = aHist.searchUserHistory('BIEEIEB1')
+        idFound1 = searchHist[0].UH_idUserHistory 
+        
+        # Insertamos la categoria
+        aCategory = category()
+        aCategory.insertCategory('wofhweoifh',1)
+        
+        # Insertamos las tareas    
+        aTarea = task()
+        aTarea.insertTask('dwidjw',1,1,idFound1)
+
+        # Obtenemos el peso de la historia
+        result = aTarea.historyWeight(None)
+        self.assertEqual(0, result)
+                      
+        # Eliminamos la tarea, categoria, historia, accion y producto
+        aTarea.deleteTask('dwidjw')
+        aCategory.deleteCategory('wofhweoifh')
+        aHist.deleteUserHistory('BIEEIEB1')
+        aAcc.deleteAccion('cinrohbwidia', idFound0)
+        aBacklog.deleteProduct('Podn fjdd.')
