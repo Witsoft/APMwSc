@@ -10,6 +10,7 @@ from userHistory import *
 # Declaracion de constantes.
 MIN_ID               = 1
 MIN_WEIGHT           = 1
+MIN_LIST             = 0
 MIN_TASK_DESCRIPTION = 1
 MAX_TASK_DESCRIPTION = 140
 
@@ -97,13 +98,13 @@ class task(object):
             if (long_HW_description and long_newDescription and min_C_idCategory and min_HW_weight):
                 foundTask = self.searchTask(HW_description)
                 foundNew  = self.searchTask(newDescription)
-                if ((foundTask != []) and ((foundNew == [])or(HW_description == newDescription))):
+                foundCat  = clsCategory.query.filter_by(C_idCategory = C_idCategory).all()
+                if ((foundTask != []) and (foundCat != []) and ((foundNew == [])or(HW_description == newDescription))):
                     oTask = clsTask.query.filter_by(HW_description = HW_description).first()
                     oTask.HW_description = newDescription
                     oTask.HW_idCategory   = C_idCategory
                     oTask.HW_weight      = HW_weight
                     db.session.commit()
-                    print("update: ",HW_description, newDescription, C_idCategory, HW_weight)
                     return True
         return False
     
@@ -117,6 +118,7 @@ class task(object):
         return([])                                
 
     def historyWeight(self,idUserHistory):
+        ''' Permite obtener la suma de todos los pesos de las tareas correspondientes a una historia de usuario '''
         checkTypeId = type(idUserHistory) == int
         peso = 0 
         oUserHistory = userHistory()
@@ -131,9 +133,18 @@ class task(object):
             peso = ''
         return peso
     
-    def lookup(self,tupleList,idUserHistory): 
-        for tuple in tupleList:
-            if tuple[0] == idUserHistory:
-                return tuple[1]
+    def lookup(self,tupleList,idUserHistory):
+        ''' Permite obtener el valor asociado a una clave en una lista de tuplas '''
+        checkTypeId    = type(idUserHistory) == int 
+        checkTypeList  = type(tupleList)     == list
+        checkTypeTuple = True
+        if checkTypeList and checkTypeId: 
+            long_list = len(tupleList) > MIN_LIST
+            if long_list:
+                for tupla in tupleList:
+                    checkTypeTuple = checkTypeTuple and (type(tupla) == tuple)
+                    if checkTypeTuple:
+                        if tupla[0] == idUserHistory:
+                            return tupla[1]
         return ('')
 #Fin clase Task
