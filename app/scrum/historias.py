@@ -23,7 +23,6 @@ def ACambiarPrioridades():
     
     # Obtenemos el id del producto.
     idPila  = int(session['idPila'])
-    print('idPila ACambiarPrioridades',idPila)
 
     list = params['lista']
     
@@ -55,7 +54,6 @@ def ACrearHistoria():
     
     # Obtenemos el id del producto.
     idPila  = int(session['idPila'])
-    print('idPila ACrearHistoria',idPila)
         
     # Extraemos los parametros.
     codeHistory = params['codigo']
@@ -117,8 +115,6 @@ def AElimHistoria():
     # Obtenemos el id del producto y de la historia.
     idPila      = int(session['idPila'])
     idHistoria  = int(session['idHistoria'])
-    print('idPila AElimHistoria', idPila)
-    print('idHistoria AElimHistoria', idHistoria)
     
     # Conseguimos la historia a eliminar 
     oUserHistory = userHistory()
@@ -180,7 +176,6 @@ def AModifHistoria():
     
     # Obtenemos el id del Producto.
     idPila  = int(session['idPila'])
-    print('idPila AModifHistoria',idPila) 
     
     # Extraemos los valores
     oUserHist    = userHistory()
@@ -245,7 +240,6 @@ def VCrearHistoria():
     
     # Obtenemos el id del producto.
     idPila = int(request.args.get('idPila',1))
-    print('idPila VCrearHistoria',idPila)
     
     if "actor" in session:
         res['actor']=session['actor']
@@ -304,8 +298,6 @@ def VHistoria():
     # Obtenemos el id del producto y de la historia.
     idPila    = int(session['idPila'])
     idHistory = int(request.args.get('idHistoria'))
-    print('idPila VHistoria',idPila)
-    print('idHistoria VHistoria',idHistory)    
     
     if "actor" in session:
         res['actor']=session['actor']
@@ -402,11 +394,11 @@ def VHistorias():
     
     # Obtenemos el id del producto y de la historia.
     idPila = int(request.args.get('idPila',1))    
-    print('idPila VHistorias',idPila)
     
     if "actor" in session:
         res['actor'] = session['actor']
     
+    oTask             = task()
     oActor            = role()
     oAccion           = accions()
     oObjective        = objective()
@@ -417,7 +409,7 @@ def VHistorias():
     
     # Obtenemos las historias asociadas al producto idPila.
     userHistoriesList = oBacklog.userHistoryAsociatedToProduct(idPila)  
-             
+    pesos          = []         
     userHistories  = []
     options        = {1:'podria ',2:'puede '}
     priorities     = {0:'Epica',1:'Alta',2:'Media',3:'Baja'}
@@ -432,7 +424,9 @@ def VHistorias():
     for hist in userHistoriesList:
         result = oUserHistory.transformUserHistory(hist.UH_idUserHistory)
         userHistories.append(result)
-
+        tupla = (hist.UH_idUserHistory,oTask.historyWeight(hist.UH_idUserHistory))
+        pesos.append(tupla)
+        
     # Obtenemos el maximo de la escala
     if typeScale == 1:
         iterations = 3
@@ -461,9 +455,11 @@ def VHistorias():
                 if hist['idHistory'] == id:
                     userHistories.remove(hist)
                     break
- 
+    
+    
     res['data0']      = [{'idHistoria':hist['idHistory'], 
                           'prioridad' :hist['priority'],
+                          'peso'      :oTask.lookup(pesos,hist['idHistory']),
                           'enunciado' :'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in historiesSortedByPriority]
     session['idPila'] = idPila
     res['idPila']     = idPila 
@@ -479,7 +475,6 @@ def VPrioridades():
     
     # Obtenemos el id del producto.
     idPila    = int(session['idPila'])
-    print('idPila VPrioridades',idPila)
     
     if "actor" in session:
         res['actor']=session['actor']
@@ -545,4 +540,3 @@ def VPrioridades():
 
 
 #Use case code ends here
-
