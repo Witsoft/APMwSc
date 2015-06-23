@@ -90,6 +90,16 @@ class CasosPrueba(unittest.TestCase):
         driver.find_element_by_xpath("//button[@type='submit']").click()
         sleep(2)
         
+        # Caso de prueba para Crear categorias
+        driver.find_element_by_link_text(u"Categorías de tareas").click()
+        driver.find_element_by_id("fCategoria_nombre").clear()
+        driver.find_element_by_id("fCategoria_nombre").send_keys("Categoria1")
+        driver.find_element_by_id("fCategoria_peso").clear()
+        driver.find_element_by_id("fCategoria_peso").send_keys("2")
+        sleep(2)
+        driver.find_element_by_xpath("//button[@type='submit']").click()
+
+        
         # Casos de prueba para agregar Producto
         driver.find_element_by_link_text("+Producto").click()
         driver.find_element_by_id("fPila_nombre").clear()
@@ -104,7 +114,7 @@ class CasosPrueba(unittest.TestCase):
 
         # Casos de prueba ver datos de un producto.
         sleep(2)
-        driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[2]").click()
+        driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[3]").click()
         sleep(2)
         
         # Caso de prueba para crear un actor.

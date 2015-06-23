@@ -204,9 +204,13 @@ class userHistory(object):
             checkLonPriority  = 0 <= priority
 
             if  checkLonIdHistory and checkLonPriority:
-                found = clsUserHistory.query.filter_by(UH_idUserHistory = idHistory).first()
+                found     = clsUserHistory.query.filter_by(UH_idUserHistory = idHistory).first()
+                foundTask = clsTask.query.filter_by(HW_idUserHistory = idHistory).all()
                 if found != None:
                     found.UH_scale = priority
+                    if foundTask != []:
+                        for task in foundTask:    
+                            db.session.delete(task)
                     db.session.commit()
                     return True
         return False
@@ -249,10 +253,14 @@ class userHistory(object):
                 found = clsUserHistory.query.filter_by(UH_codeUserHistory = codeUserHistory).all()
                 
                 if found != []:
+                    idSuperHistory = found[0].UH_idSuperHistory
                     for i in found:    
                         db.session.delete(i)          
                     db.session.commit()
-                    return True
+                    succesor = self.historySuccesors(idSuperHistory)
+                    if (idSuperHistory != 0 and succesor == []):
+                        self.updatePriority(idSuperHistory,1)
+                return True
         return False 
 
 
