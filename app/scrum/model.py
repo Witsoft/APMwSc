@@ -242,11 +242,8 @@ class clsTask(db.Model):
 		return '<HW_ idTask  %r,HW_idCategory %r, HW_weight %r ,HW_idUserHistory %r>' % (self.HW_idTask,self.HW_idCategory,self.HW_weight,self.HW_idUserHistory)
 
 
-
 migrate = Migrate(app, db)
 manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)
-
-
 db.create_all() # Creamos la base de datos
