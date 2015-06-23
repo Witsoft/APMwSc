@@ -20,6 +20,7 @@ from role      import *
 from accions   import *
 from objective import *
 from userHistory import *
+from category import *
 
 
 class CasosPrueba(unittest.TestCase):
@@ -42,25 +43,16 @@ class CasosPrueba(unittest.TestCase):
         oAccion    = accions()
         oObjective = objective()
         oHistory   = userHistory()
+        oCategory  = category() 
         
-        result    = oBacklog.findName('Taxi Seguro')
-        idBacklog = result[0].BL_idBacklog
+
         result    = oUser.deleteUser('usuario')
         print('Eliminar usuario',result)
- #       result    = oActor.deleteActor('Actor 1',idBacklog)
-  #      print('Eliminar Actor',result)
-        result    = oAccion.deleteAccion('Accion',idBacklog)
-        print('Eliminar Accion',result)
-        result    = oAccion.deleteAccion('Accion 1',idBacklog)
-        print('Eliminar Accion',result) 
-        result    = oObjective.deleteObjective('Objetivo2',idBacklog)
-        print('Eliminar obj',result)  
-        result    = oObjective.deleteObjective('Objetivo1',idBacklog)
-        print('Eliminar obj',result) 
         result    = oBacklog.deleteProduct('Producto 1')
-        print('Eliminar obj',result) 
-        result   = oHistory.deleteUserHistory('H1')
-         
+        print('Eliminar producto',result) 
+        result   = oCategory.deleteCategory('Categoria1')
+        print('Eliminar categoria',result) 
+           
               
         # Casos de prueba para registrar un usuario en la aplicacion.
         
@@ -90,6 +82,7 @@ class CasosPrueba(unittest.TestCase):
         driver.find_element_by_xpath("//button[@type='submit']").click()
         sleep(2)
         
+      
         # Caso de prueba para Crear categorias
         driver.find_element_by_link_text(u"Categorías de tareas").click()
         driver.find_element_by_id("fCategoria_nombre").clear()
@@ -98,8 +91,11 @@ class CasosPrueba(unittest.TestCase):
         driver.find_element_by_id("fCategoria_peso").send_keys("2")
         sleep(2)
         driver.find_element_by_xpath("//button[@type='submit']").click()
-
+        sleep(3)
+        driver.find_element_by_xpath("(//a[contains(text(),'Regresar')])").click()
+        sleep(2)
         
+         
         # Casos de prueba para agregar Producto
         driver.find_element_by_link_text("+Producto").click()
         driver.find_element_by_id("fPila_nombre").clear()
@@ -107,43 +103,42 @@ class CasosPrueba(unittest.TestCase):
         driver.find_element_by_id("fPila_descripcion").clear()
         driver.find_element_by_id("fPila_descripcion").send_keys("Nuevo Producto")
         Select(driver.find_element_by_id("fPila_escala")).select_by_visible_text("Alta/Media/Baja")
-        sleep(2)
+        sleep(3)
         driver.find_element_by_xpath("//button[@type='submit']").click()
         sleep(2)
-
-
+         
         # Casos de prueba ver datos de un producto.
         sleep(2)
-        driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[3]").click()
+        driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[2]").click()
         sleep(2)
-        
-        # Caso de prueba para crear un actor.
-
-#         driver.find_element_by_link_text("+Actor").click()       
-#         driver.find_element_by_id("fActor_nombre").clear()
-#         driver.find_element_by_id("fActor_nombre").send_keys("Actor1")
-#         sleep(2)
-#         driver.find_element_by_id("fActor_descripcion").clear()
-#         driver.find_element_by_id("fActor_descripcion").send_keys("Nuevo actor")
-#         sleep(2)
-#         driver.find_element_by_xpath("//button[@type='submit']").click()
-#         sleep(3)
-#         
-#         # Caso de prueba para Modificar actor.
          
-#         driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[4]").click()
-#         driver.find_element_by_name("html").click()
-#         driver.find_element_by_id("taHtmlElement").clear()
-#         driver.find_element_by_id("taHtmlElement").send_keys("Nuevo actor 1")
-#         sleep(1)
-#         driver.find_element_by_xpath("//button[@type='submit']").click()
-#         sleep(1)
-#         driver.find_element_by_link_text("Salir").click()
-#         sleep(1)
-#         
-
-#        driver.find_element_by_css_selector("button.navbar-toggle").click()
-
+        # Caso de prueba para crear un actor.
+ 
+        driver.find_element_by_link_text("+Actor").click()       
+        driver.find_element_by_id("fActor_nombre").clear()
+        driver.find_element_by_id("fActor_nombre").send_keys("Actor1")
+        sleep(3)
+# #         driver.find_element_by_id("fActor_descripcion").clear()
+# #         driver.find_element_by_id("fActor_descripcion").send_keys("Nuevo actor")
+# #         sleep(2)
+# #         driver.find_element_by_xpath("//button[@type='submit']").click()
+# #         sleep(3)
+# #         
+# #         # Caso de prueba para Modificar actor.
+#          
+# #         driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[4]").click()
+# #         driver.find_element_by_name("html").click()
+# #         driver.find_element_by_id("taHtmlElement").clear()
+# #         driver.find_element_by_id("taHtmlElement").send_keys("Nuevo actor 1")
+# #         sleep(1)
+# #         driver.find_element_by_xpath("//button[@type='submit']").click()
+# #         sleep(1)
+# #         driver.find_element_by_link_text("Salir").click()
+# #         sleep(1)
+# #         
+# 
+# #        driver.find_element_by_css_selector("button.navbar-toggle").click()
+# 
         # Caso de prueba para crear una accion.
         sleep(3)
         driver.find_element_by_link_text("+Accion").click()
@@ -152,11 +147,11 @@ class CasosPrueba(unittest.TestCase):
         sleep(2)
         driver.find_element_by_xpath("//button[@type='submit']").click()
         sleep(2)
-          
+           
         # Caso de prueba para ver la accion.
         driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[2]").click()
         sleep(3)
-        
+         
         # Caso de prueba para modificar la accion.
         #driver.get(self.base_url + "/#/VAccion/"+str(idAccion))
         driver.find_element_by_id("fAccion_descripcion").clear()
@@ -164,15 +159,7 @@ class CasosPrueba(unittest.TestCase):
         sleep(2)
         driver.find_element_by_xpath("//button[@type='submit']").click()
         sleep(2)
-   
-#        # Caso de prueba para ver la accion
-#         driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[1]").click()
-#         sleep(3)     
-#         
-#         # Caso de prueba para eliminar accion
-#         driver.find_element_by_link_text("-accion").click()
-#         sleep(2)
-
+    
         # Caso de prueba para crear un objetivo.
         driver.find_element_by_link_text("+Objetivo").click()
         driver.find_element_by_id("fObjetivo_descripcion").clear()
@@ -181,64 +168,53 @@ class CasosPrueba(unittest.TestCase):
         Select(driver.find_element_by_id("fObjetivo_transversal")).select_by_visible_text("No")
         driver.find_element_by_xpath("//button[@type='submit']").click()
         sleep(2)
-        
+         
         # Caso de prueba para ver el Objetivo
         driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[3]").click()
         sleep(3)
-        
+         
         # Caso de prueba para modificar el objetivo.
         driver.find_element_by_id("fObjetivo_descripcion").clear()
         driver.find_element_by_id("fObjetivo_descripcion").send_keys("Objetivo1")
         sleep(2)
         driver.find_element_by_xpath("//button[@type='submit']").click()
         sleep(2)
-        
-#         # Caso de prueba para ver el objetivo
-#         driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[1]").click()
-#         sleep(3)     
-#         
-#         # Caso de prueba para eliminar el objetivo
-#         driver.find_element_by_link_text("-objetivo").click()
-#         sleep(2)
-
+         
         # Caso para agregar Historia_Epica
         driver.find_element_by_link_text("Historias").click()
         sleep(2)
         driver.find_element_by_link_text("Crear").click()
-        sleep(2)
+        sleep(1)
         driver.find_element_by_id("fHistoria_codigo").clear()   
         driver.find_element_by_id("fHistoria_codigo").send_keys("H1")
-        # ERROR: Caught exception [ERROR: Unsupported command [addSelection | id=fHistoria_actores | label=Actor1]]
-        sleep(2)
+        sleep(1)
         Select(driver.find_element_by_id("fHistoria_actores")).select_by_visible_text("Actor1")
-        sleep(2)
+        sleep(1)
         Select(driver.find_element_by_id("fHistoria_tipo")).select_by_visible_text("Opcional")
-        sleep(2)
+        sleep(1)
         Select(driver.find_element_by_id("fHistoria_accion")).select_by_visible_text("Accion 1")
-        sleep(2)
+        sleep(1)
         Select(driver.find_element_by_id("fHistoria_objetivos")).select_by_visible_text("Objetivo1")
-        sleep(2)
-        # ERROR: Caught exception [ERROR: Unsupported command [addSelection | id=fHistoria_objetivos | label=Objetivo1]]
+        sleep(1)
         Select(driver.find_element_by_id("fHistoria_prioridad")).select_by_visible_text("Alta")
         sleep(2)
         driver.find_element_by_xpath("//button[@type='submit']").click()
         sleep(2)
-
-        # Caso para modificar historia
+ 
+       # Caso para modificar historia
         driver.find_element_by_link_text("Detalles").click()
         Select(driver.find_element_by_id("fHistoria_tipo")).select_by_visible_text("Obligatoria")
         sleep(2)
         driver.find_element_by_xpath("//button[@type='submit']").click()
         sleep(2)
-        
-        # Creamos Historia
-     #   driver.find_element_by_link_text("Historias").click()
-     #   sleep(2)
+         
+       # Creamos Historia
+    #   driver.find_element_by_link_text("Historias").click()
+    #   sleep(2)
         driver.find_element_by_link_text("Crear").click()
         sleep(2)
         driver.find_element_by_id("fHistoria_codigo").clear()   
         driver.find_element_by_id("fHistoria_codigo").send_keys("H2")
-        # ERROR: Caught exception [ERROR: Unsupported command [addSelection | id=fHistoria_actores | label=Actor1]]
         sleep(1)
         Select(driver.find_element_by_id("fHistoria_super")).select_by_visible_text("H1")
         sleep(1)
@@ -250,34 +226,125 @@ class CasosPrueba(unittest.TestCase):
         sleep(1)
         Select(driver.find_element_by_id("fHistoria_objetivos")).select_by_visible_text("Objetivo1")
         sleep(1)
-        # ERROR: Caught exception [ERROR: Unsupported command [addSelection | id=fHistoria_objetivos | label=Objetivo1]]
         Select(driver.find_element_by_id("fHistoria_prioridad")).select_by_visible_text("Alta")
         sleep(1)
         driver.find_element_by_xpath("//button[@type='submit']").click()
+        sleep(3)
+        
+        # Caso para agregar tarea a una historia
+        driver.find_element_by_xpath("(//a[contains(text(),'Detalles')])[2]").click()
+        sleep(1)
+        driver.find_element_by_link_text("+tarea").click()
+        sleep(1)
+        driver.find_element_by_id("fTarea_descripcion").clear()
+        driver.find_element_by_id("fTarea_descripcion").send_keys("Tarea1")
+        Select(driver.find_element_by_id("fTarea_categoria")).select_by_visible_text("Categoria1 (2)")
         sleep(2)
+        driver.find_element_by_xpath("//button[@type='submit']").click()
+        sleep(2)
+        
+        # Caso que modifica una tarea
+        driver.find_element_by_link_text("detalles").click()
+        driver.find_element_by_id("fTarea_peso").clear()
+        driver.find_element_by_id("fTarea_peso").send_keys("3")
+        driver.find_element_by_id("fTarea_peso").click()
+        driver.find_element_by_id("fTarea_descripcion").clear()
+        driver.find_element_by_id("fTarea_descripcion").send_keys("Nueva tarea")
+        sleep(2)
+        driver.find_element_by_xpath("//button[@type='submit']").click()
+        sleep(2)
+        driver.find_element_by_xpath("(//a[contains(text(),'Regresar')])").click()
+        sleep(2)
+        
+        # Caso Eliminar Tarea
+        driver.find_element_by_xpath("(//a[contains(text(),'Detalles')])[2]").click()
+        sleep(2)
+        driver.find_element_by_link_text("detalles").click()
+        sleep(2)
+        driver.find_element_by_link_text("-tarea").click()
+        sleep(3)
+        driver.find_element_by_xpath("(//a[contains(text(),'Regresar')])").click()
+        sleep(2)
+        
+        # Caso Cambiar Prioridades
+        driver.find_element_by_link_text("Cambiar prioridades").click()
+        Select(driver.find_element_by_id("fPrioridades_prioridad")).select_by_visible_text("Baja")
+        sleep(2)
+        driver.find_element_by_xpath("//button[@type='submit']").click()
+        sleep(2)
+        
+        # Eliminar Historia
+        driver.find_element_by_xpath("(//a[contains(text(),'Detalles')])[2]").click()
+        sleep(2)
+        driver.find_element_by_link_text("-historia").click()
+        sleep(2)
+        
+        # Eliminar Historia
+        driver.find_element_by_xpath("(//a[contains(text(),'Detalles')])[1]").click()
+        sleep(2)
+        driver.find_element_by_link_text("-historia").click()
+        sleep(2)
+        
+        # Regresamos a la vista de producto
+        driver.find_element_by_xpath("(//a[contains(text(),'Regresar')])").click()
+        sleep(2)
+        # ver el objetivo
+        driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[3]").click()
+        sleep(3)     
+         
+        # Caso de prueba para eliminar el objetivo
+        driver.find_element_by_link_text("-objetivo").click()
+        sleep(2)
+        
+        # Ver accion
+        driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[2]").click()
+        sleep(3)     
+         
+        # Caso de prueba para eliminar accion
+        driver.find_element_by_link_text("-accion").click()
+        sleep(2)
+        
+        # Ver actor
+        driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[1]").click()
+        sleep(3)
+        
+        # Caso de prueba para eliminar acctor
+        driver.find_element_by_link_text("-actor").click()
+        sleep(2)   
+        
+        # Caso de Prueba Salir
+        driver.find_element_by_link_text("Salir").click()
+        sleep(2)
+        
+        
+ 
+        
+        
+        
+#         
+# #        driver.find_element_by_css_selector("button.navbar-toggle").click()
+# #        driver.find_element_by_link_text("Salir").click()
+# 
+# 
+#         
+#         # Eliminamos los datos de prueba introducidos
+#         
+#         result    = oBacklog.findName('Producto 1')
+#         idBacklog = result[0].BL_idBacklog
+#         result    = oActor.deleteActor('Actor 1',idBacklog)
+#         print('Eliminar Actor',result)
+#         result    = oAccion.deleteAccion('Accion',idBacklog)
+#         print('Eliminar Accion',result)
+#         result    = oAccion.deleteAccion('Accion 1',idBacklog)
+#         print('Eliminar Accion',result) 
+#         result    = oObjective.deleteObjective('Objetivo2',idBacklog)
+#         print('Eliminar obj',result)  
+#         result    = oObjective.deleteObjective('Objetivo1',idBacklog)
+#         print('Eliminar obj',result) 
+#         result   = oHistory.deleteUserHistory('H1')
 
-        
-#        driver.find_element_by_css_selector("button.navbar-toggle").click()
-#        driver.find_element_by_link_text("Salir").click()
 
-
-        
-        # Eliminamos los datos de prueba introducidos
-        
-        oBacklog = backlog()
-        oUser    = user()
-        oActor   = role()
-        
-        
-        result    = oBacklog.findName('Taxi Seguro')
-        idBacklog = result[0].BL_idBacklog
-        result    = oUser.deleteUser('usuario')
-        print('Eliminar usuario',result)
-        result    = oActor.deleteActor('Actor 1',idBacklog)
-        print('Eliminar Actor',result)
-        result    = oAccion.deleteAccion('Accion 1',idBacklog)
-        print('Eliminar Accion',result)
-        
+       
         # Cerramos la aplicacion.
 
     
