@@ -13,6 +13,7 @@ ident = Blueprint('ident', __name__)
 def AIdentificar():
     #POST/PUT parameters.
     params  = request.get_json()
+
     results = [{'label':'/VProductos', 'msg':['Bienvenido dueño del producto'], "actor":"duenoProducto"},
                {'label':'/VProductos', 'msg':['Bienvenido Maestro Scrum'], "actor":"maestroScrum"}, 
                {'label':'/VProductos', 'msg':['Bienvenido Desarrollador'], "actor":"desarrollador"},
@@ -79,8 +80,6 @@ def ARegistrar():
         checkNewPassword = oLogin.validPassword(newPassword)
         encriptPassword  = oLogin.encript(newPassword)
         
-        print(checkNewUser,checkNewPassword,checkNewEmail)
-
         if (not checkNewUser) and checkNewPassword and (not checkNewEmail):
             result = oUser.insertUser(newName,newUser,encriptPassword,newEmail,newActor)  
              

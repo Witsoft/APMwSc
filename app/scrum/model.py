@@ -204,30 +204,45 @@ class clsObjectivesUserHistory(db.Model):
 		'''Representacion en string de los id's a los roles y sus historias'''
 		return '<idObjective %r, idUserHistory %r>' % (self.OUH_idObjective, self.OUH_idUserHistory)
 		
-
-		
 class clsTask(db.Model):
-	'''Clase que define el modelo de la tabla HomeWork'''
+	'''Clase que define el modelo de la tabla Task'''
 	
 	__tablename__ = 'task'
-	HW_idTask    = db.Column(db.Integer, primary_key = True, index = True)
+	HW_idTask        = db.Column(db.Integer, primary_key = True, index = True)
 	HW_description 	 = db.Column(db.String(140),unique = True , index = True) 
+	HW_weight        = db.Column(db.Integer)
+	HW_idCategory    = db.Column(db.Integer, db.ForeignKey('category.C_idCategory'))
 	HW_idUserHistory = db.Column(db.Integer, db.ForeignKey('userHistory.UH_idUserHistory'))
 	
-	def __init__(self,description,idUserHistory):
+	def __init__(self,description,idCategory,weight,idUserHistory):
 		self.HW_description	  = description
+		self.HW_idCategory    = idCategory
+		self.HW_weight        = weight
 		self.HW_idUserHistory = idUserHistory 
 
 	def __repr__(self):
 		'''Representacion en string de la Tarea'''
-		return '<HW_ idTask  %r, HW_idUserHistory %r>' % (self.HW_idTask,self.HW_idUserHistory)
+		return '<HW_ idTask  %r,HW_idCategory %r, HW_weight %r ,HW_idUserHistory %r>' % (self.HW_idTask,self.HW_idCategory,self.HW_weight,self.HW_idUserHistory)		
+		
+class clsCategory(db.Model):
+	'''Clase que define el modelo de la tabla Category'''
+	
+	__tablename__ = 'category'
+	C_idCategory      = db.Column(db.Integer, primary_key = True, index = True)
+	C_nameCate     	  = db.Column(db.String(50),unique = True , index = True)
+	C_weight          = db.Column(db.Integer, index = True) 
+	C_refTaskCategory = db.relationship('clsTask', backref = 'category',lazy = 'dynamic', cascade = "all, delete, delete-orphan")
 
+	def __init__(self,nameCate,weight):
+		self.C_nameCate	  = nameCate
+		self.C_weight     = weight 
 
+	def __repr__(self):
+		'''Representacion en string de la Categoria'''
+		return '<C_idCategory  %r, C_nameCate %r, C_weight %r>' % (self.C_idCategory,self.C_nameCate,self.C_weight)
 
 migrate = Migrate(app, db)
 manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)
-
-
 db.create_all() # Creamos la base de datos

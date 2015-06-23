@@ -13,23 +13,24 @@ def ACrearTarea():
     #POST/PUT parameters
     params  = request.get_json()
     results = [{'label':'/VHistoria', 'msg':['Tarea creada']}, {'label':'/VHistoria', 'msg':['No se pudo crear tarea.']}, ]
-    res     = results[1]
-
+    res     = results[0]
+    
     # Obtenemos el id de la historia actual
     idHistory = int(session['idHistoria'])
-    print('idHistoria AcrearTarea',idHistory)
 
     # Extraemos los parametros
-    TaskDesc = params['descripcion']
-        
-    oBackLog = backlog()
-    oTask    = task()
-       
-    insert   = oTask.insertTask(TaskDesc,idHistory)
+    taskDesc    = params['descripcion']
+    idCategoria = params['categoria']
+    taskPeso    = params['peso']
+    oBackLog    = backlog()
+    oTask       = task()
+    
+    insert   = oTask.insertTask(taskDesc, idCategoria, taskPeso, idHistory)
     
     if insert:        
         res = results[0]
-
+    else:
+        res = results[1]
     res['label'] = res['label'] + '/' + str(idHistory)
 
     if "actor" in res:
@@ -80,13 +81,15 @@ def AModifTarea():
     res     = results[0]
 
     idHistoria  = int(session['idHistoria'])
-    
     new_description = params['descripcion']
     idTarea         = params['idTarea']
-        
+    new_idCategoria = params['categoria']
+    new_taskPeso    = params['peso']
+  
     oTarea   = task()
     result   = clsTask.query.filter_by(HW_idTask = idTarea).first()
-    modify   = oTarea.updateTask(result.HW_description,new_description)
+ 
+    modify   = oTarea.updateTask(result.HW_description,new_description,new_idCategoria,new_taskPeso)
     
     if modify:
         res = results[0]
@@ -109,7 +112,6 @@ def VCrearTarea():
     res = {}    
     # Obtenemos el id de la historia actual.
     idHistory = int(request.args.get('idHistoria'))
-    print('idHistoria VCrearTarea',idHistory)  
     
     if "actor" in session:
         res['actor']=session['actor']
@@ -124,23 +126,27 @@ def VCrearTarea():
     
     res['usuario']        = session['usuario']
     res['codHistoria']    = hist[0].UH_codeUserHistory
+    
+    # Obtenemos una lista con los datos asociados a las categorías
+    cateList  = clsCategory.query.all()        
+    
+    # Mostramos los datos en la vista
+    ListaCompleta = []
+    for i in cateList:
+        ListaCompleta.append((i.C_idCategory,i.C_nameCate,i.C_weight))
+    
+    decorated = [(tup[2], tup) for tup in ListaCompleta]
+    decorated.sort()
 
     res['fTarea_opcionesCategoria'] = [
-      {'key':1, 'value':'Crear una acción (1)', 'peso':1},
-      {'key':2, 'value':'Migrar la base de datos (2)', 'peso':2},
-      {'key':3, 'value':'Escribir el manual en línea de una vista (1)', 'peso':1},
-      {'key':4, 'value':'Crear un criterio de aceptación (1)', 'peso':1},
-      {'key':5, 'value':'Crear una prueba de aceptación (2)', 'peso':2},
-      {'key':6, 'value':'Crear una regla de negocio compleja (3)', 'peso':3},
-    ]
+     {'key':cat[1][0] ,'value':cat[1][1]+" ("+str(cat[1][2])+")",'peso':cat[1][2]} for cat in decorated]                                 
+
     res['fTarea'] = {'idHistoria':idHistory}
 
     session['idHistoria'] = idHistory
     res['idHistoria']     = idHistory
 
-
     return json.dumps(res)
-
 
 
 @tareas.route('/tareas/VTarea')
@@ -160,26 +166,20 @@ def VTarea():
 
     idTarea = request.args.get('idTarea')
     result   = clsTask.query.filter_by(HW_idTask = idTarea).first()
-    res['fTarea'] = {'idTarea': idTarea,'descripcion': result.HW_description}
+    categoryList     = clsCategory.query.all()
     
     if 'usuario' not in session:
       res['logout'] = '/'
       return json.dumps(res)
 
     res['usuario']      = session['usuario']
-    res['codHistoria'] = codHistoria
+    res['codHistoria']  = codHistoria
 
     res['fTarea_opcionesCategoria'] = [
-      {'key':1, 'value':'Crear una acción (1)', 'peso':1},
-      {'key':2, 'value':'Migrar la base de datos (2)', 'peso':2},
-      {'key':3, 'value':'Escribir el manual en línea de una vista (1)', 'peso':1},
-      {'key':4, 'value':'Crear un criterio de aceptación (1)', 'peso':1},
-      {'key':5, 'value':'Crear una prueba de aceptación (2)', 'peso':2},
-      {'key':6, 'value':'Crear una regla de negocio compleja (3)', 'peso':3},
-    ]
-    res['fTarea'] = {'idHistoria':1, 'idTarea':int(idTarea),
-                     'descripcion':'Sacarle jugo a una piedra',
-                    'categoria':4, 'peso':1}
+      {'key':cat.C_idCategory ,'value':cat.C_nameCate+" ("+str(cat.C_weight)+")",'peso':result.HW_weight}for cat in categoryList]
+
+    res['fTarea'] = {'idHistoria':idHistoria,'idTarea': idTarea,'descripcion': result.HW_description, 'categoria': result.HW_idCategory, 'peso':result.HW_weight}
+
 
     session['idTarea'] = idTarea
     res['idTarea']     = idTarea
