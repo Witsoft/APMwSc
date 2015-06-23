@@ -13,7 +13,11 @@ CONST_MAX_NAME        = 50
 CONST_MIN_NAME        = 1
 CONST_MIN_ID          = 1
 
-scale_type = [1,2]
+scale_type  = [1,2]
+scale_alta  = [i for i in range(1,7)]
+scale_media = [i for i in range(7,13)]
+scale_baja  = [i for i in range(13,21)]
+scale = {0:0,1:1,2:10,3:20} 
 
 class backlog(object):
     '''Clase que permite (completar)'''
@@ -82,21 +86,30 @@ class backlog(object):
             if checkLongName and checkLongNewName and checkLongNewDesc and checkNewScale:
                 foundName    = self.findName(name)
                 foundNewName = self.findName(new_name)
+                
                 if foundName != [] and (foundNewName == [] or new_name == name):
                     idBacklog        = foundName[0].BL_idBacklog
                     foundUserHistory = clsUserHistory.query.filter_by(UH_idBacklog  = idBacklog).all()
                     currentScale     = foundName[0].BL_scaleType
+                    updateHist       = True
                     
-                    if currentScale != new_scale and foundUserHistory != []:
-                        return False
-                    
-                    newBacklog                = clsBacklog.query.filter_by(BL_name = name).first()
-                    newBacklog.BL_name        = new_name 
-                    newBacklog.BL_description = new_description                   
-                    newBacklog.BL_scaleType   = new_scale 
-                    db.session.commit()
-                    return True
-
+                    if currentScale == new_scale:
+                        updateHist = True
+                    else:                
+                        if foundUserHistory == []:
+                            updateHist = True  
+                        else:
+                            for hist in foundUserHistory:
+                                updateHist = self.updateScaleType(hist.UH_idUserHistory,new_scale)
+                                if updateHist == False:
+                                    break
+                    if updateHist:
+                        newBacklog                = clsBacklog.query.filter_by(BL_name = name).first()
+                        newBacklog.BL_name        = new_name 
+                        newBacklog.BL_description = new_description                   
+                        newBacklog.BL_scaleType   = new_scale 
+                        db.session.commit()
+                        return True
         return False
     
 
@@ -162,4 +175,23 @@ class backlog(object):
             return found
         return([])                             
 
+    def updateScaleType(self,idUserHistory,new_scale):
+        checkTypeId    = type(idUserHistory) == int
+        checkTypeScale = type(new_scale) == int and new_scale in scale 
+          
+        if checkTypeId and checkTypeScale:
+            foundUH = clsUserHistory.query.filter_by(UH_idUserHistory = idUserHistory).first()           
+            if foundUH != None:
+                if new_scale == 1:
+                    if foundUH.UH_scale in scale_alta:foundUH.UH_scale = 1
+                    elif foundUH.UH_scale in scale_media:foundUH.UH_scale = 2
+                    elif foundUH.UH_scale in scale_baja: foundUH.UH_scale = 3
+                    db.session.commit()
+                    return True
+                elif new_scale == 2:
+                    foundUH.UH_scale = scale[foundUH.UH_scale]
+                    db.session.commit()
+                    return True
+        return False         
+        
 # Fin Clase Backlog
