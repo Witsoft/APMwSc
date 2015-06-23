@@ -34,13 +34,13 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1)
+        result = aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1)
         self.assertTrue(result)
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
            
@@ -61,13 +61,13 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H2',0, 1,idFound, idBacklog,1)
-        result = searchHist = aHist.searchUserHistory('H2')
+        aHist.insertUserHistory('OdL',0, 1,idFound, idBacklog,1)
+        result = searchHist = aHist.searchUserHistory('OdL')
         self.assertTrue(result)
         idFound1 = searchHist[0].UH_idUserHistory
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H2')
+        aHist.deleteUserHistory('OdL')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
              
@@ -87,14 +87,14 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H2',0,1,idFound,idBacklog,1)
-        result1 = aHist.insertUserHistory('H2',0,1,idFound,2,1)
+        result = aHist.insertUserHistory('OdL',0,1,idFound,idBacklog,1)
+        result1 = aHist.insertUserHistory('OdL',0,1,idFound,2,1)
         self.assertFalse(result1)
-        searchHist = aHist.searchUserHistory('H2')
+        searchHist = aHist.searchUserHistory('OdL')
         idFound1 = searchHist[0].UH_idUserHistory
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H2')
+        aHist.deleteUserHistory('OdL')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
                         
@@ -191,13 +191,13 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0,2,idFound,idBacklog,1)
+        result = aHist.insertUserHistory('SdC',0,2,idFound,idBacklog,1)
         self.assertTrue(result)
-        searchHist = aHist.searchUserHistory('H3')
+        searchHist = aHist.searchUserHistory('SdC')
         idFound1 = searchHist[0].UH_idUserHistory
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H3')
+        aHist.deleteUserHistory('SdC')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
            
@@ -217,7 +217,7 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0, 2,idFound, 2,1)
+        result = aHist.insertUserHistory('SdC',0, 2,idFound, 2,1)
         self.assertFalse(result)
                    
         # Eliminamos accion y producto
@@ -311,7 +311,7 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H1',0, 2,idFound, 3,1)
+        result = aHist.insertUserHistory('jDw',0, 2,idFound, 3,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -1050,7 +1050,7 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H2',0, None,idFound,idBacklog,1)
+        result = aHist.insertUserHistory('OdL',0, None,idFound,idBacklog,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -1073,7 +1073,7 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0, 1,idFound, None,1)
+        result = aHist.insertUserHistory('SdC',0, 1,idFound, None,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -1096,7 +1096,7 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0, None,idFound, None,1)
+        result = aHist.insertUserHistory('SdC',0, None,idFound, None,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -1142,7 +1142,7 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0, None,idFound, '1',1)
+        result = aHist.insertUserHistory('SdC',0, None,idFound, '1',1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -1165,7 +1165,7 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0, '1',idFound,idBacklog,1)
+        result = aHist.insertUserHistory('SdC',0, '1',idFound,idBacklog,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -1188,7 +1188,7 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        result = aHist.insertUserHistory('H3',0, [],idFound,idBacklog,1)
+        result = aHist.insertUserHistory('SdC',0, [],idFound,idBacklog,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
@@ -1217,15 +1217,15 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         self.assertTrue(searchHist)
         idFound1 = searchHist[0].UH_idUserHistory
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
            
@@ -1246,7 +1246,7 @@ class TestHistory(unittest.TestCase):
         aHist = userHistory()
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         self.assertEqual([],searchHist)
                    
         # Eliminamos historia, accion y producto
@@ -1357,14 +1357,14 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
                    
         # Eliminamos historia, accion y producto
-        result = aHist.deleteUserHistory('H1')
+        result = aHist.deleteUserHistory('jDw')
         self.assertTrue(result)
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
@@ -1385,9 +1385,9 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-                  
+        
         # Eliminamos historia, accion y producto
-        result = aHist.deleteUserHistory('H1')
+        result = aHist.deleteUserHistory('kjefb')
         self.assertFalse(result)
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
@@ -1516,202 +1516,6 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz') 
-           
-    ######################################################      
-    #       Suite de Pruebas para scaleType              #
-    ######################################################
-      
-    # Casos Frontera
-      
-    # Prueba 63
-    def testScaleTypeExist(self):
-        # Insertamos Producto
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
-        findId    = aBacklog.findName('Bxtyllz')
-        idBacklog = findId[0].BL_idBacklog 
-          
-        # Insertamos la accion
-        aAcc = accions()
-        aAcc.insertAccion('Dxfynyr',idBacklog)
-        search = aAcc.searchAccion('Dxfynyr',idBacklog)
-        idFound = search[0].AC_idAccion
-          
-        # Insertamos la historia
-        aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
-        idFound1 = searchHist[0].UH_idUserHistory
-        aHist.scaleType(idFound1)
-        # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
-        aAcc.deleteAccion('Dxfynyr',idBacklog)
-        aBacklog.deleteProduct('Bxtyllz')
-      
-    # Prueba 64    
-    def testScaleType(self):
-        # Insertamos Producto
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
-        findId    = aBacklog.findName('Bxtyllz')
-        idBacklog = findId[0].BL_idBacklog 
-          
-        # Insertamos la accion
-        aAcc = accions()
-        aAcc.insertAccion('Dxfynyr',idBacklog)
-        search = aAcc.searchAccion('Dxfynyr',idBacklog)
-        idFound = search[0].AC_idAccion
-          
-        # Insertamos la historia
-        aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
-        idFound1 = searchHist[0].UH_idUserHistory
-        result = aHist.scaleType(idFound1)
-        # Eliminamos historia, accion y producto
-        self.assertNotEqual(result,None)
-        aHist.deleteUserHistory('H1')
-        aAcc.deleteAccion('Dxfynyr',idBacklog)
-        aBacklog.deleteProduct('Bxtyllz')
-       
-    # Prueba 65  
-    def testScaleTypeNone(self):
-        # Insertamos Producto
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
-        findId    = aBacklog.findName('Bxtyllz')
-        idBacklog = findId[0].BL_idBacklog 
-          
-        # Insertamos la accion
-        aAcc = accions()
-        aAcc.insertAccion('Dxfynyr',idBacklog)
-        search = aAcc.searchAccion('Dxfynyr',idBacklog)
-        idFound = search[0].AC_idAccion
-          
-        # Insertamos la historia
-        aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
-        idFound1 = searchHist[0].UH_idUserHistory
-        result = aHist.scaleType(2)
-
-        # Eliminamos historia, accion y producto
-        self.assertEqual(result,None)
-        aHist.deleteUserHistory('H1')
-        aAcc.deleteAccion('Dxfynyr',idBacklog)
-        aBacklog.deleteProduct('Bxtyllz')
-          
-    # Prueba 66
-    def testScale2History(self):
-        # Insertamos Producto
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
-        findId    = aBacklog.findName('Bxtyllz')
-        idBacklog = findId[0].BL_idBacklog 
-          
-        # Insertamos la accion
-        aAcc = accions()
-        aAcc.insertAccion('Dxfynyr',idBacklog)
-        aAcc.insertAccion('Cualquier cosa3',idBacklog)
-        search = aAcc.searchAccion('Cualquier cosa3',idBacklog)
-        idFound = search[0].AC_idAccion
-          
-        # Insertamos la historia
-        aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,2,idBacklog,1)
-        aHist.insertUserHistory('H2',0, 1,idFound,idBacklog,2)
-        searchHist = aHist.searchUserHistory('H2')
-        idFound1 = searchHist[0].UH_idUserHistory
-        result = aHist.scaleType(idFound1)
-
-        # Eliminamos historia, accion y producto
-        self.assertNotEqual(result,None)
-        aHist.deleteUserHistory('H1')
-        aHist.deleteUserHistory('H2')
-        aAcc.deleteAccion('Dxfynyr',idBacklog)
-        aAcc.deleteAccion('Cualquier cosa3',idBacklog)
-        aBacklog.deleteProduct('Bxtyllz')
-  
-    # Prueba 67
-    def testScaleTypeNoParam(self):
-        # Insertamos Producto
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
-        findId    = aBacklog.findName('Bxtyllz')
-        idBacklog = findId[0].BL_idBacklog 
-          
-        # Insertamos la accion
-        aAcc = accions()
-        aAcc.insertAccion('Dxfynyr',idBacklog)
-        search = aAcc.searchAccion('Dxfynyr',idBacklog)
-        idFound = search[0].AC_idAccion
-          
-        # Insertamos la historia
-        aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
-        idFound1 = searchHist[0].UH_idUserHistory
-        result = aHist.scaleType(None)
-
-        # Eliminamos historia, accion y producto
-        self.assertEqual(result,None)
-        aHist.deleteUserHistory('H1')
-        aAcc.deleteAccion('Dxfynyr',idBacklog)
-        aBacklog.deleteProduct('Bxtyllz')
-          
-    # Prueba 68   
-    def testScaleType0(self):
-        # Insertamos Producto
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
-        findId    = aBacklog.findName('Bxtyllz')
-        idBacklog = findId[0].BL_idBacklog 
-          
-        # Insertamos la accion
-        aAcc = accions()
-        aAcc.insertAccion('Dxfynyr',idBacklog)
-        search = aAcc.searchAccion('Dxfynyr',idBacklog)
-        idFound = search[0].AC_idAccion
-          
-        # Insertamos la historia
-        aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
-        idFound1 = searchHist[0].UH_idUserHistory
-        result = aHist.scaleType(0)
-
-        # Eliminamos historia, accion y producto
-        self.assertEqual(result,None)
-        aHist.deleteUserHistory('H1')
-        aAcc.deleteAccion('Dxfynyr',idBacklog)
-        aBacklog.deleteProduct('Bxtyllz')
-       
-    # Prueba 69  
-    def testScaleTypeNoHistory(self):
-        # Insertamos Producto
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
-        findId    = aBacklog.findName('Bxtyllz')
-        idBacklog = findId[0].BL_idBacklog 
-          
-        # Insertamos la accion
-        aAcc = accions()
-        aAcc.insertAccion('Dxfynyr',idBacklog)
-        search = aAcc.searchAccion('Dxfynyr',idBacklog)
-        idFound = search[0].AC_idAccion
-          
-        # Insertamos la historia
-        aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
-        idFound1 = searchHist[0].UH_idUserHistory
-        result = aHist.scaleType(2)
-
-        # Eliminamos historia, accion y producto
-        self.assertEqual(result,None)
-        aHist.deleteUserHistory('H1')
-        aAcc.deleteAccion('Dxfynyr',idBacklog)
-        aBacklog.deleteProduct('Bxtyllz')
  
     ######################################################      
     #       Suite de Pruebas para updatePriority         #
@@ -1719,7 +1523,7 @@ class TestHistory(unittest.TestCase):
       
     # Casos Frontera 
      
-    # Prueba 70
+    # Prueba 63
     def testUpdatePriorityExist(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -1735,17 +1539,17 @@ class TestHistory(unittest.TestCase):
           
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         aHist.updatePriority(idFound,1)
 
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
   
-    # Prueba 71
+    # Prueba 64
     def testUpdatePriorityTrue(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -1761,18 +1565,18 @@ class TestHistory(unittest.TestCase):
           
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         result = aHist.updatePriority(idFound,1)
 
         # Eliminamos historia, accion y producto
         self.assertTrue(result)
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
-    # Prueba 72
+    # Prueba 65
     def testUpdatePriorityNoIdFound(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -1788,18 +1592,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         result = aHist.updatePriority(2,1)
 
         # Eliminamos historia, accion y producto
         self.assertFalse(result)
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
      
-    # Prueba 73
+    # Prueba 66
     def testUpdatePriority0(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -1815,18 +1619,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         result = aHist.updatePriority(idFound1,0)
 
         # Eliminamos historia, accion y producto
         self.assertTrue(result)
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
      
-    # Prueba 74     
+    # Prueba 67     
     def testUpdatePriority20(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -1842,18 +1646,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         result = aHist.updatePriority(idFound1,20)
 
         # Eliminamos historia, accion y producto
         self.assertTrue(result)
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
      
-    # Prueba 75
+    # Prueba 68
     def testUpdatePriority21(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -1869,18 +1673,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         result = aHist.updatePriority(idFound1,21)
 
         # Eliminamos historia, accion y producto
         self.assertTrue(result)
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
      
-    # Prueba 76   
+    # Prueba 69   
     def testUpdatePriorityId0(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -1896,20 +1700,20 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         result = aHist.updatePriority(0,1)
 
         # Eliminamos historia, accion y producto
         self.assertFalse(result)
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
  
     # Casos Esquina
   
-    # Prueba 77
+    # Prueba 70
     def testUpdatePriority11(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -1925,18 +1729,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         result = aHist.updatePriority(idFound1,1)
         
         # Eliminamos historia, accion y producto
         self.assertTrue(result)
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
 
-    # Prueba 78        
+    # Prueba 71        
     def testUpdatePriority020(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -1952,18 +1756,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         result = aHist.updatePriority(0,20)
         
         # Eliminamos historia, accion y producto
         self.assertFalse(result)
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
  
-    # Prueba 79        
+    # Prueba 72        
     def testUpdatePriority121(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -1979,20 +1783,20 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         result = aHist.updatePriority(idFound1,21)
         
         # Eliminamos historia, accion y producto
         self.assertTrue(result)
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
      
     # Casos Malicia
      
-    # Prueba 80   
+    # Prueba 73   
     def testUpdatePriorityNoneHistory(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2008,18 +1812,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         result = aHist.updatePriority(None,20)
         
         # Eliminamos historia, accion y producto
         self.assertFalse(result)
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
      
-    # Prueba 81    
+    # Prueba 74    
     def testUpdatePriorityNone(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2035,18 +1839,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         result = aHist.updatePriority(idFound1,None)
         
         # Eliminamos historia, accion y producto
         self.assertFalse(result)
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
      
-    # Prueba 82    
+    # Prueba 75    
     def testUpdatePriorityNoParam(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2062,14 +1866,14 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         result = aHist.updatePriority(None,None)
         
         # Eliminamos historia, accion y producto
         self.assertFalse(result)
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
          
@@ -2077,7 +1881,7 @@ class TestHistory(unittest.TestCase):
     #      Suite de Pruebas para succesors      #
     ############################################# 
        
-    # Prueba 83
+    # Prueba 76
     def testExistsSuccesors(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2093,15 +1897,15 @@ class TestHistory(unittest.TestCase):
           
         # Insertamos la historia
         aHist  = userHistory()
-        result = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        result = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
         result = aHist.succesors(1)
                   
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
  
-    # Prueba 84
+    # Prueba 77
     def testNoExistsSuccesors(self):         
         # Insertamos la historia
         aHist  = userHistory()        
@@ -2109,11 +1913,11 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                   
         # Eliminamos la historia
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
                   
     # Casos Frontera        
 
-    # Prueba 85    
+    # Prueba 78    
     def testSuccesorsIdZero(self):
        # Insertamos Producto
         aBacklog = backlog()
@@ -2129,21 +1933,21 @@ class TestHistory(unittest.TestCase):
           
         # Insertamos la historia 1
         aHist  = userHistory()
-        result = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        result = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
          
         # Insertamos la historia 2
         aHist  = userHistory()
-        result = aHist.insertUserHistory('H2',1, 1,idFound,idBacklog,1)
+        result = aHist.insertUserHistory('OdL',1, 1,idFound,idBacklog,1)
          
         # Insertamos la historia 3
         aHist  = userHistory()
-        result = aHist.insertUserHistory('H3',1, 1,idFound,idBacklog,1)
+        result = aHist.insertUserHistory('SdC',1, 1,idFound,idBacklog,1)
          
         result = aHist.succesors(0)
         self.assertEqual(result,[])
                   
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')     
          
@@ -2153,7 +1957,7 @@ class TestHistory(unittest.TestCase):
         
     # Caso Inicial
      
-    # Prueba 86
+    # Prueba 79
     def testGetAllUserHistoryIdNormal(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2168,16 +1972,16 @@ class TestHistory(unittest.TestCase):
         idFound = search[0].AC_idAccion
          
         aHist = userHistory()
-        temp = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        temp = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
         result = aHist.getAllUserHistoryId(1)
         self.assertNotEqual(result,[])
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
-    # Prueba 87
+    # Prueba 80
     def testGetAllUserHistoryIdNotExist(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2192,18 +1996,18 @@ class TestHistory(unittest.TestCase):
         idFound = search[0].AC_idAccion
          
         aHist = userHistory()
-        temp = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        temp = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
         result = aHist.getAllUserHistoryId(2)
         self.assertEqual(result,[])
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
     # Casos Frontera
      
-    # Prueba 88
+    # Prueba 81
     def testGetAllUserHistoryId0(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2218,16 +2022,16 @@ class TestHistory(unittest.TestCase):
         idFound = search[0].AC_idAccion
          
         aHist = userHistory()
-        temp = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        temp = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
         result = aHist.getAllUserHistoryId(0)
         self.assertEqual(result,[])
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')   
          
-    # Prueba 89
+    # Prueba 82
     def testGetAllUserHistoryIdMaxNumber(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2242,18 +2046,18 @@ class TestHistory(unittest.TestCase):
         idFound = search[0].AC_idAccion
          
         aHist = userHistory()
-        temp = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        temp = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
         result = aHist.getAllUserHistoryId((2^31)-1)
         self.assertEqual(result,[])
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')     
      
     # Casos Malicia
      
-    # Prueba 90
+    # Prueba 83
     def testGetAllUserHistoryIdNone(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2268,16 +2072,16 @@ class TestHistory(unittest.TestCase):
         idFound = search[0].AC_idAccion
          
         aHist = userHistory()
-        temp = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        temp = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
         result = aHist.getAllUserHistoryId(None)
         self.assertEqual(result,[])
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')      
          
-    # Prueba 91
+    # Prueba 84
     def testGetAllUserHistoryIdNegativeNumber(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2292,16 +2096,16 @@ class TestHistory(unittest.TestCase):
         idFound = search[0].AC_idAccion
          
         aHist = userHistory()
-        temp = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        temp = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
         result = aHist.getAllUserHistoryId(-1)
         self.assertEqual(result,[])
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')    
          
-    # Prueba 92
+    # Prueba 85
     def testGetAllUserHistoryIdString(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2316,16 +2120,16 @@ class TestHistory(unittest.TestCase):
         idFound = search[0].AC_idAccion
          
         aHist = userHistory()
-        temp = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        temp = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
         result = aHist.getAllUserHistoryId('1')
         self.assertEqual(result,[])
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')       
          
-    # Prueba 93
+    # Prueba 86
     def testGetAllUserHistoryIdArray(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2340,12 +2144,12 @@ class TestHistory(unittest.TestCase):
         idFound = search[0].AC_idAccion
          
         aHist = userHistory()
-        temp = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        temp = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
         result = aHist.getAllUserHistoryId([])
         self.assertEqual(result,[])
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
@@ -2355,7 +2159,7 @@ class TestHistory(unittest.TestCase):
         
     # Caso Inicial
      
-    # Prueba 94
+    # Prueba 87
     def testExistsIsEpic(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2371,17 +2175,17 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.isEpic(idHist)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
-    # Prueba 95
+    # Prueba 88
     def testExistsIsEpicExist(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2397,18 +2201,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.isEpic(idHist)
         self.assertTrue(idHist)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
-    # Prueba 96
+    # Prueba 89
     def testExistsIsEpicNotExist(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2424,20 +2228,20 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.isEpic(2)
         self.assertFalse(result)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
     # Casos Frontera
      
-    # Prueba 97
+    # Prueba 90
     def testExistsIsEpic0(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2453,18 +2257,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.isEpic(0)
         self.assertFalse(result)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
-    # Prueba 98
+    # Prueba 91
     def testExistsIsEpicMaxInt(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2480,20 +2284,20 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.isEpic((2^31)-1)
         self.assertFalse(result)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')    
          
     # Casos Malicia
      
-    # Prueba 99
+    # Prueba 92
     def testExistsIsEpicNegativeNumber(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2509,18 +2313,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.isEpic(-1)
         self.assertFalse(result)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
      
-    # Prueba 100
+    # Prueba 93
     def testExistsIsEpicNone(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2536,18 +2340,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.isEpic(None)
         self.assertFalse(result)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')    
      
-    # Prueba 101
+    # Prueba 94
     def testExistsIsEpicString(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2563,14 +2367,14 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.isEpic('1')
         self.assertFalse(result)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
@@ -2580,7 +2384,7 @@ class TestHistory(unittest.TestCase):
         
     # Caso Inicial
      
-    # Prueba 102
+    # Prueba 95
     def testhistorySuccesors(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2596,19 +2400,19 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.historySuccesors(1)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
     # Casos Normal
      
-    # Prueba 103
+    # Prueba 96
     def testhistorySuccesorsExist(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2624,18 +2428,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.historySuccesors(idHist)
         self.assertEqual(result,[])
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
-    # Prueba 104
+    # Prueba 97
     def testhistorySuccesorsNotExist(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2651,20 +2455,20 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.historySuccesors(idHist)
         self.assertFalse(result)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
     # Casos Frontera
      
-    # Prueba 105
+    # Prueba 98
     def testhistorySuccesors0(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2680,18 +2484,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.historySuccesors(0)
         self.assertFalse(result)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
-    # Prueba 106
+    # Prueba 99
     def testhistorySuccesorsMaxInt(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2707,20 +2511,20 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.historySuccesors((2^31)-1)
         self.assertFalse(result)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')    
          
     # Casos Malicia
      
-    # Prueba 107
+    # Prueba 100
     def testhistorySuccesorsNegativeNumber(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2736,18 +2540,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.historySuccesors(-1)
         self.assertFalse(result)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
      
-    # Prueba 108
+    # Prueba 101
     def testhistorySuccesorsNone(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2763,18 +2567,18 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.historySuccesors(None)
         self.assertFalse(result)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')    
      
-    # Prueba 109
+    # Prueba 102
     def testhistorySuccesorsString(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2790,14 +2594,14 @@ class TestHistory(unittest.TestCase):
          
         # Insertamos la historia
         aHist  = userHistory()
-        temp   = aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
-        hist   = aHist.searchUserHistory('H1')
+        temp   = aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
+        hist   = aHist.searchUserHistory('jDw')
         idHist = hist[0].UH_idUserHistory
         result = aHist.historySuccesors('1')
         self.assertFalse(result)
                  
         # Eliminamos producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
@@ -2807,8 +2611,7 @@ class TestHistory(unittest.TestCase):
       
     # Caso Inicial 
        
-    # Prueba 110
-      
+    # Prueba 103
     def testSearchidUserHistoryIdAccion(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2838,7 +2641,7 @@ class TestHistory(unittest.TestCase):
          
     # Casos Frontera
 
-    # Prueba 111
+    # Prueba 104
     def testSearchidUserHistoryIdAccionNotExist(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2867,7 +2670,7 @@ class TestHistory(unittest.TestCase):
         aAcc.deleteAccion('pppp',idBacklog)
         aBacklog.deleteProduct('hhJJkkk')
          
-    # Prueba 112
+    # Prueba 105
     def testSearchidUserHistoryIdAccionOne(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2896,7 +2699,7 @@ class TestHistory(unittest.TestCase):
         aAcc.deleteAccion('pppp',idBacklog)
         aBacklog.deleteProduct('hhJJkkk')
                
-    # Prueba 113
+    # Prueba 106
     def testSearchidUserHistoryIdAccionBig(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2927,7 +2730,7 @@ class TestHistory(unittest.TestCase):
              
     # Casos Malicia
      
-    # Prueba 114
+    # Prueba 107
     def testSearchidUserHistoryIdAccionString(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2956,7 +2759,7 @@ class TestHistory(unittest.TestCase):
         aAcc.deleteAccion('pppp',idBacklog)
         aBacklog.deleteProduct('hhJJkkk')
              
-    # Prueba 115
+    # Prueba 108
     def testSearchidUserHistoryIdAccionInvalid(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -2985,7 +2788,7 @@ class TestHistory(unittest.TestCase):
         aAcc.deleteAccion('pppp',idBacklog)
         aBacklog.deleteProduct('hhJJkkk')
              
-    # Prueba 116
+    # Prueba 109
     def testSearchidUserHistoryIdAccionNone(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3026,7 +2829,7 @@ class TestHistory(unittest.TestCase):
         
     # Caso Inicial
        
-    # Prueba 117
+    # Prueba 110
     def testAccionsAsociatedToUserHistoryExist(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3042,23 +2845,23 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Buscamos las acciones asociadas 
         result = aHist.accionsAsociatedToUserHistory(idFound1)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
 
     # Caso Normal
 
-    # Prueba 118
+    # Prueba 111
     def testAccionsAsociatedToUserHistoryExistTrue(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3074,10 +2877,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Buscamos las acciones asociadas 
@@ -3085,11 +2888,11 @@ class TestHistory(unittest.TestCase):
         self.assertNotEqual(result,[])
         
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
 
-    # Prueba 119
+    # Prueba 112
     def testAccionsAsociatedToUserHistoryExistFalse(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3105,10 +2908,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Buscamos las acciones asociadas 
@@ -3116,13 +2919,13 @@ class TestHistory(unittest.TestCase):
         self.assertEqual(result,[])
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
 
     # Caso Frontera
 
-    # Prueba 120
+    # Prueba 113
     def testAccionsAsociatedToUserHistoryId1(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3138,10 +2941,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Buscamos las acciones asociadas 
@@ -3149,13 +2952,13 @@ class TestHistory(unittest.TestCase):
         self.assertNotEqual(result,[])
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
         
     # Caso Malicia
 
-    # Prueba 121
+    # Prueba 114
     def testAccionsAsociatedToUserHistoryExistId0(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3171,10 +2974,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Buscamos las acciones asociadas 
@@ -3182,11 +2985,11 @@ class TestHistory(unittest.TestCase):
         self.assertEqual(result,[])
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
 
-    # Prueba 122
+    # Prueba 115
     def testAccionsAsociatedToUserHistoryNegativeId(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3202,10 +3005,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Buscamos las acciones asociadas 
@@ -3213,11 +3016,11 @@ class TestHistory(unittest.TestCase):
         self.assertEqual(result,[])
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
 
-    # Prueba 123
+    # Prueba 116
     def testAccionsAsociatedToUserHistoryNotId(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3233,10 +3036,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Buscamos las acciones asociadas 
@@ -3244,11 +3047,11 @@ class TestHistory(unittest.TestCase):
         self.assertEqual(result,[])
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
 
-    # Prueba 124
+    # Prueba 117
     def testAccionsAsociatedToUserHistoryIdNone(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3264,10 +3067,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Buscamos las acciones asociadas 
@@ -3275,7 +3078,7 @@ class TestHistory(unittest.TestCase):
         self.assertEqual(result,[])
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
         
@@ -3285,7 +3088,7 @@ class TestHistory(unittest.TestCase):
         
     # Caso Inicial
        
-    # Prueba 125
+    # Prueba 118
     def testTransformUserHistoryExist(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3301,23 +3104,23 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Obtenemos los elementos de la historia
         result = aHist.transformUserHistory(idFound1)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
 
     # Caso Normal
 
-    # Prueba 126
+    # Prueba 119
     def testTransformUserHistoryExistTrue(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3333,10 +3136,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Obtenemos los elementos de la historia
@@ -3344,11 +3147,11 @@ class TestHistory(unittest.TestCase):
         self.assertNotEqual(result,{})
         
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
 
-    # Prueba 127
+    # Prueba 120
     def testTransformUserHistoryExistFalse(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3364,10 +3167,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Obtenemos los elementos de la historia
@@ -3375,13 +3178,13 @@ class TestHistory(unittest.TestCase):
         self.assertEqual(result,{})
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
 
     # Caso Frontera
 
-    # Prueba 128
+    # Prueba 121
     def testTransformUserHistoryId1(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3397,10 +3200,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Obtenemos los elementos de la historia
@@ -3408,13 +3211,13 @@ class TestHistory(unittest.TestCase):
         self.assertNotEqual(result,{})
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
         
     # Caso Malicia
 
-    # Prueba 129
+    # Prueba 122
     def testTransformUserHistoryExistId0(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3430,10 +3233,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Obtenemos los elementos de la historia
@@ -3441,11 +3244,11 @@ class TestHistory(unittest.TestCase):
         self.assertEqual(result,{})
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
 
-    # Prueba 130
+    # Prueba 123
     def testTransformUserHistoryNegativeId(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3461,10 +3264,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Obtenemos los elementos de la historia
@@ -3472,11 +3275,11 @@ class TestHistory(unittest.TestCase):
         self.assertEqual(result,{})
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
 
-    # Prueba 131
+    # Prueba 124
     def testTransformUserHistoryNotId(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3492,10 +3295,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Obtenemos los elementos de la historia
@@ -3503,11 +3306,11 @@ class TestHistory(unittest.TestCase):
         self.assertEqual(result,{})
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
 
-    # Prueba 132
+    # Prueba 125
     def testTransformUserHistoryIdNone(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3523,10 +3326,10 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0, 1,idFound,idBacklog,1)
+        aHist.insertUserHistory('jDw',0, 1,idFound,idBacklog,1)
            
         # Buscamos el codigo de la historia
-        searchHist = aHist.searchUserHistory('H1')
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Obtenemos los elementos de la historia
@@ -3534,7 +3337,7 @@ class TestHistory(unittest.TestCase):
         self.assertEqual(result,{})
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
 
@@ -3544,7 +3347,7 @@ class TestHistory(unittest.TestCase):
     
     # Caso Inicial
        
-    # Prueba 133
+    # Prueba 126
     def testUpdateUserHistoryExists(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3560,20 +3363,20 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory(idFound1,'H1',0,1,idFound,1)
+        result = aHist.updateUserHistory(idFound1,'jDw',0,1,idFound,1)
         self.assertTrue(result)
                     
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Dxfynyr',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
                         
-    # Prueba 134
+    # Prueba 127
     def testUpdateUserHistoryRepeatedElement(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3589,22 +3392,22 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H2',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H2')
+        aHist.insertUserHistory('OdL',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('OdL')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory(idFound1,'H2',0,1,idFound,1)
+        result = aHist.updateUserHistory(idFound1,'OdL',0,1,idFound,1)
         self.assertTrue(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H2')
+        aHist.deleteUserHistory('OdL')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
                         
     # Casos Fronteras
          
-    # Prueba 135
+    # Prueba 128
     def testUpdateUserHistoryShortDesc0(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3620,8 +3423,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -3629,11 +3432,11 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
             
-    # Prueba 136
+    # Prueba 129
     def testUpdateUserHistoryShortDesc1(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3649,8 +3452,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -3661,8 +3464,8 @@ class TestHistory(unittest.TestCase):
         aHist.deleteUserHistory('H')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
-           
-    # Prueba 137
+ ########################################################################################          
+    # Prueba 130
     def testUpdateUserHistoryShortDesc11(self):
         # Insertamos Producto
         aBacklog = backlog()
@@ -3678,8 +3481,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -3707,16 +3510,16 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory(idFound1,'H3',0,2,idFound,1)
+        result = aHist.updateUserHistory(idFound1,'SdC',0,2,idFound,1)
         self.assertTrue(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H3')
+        aHist.deleteUserHistory('SdC')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
                       
@@ -3736,8 +3539,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -3745,7 +3548,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
    
@@ -3765,8 +3568,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -3774,7 +3577,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
                    
@@ -3796,8 +3599,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -3805,7 +3608,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
@@ -3825,8 +3628,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -3834,7 +3637,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
@@ -3854,8 +3657,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -3863,7 +3666,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
            
@@ -3883,8 +3686,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -3892,7 +3695,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
@@ -3912,8 +3715,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -3921,7 +3724,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
@@ -3941,8 +3744,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -3950,7 +3753,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
          
@@ -3970,8 +3773,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -3979,7 +3782,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
            
@@ -3999,8 +3802,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4008,7 +3811,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
            
@@ -4028,8 +3831,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4037,7 +3840,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
         
@@ -4057,8 +3860,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4066,7 +3869,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
                       
@@ -4086,8 +3889,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4095,7 +3898,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
            
@@ -4115,8 +3918,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4124,7 +3927,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
            
@@ -4144,8 +3947,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4153,7 +3956,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
        
@@ -4173,8 +3976,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4182,7 +3985,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz') 
               
@@ -4202,8 +4005,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4211,7 +4014,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')      
                   
@@ -4231,8 +4034,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4260,8 +4063,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4269,7 +4072,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')             
            
@@ -4289,8 +4092,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4298,7 +4101,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
            
@@ -4318,8 +4121,8 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4327,7 +4130,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')           
          
@@ -4347,8 +4150,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4356,7 +4159,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')   
          
@@ -4376,8 +4179,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4385,7 +4188,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
                  
@@ -4407,8 +4210,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4416,7 +4219,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')
            
@@ -4436,8 +4239,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4445,7 +4248,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
            
@@ -4465,16 +4268,16 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory(idFound1,'H2',0, None,idFound,1)
+        result = aHist.updateUserHistory(idFound1,'OdL',0, None,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')   
            
@@ -4494,16 +4297,16 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory(None,'H3',0, 1,idFound,1)
+        result = aHist.updateUserHistory(None,'SdC',0, 1,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
            
@@ -4523,16 +4326,16 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory(None,'H3',0, None,idFound,1)
+        result = aHist.updateUserHistory(None,'SdC',0, None,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')  
               
@@ -4552,8 +4355,8 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
@@ -4561,7 +4364,7 @@ class TestHistory(unittest.TestCase):
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')     
            
@@ -4581,16 +4384,16 @@ class TestHistory(unittest.TestCase):
 
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1) 
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1) 
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
 
         # Actualizamos la historia
-        result = aHist.updateUserHistory('1','H3',0, None,idFound,1)
+        result = aHist.updateUserHistory('1','SdC',0, None,idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')    
                          
@@ -4610,16 +4413,16 @@ class TestHistory(unittest.TestCase):
            
         # Insertamos la historia
         aHist = userHistory()
-        aHist.insertUserHistory('H1',0,1,idFound,idBacklog,1)
-        searchHist = aHist.searchUserHistory('H1')
+        aHist.insertUserHistory('jDw',0,1,idFound,idBacklog,1)
+        searchHist = aHist.searchUserHistory('jDw')
         idFound1 = searchHist[0].UH_idUserHistory
         
         # Actualizamos una historia
-        result = aHist.updateUserHistory(idFound1,'H3',0,[],idFound,1)
+        result = aHist.updateUserHistory(idFound1,'SdC',0,[],idFound,1)
         self.assertFalse(result)
                    
         # Eliminamos historia, accion y producto
-        aHist.deleteUserHistory('H1')
+        aHist.deleteUserHistory('jDw')
         aAcc.deleteAccion('Xtry cxsy',idBacklog)
         aBacklog.deleteProduct('Bxtyllz')        
 

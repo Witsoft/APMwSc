@@ -46,7 +46,7 @@ def AModifProducto():
     results = [{'label':'/VProductos', 'msg':['Producto actualizado']}, {'label':'/VProductos', 'msg':['Error al modificar el producto']}]
     res     = results[1]
     
-    # obtenemos los parametros
+    # Obtenemos los parametros
     newname        = params['nombre']
     newdescription = params['descripcion']
     newscale       = params['escala']

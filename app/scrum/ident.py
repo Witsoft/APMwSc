@@ -6,6 +6,7 @@ from app.scrum.accions   import *
 from app.scrum.objective import *
 from app.scrum.user      import *
 from app.scrum.login     import *
+from app.scrum.category  import *
 
 ident = Blueprint('ident', __name__)
 
@@ -13,6 +14,7 @@ ident = Blueprint('ident', __name__)
 def AIdentificar():
     #POST/PUT parameters.
     params  = request.get_json()
+
     results = [{'label':'/VProductos', 'msg':['Bienvenido dueño del producto'], "actor":"duenoProducto"},
                {'label':'/VProductos', 'msg':['Bienvenido Maestro Scrum'], "actor":"maestroScrum"}, 
                {'label':'/VProductos', 'msg':['Bienvenido Desarrollador'], "actor":"desarrollador"},
@@ -79,8 +81,6 @@ def ARegistrar():
         checkNewPassword = oLogin.validPassword(newPassword)
         encriptPassword  = oLogin.encript(newPassword)
         
-        print(checkNewUser,checkNewPassword,checkNewEmail)
-
         if (not checkNewUser) and checkNewPassword and (not checkNewEmail):
             result = oUser.insertUser(newName,newUser,encriptPassword,newEmail,newActor)  
              
@@ -109,25 +109,32 @@ def VLogin():
     oActor   = role()
     oAccion  = accions()
     oObj     = objective()
-
+    oCat     = category()
     isEmpty  = oActor.emptyTable()
     
     if isEmpty:
         print('Cargando datos de prueba...')
         # Se crea un nuevo producto
-        result1 = oBacklog.insertBacklog('Taxi Seguro','Mejor forma de operar un taxi',1)
+        result1  = oBacklog.insertBacklog('Taxi Seguro','Mejor forma de operar un taxi',1)
         # Se crean los roles
-        result2 = oActor.insertActor('Dueño del Producto','Encargado de las decisiones de diseño del producto.',1)
-        result3 = oActor.insertActor('Maestro Scrum','Encargado de orientar y ayudar al equipo desarrollador del producto.',1)
-        result4 = oActor.insertActor('Miembro del Equipo','Pesona involucrada en el desarrollo del producto.',1)
+        result2  = oActor.insertActor('Dueño del Producto','Encargado de las decisiones de diseño del producto.',0)
+        result3  = oActor.insertActor('Maestro Scrum','Encargado de orientar y ayudar al equipo desarrollador del producto.',0)
+        result4  = oActor.insertActor('Miembro del Equipo','Pesona involucrada en el desarrollo del producto.',0)
         # Se crean acciones
-        result5 = oAccion.insertAccion('Enseñar el uso de la aplicacion',1)
-        result6 = oAccion.insertAccion('Registrar vehiculos',1)
+        result5  = oAccion.insertAccion('Enseñar el uso de la aplicacion',1)
+        result6  = oAccion.insertAccion('Registrar vehiculos',1)
         # Se crean objetivos no transversales
-        result7 = oObj.insertObjective('Verificar fallas existentes y solucionarlas',1,False)
-        result8 = oObj.insertObjective('Facilitar la deteccion de defectos',1,False)
-        # Se crean objetivos trnsversales
-        result9 = oObj.insertObjective('Incrementar la produccion',1,True)
+        result7  = oObj.insertObjective('Verificar fallas existentes y solucionarlas',1,False)
+        result8  = oObj.insertObjective('Facilitar la deteccion de defectos',1,False)
+        # Se crean objetivos transversales
+        result9  = oObj.insertObjective('Incrementar la produccion',1,True)
+        #Se crean categorias para las tareas
+        result10 = oCat.insertCategory('Crear una acción',1)
+        result11 = oCat.insertCategory('Migrar la base de datos',2)
+        result12 = oCat.insertCategory('Escribir el manual en línea de una vista',1)
+        result13 = oCat.insertCategory('Crear un criterio de aceptación',1)
+        result14 = oCat.insertCategory('Crear una prueba de aceptación',2)
+        result15 = oCat.insertCategory('Crear una regla de negocio compleja',3)
          
         oLogin = login()
         oUser  = user()     
