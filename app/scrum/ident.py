@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from flask               import request, session, Blueprint, json
-from app.scrum.role      import *
-from app.scrum.accions   import *
-from app.scrum.objective import *
-from app.scrum.user      import *
-from app.scrum.login     import *
+from flask                  import request, session, Blueprint, json
+from app.scrum.role         import *
+from app.scrum.accions      import *
+from app.scrum.objective    import *
+from app.scrum.user         import *
+from app.scrum.login        import *
+from app.scrum.category     import *
+from app.scrum.task         import *
+from app.scrum.userHistory  import *  
 
 ident = Blueprint('ident', __name__)
 
@@ -23,18 +26,19 @@ def AIdentificar():
     if request.method == 'POST':
         userName     = params['usuario']
         userPassword = params['clave']
-        # Buscamos el usuario en la base de datos.
+
+        # Buscamos el usuario en la base de datos
         oUser     = user()
         userLogin = oUser.searchUser(userName)
 
         if userLogin:
             encriptPassword = userLogin[0].U_password
-            # Chequeamos el password.
+            # Chequeamos el password
             oLogin  = login();
             isValid = oLogin.check_password(encriptPassword, userPassword)
 
             if isValid:
-                # Mostramos el nombre en la aplicacion
+                # Mostramos el nombre en la aplicación
                 fullname = userLogin[0].U_fullname
                 session['usuario'] = {'nombre': fullname.title()}
                 
@@ -65,7 +69,7 @@ def ARegistrar():
     
     if request.method == 'POST':
 
-        # Extraemos los datos.
+        # Extraemos los datos
         newName     = params['nombre']
         newUser     = params['usuario']
         newPassword = params['clave']
@@ -82,7 +86,6 @@ def ARegistrar():
         
         if (not checkNewUser) and checkNewPassword and (not checkNewEmail):
             result = oUser.insertUser(newName,newUser,encriptPassword,newEmail,newActor)  
-             
             if result: 
                 res = results[0]
 
@@ -103,45 +106,26 @@ def VLogin():
 
     session.pop('usuario', None)
     
-    # Se precargan valores en la base de datos.
-    oBacklog = backlog() 
+    # Se precargan valores en la base de datos
+    oCate    = category()
     oActor   = role()
-    oAccion  = accions()
-    oObj     = objective()
-
     isEmpty  = oActor.emptyTable()
     
     if isEmpty:
         print('Cargando datos de prueba...')
-        # Se crea un nuevo producto
-        result1 = oBacklog.insertBacklog('Taxi Seguro','Mejor forma de operar un taxi',1)
-        # Se crean los roles
-        result2 = oActor.insertActor('Dueño del Producto','Encargado de las decisiones de diseño del producto.',1)
-        result3 = oActor.insertActor('Maestro Scrum','Encargado de orientar y ayudar al equipo desarrollador del producto.',1)
-        result4 = oActor.insertActor('Miembro del Equipo','Pesona involucrada en el desarrollo del producto.',1)
-        # Se crean acciones
-        result5 = oAccion.insertAccion('Enseñar el uso de la aplicacion',1)
-        result6 = oAccion.insertAccion('Registrar vehiculos',1)
-        # Se crean objetivos no transversales
-        result7 = oObj.insertObjective('Verificar fallas existentes y solucionarlas',1,False)
-        result8 = oObj.insertObjective('Facilitar la deteccion de defectos',1,False)
-        # Se crean objetivos trnsversales
-        result9 = oObj.insertObjective('Incrementar la produccion',1,True)
-         
-        oLogin = login()
-        oUser  = user()     
-        #Creamos usuarios con los tres posibles roles
-        password         = 'Sabeys.2008'
-        encriptPassword  = oLogin.encript(password)
-         
-        result = oUser.insertUser('Dueno','admin',encriptPassword,'productOwner@gmail.com',1) 
-        result = oUser.insertUser('Maestro Scrum','scrum',encriptPassword,'scrumMaster@gmail.com',2) 
-        result = oUser.insertUser('Equipo de Trabajo','team',encriptPassword,'teamMember@gmail.com',3) 
+        #Se crean categorias para las tareas
+        result1  = oCate.insertCategory('Implementar una acción',2)
+        result2  = oCate.insertCategory('Implementar una vista',2)
+        result3  = oCate.insertCategory('Implementar una regla de negocio o un método de una clase',2)
+        result4  = oCate.insertCategory('Migrar la base de datos',2)
+        result5  = oCate.insertCategory('Crear un diagrama UML',1)
+        result6  = oCate.insertCategory('Crear datos inciales',1)
+        result7  = oCate.insertCategory('Crear un criterio de aceptación',1)
+        result8  = oCate.insertCategory('Crear una prueba de aceptación',2)
+        result9  = oCate.insertCategory('Actualizar un elemento implementado en otra tarea',1)
+        result10 = oCate.insertCategory('Escribir el manual en línea de una página',1)
         print('Se cargaron los datos.')
-         
-    print('Valores de Usuario:')
-    print(clsUser.query.all()) 
-
+             
     return json.dumps(res)
 
 

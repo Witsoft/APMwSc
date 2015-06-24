@@ -283,9 +283,9 @@ class TestActors(unittest.TestCase):
         # Inicio de la prueba.
         aAct   = role()
         result = aAct.insertActor('Lxchydzr','Gxlpy cxntzndxntx',0)
-        self.assertFalse(result,"No válido")
+        self.assertTrue(result)
         aBacklog.deleteProduct('Pxrsynzjxs')          
-          
+        aAct.deleteActor('Lxchydzr',0) 
     #############################################      
     #  Suite de Pruebas para findNameActor      #
     #############################################

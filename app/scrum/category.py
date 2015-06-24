@@ -7,7 +7,7 @@ sys.path.append('app/scrum')
 from model import *
 
 # Declaracion de constantes.
-CONST_MAX_NAME_CATEGORY     = 50
+CONST_MAX_NAME_CATEGORY     = 100
 CONST_MIN_NAME_CATEGORY     = 1
 CONST_MIN_ID_CATEGORY       = 1
 CONST_MIN_WEIGHT            = 0

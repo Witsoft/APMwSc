@@ -18,7 +18,7 @@ def ACrearTarea():
     # Obtenemos el id de la historia actual
     idHistory = int(session['idHistoria'])
 
-    # Extraemos los parametros
+    # Extraemos los parámetros
     taskDesc    = params['descripcion']
     idCategoria = params['categoria']
     taskPeso    = params['peso']
@@ -49,12 +49,11 @@ def AElimTarea():
     results = [{'label':'/VHistoria', 'msg':['Tarea borrada']}, {'label':'/VHistoria', 'msg':['No se pudo eliminar la tarea']}, ]
     res     = results[1]
 
-    # Obtenemos los parametros.
+    # Obtenemos los parámetros
     idHistoria = int(session['idHistoria'])
     idTarea    = int(session['idTarea'])
-    print('idHistoria AElimTarea',idHistoria)
-    print('idTarea AElimTarea',idTarea)
 
+    # Eliminamos la tarea 
     oTarea     = task()
     result     = clsTask.query.filter_by(HW_idTask = idTarea).first()
     delete     = oTarea.deleteTask(result.HW_description)
@@ -78,23 +77,24 @@ def AModifTarea():
     #POST/PUT parameters
     params  = request.get_json()
     results = [{'label':'/VHistoria', 'msg':['Tarea modificada']}, {'label':'/VCrearTarea', 'msg':['No se pudo modificar esta tarea.']}, ]
-    res     = results[0]
+    res     = results[1]
 
+    # Obtenemos los parámetros
     idHistoria  = int(session['idHistoria'])
     new_description = params['descripcion']
     idTarea         = params['idTarea']
     new_idCategoria = params['categoria']
     new_taskPeso    = params['peso']
   
+    # Buscamos la tarea a modificar
     oTarea   = task()
     result   = clsTask.query.filter_by(HW_idTask = idTarea).first()
  
+    # Modificamos la tarea
     modify   = oTarea.updateTask(result.HW_description,new_description,new_idCategoria,new_taskPeso)
     
     if modify:
         res = results[0]
-    else:
-        res = results[1]
          
     res['label'] = res['label'] + '/' + str(idHistoria)
 
@@ -110,7 +110,7 @@ def AModifTarea():
 def VCrearTarea():
     #GET parameter
     res = {}    
-    # Obtenemos el id de la historia actual.
+    # Obtenemos el id de la historia actual
     idHistory = int(request.args.get('idHistoria'))
     
     if "actor" in session:
@@ -120,7 +120,7 @@ def VCrearTarea():
       res['logout'] = '/'
       return json.dumps(res)
   
-    # Buscamos la historia actual.
+    # Buscamos la historia actual
     oUserHistory = userHistory()
     hist         = oUserHistory.searchIdUserHistory(idHistory)
     
@@ -153,7 +153,7 @@ def VCrearTarea():
 def VTarea():
     #GET parameter
     
-    # Obtenemos el id de la historia y de la tarea.
+    # Obtenemos el id de la historia y de la tarea
     idTarea    = int(request.args['idTarea'])
     idHistoria = int(session['idHistoria'])
 

@@ -73,7 +73,7 @@ def ACrearHistoria():
         if inserted:
             oObjUserHist = objectivesUserHistory()
             oActUserHist = actorsUserHistory()
-            result       = oUserHistory.searchUserHistory(codeHistory)
+            result       = oUserHistory.searchUserHistory(codeHistory,idPila)
             idInserted   = result[0].UH_idUserHistory
             insertedAct  = False
             insertedObj  = False
@@ -141,7 +141,7 @@ def AElimHistoria():
                     for objetivo in resultObjectives:
                         oObjUserHistory.deleteObjectiveAsociatedInUserHistory(objetivo, idPila)
                         
-                    # Conseguimos las tareas asosciadas a la historia
+                    # Conseguimos las tareas asociadas a la historia
                     aTarea     = task()
                     resultTask = aTarea.taskAsociatedToUserHistory(idHistoria) 
                 
@@ -151,7 +151,7 @@ def AElimHistoria():
                             aTarea.deleteTask(tasky.HW_description)
         
                     # Eliminamos la historia de usuario
-                    deleted = oUserHistory.deleteUserHistory(found[0].UH_codeUserHistory) 
+                    deleted = oUserHistory.deleteUserHistory(found[0].UH_idUserHistory) 
         
                     if deleted:
                         res = results[0]
@@ -391,7 +391,7 @@ def VHistoria():
 def VHistorias():
     #GET parameter
     res = {}
-    
+           
     # Obtenemos el id del producto y de la historia.
     idPila = int(request.args.get('idPila',1))    
     
@@ -406,7 +406,7 @@ def VHistorias():
     oUserHistory      = userHistory()
     oActUserHist      = actorsUserHistory()
     oObjUserHIst      = objectivesUserHistory()
-    
+        
     # Obtenemos las historias asociadas al producto idPila.
     userHistoriesList = oBacklog.userHistoryAsociatedToProduct(idPila)  
     pesos          = []         

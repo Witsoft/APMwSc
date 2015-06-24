@@ -16,7 +16,7 @@ def ACrearCategoria():
     res = results[1]
 
     if params != {}:    
-        # Extraemos los parametros.
+        # Extraemos los parámetros
         cateName    = params['nombre']
         cateWeight  = params['peso']
         
@@ -44,7 +44,7 @@ def AElimCategoria():
     results = [{'label':'/VCategorias', 'msg':['Categoría eliminada.']}, {'label':'/VCategorias', 'msg':['Error al intentar eliminar categoría.']}, ]
     res = results[1]
 
-    # Convertimos parámetro del id a entero
+    # Convertimos el parámetro del id en entero
     idCate = int(idCategoria)
     
     # Buscamos la categoría que vamos a eliminar
@@ -81,6 +81,8 @@ def AModifCategoria():
     # Buscamos la categoría a modificar
     cCategory = category()    
     showCate = cCategory.searchIdCategory(idCategory)
+
+    # Modificamos la categoría
     result  = cCategory.updateCategory(showCate[0].C_nameCate,newNameCategory,newWeight)
 
     if result:

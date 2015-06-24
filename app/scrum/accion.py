@@ -16,12 +16,12 @@ def ACrearAccion():
     results = [{'label':'/VProducto', 'msg':['Acción creada']}, {'label':'/VCrearAccion', 'msg':['Error al crear acción']}, ]
     res     = results[1]
     
-    # Obtenemos el id del producto.
+    # Obtenemos el id del producto
     idPila  = int(session['idPila'])
     print('idPila ACrearAccion',idPila) 
     
     if params != {}:           
-        # Extraemos los parametros.
+        # Extraemos los parámetros
         newDescription = params['descripcion']
         
         if request.method == 'POST':
@@ -49,20 +49,20 @@ def AElimAccion():
     results = [{'label':'/VProducto', 'msg':['Accion eliminada']}, {'label':'/VProducto', 'msg':['No se pudo eliminar esta acción']}, ]
     res     = results[1]
   
-    # Obtenemos el id del producto y de la accion.
+    # Obtenemos el id del producto y de la acción
     idPila   = int(session['idPila'])
     idAccion = int(session['idAccion'])
     print('idPila AElimActor', idPila)
     print('idActor AElimActor', idAccion)
     
-    # Conseguimos la accion a eliminar 
+    # Conseguimos la acción a eliminar 
     oAccion = accions()
     found   = oAccion.searchIdAccion(idAccion)
     
     oAccionUserHist = userHistory()
     result  = oAccionUserHist.searchidUserHistoryIdAccion(idAccion)
   
-    # Verificamos si la accion esta asociado a una historia   
+    # Verificamos si la acción está asociado a una historia   
     if (result == []):
         deleted = oAccion.deleteAccion(found[0].AC_accionDescription, idPila)
         
@@ -87,11 +87,11 @@ def AModifAccion():
     results = [{'label':'/VProducto', 'msg':['Acción actualizada']}, {'label':'/VAccion', 'msg':['Error al modificar acción']}, ]
     res     = results[1] 
     
-    # Obtenemos el id del Producto.
+    # Obtenemos el id del producto
     idPila  = int(session['idPila'])
     print('idPila AModifAccion',idPila) 
      
-    # Extraemos los parametros.
+    # Extraemos los parámetros
     newDescription = params['descripcion']
     idAccion       = int(params['idAccion']) 
 
@@ -119,7 +119,7 @@ def VAccion():
     #GET parameter
     res = {}
     
-    # Obtenemos el id del producto y de la accion.
+    # Obtenemos el id del producto y de la acción
     idPila   = int(session['idPila'])
     idAccion = int(request.args.get('idAccion'))
     print('idPila VAccion',idPila)
@@ -150,7 +150,7 @@ def VCrearAccion():
     #GET parameter
     res = {}
     
-    # Obtenemos el id del producto.
+    # Obtenemos el id del producto
     idPila = request.args.get('idPila',1)
     print('idPila VCrearAccion',idPila)
 

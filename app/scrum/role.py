@@ -11,7 +11,7 @@ CONST_MAX_NAME_ACTOR        = 50
 CONST_MIN_NAME_ACTOR        = 1
 CONST_MIN_ACTOR_DESCRIPTION = 1
 CONST_MAX_ACTOR_DESCRIPTION = 140
-CONST_MIN_ID                = 1
+CONST_MIN_ID                = 0
 
 class role(object):
     '''Clase que permite manejar los Actores de manera persistente'''
@@ -36,7 +36,7 @@ class role(object):
             if checkLongName and checkLongDescription:
                 foundBacklog = clsBacklog.query.filter_by(BL_idBacklog = idBacklog).all()
                 
-                if foundBacklog != []:
+                if foundBacklog != [] or idBacklog == 0:
                     foundActors   = clsActor.query.filter_by(A_idBacklog = idBacklog).all()
                     foundActorNameDesc = []
                     for act in foundActors:

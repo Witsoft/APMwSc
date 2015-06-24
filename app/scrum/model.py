@@ -146,7 +146,7 @@ class clsUserHistory(db.Model):
  	
 	__tablename__ = 'userHistory'
 	UH_idUserHistory     = db.Column(db.Integer, primary_key = True, index = True)
-	UH_codeUserHistory   = db.Column(db.String(11),unique = True , index = True) 
+	UH_codeUserHistory   = db.Column(db.String(11), index = True) 
 	UH_idSuperHistory    = db.Column(db.Integer, db.ForeignKey('userHistory.UH_idUserHistory'),nullable = True) 
 	UH_accionType        = db.Column(db.Integer)
 	UH_idAccion	         = db.Column(db.Integer, db.ForeignKey('accions.AC_idAccion'))
