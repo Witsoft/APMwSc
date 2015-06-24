@@ -13,16 +13,16 @@ def ACrearActor():
     results = [{'label':'/VProducto', 'msg':['Actor creado']}, {'label':'/VCrearActor', 'msg':['Error al crear actor']}, ]
     res     = results[1]
     
-    # Obtenemos el id del producto.
+    # Obtenemos el id del producto
     idPila  = int(session['idPila'])
     print('idPila ACrearActor',idPila) 
     
     if params != {}:    
-        # Extraemos los datos.
+        # Extraemos los datos
         nameActor = params['nombre']
         descActor = params['descripcion'] 
         
-        # Insertamos el actor.
+        # Insertamos el actor
         oActor   = role()
         inserted = oActor.insertActor(nameActor,descActor,idPila)
         if inserted:
@@ -46,7 +46,7 @@ def AElimActor():
     results = [{'label':'/VProducto', 'msg':['Actor eliminado']}, {'label':'/VProducto', 'msg':['No se pudo eliminar este actor']}, ]
     res     = results[1]
     
-    # Obtenemos el id del producto y de la accion.
+    # Obtenemos el id del producto y de la acción
     idPila  = int(session['idPila'])
     idActor = int(session['idActor'])
     print('idPila AElimActor', idPila)
@@ -59,7 +59,7 @@ def AElimActor():
     oActorUserHistory = actorsUserHistory()
     result            = oActorUserHistory.searchidUserHistoryIdActors(idActor)
 
-    # Verificamos si el actor esta asociado a una historia
+    # Verificamos si el actor está asociado a una historia
     if (result == []):
         deleted = oActor.deleteActor(found[0].A_nameActor,idPila)
     
@@ -92,15 +92,16 @@ def AModifActor():
     idPila  = int(session['idPila'])
     print('idPila AModifActor',idPila) 
     
-    # Extraemos los parametros.
-    idActor      = params['idActor'] #Obtenemos el id del actor
+    # Extraemos los parámetros
+    idActor      = params['idActor'] 
     newNameActor = params['nombre']
     newDescActor = params['descripcion'] 
     
     # Conseguimos el actor a modificar  
     oActor = role()
     found  = oActor.findIdActor(idActor)
-    # Modfificamos el actor deseado
+
+    # Modificamos el actor deseado
     result = oActor.updateActor(found[0].A_nameActor , newNameActor, newDescActor,idPila)    
     
     if result:
@@ -123,7 +124,7 @@ def VActor():
     #GET parameter
     res = {}
     
-    # Obtenemos el id del producto y de la accion.
+    # Obtenemos el id del producto y de la acción
     idPila  = int(session['idPila'])
     idActor = int(request.args.get('idActor'))
     print('idPila VActor',idPila)
@@ -137,7 +138,7 @@ def VActor():
       return json.dumps(res)
     res['usuario'] = session['usuario']
 
-    # Buscamos el actor actual.
+    # Buscamos el actor actual
     oActor = role()
     result = oActor.findIdActor(idActor) 
     
@@ -154,7 +155,7 @@ def VCrearActor():
     #GET parameter
     res = {}
            
-    # Obtenemos el id del producto.
+    # Obtenemos el id del producto
     idPila = request.args.get('idPila',1)
     print('idPila VCrearActor',idPila)
     

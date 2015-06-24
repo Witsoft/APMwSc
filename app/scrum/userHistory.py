@@ -337,31 +337,7 @@ class userHistory(object):
                     historyDict['objectives'] = objectivesString.lower()
                     
                     return historyDict
-        return historyDict 
-    
-    
-    def getTreeStructure(self,begin,epics,histories,treeStructure = []):
-        '''Permite almacenar una estructura de arbol'''
-
-        if epics != []:
-            treeStructure.append(epics[begin])
-            subEpics     = epics[begin]['subEpics']
-            subHIstories = epics[begin]['subHist']
-            del epics[begin]
-            
-            if histories != []:
-                for each in subHIstories:
-                    result = self.searchIdUserHistory(each)
-        
-                    if result[0].UH_idSuperHistory == begin:
-                        treeStructure.append(histories[each])
-                        del histories[each]
-                     
-                for each in subEpics:
-                    (treeStructure,epics,histories) = self.getTreeStructure(each, epics, histories, treeStructure)
-
-        return (treeStructure,epics,histories)
-             
+        return historyDict              
 
             
 # Fin Clase userHistory

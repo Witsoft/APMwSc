@@ -1,16 +1,13 @@
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
->>>>>>>=refs/remotes/origin/Desarrolladores
+>>>>>>>=refs/remotes/origin/Historia_6a
 eclipse.preferences.version=1
 encoding//app/scrum/accion.py=utf-8
 encoding//app/scrum/accions.py=utf-8
 encoding//app/scrum/actor.py=utf-8
 encoding//app/scrum/actorsUserHistory.py=utf-8
 encoding//app/scrum/backLog.py=utf-8
-<<<<<<< HEAD
-=======
 encoding//app/scrum/categorias.py=utf-8
->>>>>>> refs/remotes/origin/Historia_6a
 encoding//app/scrum/category.py=utf-8
 encoding//app/scrum/cates.py=utf-8
 encoding//app/scrum/dev.py=utf-8
@@ -28,9 +25,6 @@ encoding//app/scrum/tareas.py=utf-8
 encoding//app/scrum/task.py=utf-8
 encoding//app/scrum/user.py=utf-8
 encoding//app/scrum/userHistory.py=utf-8
-encoding//testing/actorsUserHistoryDummy.py=utf-8
-encoding//testing/objectivesUserHistoryDummy.py=utf-8
-encoding//testing/taskDummy.py=utf-8
 encoding//testing/testAccions.py=utf-8
 encoding//testing/testActorsUserHistory.py=utf-8
 encoding//testing/testBackLog.py=utf-8

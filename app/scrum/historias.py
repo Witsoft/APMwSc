@@ -141,7 +141,7 @@ def AElimHistoria():
                     for objetivo in resultObjectives:
                         oObjUserHistory.deleteObjectiveAsociatedInUserHistory(objetivo, idPila)
                         
-                    # Conseguimos las tareas asosciadas a la historia
+                    # Conseguimos las tareas asociadas a la historia
                     aTarea     = task()
                     resultTask = aTarea.taskAsociatedToUserHistory(idHistoria) 
                 
@@ -391,7 +391,7 @@ def VHistoria():
 def VHistorias():
     #GET parameter
     res = {}
-    
+           
     # Obtenemos el id del producto y de la historia.
     idPila = int(request.args.get('idPila',1))    
     
@@ -406,7 +406,7 @@ def VHistorias():
     oUserHistory      = userHistory()
     oActUserHist      = actorsUserHistory()
     oObjUserHIst      = objectivesUserHistory()
-    
+        
     # Obtenemos las historias asociadas al producto idPila.
     userHistoriesList = oBacklog.userHistoryAsociatedToProduct(idPila)  
     pesos          = []         
