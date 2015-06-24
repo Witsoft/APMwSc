@@ -109,7 +109,7 @@ class CasosPrueba(unittest.TestCase):
          
         # Casos de prueba ver datos de un producto.
         sleep(2)
-        driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[2]").click()
+        driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[3]").click()
         sleep(2)
          
         # Caso de prueba para crear un actor.
@@ -310,6 +310,8 @@ class CasosPrueba(unittest.TestCase):
         # Caso de Prueba Salir
         driver.find_element_by_link_text("Salir").click()
         sleep(2)
+        
+        result    = oBacklog.deleteProduct('Producto 1')
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
