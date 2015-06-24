@@ -48,7 +48,7 @@ class user(object):
                 auser = clsUser.query.filter_by(U_username = username).all()
                 checkIdActor = clsActor.query.filter_by(A_idActor = idActor).all()
 
-                if auser == [] or checkIdActor != []:
+                if auser == [] and checkIdActor != []:
                     newUser = clsUser(fullname,username,password,email,idActor)
                     db.session.add(newUser)
                     db.session.commit()
