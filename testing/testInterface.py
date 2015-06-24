@@ -118,27 +118,23 @@ class CasosPrueba(unittest.TestCase):
         driver.find_element_by_id("fActor_nombre").clear()
         driver.find_element_by_id("fActor_nombre").send_keys("Actor1")
         sleep(3)
-# #         driver.find_element_by_id("fActor_descripcion").clear()
-# #         driver.find_element_by_id("fActor_descripcion").send_keys("Nuevo actor")
-# #         sleep(2)
-# #         driver.find_element_by_xpath("//button[@type='submit']").click()
-# #         sleep(3)
-# #         
-# #         # Caso de prueba para Modificar actor.
-#          
-# #         driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[4]").click()
-# #         driver.find_element_by_name("html").click()
-# #         driver.find_element_by_id("taHtmlElement").clear()
-# #         driver.find_element_by_id("taHtmlElement").send_keys("Nuevo actor 1")
-# #         sleep(1)
-# #         driver.find_element_by_xpath("//button[@type='submit']").click()
-# #         sleep(1)
-# #         driver.find_element_by_link_text("Salir").click()
-# #         sleep(1)
-# #         
-# 
-# #        driver.find_element_by_css_selector("button.navbar-toggle").click()
-# 
+        driver.find_element_by_id("taTextElement").send_keys("Actor nuevo")
+        driver.find_element_by_xpath("//button[@type='submit']").click()
+        sleep(2)
+        
+        # Caso de prueba para ver el actor.
+                  
+        driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[1]").click()
+        sleep(3)
+    
+        # Caso de prueba para modificar el actor.
+        driver.find_element_by_id("taTextElement").clear()
+        driver.find_element_by_id("taTextElement").send_keys("Nuevo actor 1")
+        sleep(2)
+        driver.find_element_by_xpath("//button[@type='submit']").click()
+        sleep(1)
+
+ 
         # Caso de prueba para crear una accion.
         sleep(3)
         driver.find_element_by_link_text("+Accion").click()
@@ -153,7 +149,6 @@ class CasosPrueba(unittest.TestCase):
         sleep(3)
          
         # Caso de prueba para modificar la accion.
-        #driver.get(self.base_url + "/#/VAccion/"+str(idAccion))
         driver.find_element_by_id("fAccion_descripcion").clear()
         driver.find_element_by_id("fAccion_descripcion").send_keys("Accion 1")
         sleep(2)
@@ -315,38 +310,6 @@ class CasosPrueba(unittest.TestCase):
         # Caso de Prueba Salir
         driver.find_element_by_link_text("Salir").click()
         sleep(2)
-        
-        
- 
-        
-        
-        
-#         
-# #        driver.find_element_by_css_selector("button.navbar-toggle").click()
-# #        driver.find_element_by_link_text("Salir").click()
-# 
-# 
-#         
-#         # Eliminamos los datos de prueba introducidos
-#         
-#         result    = oBacklog.findName('Producto 1')
-#         idBacklog = result[0].BL_idBacklog
-#         result    = oActor.deleteActor('Actor 1',idBacklog)
-#         print('Eliminar Actor',result)
-#         result    = oAccion.deleteAccion('Accion',idBacklog)
-#         print('Eliminar Accion',result)
-#         result    = oAccion.deleteAccion('Accion 1',idBacklog)
-#         print('Eliminar Accion',result) 
-#         result    = oObjective.deleteObjective('Objetivo2',idBacklog)
-#         print('Eliminar obj',result)  
-#         result    = oObjective.deleteObjective('Objetivo1',idBacklog)
-#         print('Eliminar obj',result) 
-#         result   = oHistory.deleteUserHistory('H1')
-
-
-       
-        # Cerramos la aplicacion.
-
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
