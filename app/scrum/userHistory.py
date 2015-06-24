@@ -166,7 +166,6 @@ class userHistory(object):
                         result            = clsUserHistory.query.filter_by(UH_idUserHistory  = idUserHist).all()
                         checkSuperHistory = clsUserHistory.query.filter_by(UH_idSuperHistory = idUserHist).all()
 
-                        print(result)
                         if result != []:
                             result[0].UH_codeUserHistory = newCodeUserHistory
                             result[0].UH_accionType      = newAccionType

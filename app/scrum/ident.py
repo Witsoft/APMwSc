@@ -86,7 +86,6 @@ def ARegistrar():
         
         if (not checkNewUser) and checkNewPassword and (not checkNewEmail):
             result = oUser.insertUser(newName,newUser,encriptPassword,newEmail,newActor)  
-             
             if result: 
                 res = results[0]
 
@@ -108,55 +107,25 @@ def VLogin():
     session.pop('usuario', None)
     
     # Se precargan valores en la base de datos
-    oBacklog = backlog() 
+    oCate    = category()
     oActor   = role()
-    oAccion  = accions()
-    oObj     = objective()
-    oCat     = category()
-    oTask    = task()
-    oHistory = userHistory()
     isEmpty  = oActor.emptyTable()
     
     if isEmpty:
         print('Cargando datos de prueba...')
-        # Se crea un nuevo producto
-        result1  = oBacklog.insertBacklog('Taxi Seguro','Mejor forma de operar un taxi',1)
-        # Se crean los roles
-        result2  = oActor.insertActor('Dueño del Producto','Encargado de las decisiones de diseño del producto.',0)
-        result3  = oActor.insertActor('Maestro Scrum','Encargado de orientar y ayudar al equipo desarrollador del producto.',0)
-        result4  = oActor.insertActor('Miembro del Equipo','Pesona involucrada en el desarrollo del producto.',0)
-        # Se crean acciones
-        result5  = oAccion.insertAccion('Enseñar el uso de la aplicacion',1)
-        result6  = oAccion.insertAccion('Registrar vehiculos',1)
-        # Se crean objetivos no transversales
-        result7  = oObj.insertObjective('Verificar fallas existentes y solucionarlas',1,False)
-        result8  = oObj.insertObjective('Facilitar la deteccion de defectos',1,False)
-        # Se crean objetivos transversales
-        result9  = oObj.insertObjective('Incrementar la produccion',1,True)
         #Se crean categorias para las tareas
-        result10 = oCat.insertCategory('Crear una acción',1)
-        result11 = oCat.insertCategory('Migrar la base de datos',2)
-        result12 = oCat.insertCategory('Escribir el manual en línea de una vista',1)
-        result13 = oCat.insertCategory('Crear un criterio de aceptación',1)
-        result14 = oCat.insertCategory('Crear una prueba de aceptación',2)
-        result15 = oCat.insertCategory('Crear una regla de negocio compleja',3)
-         
-        oLogin = login()
-        oUser  = user()     
-        #Creamos usuarios con los tres posibles roles
-        password         = 'Sabeys.2008'
-        encriptPassword  = oLogin.encript(password)
-         
-        result = oUser.insertUser('Dueno','admin',encriptPassword,'productOwner@gmail.com',1) 
-        result = oUser.insertUser('Maestro Scrum','scrum',encriptPassword,'scrumMaster@gmail.com',2) 
-        result = oUser.insertUser('Equipo de Trabajo','team',encriptPassword,'teamMember@gmail.com',3) 
+        result1  = oCate.insertCategory('Implementar una acción',2)
+        result2  = oCate.insertCategory('Implementar una vista',2)
+        result3  = oCate.insertCategory('Implementar una regla de negocio o un método de una clase',2)
+        result4  = oCate.insertCategory('Migrar la base de datos',2)
+        result5  = oCate.insertCategory('Crear un diagrama UML',1)
+        result6  = oCate.insertCategory('Crear datos inciales',1)
+        result7  = oCate.insertCategory('Crear un criterio de aceptación',1)
+        result8  = oCate.insertCategory('Crear una prueba de aceptación',2)
+        result9  = oCate.insertCategory('Actualizar un elemento implementado en otra tarea',1)
+        result10 = oCate.insertCategory('Escribir el manual en línea de una página',1)
         print('Se cargaron los datos.')
-         
-    print('Valores de Usuario:')
-    print(clsUser.query.all()) 
-    
-    
-        
+             
     return json.dumps(res)
 
 
