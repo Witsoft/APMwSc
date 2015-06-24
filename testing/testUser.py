@@ -9,7 +9,7 @@ sys.path.append('../app/scrum')
 from user import *
 from role import *
 
-class TestUsers(unittest.TestCase):
+class TestUser(unittest.TestCase):
 
     ##########################################      
     #   Suite de Pruebas para InsertUser     #
