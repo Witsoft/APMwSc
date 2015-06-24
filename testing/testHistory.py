@@ -5058,4 +5058,6 @@ class TestHistory(unittest.TestCase):
         # Eliminamos historia, accion y producto
         aHist.deleteUserHistory(idFound1)
         aAcc.deleteAccion('pppp',idBacklog)
-        aBacklog.deleteProduct('hhJJkkk')
+        aBacklog.deleteProduct('hhJJkkk')  
+        
+#Fin Casos userHistory
