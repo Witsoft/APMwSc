@@ -17,6 +17,7 @@ scale_type  = [1,2]
 scale_alta  = [i for i in range(1,7)]
 scale_media = [i for i in range(7,13)]
 scale_baja  = [i for i in range(13,21)]
+scale_type1 = [i for i in range(0,4)]
 scale = {0:0,1:1,2:10,3:20} 
 
 class backlog(object):
@@ -189,9 +190,10 @@ class backlog(object):
                     db.session.commit()
                     return True
                 elif new_scale == 2:
-                    foundUH.UH_scale = scale[foundUH.UH_scale]
-                    db.session.commit()
-                    return True
+                    if foundUH.UH_scale in scale_type1:
+                        foundUH.UH_scale = scale[foundUH.UH_scale]
+                        db.session.commit()
+                        return True
         return False         
         
 # Fin Clase Backlog
