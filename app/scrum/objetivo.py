@@ -15,13 +15,13 @@ def ACrearObjetivo():
     results = [{'label':'/VProducto', 'msg':['Objetivo creado']}, {'label':'/VCrearObjetivo', 'msg':['Error al crear objetivo']}, ]
     res     = results[1]
     
-    # Obtenemos el id del producto.
+    # Obtenemos el id del producto
     idPila  = int(session['idPila'])
     print('idPila ACrearObjetivo',idPila) 
     
     if request.method == 'POST':
     
-        # Extraemos los parametros.
+        # Extraemos los parámetros
         newDescription      = params['descripcion']
         transverseObjective = params['transversal']
         
@@ -47,10 +47,9 @@ def ACrearObjetivo():
 def AElimObjetivo():
     #GET parameter
     results = [{'label':'/VProducto', 'msg':['Objetivo eliminado']}, {'label':'/VProducto', 'msg':['No se pudo eliminar este objetivo']}, ]
-    res = results[1]
-    #Action code goes here, res should be a list with a label and a message
+    res     = results[1] 
     
-    # Obtenemos el id del Producto.
+    # Obtenemos el id del producto
     idPila       = int(session['idPila'])
     idObjective  = int(session['idObjective'])
     print('idPila AElimObjetivo', idPila)
@@ -63,7 +62,7 @@ def AElimObjetivo():
     oObjUserHistory = objectivesUserHistory()
     result = oObjUserHistory.searchidUserHistoryIdObjective(idObjective)
     
-    # Verificamos si el objetivo esta asociado a una historia
+    # Verificamos si el objetivo está asociado a una historia
     if (result == []):
         deleted = oObjetivo.deleteObjective(found[0].O_descObjective,idPila) 
 
@@ -72,7 +71,6 @@ def AElimObjetivo():
 
     res['label'] = res['label'] +  '/' + str(idPila)
 
-    #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -89,19 +87,20 @@ def AModifObjetivo():
     results = [{'label':'/VProducto', 'msg':['Objetivo actualizado']}, {'label':'/VObjetivo', 'msg':['Error al modificar objetivo']}, ]
     res     = results[1] 
     
-    # Obtenemos el id del Producto.
+    # Obtenemos el id del producto
     idPila  = int(session['idPila'])
     print('idPila AModifAccion',idPila) 
     
-    # Extraemos los parametros.
-    idObjetivo     = params['idObjetivo']  # Obtenemos el id del objetivo
-    newDescription = params['descripcion'] # Obtenemos la nueva descripción del objetivo
-    newType        = params['transversal'] # Obtenemos el tipo de objetivo(transversal,no transversal)
-    
+    # Extraemos los parámetros
+    idObjetivo     = params['idObjetivo']  
+    newDescription = params['descripcion'] 
+    newType        = params['transversal'] 
+        
+    # Conseguimos el objetivo a modificar
     oObjetivo    = objective()
-    # Conseguimos el objetivo a modificar.
     objetivoDesc = oObjetivo.searchIdObjective(idObjetivo) 
-    #Modificamos la descripción del objetivo.    
+
+    # Modificamos la descripción del objetivo    
     result       = oObjetivo.updateObjective(objetivoDesc[0].O_descObjective , newDescription,newType,idPila) 
 
     if result:
@@ -124,7 +123,7 @@ def VObjetivo():
     #GET parameter
     res = {}
     
-    # Obtenemos el id del producto y del objetivo.
+    # Obtenemos el id del producto y del objetivo
     idPila      = int(session['idPila'])
     idObjective = int(request.args.get('idObjetivo'))
     print('idPila VObjetivo',idPila)
@@ -141,11 +140,13 @@ def VObjetivo():
   
     res['usuario'] = session['usuario']
     
+    # Determinamos el tipo de objetivo a través de su id
     oObjective = objective()
     result     = oObjective.searchIdObjective(idObjective)
     number     = int(result[0].O_objType)
     istransver = boolean[number]
 
+    # Mostramos los objetivos en la vista
     res['fObjetivo_opcionesTransversalidad'] = [{'key':True, 'value':'Si'},{'key':False, 'value':'No'}]
     res['fObjetivo'] = {'idObjetivo':idObjective, 'descripcion':result[0].O_descObjective , 'transversal':istransver}    
     res['idPila']    = idPila
@@ -160,7 +161,7 @@ def VCrearObjetivo():
     #GET parameter
     res = {}
     
-    # Obtenemos el id del producto.
+    # Obtenemos el id del producto
     idPila = request.args.get('idPila',1)
     print('idPila VCrearObjetivo',idPila)
     

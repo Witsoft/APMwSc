@@ -3,13 +3,13 @@
 import sys
 import unittest
 
-# Ruta que permite utilizar el módulo objective.py
+# Ruta que permite utilizar el módulo user.py
 sys.path.append('../app/scrum')
 
 from login import *
 
-class clsLoginTester(unittest.TestCase):
-
+class TestLogin(unittest.TestCase):
+        
     def testclsLoginEncriptFalse(self):
         aclsLogin = login() 
      
@@ -431,3 +431,4 @@ class clsLoginTester(unittest.TestCase):
         
         c6 = "C*@d$.3Aca#a3aE+$"    #longitud 17    caracteres validos
         self.assertEqual(17, aclsLogin.length_password(c6))
+#Fin de Casos Login 

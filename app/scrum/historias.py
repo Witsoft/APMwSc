@@ -23,10 +23,8 @@ def ACambiarPrioridades():
     
     # Obtenemos el id del producto.
     idPila  = int(session['idPila'])
-    print('idPila ACambiarPrioridades',idPila)
 
     list = params['lista']
-    print(list)
     
     oHistory = userHistory()
     
@@ -38,13 +36,11 @@ def ACambiarPrioridades():
     res['label']  = res['label']+'/'+str(idPila)
     res['idPila'] = idPila
 
-    #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
         else:
-            session['actor'] = res['actor']
-            
+            session['actor'] = res['actor']        
     return json.dumps(res)
 
 
@@ -58,7 +54,6 @@ def ACrearHistoria():
     
     # Obtenemos el id del producto.
     idPila  = int(session['idPila'])
-    print('idPila ACrearHistoria',idPila)
         
     # Extraemos los parametros.
     codeHistory = params['codigo']
@@ -78,7 +73,7 @@ def ACrearHistoria():
         if inserted:
             oObjUserHist = objectivesUserHistory()
             oActUserHist = actorsUserHistory()
-            result       = oUserHistory.searchUserHistory(codeHistory)
+            result       = oUserHistory.searchUserHistory(codeHistory,idPila)
             idInserted   = result[0].UH_idUserHistory
             insertedAct  = False
             insertedObj  = False
@@ -116,13 +111,10 @@ def AElimHistoria():
     #GET parameter
     results = [{'label':'/VHistorias', 'msg':['Historia eliminada']}, {'label':'/VHistorias', 'msg':['No se pudo eliminar esta historia']}, ]
     res = results[1]
-    #Action code goes here, res should be a list with a label and a message
 
     # Obtenemos el id del producto y de la historia.
     idPila      = int(session['idPila'])
     idHistoria  = int(session['idHistoria'])
-    print('idPila AElimHistoria', idPila)
-    print('idHistoria AElimHistoria', idHistoria)
     
     # Conseguimos la historia a eliminar 
     oUserHistory = userHistory()
@@ -148,16 +140,24 @@ def AElimHistoria():
                     # Eliminamos los objetivos asociados a la historia
                     for objetivo in resultObjectives:
                         oObjUserHistory.deleteObjectiveAsociatedInUserHistory(objetivo, idPila)
+                        
+                    # Conseguimos las tareas asociadas a la historia
+                    aTarea     = task()
+                    resultTask = aTarea.taskAsociatedToUserHistory(idHistoria) 
+                
+                    if (resultTask != []):
+                        # Eliminamos las tareas asociados a la historia
+                        for tasky in resultTask:
+                            aTarea.deleteTask(tasky.HW_description)
         
                     # Eliminamos la historia de usuario
-                    deleted = oUserHistory.deleteUserHistory(found[0].UH_codeUserHistory) 
+                    deleted = oUserHistory.deleteUserHistory(found[0].UH_idUserHistory) 
         
                     if deleted:
                         res = results[0]
 
     res['label'] = res['label'] + '/' + str(idPila)
 
-    #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -171,12 +171,11 @@ def AElimHistoria():
 def AModifHistoria():
     #POST/PUT parameters
     params  = request.get_json()
-    results = [{'label':'/VHistorias', 'msg':['Historia modificada']}, {'label':'/VHistoria', 'msg':['Error al modificar historia']}, ]
+    results = [{'label':'/VHistorias', 'msg':['Historia modificada']}, {'label':'/VHistorias', 'msg':['Error al modificar historia']}, ]
     res     = results[1]
     
     # Obtenemos el id del Producto.
     idPila  = int(session['idPila'])
-    print('idPila AModifHistoria',idPila) 
     
     # Extraemos los valores
     oUserHist    = userHistory()
@@ -219,7 +218,7 @@ def AModifHistoria():
             for id in idObjectives:
                 insertedAct = oObjUserHist.insertObjectiveAsociatedInUserHistory(id,idHistory)
             
-            if not isEpic:
+            if not oUserHist.isEpic:
                 result = oUserHist.updatePriority(priority)
         
             res = results[0]
@@ -230,8 +229,7 @@ def AModifHistoria():
         if res['actor'] is None:
             session.pop("actor", None)
         else:
-            session['actor'] = res['actor']
-            
+            session['actor'] = res['actor']       
     return json.dumps(res)
 
 
@@ -242,7 +240,6 @@ def VCrearHistoria():
     
     # Obtenemos el id del producto.
     idPila = int(request.args.get('idPila',1))
-    print('idPila VCrearHistoria',idPila)
     
     if "actor" in session:
         res['actor']=session['actor']
@@ -295,15 +292,12 @@ def VCrearHistoria():
 
 @historias.route('/historias/VHistoria')
 def VHistoria():
-
     #GET parameter
     res = {}
 
     # Obtenemos el id del producto y de la historia.
     idPila    = int(session['idPila'])
     idHistory = int(request.args.get('idHistoria'))
-    print('idPila VHistoria',idPila)
-    print('idHistoria VHistoria',idHistory)    
     
     if "actor" in session:
         res['actor']=session['actor']
@@ -313,7 +307,7 @@ def VHistoria():
       return json.dumps(res)
     res['usuario'] = session['usuario']
 
-    scale = {1:'Alta',2:'Media',3:'Baja'}
+    scale = {0:'No tiene escala asignada por ser Épica',1:'Alta',2:'Media',3:'Baja'}
         
     oBacklog      = backlog() 
     oObjective    = objective()
@@ -352,16 +346,22 @@ def VHistoria():
 
     # Obtenemos los objetivos asociados a una historia de usuario.
     objectives = oObjUserHist.idObjectivesAsociatedToUserHistory(idHistory)            
+
+    # Obtenemos la escala asociada a la historia (la que se selecciono para el producto)
+    typeScale = oBacklog.scaleType(idPila)
     
-    # Obtenemos la escala a mostrar
+    # Obtenemos la escala asignada a la historia actual
+    numScale  = history.UH_scale 
     
-    typeScale = oUserHist.scaleType(idHistory)
-    # Obtenemos el tipo de escala asociado al producto (id,valor)
     resultScale = []
-    if typeScale == 1:
-        resultScale = [(i,scale[i]) for i in range(1,3+1)]
-    elif typeScale == 2:
-        resultScale = [(i,i) for i in range(1,20+1)]
+    if numScale == 0:
+        resultScale = [(0,scale[0])]
+    else:
+        # Obtenemos el tipo de escala asociado al producto (id,valor)
+        if typeScale == 1:
+            resultScale = [(i,scale[i]) for i in range(1,3+1)]
+        elif typeScale == 2:
+            resultScale = [(i,i) for i in range(1,20+1)]
     
     
     res['fHistoria_opcionesHistorias']     = [{'key':hist.UH_idUserHistory,'value':hist.UH_codeUserHistory}for hist in historias] 
@@ -373,9 +373,9 @@ def VHistoria():
     res['fHistoria_opcionesPrioridad']     = [{'key':scale[0], 'value':scale[1]}for scale in resultScale]
     
     
-    res['fHistoria'] = {'super':history.UH_idSuperHistory , 'idHistoria':idHistory, 'idPila':history.UH_idBacklog, 'codigo':history.UH_codeUserHistory,
-       'actores':actors, 'accion':history.UH_idAccion, 'objetivos':objectives, 'tipo':history.UH_accionType ,
-       'prioridad':history.UH_scale}
+    res['fHistoria'] = {'super':history.UH_idSuperHistory , 'idHistoria':idHistory, 'idPila':history.UH_idBacklog, 
+                        'codigo':history.UH_codeUserHistory,'actores':actors, 'accion':history.UH_idAccion, 
+                        'objetivos':objectives, 'tipo':history.UH_accionType, 'prioridad':history.UH_scale}
    
     res['data2'] = [{'idTarea':tarea.HW_idTask, 'descripcion':tarea.HW_description}for tarea in taskList]
 
@@ -391,14 +391,14 @@ def VHistoria():
 def VHistorias():
     #GET parameter
     res = {}
-    
+           
     # Obtenemos el id del producto y de la historia.
     idPila = int(request.args.get('idPila',1))    
-    print('idPila VHistorias',idPila)
     
     if "actor" in session:
         res['actor'] = session['actor']
     
+    oTask             = task()
     oActor            = role()
     oAccion           = accions()
     oObjective        = objective()
@@ -406,13 +406,15 @@ def VHistorias():
     oUserHistory      = userHistory()
     oActUserHist      = actorsUserHistory()
     oObjUserHIst      = objectivesUserHistory()
-    
+        
     # Obtenemos las historias asociadas al producto idPila.
     userHistoriesList = oBacklog.userHistoryAsociatedToProduct(idPila)  
-             
-    userHistories = []
-    options       = {1:'podria ',2:'puede '}
-    priorities    = {0:'Epica',1:'Alta',2:'Media',3:'Baja'}
+    pesos          = []         
+    userHistories  = []
+    options        = {1:'podria ',2:'puede '}
+    priorities     = {0:'Epica',1:'Alta',2:'Media',3:'Baja'}
+    priorities2    = {i:str(i)for i in range(1,20+1)}
+    priorities2[0] = 'Epica'
     
     # Obtenemos el tipo de escala seleccionada en el producto asociado a la historia.
     typeScale = oBacklog.scaleType(idPila)
@@ -422,7 +424,10 @@ def VHistorias():
     for hist in userHistoriesList:
         result = oUserHistory.transformUserHistory(hist.UH_idUserHistory)
         userHistories.append(result)
-
+        tupla = (hist.UH_idUserHistory,oTask.historyWeight(hist.UH_idUserHistory))
+        pesos.append(tupla)
+        
+    # Obtenemos el maximo de la escala
     if typeScale == 1:
         iterations = 3
     elif typeScale == 2:
@@ -438,6 +443,8 @@ def VHistorias():
                 # Convertimos a escala Alta, Media, Baja si es necesario
                 if typeScale == 1:
                     hist['priority'] = priorities[i]
+                elif typeScale == 2:
+                    hist['priority'] = priorities2[i]
                 historiesSortedByPriority.append(hist)
                 # Almacenamos los ids de las historias ordenadas
                 idsHistories.append(hist['idHistory'])
@@ -448,14 +455,17 @@ def VHistorias():
                 if hist['idHistory'] == id:
                     userHistories.remove(hist)
                     break
- 
+    
+    
     res['data0']      = [{'idHistoria':hist['idHistory'], 
                           'prioridad' :hist['priority'],
+                          'peso'      :oTask.lookup(pesos,hist['idHistory']),
                           'enunciado' :'En tanto ' + hist['actors'] + hist['accions'] + ' para ' + hist['objectives']}for hist in historiesSortedByPriority]
     session['idPila'] = idPila
     res['idPila']     = idPila 
     
     return json.dumps(res)
+
 
 
 @historias.route('/historias/VPrioridades')
@@ -465,7 +475,6 @@ def VPrioridades():
     
     # Obtenemos el id del producto.
     idPila    = int(session['idPila'])
-    print('idPila VPrioridades',idPila)
     
     if "actor" in session:
         res['actor']=session['actor']
@@ -475,7 +484,6 @@ def VPrioridades():
       return json.dumps(res)
     res['usuario'] = session['usuario']
     
-    #Action code goes here, res should be a JSON structure
     oActor            = role()
     oAccion           = accions()
     oObjective        = objective()
@@ -494,66 +502,21 @@ def VPrioridades():
     # Obtenemos el tipo de escala asociada al producto.
     typeScale = oBacklog.scaleType(idPila)
     
-    # Obtenemos el tipo de escala asociado al producto (id,valor)
+    # Obtenemos el tipo de escala asociado al producto (id,valor) y elvalor maximo de la escala
     if typeScale == 1:
+        iterations  = 3
         resultScale = [(i,scale[i]) for i in range(1,3+1)]
     elif typeScale == 2:
+        iterations  = 20
         resultScale = [(i,i) for i in range(1,20+1)]
-    
-    
-    for hist in userHistoriesList:
-        historyDict   = {}
-         
-        historyDict['idHistory'] = hist.UH_idUserHistory
-        historyDict['priority']  = hist.UH_scale
-         
-        # Obtenemos los id de los actores que componen la historia.
-        idActorsList  = oActUserHist.idActorsAsociatedToUserHistory(hist.UH_idUserHistory)
-        missingActors = len(idActorsList)
-        actorsString  = ''
-        
-        # Almacenamos los actores asociados a la historia en el diccionario de la historia.
-        for act in idActorsList:
-            result       = oActor.findIdActor(act)
-            actorsString = actorsString + ' ' + str(result[0].A_nameActor) + ' '
-            
-            if missingActors != 1:
-                actorsString = actorsString + ',' 
-            missingActors = missingActors - 1   
-            
-        historyDict['actors'] = actorsString.lower()
 
-        # Almacenamos la accion asociada la historia en el diccionario de la historia.
-        idAccions = oUserHistory.accionsAsociatedToUserHistory(hist.UH_idUserHistory)
-        result    = oAccion.searchIdAccion(idAccions[0].UH_idAccion)
-        
-        # Obtenemos el tipo de accion de la historia.
-        option    = hist.UH_accionType 
-        historyDict['accions'] = ' ' + options[option] + str(result[0].AC_accionDescription).lower() + ' ' 
-         
-        # Obtenemos los id de los objetivos que componen la historia.
-        idObjectivesList  = oObjUserHIst.idObjectivesAsociatedToUserHistory(hist.UH_idUserHistory)
-        missingObjectives = len(idObjectivesList)
-        objectivesString  = ''
-        
-        # Almacenamos los objetivos asociados a la historia en el diccionario de la historia.
-        for obj in idObjectivesList: 
-            result           = oObjective.searchIdObjective(obj)
-            objectivesString = objectivesString + ' ' + str(result[0].O_descObjective)
-            
-            if missingObjectives != 1:
-                objectivesString = ' ' + objectivesString + ',' 
-                
-            missingObjectives = missingObjectives - 1 
-        historyDict['objectives'] = objectivesString.lower()
-             
-        userHistories.append(historyDict)
-        
-        # Obtenemos el maximo de la escala
-    if typeScale == 1:
-        iterations = 3
-    elif typeScale == 2:
-        iterations = 20
+    # Obtenemos los valores de cada historia en un diccionario y almacenamos esos
+    # diccionarios en un arreglo.
+    for hist in userHistoriesList:
+        epic = oUserHistory.isEpic(hist.UH_idUserHistory)
+        if not epic:
+            result = oUserHistory.transformUserHistory(hist.UH_idUserHistory)
+            userHistories.append(result)        
 
     historiesSortedByPriority = []
     # Ordenamos las tuplas por prioridad
@@ -569,3 +532,11 @@ def VPrioridades():
     res['idPila']       = idPila
  
     return json.dumps(res)
+
+
+
+
+#Use case code starts here
+
+
+#Use case code ends here

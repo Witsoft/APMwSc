@@ -14,7 +14,7 @@ def ACrearProducto():
     res     = results[1]
     
     if params != {}:    
-        # Extraemos los parametros.
+        # Extraemos los parámetros
         prodName  = params['nombre']
         prodDesc  = params['descripcion']
         prodScale = params['escala']
@@ -23,7 +23,7 @@ def ACrearProducto():
         inserted = oBacklog.insertBacklog(prodName,prodDesc,prodScale)
         
         if inserted:
-            # Obtenemos el producto insertado.
+            # Obtenemos el producto insertado
             result = oBacklog.findName(prodName)
             res['idPila'] = result[0].BL_idBacklog 
         
@@ -35,7 +35,6 @@ def ACrearProducto():
             session.pop("actor", None)
         else:
             session['actor'] = res['actor']
-            
     return json.dumps(res)
 
 
@@ -47,7 +46,7 @@ def AModifProducto():
     results = [{'label':'/VProductos', 'msg':['Producto actualizado']}, {'label':'/VProductos', 'msg':['Error al modificar el producto']}]
     res     = results[1]
     
-    # obtenemos los parametros
+    # Obtenemos los parámetros
     newname        = params['nombre']
     newdescription = params['descripcion']
     newscale       = params['escala']
@@ -55,7 +54,7 @@ def AModifProducto():
 
     oBacklog = backlog()
     
-    # Buscamos el producto a modificar.
+    # Buscamos el producto a modificar
     result = oBacklog.findIdProduct(idPila)
     result = oBacklog.modifyBacklog(result.BL_name, newname, newdescription, newscale)      
     
@@ -67,7 +66,6 @@ def AModifProducto():
             session.pop("actor", None)
         else:
             session['actor'] = res['actor']
-            
     return json.dumps(res)
 
 
@@ -100,7 +98,7 @@ def VCrearProducto():
 def VProducto():
     #GET parameter
     res = {}
-    # Obtenemos el id del producto.
+    # Obtenemos el id del producto
     idPila = int(request.args.get('idPila', 1))
     print('idPila VProducto ',idPila)
     
@@ -112,7 +110,7 @@ def VProducto():
       return json.dumps(res)
     res['usuario'] = session['usuario']
 
-    # Obtenemos los datos asociados al producto.
+    # Obtenemos los datos asociados al producto
     oBacklog   = backlog()
     actorsList = oBacklog.actorsAsociatedToProduct(idPila)
     accionList = oBacklog.accionsAsociatedToProduct(idPila)
@@ -123,14 +121,14 @@ def VProducto():
     res['data5'] = [{'idAccion':acc.AC_idAccion , 'descripcion':acc.AC_accionDescription}for acc in accionList]
     res['data7'] = [{'idObjetivo':obj.O_idObjective, 'descripcion':obj.O_descObjective } for obj in objectList]
       
-    # Buscamos el producto actual.
+    # Buscamos el producto actual
     result = oBacklog.findIdProduct(idPila)
      
-    # Mostramos los valores seleccionados.
+    # Mostramos los valores seleccionados
     res['fPila'] = {'idPila':idPila,'nombre': result.BL_name,'descripcion':result.BL_description,'escala':result.BL_scaleType}
     res['fPila_opcionesEscala'] = [{'key':1,'value':'Alta/Media/Baja'}, {'key':2,'value':'Entre 1 y 20'}]
     
-    # Guardamos el id del producto.
+    # Guardamos el id del producto
     session['idPila'] = idPila
     res['idPila']     = idPila
     
@@ -149,7 +147,7 @@ def VProductos():
       return json.dumps(res)
     res['usuario'] = session['usuario']
 
-    # Obtenemos la lista de productos.
+    # Obtenemos la lista de productos
     oBacklog    = backlog() 
     productList = oBacklog.getAllProducts()
     

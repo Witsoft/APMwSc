@@ -139,14 +139,14 @@ class clsAccion(db.Model):
         '''Respresentación en string del modelo accion'''
         return '<IdAccion %r, Descripcion %r, IdBacklog %r>' %(self.AC_idAccion, self.AC_accionDescription, self.AC_idBacklog)
         
-        
+    
         
 class clsUserHistory(db.Model):
 	'''Clase que define el modelo de tabla userHistory'''
  	
 	__tablename__ = 'userHistory'
 	UH_idUserHistory     = db.Column(db.Integer, primary_key = True, index = True)
-	UH_codeUserHistory   = db.Column(db.String(11),unique = True , index = True) 
+	UH_codeUserHistory   = db.Column(db.String(11), index = True) 
 	UH_idSuperHistory    = db.Column(db.Integer, db.ForeignKey('userHistory.UH_idUserHistory'),nullable = True) 
 	UH_accionType        = db.Column(db.Integer)
 	UH_idAccion	         = db.Column(db.Integer, db.ForeignKey('accions.AC_idAccion'))
@@ -166,8 +166,9 @@ class clsUserHistory(db.Model):
 
 	def __repr__(self):
 		'''Representacion en string de la Historia de Usuario'''
-		return '<idUserHistory %r, codeUserHistory %r, scale %r>' % (self.UH_idUserHistory ,self.UH_codeUserHistory, self.UH_scale)
+		return '<idUserHistory %r, codeUserHistory %r, idSuperHistory %r, scale %r>' % (self.UH_idUserHistory ,self.UH_codeUserHistory,self.UH_idSuperHistory,self.UH_scale)
  	
+
 	
 class clsActorsUserHistory(db.Model):
 	'''Clase que define el modelo de tabla actorsUserHistory'''
@@ -184,6 +185,8 @@ class clsActorsUserHistory(db.Model):
 	def __repr__(self):
 		'''Representacion en string de los id's a los actores y sus historias'''
 		return '<idActor %r, idUserHistory %r>' % (self.AUH_idActor, self.AUH_idUserHistory)
+ 
+ 
  
 class clsObjectivesUserHistory(db.Model):
 	'''Clase que define el modelo de tabla ObjectivesUserHistory'''
@@ -202,25 +205,44 @@ class clsObjectivesUserHistory(db.Model):
 		return '<idObjective %r, idUserHistory %r>' % (self.OUH_idObjective, self.OUH_idUserHistory)
 		
 class clsTask(db.Model):
-	'''Clase que define el modelo de la tabla HomeWork'''
+	'''Clase que define el modelo de la tabla Task'''
 	
 	__tablename__ = 'task'
-	HW_idTask    = db.Column(db.Integer, primary_key = True, index = True)
+	HW_idTask        = db.Column(db.Integer, primary_key = True, index = True)
 	HW_description 	 = db.Column(db.String(140),unique = True , index = True) 
+	HW_weight        = db.Column(db.Integer)
+	HW_idCategory    = db.Column(db.Integer, db.ForeignKey('category.C_idCategory'))
 	HW_idUserHistory = db.Column(db.Integer, db.ForeignKey('userHistory.UH_idUserHistory'))
 	
-	def __init__(self,description,idUserHistory):
+	def __init__(self,description,idCategory,weight,idUserHistory):
 		self.HW_description	  = description
+		self.HW_idCategory    = idCategory
+		self.HW_weight        = weight
 		self.HW_idUserHistory = idUserHistory 
 
 	def __repr__(self):
 		'''Representacion en string de la Tarea'''
-		return '<HW_ idTask  %r, HW_idUserHistory %r>' % (self.HW_idTask,self.HW_idUserHistory)
+		return '<HW_ idTask  %r,HW_idCategory %r, HW_weight %r ,HW_idUserHistory %r>' % (self.HW_idTask,self.HW_idCategory,self.HW_weight,self.HW_idUserHistory)		
+		
+class clsCategory(db.Model):
+	'''Clase que define el modelo de la tabla Category'''
+	
+	__tablename__ = 'category'
+	C_idCategory      = db.Column(db.Integer, primary_key = True, index = True)
+	C_nameCate     	  = db.Column(db.String(50),unique = True , index = True)
+	C_weight          = db.Column(db.Integer, index = True) 
+	C_refTaskCategory = db.relationship('clsTask', backref = 'category',lazy = 'dynamic', cascade = "all, delete, delete-orphan")
+
+	def __init__(self,nameCate,weight):
+		self.C_nameCate	  = nameCate
+		self.C_weight     = weight 
+
+	def __repr__(self):
+		'''Representacion en string de la Categoria'''
+		return '<C_idCategory  %r, C_nameCate %r, C_weight %r>' % (self.C_idCategory,self.C_nameCate,self.C_weight)
 
 migrate = Migrate(app, db)
 manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)
-
-
 db.create_all() # Creamos la base de datos

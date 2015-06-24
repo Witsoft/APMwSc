@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask          import request, session, Blueprint, json
-from app.scrum.role import *
+from flask                       import request, session, Blueprint, json
+from app.scrum.role              import *
 from app.scrum.actorsUserHistory import *
 
 actor = Blueprint('actor', __name__)
@@ -13,16 +13,16 @@ def ACrearActor():
     results = [{'label':'/VProducto', 'msg':['Actor creado']}, {'label':'/VCrearActor', 'msg':['Error al crear actor']}, ]
     res     = results[1]
     
-    # Obtenemos el id del producto.
+    # Obtenemos el id del producto
     idPila  = int(session['idPila'])
     print('idPila ACrearActor',idPila) 
     
     if params != {}:    
-        # Extraemos los datos.
+        # Extraemos los datos
         nameActor = params['nombre']
         descActor = params['descripcion'] 
         
-        # Insertamos el actor.
+        # Insertamos el actor
         oActor   = role()
         inserted = oActor.insertActor(nameActor,descActor,idPila)
         if inserted:
@@ -44,11 +44,11 @@ def ACrearActor():
 def AElimActor():
     #GET parameter
     results = [{'label':'/VProducto', 'msg':['Actor eliminado']}, {'label':'/VProducto', 'msg':['No se pudo eliminar este actor']}, ]
-    res = results[1]
+    res     = results[1]
     
-    # Obtenemos el id del producto y de la accion.
-    idPila   = int(session['idPila'])
-    idActor  = int(session['idActor'])
+    # Obtenemos el id del producto y de la acción
+    idPila  = int(session['idPila'])
+    idActor = int(session['idActor'])
     print('idPila AElimActor', idPila)
     print('idActor AElimActor', idActor)
     
@@ -59,7 +59,7 @@ def AElimActor():
     oActorUserHistory = actorsUserHistory()
     result            = oActorUserHistory.searchidUserHistoryIdActors(idActor)
 
-    # Verificamos si el actor esta asociado a una historia
+    # Verificamos si el actor está asociado a una historia
     if (result == []):
         deleted = oActor.deleteActor(found[0].A_nameActor,idPila)
     
@@ -68,8 +68,6 @@ def AElimActor():
 
     res['label'] = res['label'] + '/' + str(idPila)
     
-
-    #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -94,15 +92,16 @@ def AModifActor():
     idPila  = int(session['idPila'])
     print('idPila AModifActor',idPila) 
     
-    # Extraemos los parametros.
-    idActor      = params['idActor'] #Obtenemos el id del actor
+    # Extraemos los parámetros
+    idActor      = params['idActor'] 
     newNameActor = params['nombre']
     newDescActor = params['descripcion'] 
     
     # Conseguimos el actor a modificar  
     oActor = role()
     found  = oActor.findIdActor(idActor)
-    # Modfificamos el actor deseado
+
+    # Modificamos el actor deseado
     result = oActor.updateActor(found[0].A_nameActor , newNameActor, newDescActor,idPila)    
     
     if result:
@@ -116,8 +115,6 @@ def AModifActor():
         else:
             session['actor'] = res['actor']
     
-     
-       
     return json.dumps(res)
 
 
@@ -126,9 +123,10 @@ def AModifActor():
 def VActor():
     #GET parameter
     res = {}
-    # Obtenemos el id del producto y de la accion.
-    idPila   = int(session['idPila'])
-    idActor  = int(request.args.get('idActor'))
+    
+    # Obtenemos el id del producto y de la acción
+    idPila  = int(session['idPila'])
+    idActor = int(request.args.get('idActor'))
     print('idPila VActor',idPila)
     print('idActor VActor',idActor)
     
@@ -140,7 +138,7 @@ def VActor():
       return json.dumps(res)
     res['usuario'] = session['usuario']
 
-    # Buscamos el actor actual.
+    # Buscamos el actor actual
     oActor = role()
     result = oActor.findIdActor(idActor) 
     
@@ -157,7 +155,7 @@ def VCrearActor():
     #GET parameter
     res = {}
            
-    # Obtenemos el id del producto.
+    # Obtenemos el id del producto
     idPila = request.args.get('idPila',1)
     print('idPila VCrearActor',idPila)
     
@@ -172,8 +170,6 @@ def VCrearActor():
     res['idPila'] = idPila
 
     return json.dumps(res)
-
-
 
 
 

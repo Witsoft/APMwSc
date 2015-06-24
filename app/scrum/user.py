@@ -29,19 +29,6 @@ class user(object):
                 auser = clsUser.query.filter_by(U_username = username).all()
                 return auser
  
- 
-    def findEmail(self,email):
-        '''Permite saber si un email esta en la base de datos'''
-        aemail = clsUser.query.filter_by(U_email=email).all()
-        return aemail != []
- 
- 
-    def isFound(self,username):
-        '''Permite saber si un usuario esta en la base de datos'''
-        auser = clsUser.query.filter_by(U_username = username).all()
-        return auser != []
-
-
     def insertUser(self, fullname, username, password, email, idActor):
         '''Permite insertar un usuario en la tabla'''
 
@@ -94,7 +81,8 @@ class user(object):
                     auser[0].U_idActor  = new_idActor
                     db.session.commit()
                     return True
-        return False     
+        return False    
+     
      
     def deleteUser(self,username):
         '''Permite eliminar un usuario de la tabla'''
@@ -110,5 +98,18 @@ class user(object):
                     db.session.commit()
                     return True
         return False
+
+
+    def findEmail(self,email):
+        '''Permite saber si un email esta en la base de datos'''
+        aemail = clsUser.query.filter_by(U_email=email).all()
+        return aemail != []
+        
+ 
+    def isFound(self,username):
+        '''Permite saber si un usuario esta en la base de datos'''
+        auser = clsUser.query.filter_by(U_username = username).all()
+        return auser != []
+        
         
 # Fin Clase user
