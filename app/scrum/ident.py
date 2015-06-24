@@ -124,6 +124,17 @@ def VLogin():
         result8  = oCate.insertCategory('Crear una prueba de aceptación',2)
         result9  = oCate.insertCategory('Actualizar un elemento implementado en otra tarea',1)
         result10 = oCate.insertCategory('Escribir el manual en línea de una página',1)
+
+        oLogin = login()
+        oUser  = user()     
+        #Creamos usuarios con los tres posibles roles
+        password         = 'Sabeys.2008'
+        encriptPassword  = oLogin.encript(password)
+         
+        result = oUser.insertUser('Dueno','admin',encriptPassword,'productOwner@gmail.com',1) 
+        result = oUser.insertUser('Maestro Scrum','scrum',encriptPassword,'scrumMaster@gmail.com',2) 
+        result = oUser.insertUser('Equipo de Trabajo','team',encriptPassword,'teamMember@gmail.com',3) 
+
         print('Se cargaron los datos.')
              
     return json.dumps(res)
