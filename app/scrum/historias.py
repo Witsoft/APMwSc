@@ -73,7 +73,7 @@ def ACrearHistoria():
         if inserted:
             oObjUserHist = objectivesUserHistory()
             oActUserHist = actorsUserHistory()
-            result       = oUserHistory.searchUserHistory(codeHistory)
+            result       = oUserHistory.searchUserHistory(codeHistory,idPila)
             idInserted   = result[0].UH_idUserHistory
             insertedAct  = False
             insertedObj  = False
@@ -151,7 +151,7 @@ def AElimHistoria():
                             aTarea.deleteTask(tasky.HW_description)
         
                     # Eliminamos la historia de usuario
-                    deleted = oUserHistory.deleteUserHistory(found[0].UH_codeUserHistory) 
+                    deleted = oUserHistory.deleteUserHistory(found[0].UH_idUserHistory) 
         
                     if deleted:
                         res = results[0]

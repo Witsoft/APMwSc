@@ -6,12 +6,12 @@ import unittest
 # Ruta que permite utilizar el módulo user.py
 sys.path.append('../app/scrum')
 
-from model     import *
-from backLog   import *
-from role      import *
-from accions   import *
-from objective import *
-
+from model       import *
+from backLog     import *
+from role        import *
+from accions     import *
+from objective   import *
+from userHistory import *
 class TestBacklog(unittest.TestCase):
      
      #############################################      
@@ -1031,3 +1031,590 @@ class TestBacklog(unittest.TestCase):
         oObjective.deleteObjective('nxvs hbjxtyvz',1)
         oObjective.deleteObjective('nxvs hbjxtyvzdxs',2)
         aBacklog.deleteProduct('Thxy Sxgyrz')           
+
+    ################################################      
+    #   Suite de Pruebas para updatePriorityScale  #
+    ################################################
+           
+    # Caso Inicial
+       
+    # Prueba 107
+    def testUpdateScaleTypeExist(self):
+        #Se inserta un producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Thxy Sxgyrz','Dxscrypcyzn',1)
+        searchBacklog = aBacklog.findName('Thxy Sxgyrz')
+        idFound0 = searchBacklog[0].BL_idBacklog
+        
+        aBacklog.updateScaleType(1,1)
+        
+        #Se elimina producto
+        aBacklog.deleteProduct('Thxy Sxgyrz')
+        
+     # Prueba 108
+    def testUpdateScaleTypeTrue(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(idFound1,1)
+        self.assertTrue(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+           
+    #Casos Frontera
+    
+    # Prueba 109
+    def testUpdateScaleTypeId0(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(0,1)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    # Prueba 110
+    def testUpdateScaleTypeMaxId(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType((2^31)-1,1)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    # Prueba 111
+    def testUpdateScaleTypeNoId(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(8729,1)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    # Prueba 112
+    def testUpdateScaleTypeNoneId(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(None,1)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')  
+    
+    # Prueba 113
+    def testUpdateScaleTypePriority1to2(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,3)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(idFound1,2)
+        self.assertTrue(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')  
+    
+    # Prueba 114
+    def testUpdateScaleTypePriority0(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(idFound1,0)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')    
+    
+    # Prueba 115
+    def testUpdateScaleTypePriority3(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(idFound1,3)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+    
+    # Prueba 116
+    def testUpdateScaleTypePriorityNone(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(idFound1,None)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    # Prueba 117
+    def testUpdateScaleTypePriorityMax(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(idFound1,(2^31)-1)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+    
+    #Casos Esquina
+        
+    # Prueba 118
+    def testUpdateScaleTypeAllMax(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType((2^31)-1,(2^31)-1)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')  
+    
+    # Prueba 119
+    def testUpdateScaleType1to1(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,3)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(idFound1,1)
+        self.assertTrue(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    # Prueba 120
+    def testUpdateScaleType2to2(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(idFound1,2)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    # Prueba 121
+    def testUpdateScaleTypeNoIdScale3(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(984,3)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.') 
+        
+    # Prueba 122
+    def testUpdateScaleTypeEpic2to1(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,0)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(idFound1,1)
+        self.assertTrue(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')  
+    
+    # Prueba 123
+    def testUpdateScaleTypeEpic1to2(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,0)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(idFound1,2)
+        self.assertTrue(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')  
+    
+    #Casos Malicia
+        
+    # Prueba 124
+    def testUpdateScaleTypeAllNone(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(None,None)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')   
+        
+    # Prueba 125
+    def testUpdateScaleTypeAll0(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(0,0)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+    # Prueba 126
+    def testUpdateScaleType0None(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(0,None)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')    
+        
+    # Prueba 127
+    def testUpdateScaleTypeNone0(self):
+        # Insertamos Producto
+        aBacklog = backlog()
+        aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',2)
+        searchBacklog = aBacklog.findName('Podn fjdd.')
+        idFound0 = searchBacklog[0].BL_idBacklog
+              
+        # Insertamos la accion
+        aAcc = accions()
+        aAcc.insertAccion('cinrohbwidia',1)
+        search = aAcc.searchAccion('cinrohbwidia',1)
+        idFound = search[0].AC_idAccion
+              
+        # Insertamos la historia
+        aHist = userHistory()
+        aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,20)
+        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1 = searchHist[0].UH_idUserHistory 
+
+        result = aBacklog.updateScaleType(None,0)
+        self.assertFalse(result)
+
+        # Eliminamos historia, accion y producto
+        aHist.deleteUserHistory(idFound1)
+        aAcc.deleteAccion('cinrohbwidia',1)
+        aBacklog.deleteProduct('Podn fjdd.')
+        
+#Fin Casos Backlog  

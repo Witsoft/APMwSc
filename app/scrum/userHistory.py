@@ -12,7 +12,7 @@ CONST_MAX_COD    = 11
 CONST_MIN_COD    = 1
 CONST_MIN_ID     = 1
 CONST_MIN_IDHIST = 0
-CONST_MIN_SCALE  = 1
+CONST_MIN_SCALE  = 0
 CONST_MAX_SCALE  = 20
 
 arrayType = [1,2]
@@ -40,7 +40,6 @@ class userHistory(object):
     def isEpic(self, idUserHistory):
         '''Clase que permite reconocer las épicas'''
         checkId = type(idUserHistory) == int and CONST_MIN_ID <= idUserHistory
-        
         if checkId:
             existId = clsUserHistory.query.filter_by(UH_idSuperHistory = idUserHistory).all()
             
@@ -115,15 +114,17 @@ class userHistory(object):
         return False
     
         
-    def searchUserHistory(self,codeUserHistory):
+    def searchUserHistory(self,codeUserHistory, idBacklog):
         '''Permite encontrar una historia de usuario por codigo'''
         typecod = type(codeUserHistory) == str
+        typeId  = type(idBacklog) == int
         
-        if typecod:
+        if typecod and typeId:
             checkLenCodeUserHistory = len(codeUserHistory) <= CONST_MAX_COD
+            checkIdBacklog          = idBacklog >= CONST_MIN_ID 
  
-            if checkLenCodeUserHistory:
-                found = clsUserHistory.query.filter_by(UH_codeUserHistory = codeUserHistory).all()
+            if checkLenCodeUserHistory and checkIdBacklog:
+                found = clsUserHistory.query.filter_by(UH_codeUserHistory = codeUserHistory,UH_idBacklog = idBacklog).all()
                 return found
         return ([])
     
@@ -204,6 +205,7 @@ class userHistory(object):
             checkLonPriority  = 0 <= priority
 
             if  checkLonIdHistory and checkLonPriority:
+                
                 found     = clsUserHistory.query.filter_by(UH_idUserHistory = idHistory).first()
                 foundTask = clsTask.query.filter_by(HW_idUserHistory = idHistory).all()
                 if found != None:
@@ -211,10 +213,10 @@ class userHistory(object):
                     if foundTask != []:
                         for task in foundTask:    
                             db.session.delete(task)
+
                     db.session.commit()
                     return True
         return False
-
 
     def accionsAsociatedToUserHistory(self,userHistoryId):
         ''' Permite obtener una lista de los Acciones asociados a una historia de usuario'''
@@ -242,15 +244,15 @@ class userHistory(object):
         return  ([])
     
     
-    def deleteUserHistory(self,codeUserHistory):
-        '''Permite eliminar una historia segun su codigo'''
-        checkTypeCodeHistory = type(codeUserHistory) == str
+    def deleteUserHistory(self,idUserHistory):
+        '''Permite eliminar una historia segun su ID'''
+        checkTypeIdHistory = type(idUserHistory) == int
         
-        if checkTypeCodeHistory:
-            checkLenCodeHistory = CONST_MIN_COD <= len(codeUserHistory) <= CONST_MAX_COD
+        if checkTypeIdHistory:
+            checkIdHistory = idUserHistory >= CONST_MIN_ID
             
-            if checkLenCodeHistory:
-                found = clsUserHistory.query.filter_by(UH_codeUserHistory = codeUserHistory).all()
+            if checkIdHistory:
+                found = clsUserHistory.query.filter_by(UH_idUserHistory = idUserHistory).all()
                 
                 if found != []:
                     idSuperHistory = found[0].UH_idSuperHistory
@@ -260,7 +262,7 @@ class userHistory(object):
                     succesor = self.historySuccesors(idSuperHistory)
                     if (idSuperHistory != 0 and succesor == []):
                         self.updatePriority(idSuperHistory,1)
-                return True
+                    return True
         return False 
 
 
@@ -337,7 +339,7 @@ class userHistory(object):
                     historyDict['objectives'] = objectivesString.lower()
                     
                     return historyDict
-        return historyDict              
 
-            
+        return historyDict 
+    
 # Fin Clase userHistory

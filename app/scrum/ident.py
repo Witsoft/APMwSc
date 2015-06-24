@@ -10,7 +10,6 @@ from app.scrum.category     import *
 from app.scrum.task         import *
 from app.scrum.userHistory  import *  
 
-
 ident = Blueprint('ident', __name__)
 
 @ident.route('/ident/AIdentificar', methods=['POST'])
@@ -113,68 +112,35 @@ def VLogin():
     oActor   = role()
     oAccion  = accions()
     oObj     = objective()
-    oCate    = category()
+    oCat     = category()
     oTask    = task()
     oHistory = userHistory()
-
     isEmpty  = oActor.emptyTable()
     
     if isEmpty:
         print('Cargando datos de prueba...')
-        
-        # Se crean las categorías por defecto
-        resu1  = oCate.insertCategory('Implementar una acción',2)
-        resu2  = oCate.insertCategory('Implementar una vista',2)
-        resu3  = oCate.insertCategory('Implementar una regla de negocio on un método de una clase',2)
-        resu4  = oCate.insertCategory('Migrar la base de datos',2)
-        resu5  = oCate.insertCategory('Crear un diagrama UML',1)
-        resu6  = oCate.insertCategory('Crear datos iniciales',1)
-        resu7  = oCate.insertCategory('Crear un criterio de aceptación',1)
-        resu8  = oCate.insertCategory('Crear una prueba de aceptación',2)
-        resu9  = oCate.insertCategory('Actualizar en elemento implementado en otra tarea',1)
-        resu10 = oCate.insertCategory('Escribir el manual en línea de una página',2)    
-        resu11 = oCate.insertCategory('Ordenar las placas',5)
-        resu12 = oCate.insertCategory('Mirar colores llamativos',3)
-        resu13 = oCate.insertCategory('Crear aplicación de WitSoft',7)
-        resu14 = oCate.insertCategory('Reutilizar herramientas de trabajo',4)
-
-        # Creamos el primer producto
-        resu15 = oBacklog.insertBacklog('Taxi Seguro','Mejor forma de operar un taxi',1)
-    
-        # Insertamos los actores asociados
-        resu16 = oActor.insertActor('Conductor','Encargado de manejar un automovil',1)
-        resu17 = oActor.insertActor('Mecánico','Encargado de reparar automóviles',1)
-        resu18 = oActor.insertActor('Supervisor','Persona involucrada en el desarrollo del producto',1)
-    
-        # Insertamos las acciones asociadas
-        resu19 = oAccion.insertAccion('Enseñar el uso de la aplicación',1)
-        resu20 = oAccion.insertAccion('Registrar vehiculos',1)
-    
+        # Se crea un nuevo producto
+        result1  = oBacklog.insertBacklog('Taxi Seguro','Mejor forma de operar un taxi',1)
+        # Se crean los roles
+        result2  = oActor.insertActor('Dueño del Producto','Encargado de las decisiones de diseño del producto.',0)
+        result3  = oActor.insertActor('Maestro Scrum','Encargado de orientar y ayudar al equipo desarrollador del producto.',0)
+        result4  = oActor.insertActor('Miembro del Equipo','Pesona involucrada en el desarrollo del producto.',0)
+        # Se crean acciones
+        result5  = oAccion.insertAccion('Enseñar el uso de la aplicacion',1)
+        result6  = oAccion.insertAccion('Registrar vehiculos',1)
         # Se crean objetivos no transversales
-        resu21 = oObj.insertObjective('Verificar fallas existentes y solucionarlas',1,False)
-        resu22 = oObj.insertObjective('Facilitar la deteccion de defectos',1,False)
-    
+        result7  = oObj.insertObjective('Verificar fallas existentes y solucionarlas',1,False)
+        result8  = oObj.insertObjective('Facilitar la deteccion de defectos',1,False)
         # Se crean objetivos transversales
-        resu23 = oObj.insertObjective('Incrementar la produccion',1,True)
-            
-        # Creamos el segundo producto
-        resu24 = oBacklog.insertBacklog('WitGrafies','Herramienta graficadora',2)
-    
-        # Insertamos los actores asociados
-        resu25 = oActor.insertActor('Diseñador Gráfico','Decide como se ve la aplicación',2)
-        resu26 = oActor.insertActor('Diseñador de Experiencias de Usuario','Decide como se siente usar la aplicación',2)
-    
-        # Insertamos las acciones asociadas
-        resu27 = oAccion.insertAccion('Elegir elementos gráficos',2)
-        resu28 = oAccion.insertAccion('Elegir mecanismos de interacción',2)
-    
-        # Se crean objetivos no transversales
-        resu29 = oObj.insertObjective('Presentar correctamente la información',2,False)
-        resu30 = oObj.insertObjective('Presentar pasos lógicos de la interacción',2,False)
-    
-        # Se crean objetivos transversales
-        resu31 = oObj.insertObjective('Ofrecer seguridad a los datos del usuario',2,True)
-
+        result9  = oObj.insertObjective('Incrementar la produccion',1,True)
+        #Se crean categorias para las tareas
+        result10 = oCat.insertCategory('Crear una acción',1)
+        result11 = oCat.insertCategory('Migrar la base de datos',2)
+        result12 = oCat.insertCategory('Escribir el manual en línea de una vista',1)
+        result13 = oCat.insertCategory('Crear un criterio de aceptación',1)
+        result14 = oCat.insertCategory('Crear una prueba de aceptación',2)
+        result15 = oCat.insertCategory('Crear una regla de negocio compleja',3)
+         
         oLogin = login()
         oUser  = user()     
         #Creamos usuarios con los tres posibles roles
@@ -184,8 +150,12 @@ def VLogin():
         result = oUser.insertUser('Dueno','admin',encriptPassword,'productOwner@gmail.com',1) 
         result = oUser.insertUser('Maestro Scrum','scrum',encriptPassword,'scrumMaster@gmail.com',2) 
         result = oUser.insertUser('Equipo de Trabajo','team',encriptPassword,'teamMember@gmail.com',3) 
-
         print('Se cargaron los datos.')
+         
+    print('Valores de Usuario:')
+    print(clsUser.query.all()) 
+    
+    
         
     return json.dumps(res)
 
