@@ -581,7 +581,7 @@ class TestCategory(unittest.TestCase):
     def testSearchIdCategoryNotExist(self):
         aCategory = category()
         aCategory.insertCategory('Kxtygzrda',1)
-        result    = aCategory.searchIdCategory(2)
+        result    = aCategory.searchIdCategory(99)
         self.assertFalse(result)
          
         # Eliminando la categoria
@@ -769,3 +769,5 @@ class TestCategory(unittest.TestCase):
         # Eliminando la categoria
         result = aCategory.deleteCategory('{}')
         self.assertTrue(result)
+
+# Fin de casos de Category

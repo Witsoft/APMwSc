@@ -1355,11 +1355,12 @@ class TestActorsUserHistory(unittest.TestCase):
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
         result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+        
          
         # Inicio de caso de prueba
         # Buscamos id's de historias que contengan asociado un objetivo        
         aAccAs = actorsUserHistory()
-        res    = aAccAs.deleteActorAsociatedInUserHistory(1, idFound1) 
+        res    = aAccAs.deleteActorAsociatedInUserHistory(idFound2, idFound1) 
         self.assertTrue(res)
          
         # Eliminamos historia, accion y producto
@@ -1401,7 +1402,7 @@ class TestActorsUserHistory(unittest.TestCase):
         # Inicio de caso de prueba
         # Buscamos id's de historias que contengan asociado un objetivo        
         aAccAs = actorsUserHistory()
-        res    = aAccAs.deleteActorAsociatedInUserHistory(idFound2, 1) 
+        res    = aAccAs.deleteActorAsociatedInUserHistory(idFound2, idFound1) 
         self.assertTrue(res)
          
         # Eliminamos historia, accion y producto
@@ -1525,13 +1526,13 @@ class TestActorsUserHistory(unittest.TestCase):
                   
         # Insertamos Actor asociado
         aAccAs = actorsUserHistory()
-        result = aAccAs.insertActorAsociatedInUserHistory(idFound2, idFound1) 
+        result = aAccAs.insertActorAsociatedInUserHistory(idFound2,idFound1) 
          
         # Inicio de caso de prueba
         # Buscamos id's de historias que contengan asociado un objetivo        
         aAccAs = actorsUserHistory()
         res    = aAccAs.deleteActorAsociatedInUserHistory(1,1) 
-        self.assertTrue(res)
+        self.assertFalse(res)
          
         # Eliminamos historia, accion y producto
         aHist.deleteUserHistory(idFound1)
@@ -1707,5 +1708,5 @@ class TestActorsUserHistory(unittest.TestCase):
         aHist.deleteUserHistory(idFound1)
         aAcc.deleteAccion('pppp',idBacklog)
         aBacklog.deleteProduct('hhJJkkk')  
-         
- 
+        
+# Fin de casos ActorsUserHistory

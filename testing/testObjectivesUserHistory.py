@@ -1377,7 +1377,7 @@ class TestObjectivesUserHistory(unittest.TestCase):
         # Inicio de caso de prueba
         # Buscamos id's de historias que contengan asociado un objetivo        
         aObjAs = objectivesUserHistory()
-        res    = aObjAs.deleteObjectiveAsociatedInUserHistory(1, idFound1) 
+        res    = aObjAs.deleteObjectiveAsociatedInUserHistory(idFound2, idFound1) 
         self.assertTrue(res)
         
         # Eliminamos historia, accion y producto
@@ -1419,7 +1419,7 @@ class TestObjectivesUserHistory(unittest.TestCase):
         # Inicio de caso de prueba
         # Buscamos id's de historias que contengan asociado un objetivo        
         aObjAs = objectivesUserHistory()
-        res    = aObjAs.deleteObjectiveAsociatedInUserHistory(idFound2, 1) 
+        res    = aObjAs.deleteObjectiveAsociatedInUserHistory(idFound2, idFound1) 
         self.assertTrue(res)
         
         # Eliminamos historia, accion y producto
@@ -1590,7 +1590,7 @@ class TestObjectivesUserHistory(unittest.TestCase):
         # Inicio de caso de prueba
         # Buscamos id's de historias que contengan asociado un objetivo        
         aObjAs = objectivesUserHistory()
-        res    = aObjAs.deleteObjectiveAsociatedInUserHistory(1,1) 
+        res    = aObjAs.deleteObjectiveAsociatedInUserHistory(idFound2,idFound1) 
         self.assertTrue(res)
                  
         # Eliminamos historia, accion y producto
@@ -1767,3 +1767,5 @@ class TestObjectivesUserHistory(unittest.TestCase):
         aHist.deleteUserHistory(idFound1)
         aObj.deleteObjective('Ccc',idBacklog)
         aBacklog.deleteProduct('hhJJkkk') 
+
+# Fin de casos ObjectivesUserHistory

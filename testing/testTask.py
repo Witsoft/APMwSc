@@ -1466,7 +1466,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -1501,7 +1501,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -1537,7 +1537,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -1573,7 +1573,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -1607,7 +1607,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -1645,7 +1645,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -1681,7 +1681,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -1717,7 +1717,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -1759,7 +1759,7 @@ class TestTask(unittest.TestCase):
                 
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
               
@@ -1794,7 +1794,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
             
@@ -1833,7 +1833,7 @@ class TestTask(unittest.TestCase):
                 
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
              
@@ -1875,7 +1875,7 @@ class TestTask(unittest.TestCase):
                 
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
              
@@ -1912,7 +1912,7 @@ class TestTask(unittest.TestCase):
                 
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
            
@@ -1948,7 +1948,7 @@ class TestTask(unittest.TestCase):
                 
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
            
@@ -1983,7 +1983,7 @@ class TestTask(unittest.TestCase):
                 
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
            
@@ -2020,7 +2020,7 @@ class TestTask(unittest.TestCase):
                 
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
              
@@ -2056,7 +2056,7 @@ class TestTask(unittest.TestCase):
                 
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
            
@@ -2092,7 +2092,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
             
@@ -2128,7 +2128,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
             
@@ -2164,7 +2164,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
             
@@ -2200,7 +2200,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
             
@@ -2236,7 +2236,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
             
@@ -2272,7 +2272,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
             
@@ -2308,7 +2308,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
             
@@ -2344,7 +2344,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
             
@@ -2382,7 +2382,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -2418,7 +2418,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
  
@@ -2454,7 +2454,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -2490,7 +2490,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -2526,7 +2526,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -2561,7 +2561,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -2597,7 +2597,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -2631,7 +2631,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -2669,7 +2669,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -2705,7 +2705,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
            
@@ -2741,7 +2741,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -2777,7 +2777,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -2813,7 +2813,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -2849,7 +2849,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -2885,7 +2885,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -2920,7 +2920,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -2956,7 +2956,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -2992,7 +2992,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3027,7 +3027,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3063,7 +3063,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3099,7 +3099,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3134,7 +3134,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3170,7 +3170,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3206,7 +3206,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3242,7 +3242,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3278,7 +3278,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3314,7 +3314,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3349,7 +3349,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3385,7 +3385,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3421,7 +3421,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3459,7 +3459,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3495,7 +3495,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3531,7 +3531,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('hIDBW',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('hIDBW',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('hIDBW',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
         
@@ -3573,7 +3573,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -3608,7 +3608,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -3644,7 +3644,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -3682,7 +3682,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -3719,7 +3719,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -3756,7 +3756,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -3792,7 +3792,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -3828,7 +3828,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -3866,7 +3866,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -3902,7 +3902,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
              
@@ -3938,7 +3938,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -3974,7 +3974,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
              
@@ -4010,7 +4010,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -4046,7 +4046,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -4089,7 +4089,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
              
@@ -4124,7 +4124,7 @@ class TestTask(unittest.TestCase):
                
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
              
@@ -4161,7 +4161,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
             
@@ -4196,7 +4196,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
             
@@ -4230,7 +4230,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
             
@@ -4265,7 +4265,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -4300,7 +4300,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -4335,7 +4335,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -4372,7 +4372,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -4406,7 +4406,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -4441,7 +4441,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -4476,7 +4476,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -4511,7 +4511,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -4546,7 +4546,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -4978,7 +4978,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5009,7 +5009,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5044,7 +5044,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5077,7 +5077,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5110,7 +5110,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5143,7 +5143,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5176,7 +5176,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5209,7 +5209,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5242,7 +5242,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5275,7 +5275,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5308,7 +5308,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5343,7 +5343,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5376,7 +5376,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5409,7 +5409,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5442,7 +5442,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5475,7 +5475,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5510,7 +5510,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5543,7 +5543,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5576,7 +5576,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5609,7 +5609,7 @@ class TestTask(unittest.TestCase):
               
          # Insertamos la historia
          aHist = userHistory()
-         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, 1,1)
+         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
          idFound1 = searchHist[0].UH_idUserHistory 
          
@@ -5624,4 +5624,5 @@ class TestTask(unittest.TestCase):
          aHist.deleteUserHistory(idFound1)
          aAcc.deleteAccion('cinrohbwidia',1)
          aBacklog.deleteProduct('Podn fjdd.')
+         
 #Fin de los casos de prueba

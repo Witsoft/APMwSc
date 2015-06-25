@@ -139,7 +139,7 @@ class TestObjectives(unittest.TestCase):
         oBacklog.insertBacklog('Xstryctyrzs','Cxmplyczdz',1)
         # Inicio de la prueba.
         oObj   = objective()
-        result  =oObj.insertObjective('Dxs pyrczylcs',2,True)
+        result  =oObj.insertObjective('Dxs pyrczylcs',99,True)
         self.assertFalse(result)
         oBacklog.deleteProduct('Xstryctyrzs')
 
@@ -149,7 +149,7 @@ class TestObjectives(unittest.TestCase):
         oBacklog.insertBacklog('Xstryctyrzs','Pxsydy',1)
         # Inicio de la prueba.
         oObj   = objective()
-        result = oObj.insertObjective(20*'Llxmxry',3,True)
+        result = oObj.insertObjective(20*'Llxmxry',99,True)
         self.assertFalse(result)
         oBacklog.deleteProduct('Xstryctyrzs')
 
@@ -430,7 +430,7 @@ class TestObjectives(unittest.TestCase):
         # Inicio de la prueba.
         oObj = objective()
         oObj.insertObjective('Szbxr xndxcy',idBacklog,False)
-        result = oObj.searchIdObjective(5)
+        result = oObj.searchIdObjective(99)
         self.assertEqual([],result)
         oObj.deleteObjective('Szbxr xndxcy',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
@@ -906,3 +906,5 @@ class TestObjectives(unittest.TestCase):
         self.assertEqual([],transverse)    
         oObj.deleteObjective('Dvsxrryllzr conjzntys',idBacklog)
         oBacklog.deleteProduct('Xstryctyrzs')
+
+# Fin de casos Objective

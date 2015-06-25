@@ -1417,3 +1417,5 @@ class TestUser(unittest.TestCase):
         user1.deleteUser('ehfahw')
         role1.deleteActor('Xsxyrvz',idBacklog)
         aBacklog.deleteProduct('Pxrsynzjxs')
+        
+# Fin de casos User
