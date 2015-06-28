@@ -15,7 +15,6 @@ def ACrearActor():
     
     # Obtenemos el id del producto
     idPila  = int(session['idPila'])
-    print('idPila ACrearActor',idPila) 
     
     if params != {}:    
         # Extraemos los datos
@@ -49,8 +48,6 @@ def AElimActor():
     # Obtenemos el id del producto y de la acción
     idPila  = int(session['idPila'])
     idActor = int(session['idActor'])
-    print('idPila AElimActor', idPila)
-    print('idActor AElimActor', idActor)
     
     # Conseguimos el actor a eliminar 
     oActor = role()
@@ -90,8 +87,7 @@ def AModifActor():
 
     # Obtenemos el id del Producto.
     idPila  = int(session['idPila'])
-    print('idPila AModifActor',idPila) 
-    
+
     # Extraemos los parámetros
     idActor      = params['idActor'] 
     newNameActor = params['nombre']
@@ -127,9 +123,7 @@ def VActor():
     # Obtenemos el id del producto y de la acción
     idPila  = int(session['idPila'])
     idActor = int(request.args.get('idActor'))
-    print('idPila VActor',idPila)
-    print('idActor VActor',idActor)
-    
+
     if "actor" in session:
         res['actor']=session['actor']
     
@@ -157,7 +151,6 @@ def VCrearActor():
            
     # Obtenemos el id del producto
     idPila = request.args.get('idPila',1)
-    print('idPila VCrearActor',idPila)
     
     if "actor" in session:
         res['actor']=session['actor']

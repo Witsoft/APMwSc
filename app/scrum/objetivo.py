@@ -17,7 +17,6 @@ def ACrearObjetivo():
     
     # Obtenemos el id del producto
     idPila  = int(session['idPila'])
-    print('idPila ACrearObjetivo',idPila) 
     
     if request.method == 'POST':
     
@@ -52,8 +51,6 @@ def AElimObjetivo():
     # Obtenemos el id del producto
     idPila       = int(session['idPila'])
     idObjective  = int(session['idObjective'])
-    print('idPila AElimObjetivo', idPila)
-    print('idActor AElimObjetivo', idObjective)
     
     # Conseguimos el objetivo a eliminar  
     oObjetivo    = objective()
@@ -89,7 +86,6 @@ def AModifObjetivo():
     
     # Obtenemos el id del producto
     idPila  = int(session['idPila'])
-    print('idPila AModifAccion',idPila) 
     
     # Extraemos los parámetros
     idObjetivo     = params['idObjetivo']  
@@ -126,9 +122,6 @@ def VObjetivo():
     # Obtenemos el id del producto y del objetivo
     idPila      = int(session['idPila'])
     idObjective = int(request.args.get('idObjetivo'))
-    print('idPila VObjetivo',idPila)
-    print('idObjetivo VObjetivo',idObjective)
-    
     boolean = {0:False,1:True}
     
     if "actor" in session:
@@ -163,7 +156,6 @@ def VCrearObjetivo():
     
     # Obtenemos el id del producto
     idPila = request.args.get('idPila',1)
-    print('idPila VCrearObjetivo',idPila)
     
     if "actor" in session:
         res['actor']=session['actor']

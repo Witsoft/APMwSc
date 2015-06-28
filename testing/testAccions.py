@@ -127,7 +127,7 @@ class TestAccions(unittest.TestCase):
         aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
         # Inicio de la prueba.
         aAcc    = accions()
-        result  = aAcc.insertAccion('DwfEndqr cun fw3rzv',2)
+        result  = aAcc.insertAccion('DwfEndqr cun fw3rzv',88)
         self.assertFalse(result)
         aBacklog.deleteProduct('Bxtyllz')
  
@@ -137,7 +137,7 @@ class TestAccions(unittest.TestCase):
         aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
         # Inicio de la prueba.
         aAcc   = accions()
-        result = aAcc.insertAccion(20*'LlWmcrl',3)
+        result = aAcc.insertAccion(20*'LlWmcrl',99)
         self.assertFalse(result)
         aBacklog.deleteProduct('Bxtyllz')
                        
@@ -879,3 +879,5 @@ class TestAccions(unittest.TestCase):
         result = aAcc.deleteAccion('Lys@a dp 3nfmsgzs',-1)
         self.assertFalse(result,"Id válida")
         aBacklog.deleteProduct('Bxtyllz')        
+
+# Fin de casos Accions

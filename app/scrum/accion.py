@@ -18,7 +18,7 @@ def ACrearAccion():
     
     # Obtenemos el id del producto
     idPila  = int(session['idPila'])
-    print('idPila ACrearAccion',idPila) 
+
     
     if params != {}:           
         # Extraemos los parámetros
@@ -52,9 +52,7 @@ def AElimAccion():
     # Obtenemos el id del producto y de la acción
     idPila   = int(session['idPila'])
     idAccion = int(session['idAccion'])
-    print('idPila AElimActor', idPila)
-    print('idActor AElimActor', idAccion)
-    
+
     # Conseguimos la acción a eliminar 
     oAccion = accions()
     found   = oAccion.searchIdAccion(idAccion)
@@ -89,8 +87,7 @@ def AModifAccion():
     
     # Obtenemos el id del producto
     idPila  = int(session['idPila'])
-    print('idPila AModifAccion',idPila) 
-     
+
     # Extraemos los parámetros
     newDescription = params['descripcion']
     idAccion       = int(params['idAccion']) 
@@ -122,9 +119,7 @@ def VAccion():
     # Obtenemos el id del producto y de la acción
     idPila   = int(session['idPila'])
     idAccion = int(request.args.get('idAccion'))
-    print('idPila VAccion',idPila)
-    print('idAccion VAccion',idAccion)
-    
+
     if "actor" in session:
         res['actor']=session['actor']
     
@@ -152,7 +147,6 @@ def VCrearAccion():
     
     # Obtenemos el id del producto
     idPila = request.args.get('idPila',1)
-    print('idPila VCrearAccion',idPila)
 
     if "actor" in session:
         res['actor']=session['actor']

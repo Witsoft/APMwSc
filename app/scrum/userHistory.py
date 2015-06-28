@@ -209,10 +209,9 @@ class userHistory(object):
                 foundTask = clsTask.query.filter_by(HW_idUserHistory = idHistory).all()
                 if found != None:
                     found.UH_scale = priority
-                    if foundTask != []:
+                    if (priority == 0) and (foundTask != []):
                         for task in foundTask:    
                             db.session.delete(task)
-
                     db.session.commit()
                     return True
         return False

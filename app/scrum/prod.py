@@ -75,8 +75,7 @@ def VCrearProducto():
     res = {}
     # Buscamos el id del producto.
     idPila = int(request.args.get('idPila',1))
-    print('idPila VCrearProducto ',idPila)
-    
+      
     if "actor" in session:
         res['actor']=session['actor']
     
@@ -100,7 +99,6 @@ def VProducto():
     res = {}
     # Obtenemos el id del producto
     idPila = int(request.args.get('idPila', 1))
-    print('idPila VProducto ',idPila)
     
     if "actor" in session:
         res['actor']=session['actor']
