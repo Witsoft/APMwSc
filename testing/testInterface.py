@@ -47,11 +47,8 @@ class CasosPrueba(unittest.TestCase):
         
 
         result    = oUser.deleteUser('usuario')
-        print('Eliminar usuario',result)
         result    = oBacklog.deleteProduct('Producto 1')
-        print('Eliminar producto',result) 
-        result   = oCategory.deleteCategory('Categoria1')
-        print('Eliminar categoria',result) 
+        result   = oCategory.deleteCategory('Categoria1') 
            
               
         # Casos de prueba para registrar un usuario en la aplicacion.

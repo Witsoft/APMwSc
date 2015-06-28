@@ -40,7 +40,6 @@ def ACrearCategoria():
 def AElimCategoria():
     #GET parameter
     idCategoria = request.args['idCategoria']
-    print('idCategoria AElimCategoria',idCategoria)
     results = [{'label':'/VCategorias', 'msg':['Categoría eliminada.']}, {'label':'/VCategorias', 'msg':['Error al intentar eliminar categoría.']}, ]
     res = results[1]
 
