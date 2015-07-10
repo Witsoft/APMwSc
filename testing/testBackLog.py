@@ -15,7 +15,7 @@ from userHistory import *
 class TestBacklog(unittest.TestCase):
      
      #############################################      
-     #    Suite de Pruebas para findDescription  #
+     #         Pruebas para findDescription      #
      #############################################
   
      # Caso Inicial
@@ -220,7 +220,7 @@ class TestBacklog(unittest.TestCase):
   
            
       #############################################      
-      #   Suite de Pruebas para insertBacklog  #
+      #         Pruebas para insertBacklog        #
       #############################################
         
     # Caso Inicial
@@ -400,7 +400,7 @@ class TestBacklog(unittest.TestCase):
         self.assertFalse(result)
   
       #############################################      
-      #   Suite de Pruebas para deleteProduct  #
+      #         Pruebas para deleteProduct        #
       #############################################
         
      # Caso Inicial
@@ -589,7 +589,7 @@ class TestBacklog(unittest.TestCase):
   
                   
     ##############################################      
-    #   Suite de Pruebas para modifyDescription  #
+    #        Pruebas para modifyDescription      #
     ############################################## 
   
      # Caso Inicial
@@ -800,7 +800,7 @@ class TestBacklog(unittest.TestCase):
      
      
      ####################################################      
-     #   Suite de Pruebas para actorsAsociatedToProduct #
+     #        Pruebas para actorsAsociatedToProduct     #
      ####################################################  
      
      # Casos Frontera
@@ -876,7 +876,7 @@ class TestBacklog(unittest.TestCase):
  
          
      ####################################################      
-     #   Suite de Pruebas para accionAsociatedToProduct #
+     #        Pruebas para accionAsociatedToProduct     #
      ####################################################  
      
     # Casos Frontera
@@ -951,7 +951,7 @@ class TestBacklog(unittest.TestCase):
  
          
      #######################################################      
-     #   Suite de Pruebas para objectiveAsociatedToProduct #
+     #        Pruebas para objectiveAsociatedToProduct     #
      #######################################################  
     
     # Casos Frontera
@@ -1033,7 +1033,7 @@ class TestBacklog(unittest.TestCase):
         aBacklog.deleteProduct('Thxy Sxgyrz')           
 
     ################################################      
-    #   Suite de Pruebas para updatePriorityScale  #
+    #       Pruebas para updatePriorityScale       #
     ################################################
            
     # Caso Inicial

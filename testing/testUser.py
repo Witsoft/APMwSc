@@ -12,497 +12,541 @@ from role import *
 class TestUser(unittest.TestCase):
 
     ##########################################      
-    #   Suite de Pruebas para InsertUser     #
+    #        Pruebas para InsertUser         #
     ##########################################
     
     # Caso Inicial
  
     # Prueba 1
-      
-    def testUserInsertExist(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sah','ehfah','al', '@ls', 1)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+    def testInsertUserExists(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog  
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sah','ehfah','al', '@ls',idActor)
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Caso frontera
+    # Casos frontera
 
     # Prueba 2   
-    def testUserInsertTrue(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserTrue(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sah','ehfahw','alir893b1','@ls',1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sah','ehfahw','alir893b1','@ls',idActor)
         self.assertTrue(result)
-        user1.deleteUser('ehfahw')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfahw')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
                    
     # Prueba 3
-    def testUserInsertFalse(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sah','ehfah','al', '@ls',6)
+    def testInsertUserFalse(self):
+        oUser     = user()
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sah','ehfah','al', '@ls',6000)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
            
     # Prueba 4
-    def testUserInsertNoUser(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserEmptyUsername(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sah','','al','@?lds',1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result = oUser.insertUser('sah','','al','@?lds',idActor)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
             
     # Prueba 5
-    def testUserInsert1char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserUsernameLength1(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sahid', 'a','1223478364', 'xxx@gmail.com',1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sahid', 'a','1223478364', 'xxx@gmail.com',idActor)
         self.assertTrue(result)
-        user1.deleteUser('a')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')  
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('a')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')  
    
     # Prueba 6
-    def testUserInsert17char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserUsernameLength17(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sahid', 'jksjdfdj vkjdfuhf','12234', 'xxx@gmail.com', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sahid', 'jksjdfdj vkjdfuhf','12234', 'xxx@gmail.com',idActor)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     # Prueba 7
-    def testUserInsert16char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserUsernameLength16(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sahid', 'jksjdfdjvkjdfuhf','122346768', 'yzyyxxx@gmail.com', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sahid', 'jksjdfdjvkjdfuhf','122346768', 'yzyyxxx@gmail.com',idActor)
         self.assertTrue(result)
-        user1.deleteUser('jksjdfdjvkjdfuhf')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('jksjdfdjvkjdfuhf')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
            
     # Prueba 8
-    def testUserInsert15char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sahid', 'wjfr9olpsmfkreo','1225676834', 'xfeexx@fgmail.com', 1)
+    def testInsertUserUsernameLength15(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog  
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sahid', 'wjfr9olpsmfkreo','1225676834', 'xfeexx@fgmail.com',idActor)
         self.assertTrue(result) 
-        user1.deleteUser('wjfr9olpsmfkreo')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('wjfr9olpsmfkreo')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
            
     # Prueba 9
-    def testUserInsert8char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserUserNameLength8(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
         # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sahid', 'wiekfprm','1223463637', 'yffe@ldv.gmail.com', 1)
+        result    = oUser.insertUser('sahid', 'wiekfprm','1223463637', 'yffe@ldv.gmail.com',idActor)
         self.assertTrue(result)
-        user1.deleteUser('wiekfprm')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('wiekfprm')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
              
     # Prueba 10
-    def testUserInserFullnamet51char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserFullnameLength51(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sxhyd Pxtrycyx Rryfs Vrlrncyu kjhdj kjhvjfdbhjdcmkd', 'jksjdfdj vkjdfuhf','12234', 'xxx@gmail.com', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sxhyd Pxtrycyx Rryfs Vrlrncyu kjhdj kjhvjfdbhjdcmkd', 'jksjdfdj vkjdfuhf','12234', 'xxx@gmail.com',idActor)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
             
     # Prueba 11
-    def testUserInserFullnamet50char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserFullnameLength50(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result =  user1.insertUser('sdhtd Pdtrycrt Rtyys Vslcncta kjhdj kjhvjfdbhjdcmk', 'jksjdfdj__','1223485953', 'xx__x@gmail.com', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sdhtd Pdtrycrt Rtyys Vslcncta kjhdj kjhvjfdbhjdcmk', 'jksjdfdj__','1223485953', 'xx__x@gmail.com',idActor)
         self.assertTrue(result)
-        user1.deleteUser('jksjdfdj__') 
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')      
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('jksjdfdj__') 
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')      
                   
     # Prueba 12
-    def testUserInserFullnamet49char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserFullnameLength49(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sahid Patricia Reyes Valencia jhdj kjhvjfdbhjdcmkd', 'jpvkjdfuhf','8475312234', 'xyyy@gmail.com', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sahid Patricia Reyes Valencia jhdj kjhvjfdbhjdcmkd', 'jpvkjdfuhf','8475312234', 'xyyy@gmail.com',idActor)
         self.assertTrue(result)
-        user1.deleteUser('jpvkjdfuhf') 
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('jpvkjdfuhf') 
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
          
     # Prueba 13
-    def testUserInserFullnamet25char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserFullnameLength25(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('Pxtrscre Rtyts Vqlfncfa25', 'patkjdfuhf','1223467843', 'patx@gmail.com', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('Pxtrscre Rtyts Vqlfncfa25', 'patkjdfuhf','1223467843', 'patx@gmail.com',idActor)
         self.assertTrue(result)
-        user1.deleteUser('patkjdfuhf')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('patkjdfuhf')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
            
     # Prueba 14
-    def testUserInserNoFullname(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserEmptyFullname(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('', 'patkjdfuhf','12234', 'patx@gmail.com', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('', 'patkjdfuhf','12234', 'patx@gmail.com',idActor)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
    
     # Prueba 15
-    def testUserInserFullnamet1char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('P', 'patkfhf_1','122374834', 'paddtx@gmail.com', 1)
+    def testInsertUserFullnameLength1(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('P', 'patkfhf_1','122374834', 'paddtx@gmail.com',idActor)
         self.assertTrue(result)
-        user1.deleteUser('patkfhf_1')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('patkfhf_1')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
            
     # Prueba 16
-    def testUserInsertEmail31char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserEmailLength31(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sxhyd Pxtrycyx', 'tdd ','12d234', '10-10603-10-10916ing@ldc.usb.ve', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sxhyd Pxtrycyx', 'tdd ','12d234', '10-10603-10-10916ing@ldc.usb.ve',idActor)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
            
     # Prueba 17
-    def testUserInsertNoEmail(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserEmptyEmail(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sxhyd Pxtrycyx', 'tdd ','12d234', '', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sxhyd Pxtrycyx', 'tdd ','12d234', '',idActor)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
            
     # Prueba 18
-    def testUserInsertEmail1char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserEmailLength1(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sxhyd Pxtrycyx', 'tdd_1','12d2345678','@', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sxhyd Pxtrycyx', 'tdd_1','12d2345678','@',idActor)
         self.assertTrue(result)
-        user1.deleteUser('tdd_1')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')        
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('tdd_1')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')        
          
     # Prueba 19
-    def testUserInsertEmail30char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserEmailLength30(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sxhyd Pxtrycyx', 'tdd_2','12d2356784', '123167890patricia_v@gmail.com', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sxhyd Pxtrycyx', 'tdd_2','12d2356784', '123167890patricia_v@gmail.com',idActor)
         self.assertTrue(result)
-        user1.deleteUser('tdd_2')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('tdd_2')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
            
     # Prueba 20
-    def testUserInsertEmail29char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserEmailLength29(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sxhyd Pxtrycyx', 'tdd_3','12d2343434', '123167890patriciav@gmail.com', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sxhyd Pxtrycyx', 'tdd_3','12d2343434', '123167890patriciav@gmail.com',idActor)
         self.assertTrue(result)
-        user1.deleteUser('tdd_3')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('tdd_3')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
            
     # Prueba 21
-    def testUserInsertPassword201(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserPasswordLength201(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('pat', 'ehfer_23',100*'12' + 'e', '2@ls',1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('pat', 'ehfer_23',100*'12' + 'e', '2@ls',idActor)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
    
     # Prueba 22
-    def testUserInsertNoPassword(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserEmptyPassword(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sah', 'ehfadh_2','', '3@ls', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sah', 'ehfadh_2','', '3@ls',idActor)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
           
     # Prueba 23
-    def testUserInsertPassword199(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserPasswordLength199(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sah', 'ehf_1',199*'e', 'po@rls', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sah', 'ehf_1',199*'e', 'po@rls',idActor)
         self.assertTrue(result)
-        user1.deleteUser('ehf_1')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehf_1')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
           
     # Prueba 24
-    def testUserInsertPassword1(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserPasswordLength1(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sr', 'er3r_1','1', 'desm@ld.s', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sr', 'er3r_1','1', 'desm@ld.s',idActor)
         self.assertTrue(result)
-        user1.deleteUser('er3r_1')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('er3r_1')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
           
     # Prueba 25
-    def testUserInsertPassword2(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testInsertUserPasswordLength2(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sah', 'frkfe_1','qi', 'fefef_t@l.ss', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sah', 'frkfe_1','qi', 'fefef_t@l.ss', idActor)
         self.assertTrue(result)
-        user1.deleteUser('frkfe_1')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('frkfe_1')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
            
     # Prueba 26
-    def testUserInsertNoRole(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('srgfer', 'pw74b_r','efoewfwe1', 'tarea@hot.com', None)
+    def testInsertUserNoneRole(self):
+        oUser     = user()
+        # Inicio de la prueba.
+        result    = oUser.insertUser('srgfer', 'pw74b_r','efoewfwe1', 'tarea@hot.com', None)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
    
     # Prueba 27
-    def testUserInsertnNoRoleString(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('utdf R', 'olpo','efefefr3', 'nonemail@,mail.cpom', 80)
+    def testInsertUserInvalidIdRole(self):
+        oUser     = user()
+        # Inicio de la prueba.
+        result    = oUser.insertUser('utdf R', 'olpo','efefefr3', 'nonemail@,mail.cpom','8')
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
            
     # Caso Malicia
 
     # Prueba 28
-    def testUserInsertidroleChar(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('sahid', 'a','12234', 'xxx@gmail.com','b')
+    def testInsertUserInvalidStringIdRole(self):
+        oUser     = user()
+        # Inicio de la prueba.
+        result    = oUser.insertUser('sahid', 'a','12234', 'xxx@gmail.com','b')
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
            
     # Prueba 29
-    def testUserInsertNochar(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('', '','', '', None)
+    def testInsertUserInvalidParams(self):
+        oUser     = user()
+        # Inicio de la prueba.
+        result    = oUser.insertUser('', '','', '', None)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
-       
+
     # Prueba 30
-    def testUserInsertNoParam(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser(None, None,None, None,None)
+    def testInsertUserNoneParams(self):
+        oUser     = user()
+        # Inicio de la prueba.
+        result    = oUser.insertUser(None, None,None, None,None)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
                       
     # Caso esquina
 
     # Prueba 31
-    def testUserInsertNoForeign(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.insertUser('fiee0 ee', 'q84-g0gs','wdwd94', 'ffjfor@w.pol',  60)
+    def testInsertUserInvalidForeignIdRole(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        # Inicio de la prueba.
+        result    = oUser.insertUser('fiee0 ee', 'q84-g0gs','wdwd94', 'ffjfor@w.pol',9000)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oBacklog.deleteProduct('Pxrsynzjxs')
   
      ##########################################      
      #   Suite de Pruebas para searchUser     #
@@ -511,164 +555,154 @@ class TestUser(unittest.TestCase):
     # Caso Inicial
 
     # Prueba 32
-    def testsearchUserExist(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
+    def testSearchUserExists(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
         # Inicio de la prueba. 
-        user1 = user()
-        result = user1.searchUser('ehfah')
+        result    = oUser.searchUser('ehfah')
+        # Eliminamos los datos insertados.
+        oBacklog.deleteProduct('Pxrsynzjxs')
   
     #Caso Frontera
     
     # Prueba 33
-    def testsearchUserTrue(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
+    def testSearchUserTrue(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog  
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('nombre','ehfah','12345678','ef@fg.com',idActor)
         # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('nombre','ehfah','12345678','ef@fg.com',1)
-        result = user1.searchUser('ehfah')
+        result    = oUser.searchUser('ehfah')
         self.assertNotEqual([],result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
              
     # Prueba 34
-    def testsearchUser1Char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testSearchUserUsernameLength1(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('nombreA','a','12345678','a@g.com',idActor)
         # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('nombreA','a','12345678','a@g.com',1)
-        result = user1.searchUser('a')
+        result    = oUser.searchUser('a')
         self.assertNotEqual([],result)
-        user1.deleteUser('a')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('a')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
      
     # Prueba 35
-    def testsearchUser16Char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testSearchUserUsarnameLength6(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('new uswer','jksjdfdjvkjdfuhf','12345678','nuevo@.com',idActor)
         # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('new uswer','jksjdfdjvkjdfuhf','12345678','nuevo@.com',1)
-        result = user1.searchUser('jksjdfdjvkjdfuhf')
+        result    = oUser.searchUser('jksjdfdjvkjdfuhf')
         self.assertNotEqual([],result)
-        user1.deleteUser('new uswer')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
-  
-    # Prueba 36
-    def testSearchUserNotChar(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.searchUser('') 
-        self.assertEqual([],result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('new uswer')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
       
-    # Prueba 37
-    def testsearchUser17Char(self):  
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 36
+    def testSearchUserUsernameLength7(self):  
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('fullname','jksjdfdj vkjdfuhf','12345678','email@',idActor)
         # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('fullname','jksjdfdj vkjdfuhf','12345678','email@',1)
-        result = user1.searchUser('jksjdfdj vkjdfuhf')
+        result    = oUser.searchUser('jksjdfdj vkjdfuhf')
         self.assertEqual([],result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
   
     # Caso Esquina
 
-    # Prueba 38
-    def testsearchUserNotInsert(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
+    # Prueba 37
+    def testSearchUserUserNameNotInserted(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
         # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.searchUser('PatriciaValencia')
+        result = oUser.searchUser('PatriciaValencia')
         self.assertEqual([],result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oBacklog.deleteProduct('Pxrsynzjxs')
   
-    # Prueba 39
-    def testsearchUser8Char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 38
+    def testSearchUserUsernameLength8(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('fullname','wiekfprm','123456784','eail@nuevo',idActor)
         # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('fullname','wiekfprm','123456784','eail@nuevo',1)
-        result = user1.searchUser('wiekfprm')
+        result = oUser.searchUser('wiekfprm')
         self.assertNotEqual([],result)
-        user1.deleteUser('wiekfprm')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('wiekfprm')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
   
     # Caso Malicia 
 
-    # Prueba 40
-    def testsearchUserNoChar(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
+    # Prueba 39
+    def testSearchUserEmptyUsername(self):
+        # Insertamos los datos necesarios.
+        oUser     = user()
         # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.searchUser('')
+        result = oUser.searchUser('')
         self.assertEqual([],result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
 
-    # Prueba 41            
-    def testsearchUserNoParam(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
+    # Prueba 40            
+    def testSearchUserNoneParam(self):
+        oUser     = user()
         # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.searchUser(None)
+        result = oUser.searchUser(None)
         self.assertEqual([],result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
   
     ##########################################      
     #   Suite de Pruebas para UpdateUser     #
@@ -676,260 +710,315 @@ class TestUser(unittest.TestCase):
 
     # Caso Inicial
 
-    # Prueba 42        
-    def testupdateUserTrue(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 41        
+    def testUpdateUserTrue(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('loquesea','ehfah','12345678','cosa',1)
-        result = user1.updateUser('xd','ehfah','ldow1qeqt', 'o123ifhweief@ef',1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('loquesea','ehfah','12345678','cosa',idActor)
+        # Inicio de la prueba.
+        result    = oUser.updateUser('xd','ehfah','ldow1qeqt', 'o123ifhweief@ef',idActor)
         self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     # Caso Frontera
 
-    # Prueba 43 
-    def testupdateUserFalse(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 42 
+    def testUpdateUserFalse(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('valido', 'ehfah', 'ldowf4r42q', 'oifhwe@fw', 1)
-        result = user1.updateUser(None, 'ehfah', 'ldowqeq', 'oifhweiofw',  1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('valido', 'ehfah', 'ldowf4r42q', 'oifhwe@fw',idActor)
+        # Inicio de la prueba.
+        result    = oUser.updateUser(None, 'ehfah', 'ldowqeq', 'oifhweiofw',idActor)
         self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 44    
-    def testupdateUserNonepass(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 43    
+    def testUpdateUserNonePassword(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('yloqdd', 'ehfah', '123456789', 'oieeniofefw',  1)
-        result = user1.updateUser('y', 'ehfah', None, 'oieeniofefw',  1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('yloqdd', 'ehfah', '123456789', 'oieeniofefw',idActor)
+        # Inicio de la prueba.
+        result    = oUser.updateUser('y', 'ehfah', None, 'oieeniofefw',idActor)
         self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 45        
-    def testupdateUserNonedescription(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 44        
+    def testUpdateUserNoneDescription(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('loqwew', 'ehfah', 'ldoee22wqeq', 'nuevoemaild', 1)
-        result = user1.updateUser('loq', 'ehfah', 'ldowqeq', '', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('loqwew', 'ehfah', 'ldoee22wqeq', 'nuevoemaild', idActor)
+        # Inicio de la prueba.
+        result    = oUser.updateUser('loq', 'ehfah', 'ldowqeq', '',idActor)
         self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 46           
-    def testupdateUserIntermedio(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 45           
+    def testUpdateUserElementToUpdateDoesNotExist(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('loer3q', 'ehfah', '123163r378012wd', 'frrwfwfe', 1)
-        result = user1.updateUser('loq', 'ehfah','123167891012wd', 'fwfwfe', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('loer3q', 'ehfah', '123163r378012wd', 'frrwfwfe',idActor)
+        # Inicio de la prueba.
+        result    = oUser.updateUser('loq', 'ehfah','123167891012wd', 'fwfwfe',idActor)
         self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 47    
-    def testupdateUserNorole(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 46    
+    def testUpdateUserInvalidNumberRole(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.updateUser( 'lfoqefe', 'ehfah', '12312331wd', 'fw3rfe', 1)
-        result = user1.updateUser( 'lfoq', 'ehfah', '1231612wd', 'fwfefwfe', 4000)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        # Inicio de la prueba.
+        result    = oUser.updateUser( 'lfoq', 'ehfah', '1231612wd', 'fwfefwfe', 4000)
         self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 48
-    def testupdateUserChar(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 47
+    def testUpdateUserInvalidStringRole(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        self.assertFalse(user1.updateUser( 'lfoq', 'ehfah', '1231612wd', 'fwfe@fwfe',  'a'))
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')    
-
-    # Prueba 49     
-    def testupdateUserNoUser(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.updateUser( 'lfoqeffe', 'ehfah', '123161efef2wd', 'fwf@@efeffwfe', 1)
-        result = user1.updateUser( 'lfoq', None, '1231612wd', 'fwf@@efwfe',  1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        # Inicio de la prueba.
+        result    = oUser.updateUser( 'lfoq', 'ehfah', '1231612wd', 'fwfe@fwfe','a')
         self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')    
+
+    # Prueba 48     
+    def testUpdateUserNoneUsername(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog  
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        # Inicio de la prueba.
+        result    = oUser.updateUser( 'lfoq', None, '1231612wd', 'fwf@@efwfe',idActor)
+        self.assertFalse(result)
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
+
+    # Prueba 49    
+    def testUpdateUserInvalidParams(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog 
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@',idActor)
+        # Inicio de la prueba.
+        result    = oUser.updateUser( '', '', '', '', None)
+        self.assertFalse(result)
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     # Prueba 50     
-    def testupdateUserBlancs(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testUpdateUserNoneParams(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
-        result = user1.updateUser( '', '', '', '', None)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@',idActor)
+        # Inicio de la prueba.
+        result    = oUser.updateUser( None, None,  None, None, None)
         self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     # Prueba 51     
-    def testupdateUserNoParam(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testUpdateUserValidUsernameInvalidOtherParams(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
-        result = user1.updateUser( None, None,  None, None, None)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@',idActor)
+        # Inicio de la prueba.
+        result    = oUser.updateUser( None, 'ehfah', None, None, None)
         self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     # Prueba 52     
-    def testupdateUserNoChange(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    def testUpdateUserMaxNumberCharactersAllowed(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
-        result = user1.updateUser( None, 'ehfah', None, None, None)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@',idActor)
+        # Inicio de la prueba.
+        result    = oUser.updateUser(50*'a','ehfah','condieciseischar','cuenta30a@prueba.usb.ve',idActor)
         self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 53     
-    def testupdateUsermaxchar(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 53 
+    def testUpdateUserExternalBorder(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
-        result = user1.updateUser(50*'a','ehfah','condieciseischar','cuenta30a@prueba.usb.ve', 1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@',idActor)
+        # Inicio de la prueba.
+        result    = oUser.updateUser('mas cincuenta caracteres en el nombre con espacios_','ehfah','condieci_seischar','cuenta30charpara@_prueba.usb.ve',idActor)
         self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 54 
-    def testupdateUserFronteraExt(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 54     
+    def testUpdateUserInternalBorder(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
-        result = user1.updateUser('mas cincuenta caracteres en el nombre con espacios_','ehfah','condieci_seischar','cuenta30charpara@_prueba.usb.ve',1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@',idActor)
+        # Inicio de la prueba.
+        result    = oUser.updateUser('mas cincuenta caracteres en el nombre con espacio','ehfah','condieciseischa','cuenta30charpar@prueba.usb.ve',idActor)
         self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     # Prueba 55     
-    def testupdateUserFronteraInt(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
-        result = user1.updateUser('mas cincuenta caracteres en el nombre con espacio','ehfah','condieciseischa','cuenta30charpar@prueba.usb.ve',1)
+    def testUpdateUserNotfound(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
+        idBacklog = findId[0].BL_idBacklog  
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@',idActor)
+        # Inicio de la prueba.
+        result    = oUser.updateUser( 'mas cincuenta caracteres ', 'prueba_admin', 'condieciseischar', 'cuentanueva@prueba.usb.ve',idActor)
         self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
-
-    # Prueba 56     
-    def testupdateUserNotfound(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser( 'wdwdwd', 'ehfah', '1234567890', 'nuebee3@', 1)
-        result = user1.updateUser( 'mas cincuenta caracteres ', 'prueba_admin', 'condieciseischar', 'cuentanueva@prueba.usb.ve', 1)
-        self.assertFalse(result)
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
      
     ##########################################      
     #   Suite de Pruebas para DeleteUser     #
@@ -937,158 +1026,160 @@ class TestUser(unittest.TestCase):
      
     # Caso Inicial
 
-    # Prueba 57     
+    # Prueba 56     
     def testUserDeleteExist(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        user1 = user()
-        user1.deleteUser('ehfah')
+        # Inicio de la prueba.
+        oUser.deleteUser('ehfah')
 
     #vCaso Frontera
 
-    # Prueba 58     
+    # Prueba 57     
     def testUserDeleteTrue(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('urown','wiekfprm','1234322249','email@nee',1)
-        result = user1.deleteUser('wiekfprm')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('urown','wiekfprm','1234322249','email@nee',idActor)
+        # Inicio de la prueba.
+        result    = oUser.deleteUser('wiekfprm')
         self.assertTrue(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
       
-    # Prueba 59     
+    # Prueba 58     
     def testUserDeleteFalse(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.deleteUser('wiekfprm')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        # Inicio de la prueba.
+        result    = oUser.deleteUser('wiekfprm')
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oBacklog.deleteProduct('Pxrsynzjxs')
               
-    # Prueba 60         
-    def testUserDelete1char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 59         
+    def testUserDeleteUsernameLength1(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('nombrea','a','passworda12','emaila',1)
-        result = user1.deleteUser('a')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('nombrea','a','passworda12','emaila',idActor)
+        # Inicio de la prueba.
+        result    = oUser.deleteUser('a')
         self.assertTrue(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
           
-    # Prueba 61       
-    def testUserDelete16char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 60       
+    def testUserDeleteUsernameLength16(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('nombre','jksjdfdjvkjdfuhf','1234567890','emaildwd@',1)
-        result = user1.deleteUser('jksjdfdjvkjdfuhf')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('nombre','jksjdfdjvkjdfuhf','1234567890','emaildwd@',idActor)
+        # Inicio de la prueba.
+        result    = oUser.deleteUser('jksjdfdjvkjdfuhf')
         self.assertTrue(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
               
-    # Prueba 62       
-    def testUserDelete17char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.deleteUser('jksjdfdj vkjdfuhf')
+    # Prueba 61       
+    def testUserDeleteUsernameLength17(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        # Inicio de la prueba.
+        result    = oUser.deleteUser('jksjdfdj vkjdfuhf')
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oBacklog.deleteProduct('Pxrsynzjxs')
               
-    # Prueba 63
-    def testUserDelete15char(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 62
+    def testUserDeleteUsernameLength15(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('nombre','wjfr9olpsmfkreo','1234567890','emailen',1)
-        result = user1.deleteUser('wjfr9olpsmfkreo')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('nombre','wjfr9olpsmfkreo','1234567890','emailen',idActor)
+        # Inicio de la prueba.
+        result    = oUser.deleteUser('wjfr9olpsmfkreo')
         self.assertTrue(result) 
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     # Caso Malicia
 
-    # Prueba 64     
-    def testUserDeleteNoUser(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.deleteUser('')
+    # Prueba 63     
+    def testUserDeleteEmptyUsername(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        # Inicio de la prueba.
+        result    = oUser.deleteUser('')
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oBacklog.deleteProduct('Pxrsynzjxs')
               
-    # Prueba 65         
-    def testUserDeleteNoParam(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.deleteUser(None)
+    # Prueba 64         
+    def testUserDeleteNoneParam(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        # Inicio de la prueba.
+        result    = oUser.deleteUser(None)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')     
+        # Eliminamos los datos insertados.
+        oBacklog.deleteProduct('Pxrsynzjxs')     
      
-    # Prueba 66     
-    def testUserDeleteNoChar(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
-        idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        result = user1.deleteUser('')
+    # Prueba 65     
+    def testUserDeleteNumberParam(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        # Inicio de la prueba.
+        result    = oUser.deleteUser(13)
         self.assertFalse(result)
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs') 
+        # Eliminamos los datos insertados.
+        oBacklog.deleteProduct('Pxrsynzjxs') 
 
     ##########################################      
     #   Suite de Pruebas para findEmail      #
@@ -1096,163 +1187,199 @@ class TestUser(unittest.TestCase):
     
     # Caso Inicial
  
-    # Prueba 67      
-    def testUserFindEmailExist(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+    # Prueba 66      
+    def testUserFindEmailExists(self):
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfah','al', '@ls', 1)
-        result = user1.findEmail('@ls')
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfah','al', '@ls', idActor)
+        # Inicio de la prueba.
+        result    = oUser.findEmail('@ls')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     # Caso normal
 
-    # Prueba 68   
+    # Prueba 67   
     def testUserFindEmailTrue(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfahw','alir893b1','@ls',1)
-        result = user1.findEmail('@ls')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfahw','alir893b1','@ls',idActor)
+        # Inicio de la prueba.
+        result    = oUser.findEmail('@ls')
         self.assertTrue(result)
-        user1.deleteUser('ehfahw')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfahw')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     # Caso frontera
                    
-    # Prueba 69
+    # Prueba 68
     def testUserFindEmailString1(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfahw','alir893b1','l',1)
-        result = user1.findEmail('l')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfahw','alir893b1','l',idActor)
+        # Inicio de la prueba.
+        result    = oUser.findEmail('l')
         self.assertTrue(result)
-        user1.deleteUser('ehfahw')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfahw')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
            
-    # Prueba 70
+    # Prueba 69
     def testUserFindEmailString2(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfahw','alir893b1','ls',1)
-        result = user1.findEmail('ls')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfahw','alir893b1','ls',idActor)
+        # Inicio de la prueba.
+        result    = oUser.findEmail('ls')
         self.assertTrue(result)
-        user1.deleteUser('ehfahw')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfahw')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
             
-    # Prueba 71
+    # Prueba 70
     def testUserFindEmailString30(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfahw','alir893b1',10*'@ls',1)
-        result = user1.findEmail(10*'@ls')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfahw','alir893b1',10*'@ls',idActor)
+        # Inicio de la prueba.
+        result    = oUser.findEmail(10*'@ls')
         self.assertTrue(result)
-        user1.deleteUser('ehfahw')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfahw')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
    
-    # Prueba 72
+    # Prueba 71
     def testUserFindEmailString29(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfahw','alir893b1',7*'@las'+ 's',1)
-        result = user1.findEmail(7*'@las'+ 's')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfahw','alir893b1',7*'@las'+ 's',idActor)
+        # Inicio de la prueba.
+        result    = oUser.findEmail(7*'@las'+ 's')
         self.assertTrue(result)
-        user1.deleteUser('ehfahw')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfahw')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     # Caso Malicia
     
-    # Prueba 73
+    # Prueba 72
     def testUserFindEmailString0(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfahw','alir893b1',7*'@las'+ 's',1)
-        result = user1.findEmail('')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfahw','alir893b1',7*'@las'+ 's',idActor)
+        # Inicio de la prueba.
+        result    = oUser.findEmail('')
         self.assertFalse(result)
-        user1.deleteUser('ehfahw')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfahw')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
            
-    # Prueba 74
+    # Prueba 73
     def testUserFindEmailNone(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfahw','alir893b1','alas',1)
-        result = user1.findEmail(None)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfahw','alir893b1','alas',idActor)
+        # Inicio de la prueba.
+        result    = oUser.findEmail(None)
         self.assertFalse(result)
-        user1.deleteUser('ehfahw')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfahw')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 75
+    # Prueba 74
     def testUserFindEmailInteger(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfahw','alir893b1','alas',1)
-        result = user1.findEmail(1)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfahw','alir893b1','alas',idActor)
+        # Inicio de la prueba.
+        result    = oUser.findEmail(1)
         self.assertFalse(result)
-        user1.deleteUser('ehfahw')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfahw')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     ##########################################      
     #   Suite de Pruebas para isFound        #
@@ -1260,162 +1387,198 @@ class TestUser(unittest.TestCase):
     
     # Caso Inicial
  
-    # Prueba 76
+    # Prueba 75
     def testUserIsFoundExist(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfah','al', '@ls', 1)
-        result = user1.isFound('ehfah')
-        user1.deleteUser('ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfah','al', '@ls', idActor)
+        # Inicio de la prueba.
+        result    = oUser.isFound('ehfah')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     # Caso normal
 
-    # Prueba 77   
+    # Prueba 76   
     def testUserIsFoundTrue(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfahw','alir893b1','@ls',1)
-        result = user1.isFound('ehfahw')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfahw','alir893b1','@ls',idActor)
+        # Inicio de la prueba.
+        result    = oUser.isFound('ehfahw')
         self.assertTrue(result)
-        user1.deleteUser('ehfahw')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfahw')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     # Caso frontera
                    
-    # Prueba 78
+    # Prueba 77
     def testUserIsFoundString1(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','e','alir893b1','ldddf',1)
-        result = user1.isFound('e')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','e','alir893b1','ldddf',idActor)
+        # Inicio de la prueba.
+        result    = oUser.isFound('e')
         self.assertTrue(result)
-        user1.deleteUser('e')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('e')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
            
-    # Prueba 79
+    # Prueba 78
     def testUserIsFoundString2(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','eh','alir893b1','lfdfs',1)
-        result = user1.isFound('eh')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','eh','alir893b1','lfdfs',idActor)
+        # Inicio de la prueba.
+        result    = oUser.isFound('eh')
         self.assertTrue(result)
-        user1.deleteUser('eh')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('eh')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
             
-    # Prueba 80
+    # Prueba 79
     def testUserFindEmailString16(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah',4*'ehfa','alir893b1','@ls',1)
-        result = user1.isFound(4*'ehfa')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah',4*'ehfa','alir893b1','@ls',idActor)
+        # Inicio de la prueba.
+        result    = oUser.isFound(4*'ehfa')
         self.assertTrue(result)
-        user1.deleteUser(4*'ehfa')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser(4*'ehfa')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
    
-    # Prueba 81
+    # Prueba 80
     def testUserIsFoundString15(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah',3*'ehfah','alir893b1','@las',1)
-        result = user1.isFound(3*'ehfah')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah',3*'ehfah','alir893b1','@las',idActor)
+        # Inicio de la prueba.
+        result    = oUser.isFound(3*'ehfah')
         self.assertTrue(result)
-        user1.deleteUser(3*'ehfah')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser(3*'ehfah')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
     # Caso Malicia
     
-    # Prueba 82
+    # Prueba 81
     def testUserIsFoundString0(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfahw','alir893b1',7*'@las'+ 's',1)
-        result = user1.isFound('')
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfahw','alir893b1',7*'@las'+ 's',idActor)
+        # Inicio de la prueba.
+        result    = oUser.isFound('')
         self.assertFalse(result)
-        user1.deleteUser('ehfahw')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfahw')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
            
-    # Prueba 83
+    # Prueba 82
     def testUserIsFoundNone(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
-        # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfahw','alir893b1','alas',1)
-        result = user1.isFound(None)
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfahw','alir893b1','alas',idActor)
+        # Inicio de la prueba.
+        result    = oUser.isFound(None)
         self.assertFalse(result)
-        user1.deleteUser('ehfahw')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfahw')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
 
-    # Prueba 84
+    # Prueba 83
     def testUserIsFoundInteger(self):
-        aBacklog = backlog()
-        aBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
-        findId    = aBacklog.findName('Pxrsynzjxs')
+        # Insertamos los datos necesarios.
+        oBacklog  = backlog()
+        oRole     = role()
+        oUser     = user()
+        oBacklog.insertBacklog('Pxrsynzjxs','Dxsyñz dy rzlys',1)
+        findId    = oBacklog.findName('Pxrsynzjxs')
         idBacklog = findId[0].BL_idBacklog 
+        oRole.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
+        result    = oRole.findNameActor('Xsxyrvz',idBacklog)
+        idActor   = result[0].A_idActor
+        oUser.insertUser('sah','ehfahw','alir893b1','alas',idActor)
         # Inicio de la prueba. 
-        role1 = role()
-        user1 = user()
-        role1.insertActor('Xsxyrvz','Mxnyjxdzr',idBacklog)
-        user1.insertUser('sah','ehfahw','alir893b1','alas',1)
-        result = user1.isFound(1)
+        result    = oUser.isFound(1)
         self.assertFalse(result)
-        user1.deleteUser('ehfahw')
-        role1.deleteActor('Xsxyrvz',idBacklog)
-        aBacklog.deleteProduct('Pxrsynzjxs')
+        # Eliminamos los datos insertados.
+        oUser.deleteUser('ehfahw')
+        oRole.deleteActor('Xsxyrvz',idBacklog)
+        oBacklog.deleteProduct('Pxrsynzjxs')
         
 # Fin de casos User

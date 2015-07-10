@@ -15,7 +15,7 @@ from objectivesUserHistory  import *
 class TestObjectivesUserHistory(unittest.TestCase):
     
     #############################################      
-    #   Suite de Pruebas para insertAccion   #
+    #        Pruebas para insertAccion          #
     #############################################
 
     # Caso Inicial
@@ -256,7 +256,6 @@ class TestObjectivesUserHistory(unittest.TestCase):
      # Caso Esquina
       
     # Prueba 6   
-      
     def testinsertObjectiveAsociatedInUserHistoryNotExist(self):
         #Insertamos Producto
         aBacklog = backlog()
@@ -601,7 +600,7 @@ class TestObjectivesUserHistory(unittest.TestCase):
         aBacklog.deleteProduct('hhJJkkk')
           
     #########################################################      
-    #   Suite de Pruebas para idActorsAsociatedToUserHistory #
+    #       Pruebas para idActorsAsociatedToUserHistory     #
     #########################################################     
         
     # Caso Inicial 
@@ -939,7 +938,7 @@ class TestObjectivesUserHistory(unittest.TestCase):
         aBacklog.deleteProduct('hhJJkkk')    
  
     #########################################################      
-    #   Suite de Pruebas para searchidUserHistoryIdObjective #
+    #       Pruebas para searchidUserHistoryIdObjective     #
     #########################################################     
      
     # Caso Inicial 
@@ -1016,7 +1015,7 @@ class TestObjectivesUserHistory(unittest.TestCase):
         # Buscamos id's de historias que contengan asociado un objetivo
         aObjAs = objectivesUserHistory()
         res = aObjAs.searchidUserHistoryIdObjective(0) 
-        self.assertEqual(None,res)
+        self.assertEqual([],res)
                  
         # Eliminamos historia, accion y producto
         aHist.deleteUserHistory(idFound1)
@@ -1128,8 +1127,8 @@ class TestObjectivesUserHistory(unittest.TestCase):
             
         # Buscamos id's de historias que contengan asociado un objetivo
         aObjAs = objectivesUserHistory()
-        res = aObjAs.searchidUserHistoryIdObjective('3') 
-        self.assertEqual(None,res)
+        res    = aObjAs.searchidUserHistoryIdObjective('3') 
+        self.assertEqual([],res)
         
         # Eliminamos historia, accion y producto
         aHist.deleteUserHistory(idFound1)
@@ -1166,7 +1165,7 @@ class TestObjectivesUserHistory(unittest.TestCase):
         # Buscamos id's de historias que contengan asociado un objetivo
         aObjAs = objectivesUserHistory()
         res = aObjAs.searchidUserHistoryIdObjective(-3) 
-        self.assertEqual(None,res)
+        self.assertEqual([],res)
         
         # Eliminamos historia, accion y producto
         aHist.deleteUserHistory(idFound1)
@@ -1203,7 +1202,7 @@ class TestObjectivesUserHistory(unittest.TestCase):
         # Buscamos id's de historias que contengan asociado un objetivo
         aObjAs = objectivesUserHistory()
         res = aObjAs.searchidUserHistoryIdObjective(None) 
-        self.assertEqual(None,res)
+        self.assertEqual([],res)
         
         # Eliminamos historia, accion y producto
         aHist.deleteUserHistory(idFound1)
@@ -1211,7 +1210,7 @@ class TestObjectivesUserHistory(unittest.TestCase):
         aBacklog.deleteProduct('hhJJkkk')
 
     ###############################################################      
-    #   Suite de Pruebas para deleteObjectiveAsociatedInUserHistory #
+    #       Pruebas para deleteObjectiveAsociatedInUserHistory    #
     ###############################################################
     
     # Caso Inicial     

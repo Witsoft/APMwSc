@@ -17,7 +17,7 @@ from category               import *
 class TestTask(unittest.TestCase):
        
      #############################################      
-     #      Suite de Pruebas para insertTask     #
+     #           Pruebas para insertTask         #
      #############################################
                
      # Caso Inicial
@@ -1445,7 +1445,7 @@ class TestTask(unittest.TestCase):
          aBacklog.deleteProduct('Podn fjdd.')                
                           
      #############################################      
-     #      Suite de Pruebas para getAllTask     #
+     #           Pruebas para getAllTask         #
      #############################################
            
       #Casos Frontera
@@ -1738,7 +1738,7 @@ class TestTask(unittest.TestCase):
          aBacklog.deleteProduct('Podn fjdd.') 
     
      #############################################      
-     #   Suite de Pruebas para updateTask    #
+     #          Pruebas para updateTask          #
      #############################################
                 
      # Caso Inicial
@@ -3552,7 +3552,7 @@ class TestTask(unittest.TestCase):
          aBacklog.deleteProduct('Podn fjdd.')
  
      #############################################      
-     #   Suite de Pruebas para searchTask        #
+     #          Pruebas para searchTask          #
      #############################################
               
      # Caso Inicial
@@ -4068,7 +4068,7 @@ class TestTask(unittest.TestCase):
 
                    
      #############################################      
-     #   Suite de Pruebas para deleteTask        #
+     #          Pruebas para deleteTask          #
      #############################################
               
      # Caso Inicial
@@ -4428,15 +4428,15 @@ class TestTask(unittest.TestCase):
      # Prueba 123
      def testdeleteTaskNone(self):
          # Insertamos Producto
-         aBacklog = backlog()
+         aBacklog      = backlog()
          aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
          searchBacklog = aBacklog.findName('Podn fjdd.')
-         idFound0 = searchBacklog[0].BL_idBacklog
+         idFound0      = searchBacklog[0].BL_idBacklog
               
          # Insertamos la accion
-         aAcc = accions()
+         aAcc    = accions()
          aAcc.insertAccion('cinrohbwidia',1)
-         search = aAcc.searchAccion('cinrohbwidia',1)
+         search  = aAcc.searchAccion('cinrohbwidia',1)
          idFound = search[0].AC_idAccion
               
          # Insertamos la historia
@@ -4463,22 +4463,22 @@ class TestTask(unittest.TestCase):
      # Prueba 124
      def testdeleteTaskArray(self):
          # Insertamos Producto
-         aBacklog = backlog()
+         aBacklog      = backlog()
          aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
          searchBacklog = aBacklog.findName('Podn fjdd.')
-         idFound0 = searchBacklog[0].BL_idBacklog
+         idFound0      = searchBacklog[0].BL_idBacklog
               
          # Insertamos la accion
-         aAcc = accions()
+         aAcc     = accions()
          aAcc.insertAccion('cinrohbwidia',1)
-         search = aAcc.searchAccion('cinrohbwidia',1)
+         search  = aAcc.searchAccion('cinrohbwidia',1)
          idFound = search[0].AC_idAccion
               
          # Insertamos la historia
-         aHist = userHistory()
+         aHist      = userHistory()
          aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
-         idFound1 = searchHist[0].UH_idUserHistory 
+         idFound1   = searchHist[0].UH_idUserHistory 
          
          #Insertamos la categoria
          aCategory = category()
@@ -4498,22 +4498,22 @@ class TestTask(unittest.TestCase):
      # Prueba 125
      def testdeleteTaskDictionary(self):
          # Insertamos Producto
-         aBacklog = backlog()
+         aBacklog      = backlog()
          aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
          searchBacklog = aBacklog.findName('Podn fjdd.')
-         idFound0 = searchBacklog[0].BL_idBacklog
+         idFound0      = searchBacklog[0].BL_idBacklog
               
          # Insertamos la accion
-         aAcc = accions()
+         aAcc    = accions()
          aAcc.insertAccion('cinrohbwidia',1)
-         search = aAcc.searchAccion('cinrohbwidia',1)
+         search  = aAcc.searchAccion('cinrohbwidia',1)
          idFound = search[0].AC_idAccion
               
          # Insertamos la historia
-         aHist = userHistory()
+         aHist      = userHistory()
          aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
-         idFound1 = searchHist[0].UH_idUserHistory 
+         idFound1   = searchHist[0].UH_idUserHistory 
          
          #Insertamos la categoria
          aCategory = category()
@@ -4533,28 +4533,28 @@ class TestTask(unittest.TestCase):
      # Prueba 126
      def testdeleteTaskLong(self):
          # Insertamos Producto
-         aBacklog = backlog()
+         aBacklog      = backlog()
          aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
          searchBacklog = aBacklog.findName('Podn fjdd.')
-         idFound0 = searchBacklog[0].BL_idBacklog
+         idFound0      = searchBacklog[0].BL_idBacklog
               
          # Insertamos la accion
-         aAcc = accions()
+         aAcc    = accions()
          aAcc.insertAccion('cinrohbwidia',1)
-         search = aAcc.searchAccion('cinrohbwidia',1)
+         search  = aAcc.searchAccion('cinrohbwidia',1)
          idFound = search[0].AC_idAccion
               
          # Insertamos la historia
-         aHist = userHistory()
+         aHist      = userHistory()
          aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
          searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
-         idFound1 = searchHist[0].UH_idUserHistory 
+         idFound1   = searchHist[0].UH_idUserHistory 
          
          #Insertamos la categoria
          aCategory = category()
          aCategory.insertCategory('wofhweoifh',1)
             
-         aTarea = task()
+         aTarea    = task()
          aTarea.insertTask('T',1,1,idFound1)      
                       
          # Eliminamos historia, accion y producto
@@ -4574,24 +4574,24 @@ class TestTask(unittest.TestCase):
     # Prueba 127
      def testHistoryWeightExists(self):
         # Insertamos Producto
-        aBacklog = backlog()
+        aBacklog      = backlog()
         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
         searchBacklog = aBacklog.findName('Podn fjdd.')
-        idFound0 = searchBacklog[0].BL_idBacklog
+        idFound0      = searchBacklog[0].BL_idBacklog
         searchBacklog = aBacklog.findName('Podn fjdd.')
-        idFound0 = searchBacklog[0].BL_idBacklog
+        idFound0      = searchBacklog[0].BL_idBacklog
     
         # Insertamos la accion
-        aAcc = accions()
+        aAcc    = accions()
         aAcc.insertAccion('cinrohbwidia',idFound0)
-        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        search  = aAcc.searchAccion('cinrohbwidia',idFound0)
         idFound = search[0].AC_idAccion
 
         # Insertamos la historia
-        aHist = userHistory()   
+        aHist      = userHistory()   
         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
         searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
-        idFound1 = searchHist[0].UH_idUserHistory 
+        idFound1   = searchHist[0].UH_idUserHistory 
         
         # Insertamos la categoria
         aCategory = category()
@@ -4617,24 +4617,24 @@ class TestTask(unittest.TestCase):
     # Prueba 128
      def testHistoryWeightNotExists(self):
         # Insertamos Producto
-        aBacklog = backlog()
+        aBacklog      = backlog()
         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
         searchBacklog = aBacklog.findName('Podn fjdd.')
-        idFound0 = searchBacklog[0].BL_idBacklog
+        idFound0      = searchBacklog[0].BL_idBacklog
         searchBacklog = aBacklog.findName('Podn fjdd.')
-        idFound0 = searchBacklog[0].BL_idBacklog
+        idFound0      = searchBacklog[0].BL_idBacklog
     
         # Insertamos la accion
-        aAcc = accions()
+        aAcc    = accions()
         aAcc.insertAccion('cinrohbwidia',idFound0)
-        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        search  = aAcc.searchAccion('cinrohbwidia',idFound0)
         idFound = search[0].AC_idAccion
 
         # Insertamos la historia
-        aHist = userHistory()
+        aHist      = userHistory()
         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
         searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
-        idFound1 = searchHist[0].UH_idUserHistory 
+        idFound1   = searchHist[0].UH_idUserHistory 
         
         # Insertamos la categoria
         aCategory = category()
@@ -4658,26 +4658,26 @@ class TestTask(unittest.TestCase):
     # Prueba 129
      def testHistoryWeightIdOneEpic(self):
         # Insertamos Producto
-        aBacklog = backlog()
+        aBacklog      = backlog()
         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
         searchBacklog = aBacklog.findName('Podn fjdd.')
-        idFound0 = searchBacklog[0].BL_idBacklog
+        idFound0      = searchBacklog[0].BL_idBacklog
 
         # Insertamos la accion
-        aAcc = accions()
+        aAcc     = accions()
         aAcc.insertAccion('cinrohbwidia',idFound0)
-        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        search  = aAcc.searchAccion('cinrohbwidia',idFound0)
         idFound = search[0].AC_idAccion
               
         # Insertamos la historia
-        aHist = userHistory()
+        aHist      = userHistory()
         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
         searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
-        idFound1 = searchHist[0].UH_idUserHistory 
+        idFound1   = searchHist[0].UH_idUserHistory 
         aHist.insertUserHistory('BIEEIEB12',idFound1, 1,idFound, idFound0,1)
         
         searchHist2 = aHist.searchUserHistory('BIEEIEB12',idFound0)
-        idFound2 = searchHist2[0].UH_idUserHistory
+        idFound2    = searchHist2[0].UH_idUserHistory
     
         # Insertamos la categoria
         aCategory = category()
@@ -4704,22 +4704,22 @@ class TestTask(unittest.TestCase):
     # Prueba 130
      def testHistoryWeightIdOneNotEpic(self):
         # Insertamos Producto
-        aBacklog = backlog()
+        aBacklog      = backlog()
         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
         searchBacklog = aBacklog.findName('Podn fjdd.')
-        idFound0 = searchBacklog[0].BL_idBacklog
+        idFound0      = searchBacklog[0].BL_idBacklog
     
         # Insertamos la accion
-        aAcc = accions()
+        aAcc    = accions()
         aAcc.insertAccion('cinrohbwidia',idFound0)
-        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        search  = aAcc.searchAccion('cinrohbwidia',idFound0)
         idFound = search[0].AC_idAccion
               
         # Insertamos la historia
-        aHist = userHistory()
+        aHist      = userHistory()
         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
         searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
-        idFound1 = searchHist[0].UH_idUserHistory 
+        idFound1   = searchHist[0].UH_idUserHistory 
         
         # Insertamos la categoria
         aCategory = category()
@@ -4753,25 +4753,25 @@ class TestTask(unittest.TestCase):
     # Prueba 131
      def testHistoryWeightNotEpic(self):
         # Insertamos Producto
-        aBacklog = backlog()
+        aBacklog      = backlog()
         aBacklog.insertBacklog('Podn fjdd.','ODJdbeidbww',1)
         searchBacklog = aBacklog.findName('Podn fjdd.')
-        idFound0 = searchBacklog[0].BL_idBacklog
+        idFound0      = searchBacklog[0].BL_idBacklog
     
         # Insertamos la accion
-        aAcc = accions()
+        aAcc    = accions()
         aAcc.insertAccion('cinrohbwidia',idFound0)
-        search = aAcc.searchAccion('cinrohbwidia',idFound0)
+        search  = aAcc.searchAccion('cinrohbwidia',idFound0)
         idFound = search[0].AC_idAccion
               
         # Insertamos la historia
-        aHist = userHistory()
+        aHist       = userHistory()
         aHist.insertUserHistory('BIEEIEB1',0, 1,idFound, idFound0,1)
-        aHist.insertUserHistory('BIEEIEB12',1, 1,idFound, idFound0,1)
-        searchHist = aHist.searchUserHistory('BIEEIEB1',idFound0)
-        idFound1 = searchHist[0].UH_idUserHistory 
+        searchHist  = aHist.searchUserHistory('BIEEIEB1',idFound0)
+        idFound1    = searchHist[0].UH_idUserHistory 
+        aHist.insertUserHistory('BIEEIEB12',idFound1, 1,idFound, idFound0,1)
         searchHist2 = aHist.searchUserHistory('BIEEIEB12',idFound0)
-        idFound2 = searchHist2[0].UH_idUserHistory
+        idFound2    = searchHist2[0].UH_idUserHistory
         
         # Insertamos la categoria
         aCategory = category()
@@ -4956,7 +4956,7 @@ class TestTask(unittest.TestCase):
         aBacklog.deleteProduct('Podn fjdd.')
 
      #########################################      
-     #   Suite de Pruebas para lookup        #
+     #          Pruebas para lookup          #
      #########################################
 
      # Caso Inicial

@@ -81,7 +81,7 @@ def AElimObjetivo():
 def AModifObjetivo():
     #POST/PUT parameters
     params  = request.get_json()
-    results = [{'label':'/VProducto', 'msg':['Objetivo actualizado']}, {'label':'/VObjetivo', 'msg':['Error al modificar objetivo']}, ]
+    results = [{'label':'/VProducto', 'msg':['Objetivo actualizado']}, {'label':'/VProducto', 'msg':['Error al modificar objetivo']}, ]
     res     = results[1] 
     
     # Obtenemos el id del producto

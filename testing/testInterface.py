@@ -44,13 +44,11 @@ class CasosPrueba(unittest.TestCase):
         oObjective = objective()
         oHistory   = userHistory()
         oCategory  = category() 
-        
 
-        result    = oUser.deleteUser('usuario')
-        result    = oBacklog.deleteProduct('Producto 1')
-        result   = oCategory.deleteCategory('Categoria1') 
+        result     = oUser.deleteUser('usuario')
+        result     = oBacklog.deleteProduct('Producto 1')
+        result     = oCategory.deleteCategory('Categoria1') 
            
-              
         # Casos de prueba para registrar un usuario en la aplicacion.
         
         driver.get(self.base_url + "/#/VRegistro")
@@ -78,7 +76,6 @@ class CasosPrueba(unittest.TestCase):
         sleep(2)
         driver.find_element_by_xpath("//button[@type='submit']").click()
         sleep(2)
-        
       
         # Caso de prueba para Crear categorias
         driver.find_element_by_link_text(u"Categorías de tareas").click()
@@ -92,7 +89,6 @@ class CasosPrueba(unittest.TestCase):
         driver.find_element_by_xpath("(//a[contains(text(),'Regresar')])").click()
         sleep(2)
         
-         
         # Casos de prueba para agregar Producto
         driver.find_element_by_link_text("+Producto").click()
         driver.find_element_by_id("fPila_nombre").clear()
@@ -110,7 +106,6 @@ class CasosPrueba(unittest.TestCase):
         sleep(2)
          
         # Caso de prueba para crear un actor.
- 
         driver.find_element_by_link_text("+Actor").click()       
         driver.find_element_by_id("fActor_nombre").clear()
         driver.find_element_by_id("fActor_nombre").send_keys("Actor1")
@@ -119,8 +114,7 @@ class CasosPrueba(unittest.TestCase):
         driver.find_element_by_xpath("//button[@type='submit']").click()
         sleep(2)
         
-        # Caso de prueba para ver el actor.
-                  
+        # Caso de prueba para ver el actor.      
         driver.find_element_by_xpath("(//a[contains(text(),'Ver')])[1]").click()
         sleep(3)
     
@@ -131,7 +125,6 @@ class CasosPrueba(unittest.TestCase):
         driver.find_element_by_xpath("//button[@type='submit']").click()
         sleep(1)
 
- 
         # Caso de prueba para crear una accion.
         sleep(3)
         driver.find_element_by_link_text("+Accion").click()
@@ -201,8 +194,6 @@ class CasosPrueba(unittest.TestCase):
         sleep(2)
          
        # Creamos Historia
-    #   driver.find_element_by_link_text("Historias").click()
-    #   sleep(2)
         driver.find_element_by_link_text("Crear").click()
         sleep(2)
         driver.find_element_by_id("fHistoria_codigo").clear()   
@@ -226,7 +217,7 @@ class CasosPrueba(unittest.TestCase):
         # Caso para agregar tarea a una historia
         driver.find_element_by_xpath("(//a[contains(text(),'Detalles')])[2]").click()
         sleep(1)
-        driver.find_element_by_link_text("+tarea").click()
+        driver.find_element_by_link_text("+Tarea").click()
         sleep(1)
         driver.find_element_by_id("fTarea_descripcion").clear()
         driver.find_element_by_id("fTarea_descripcion").send_keys("Tarea1")
@@ -236,7 +227,7 @@ class CasosPrueba(unittest.TestCase):
         sleep(2)
         
         # Caso que modifica una tarea
-        driver.find_element_by_link_text("detalles").click()
+        driver.find_element_by_link_text("Detalles").click()
         driver.find_element_by_id("fTarea_peso").clear()
         driver.find_element_by_id("fTarea_peso").send_keys("3")
         driver.find_element_by_id("fTarea_peso").click()
@@ -251,9 +242,9 @@ class CasosPrueba(unittest.TestCase):
         # Caso Eliminar Tarea
         driver.find_element_by_xpath("(//a[contains(text(),'Detalles')])[2]").click()
         sleep(2)
-        driver.find_element_by_link_text("detalles").click()
+        driver.find_element_by_link_text("Detalles").click()
         sleep(2)
-        driver.find_element_by_link_text("-tarea").click()
+        driver.find_element_by_link_text("-Tarea").click()
         sleep(3)
         driver.find_element_by_xpath("(//a[contains(text(),'Regresar')])").click()
         sleep(2)
@@ -268,13 +259,13 @@ class CasosPrueba(unittest.TestCase):
         # Eliminar Historia
         driver.find_element_by_xpath("(//a[contains(text(),'Detalles')])[2]").click()
         sleep(2)
-        driver.find_element_by_link_text("-historia").click()
+        driver.find_element_by_link_text("-Historia").click()
         sleep(2)
         
         # Eliminar Historia
         driver.find_element_by_xpath("(//a[contains(text(),'Detalles')])[1]").click()
         sleep(2)
-        driver.find_element_by_link_text("-historia").click()
+        driver.find_element_by_link_text("-Historia").click()
         sleep(2)
         
         # Regresamos a la vista de producto
@@ -285,7 +276,7 @@ class CasosPrueba(unittest.TestCase):
         sleep(3)     
          
         # Caso de prueba para eliminar el objetivo
-        driver.find_element_by_link_text("-objetivo").click()
+        driver.find_element_by_link_text("-Objetivo").click()
         sleep(2)
         
         # Ver accion
@@ -293,7 +284,7 @@ class CasosPrueba(unittest.TestCase):
         sleep(3)     
          
         # Caso de prueba para eliminar accion
-        driver.find_element_by_link_text("-accion").click()
+        driver.find_element_by_link_text("-Accion").click()
         sleep(2)
         
         # Ver actor
@@ -301,7 +292,7 @@ class CasosPrueba(unittest.TestCase):
         sleep(3)
         
         # Caso de prueba para eliminar acctor
-        driver.find_element_by_link_text("-actor").click()
+        driver.find_element_by_link_text("-Actor").click()
         sleep(2)   
         
         # Caso de Prueba Salir
