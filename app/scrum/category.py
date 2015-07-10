@@ -34,6 +34,7 @@ class category(object):
                     db.session.commit()
                     return True                                           
         return False
+    
 
     def updateCategory(self,nameCategory,newNameCategory,newWeight):
         '''Permite modificar el nombre y el peso de una categoría'''
@@ -76,16 +77,16 @@ class category(object):
                     db.session.commit()
                     return True
         return False
+    
 
     def searchIdCategory(self, idCategory):
         '''Permite buscar categorias por su id'''
         
         typeIdCategory = (type(idCategory) == int)
+        cCategory      = []
         
-        cCategory = []
         if typeIdCategory:
             cCategory = clsCategory.query.filter_by(C_idCategory = idCategory).all()
         return cCategory
-
     
 # Fin Clase Category

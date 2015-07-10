@@ -15,6 +15,7 @@ class objectivesUserHistory(object):
     
     def insertObjectiveAsociatedInUserHistory(self,id_Objective, id_userHistory):
         '''Permite insertar un objetivo a una historia de usuario'''
+        
         checkIdObjective = type(id_Objective) == int and id_Objective >= CONST_MIN_ID
         checkUserHistory = type(id_userHistory) == int and id_userHistory >= CONST_MIN_ID
         
@@ -32,6 +33,7 @@ class objectivesUserHistory(object):
 
     def idObjectivesAsociatedToUserHistory(self,id_userHistory):
         '''Permite obtener los ids de los objetivos asociados a una historia de usuario'''
+        
         checkIdUserHistory = type(id_userHistory) == int and id_userHistory >= CONST_MIN_ID
         
         idsList = []
@@ -45,11 +47,14 @@ class objectivesUserHistory(object):
         
     def searchidUserHistoryIdObjective(self, idObjective):
         '''Permite obtener los ids de las historias de usuario que contiene el idObjective'''
+        
         checkIdObjective = type(idObjective) == int and idObjective >= CONST_MIN_ID
 
         if checkIdObjective:
-            result = clsObjectivesUserHistory.query.filter_by(OUH_idObjective  = idObjective).all()
+            result = clsObjectivesUserHistory.query.filter_by(OUH_idObjective = idObjective).all()
             return result
+        return ([])
+        
 
     def deleteObjectiveAsociatedInUserHistory(self,id_Objective, id_userHistory):
         '''Permite eliminar un actor de una historia de usuario'''

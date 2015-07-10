@@ -82,7 +82,7 @@ def AElimAccion():
 def AModifAccion():
     #POST/PUT parameters
     params  = request.get_json()
-    results = [{'label':'/VProducto', 'msg':['Acción actualizada']}, {'label':'/VAccion', 'msg':['Error al modificar acción']}, ]
+    results = [{'label':'/VProducto', 'msg':['Acción actualizada']}, {'label':'/VProducto', 'msg':['Error al modificar acción']}, ]
     res     = results[1] 
     
     # Obtenemos el id del producto

@@ -13,6 +13,7 @@ CONST_MIN_ACTOR_DESCRIPTION = 1
 CONST_MAX_ACTOR_DESCRIPTION = 140
 CONST_MIN_ID                = 0
 
+
 class role(object):
     '''Clase que permite manejar los Actores de manera persistente'''
     
@@ -24,6 +25,7 @@ class role(object):
 
     def insertActor(self,nameActor,actordescription,idBacklog):
         '''Permite insertar un actor'''
+        
         checkTypeName        = type(nameActor) == str
         checkTypeDescription = type(actordescription) == str
         checkTypeId          = type(idBacklog) == int
@@ -54,9 +56,11 @@ class role(object):
 
     def findNameActor(self, nameActor,idBacklog):
         '''Permite buscar un elemento en la tabla de actores'''
+        
         checkTypeName = type(nameActor) == str
         checkTypeId   = type(idBacklog) == int
-        foundActor = []
+        foundActor    = []
+        
         if checkTypeName and checkTypeId:
             checkLenName = CONST_MIN_NAME_ACTOR <= len(nameActor) <= CONST_MAX_NAME_ACTOR
             checkId      = CONST_MIN_ID <= idBacklog 
@@ -68,8 +72,10 @@ class role(object):
     
     def findIdActor(self, idActor):
         '''Permite buscar un elemento en la tabla de actores por su id'''
+        
         checkIdActor = type(idActor) == int and idActor >= CONST_MIN_ID
-        foundActor = []
+        foundActor   = []
+        
         if checkIdActor:
                 foundActor = clsActor.query.filter_by(A_idActor = idActor).all()
         return foundActor
@@ -93,7 +99,7 @@ class role(object):
                 foundnameActor = clsActor.query.filter_by(A_idBacklog = idBacklog,A_nameActor = nameActor).all()
                 foundNewActor  = clsActor.query.filter_by(A_idBacklog = idBacklog,A_nameActor = newNameActor).all()
                 
-                if foundnameActor != []:
+                if foundnameActor != [] and (foundNewActor == [] or nameActor == newNameActor):
                     updateActor = clsActor.query.filter_by(A_idBacklog = idBacklog,A_nameActor = nameActor).first()
                     updateActor.A_nameActor        = newNameActor
                     updateActor.A_actorDescription = newDescription
@@ -105,14 +111,17 @@ class role(object):
     def deleteActor(self,nameActor,idBacklog):
         '''Permite eliminar un actor dado su nombre'''
 
-        checkTypeName = type(nameActor) == str
-        checkTypeIdBacklog   = type(idBacklog) == int           
+        checkTypeName      = type(nameActor) == str
+        checkTypeIdBacklog = type(idBacklog) == int   
+                
         if checkTypeName and checkTypeIdBacklog:
             
             checkLongNameActor = CONST_MIN_NAME_ACTOR <= len(nameActor) <= CONST_MAX_NAME_ACTOR 
             checkLongIdBacklog = CONST_MIN_ID <= idBacklog 
+            
             if checkLongNameActor and checkLongIdBacklog:
                 oActor = clsActor.query.filter_by(A_idBacklog = idBacklog,A_nameActor = nameActor).all()
+                
                 if oActor != []:
                     tupla = clsActor.query.filter_by(A_nameActor = nameActor).first()    
                     db.session.delete(tupla)

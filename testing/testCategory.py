@@ -11,7 +11,7 @@ from category import *
 class TestCategory(unittest.TestCase):
     
     #############################################      
-    #   Suite de Pruebas para insertCategory    #
+    #         Pruebas para insertCategory       #
     #############################################
     
     # Caso Inicial
@@ -227,7 +227,7 @@ class TestCategory(unittest.TestCase):
          
      
     #############################################      
-    #   Suite de Pruebas para updateCategory    #
+    #        Pruebas para updateCategory        #
     #############################################
      
     # Caso Normal
@@ -562,7 +562,7 @@ class TestCategory(unittest.TestCase):
         aCategory.deleteCategory('Kxtygzrda')
         
     #############################################      
-    #  Suite de Pruebas para searchIdCategory   #
+    #       Pruebas para searchIdCategory       #
     #############################################
         
     # Caso Normal
@@ -643,7 +643,7 @@ class TestCategory(unittest.TestCase):
         
     
     #############################################      
-    #  Suite de Pruebas para deleteCategory   #
+    #        Pruebas para deleteCategory        #
     #############################################
         
     # Caso Normal

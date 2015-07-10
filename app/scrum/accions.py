@@ -45,10 +45,11 @@ class accions(object):
                 
     def searchAccion(self, accionDescription, idBacklog):
         '''Permite buscar acciones por su descripcion'''
+        
         checkTypeId   = type(idBacklog) == int
         checkTypeDesc = type(accionDescription) == str
+        foundAccion   = []
         
-        foundAccion = []
         if checkTypeId and checkTypeDesc:
             checkLenDesc = MIN_ACCION_DESCRIPTION <= len(accionDescription) <= MAX_ACCION_DESCRIPTION
             checkId      = MIN_ID <= idBacklog 
@@ -60,18 +61,20 @@ class accions(object):
     
     def searchIdAccion(self, idAccion):
         '''Permite buscar acciones por su id'''
+        
         checkTypeIdAccion = type(idAccion) == int
-        foundAccion =[]
+        foundAccion       = []
 
         if checkTypeIdAccion:
             checkId = idAccion >= MIN_ID
             if checkId:
                 foundAccion = clsAccion.query.filter_by(AC_idAccion  = idAccion).all()
-
-        return foundAccion  
+        return foundAccion
+      
             
     def updateAccion(self, accionDescription,newDescription,idBacklog):
         '''Permite actualizar la descripcion de una accion'''   
+        
         checkTypeDescription    = type(accionDescription) == str
         checkTypeNewdescription = type(newDescription) == str
         checkTypeIdBacklog      = type(idBacklog) == int
@@ -94,6 +97,7 @@ class accions(object):
        
     def deleteAccion(self, accionDescription,idBacklog):
         '''Permite eliminar una accion segun su id'''
+        
         checkTypeDescription = type(accionDescription) == str 
         checkTypeIdBacklog   = type(idBacklog) == int       
         

@@ -21,6 +21,7 @@ class objective(object):
 
     def insertObjective(self,descObjective, idBacklog, objType):
         '''Permite insertar un Objetivo'''
+        
         checkObjType = objType in arrayType
         checkDesc    = type(descObjective) == str
         checkId_BL   = type(idBacklog) == int 
@@ -50,6 +51,7 @@ class objective(object):
                 
     def searchObjective(self, descObjective, idBacklog):
         '''Permite buscar objetivos por su descripcion'''
+        
         checkTypeId   = type(idBacklog) == int
         checkTypeDesc = type(descObjective) == str       
         
@@ -65,19 +67,21 @@ class objective(object):
     
     def searchIdObjective(self, idObjective):
         '''Permite buscar objetivos por su id'''
-        checkIdObjective = type(idObjective) == int and idObjective >= CONST_MIN_ID_OBJ 
         
-        foundObjective = []
+        checkIdObjective = type(idObjective) == int and idObjective >= CONST_MIN_ID_OBJ  
+        foundObjective   = []
+        
         if checkIdObjective:
             checkId = idObjective >= CONST_MIN_ID_OBJ
+            
             if checkId:
                 foundObjective = clsObjective.query.filter_by(O_idObjective = idObjective).all()
-            
         return foundObjective 
     
             
     def updateObjective(self, descObjective, newDescObjective,newObjType,idBacklog):
         '''Permite actualizar la descripcion de un objetivo'''
+        
         checkObjType       = newObjType in arrayType   
         checkDesc          = type(descObjective) == str 
         checkNewDesc       = type(newDescObjective) == str
@@ -89,45 +93,38 @@ class objective(object):
             checkIdBacklog  = CONST_MIN_ID_OBJ <= idBacklog
         
             if checkDescLen and checkNewDescLen and checkIdBacklog:
-                foundObjective = clsObjective.query.filter_by(O_descObjective = descObjective,O_idBacklog = idBacklog).all()
+                # Buscamos el objetivo actual.
+                foundObjective = clsObjective.query.filter_by(O_descObjective = descObjective,O_idBacklog = idBacklog).all()  
+                # Buscamos si existe el objetivo por el cual se va a sustituir. 
                 foundNewObj    = clsObjective.query.filter_by(O_descObjective = newDescObjective,O_idBacklog = idBacklog).all()
                 
                 if foundObjective != [] and (foundNewObj == [] or descObjective == newDescObjective):
-                    foundObjective[0].O_descObjective = newDescObjective
-                    typeObjective                     = int(foundObjective[0].O_objType)
+                    foundObjective[0].O_descObjective = newDescObjective                 # Asignamos la nueva descripcion.
+                    typeObjective                     = int(foundObjective[0].O_objType) # Obtenemos si es transversal o no.
                     
-                    if typeObj[typeObjective] == arrayType[0]:
+                    if typeObj[typeObjective] == arrayType[0]:     # Si el objetivo es transversal
                         foundObjective[0].O_objType = newObjType
                         
-                    elif typeObj[typeObjective] == arrayType[1]:
+                    elif typeObj[typeObjective] == arrayType[1]:   # Si el objetivo no es tranversal.                 
                         idObj       = foundObjective[0].O_idObjective
                         idHistories = clsUserHistory.query.filter_by(UH_idBacklog = idBacklog).all()
                         
-                        if idHistories != []:
-                            for hist in idHistories:
+                        if idHistories != []: # Si hay historias asociadas al mismo producto al cual esta asociado el objetivo actual.
+                            for hist in idHistories: 
+                                # Para cada historia obtenemos los objetivos asociados.
                                 idsObjectives = clsObjectivesUserHistory.query.filter_by(OUH_idUserHistory = hist.UH_idUserHistory).all()
 
                                 idsList = []
                                 for obj in idsObjectives:
+                                    # Almacenamos en una lista los ids de los objetivos asociados a cada historia
                                     idsList.append(obj.OUH_idObjective)
 
-                                if idObj in idsList:
-                                    checkLenIdsObjectives = len(idsObjectives)
-                                     
-                                    if checkLenIdsObjectives == 1:
-                                        found = clsUserHistory.query.filter_by(UH_codeUserHistory = hist.UH_codeUserHistory).all()
-                                        foundObjective[0].O_objType = newObjType
-                                        if found != []:
-                                            for i in found:    
-                                                db.session.delete(i)          
-                                            db.session.commit() 
-                                    else:  
-                                        oObjective = clsObjectivesUserHistory.query.filter_by(OUH_idObjectivesUserHist = idObj,OUH_idUserHistory = hist.UH_idUserHistory).all()
-                                        foundObjective[0].O_objType = newObjType
-                                        if oObjective != []:
-                                            for i in oObjective:
-                                                db.session.delete(i)
-                                            db.session.commit()
+                            # Si el objetivo actual no esta en la lista de objetivos anterior significa que no pertenece a una historia.
+                            if not(idObj in idsList): 
+                                foundObjective[0].O_objType = newObjType
+                                db.session.commit()
+                            else:
+                                return False
                         else:
                             foundObjective[0].O_objType = newObjType
                     db.session.commit()
@@ -146,6 +143,7 @@ class objective(object):
 
     def deleteObjective(self, descObjective, idBacklog):
         '''Permite eliminar un objetivo de acuerdo a su descripcion'''
+        
         checkTypeDescription = type(descObjective) == str
         checkTypeIdBacklog   = type(idBacklog) == int   
         
@@ -155,12 +153,10 @@ class objective(object):
             
             if checkLenDescription and checkLongIdBacklog :
                 found = clsObjective.query.filter_by(O_descObjective = descObjective,O_idBacklog = idBacklog).all()
-                
 
                 if found != []:  
                     tupla = clsObjective.query.filter_by(O_descObjective = descObjective).first()   
                     db.session.delete(tupla)     
-
                     db.session.commit()
                     return True
         return False 

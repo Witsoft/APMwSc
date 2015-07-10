@@ -78,7 +78,7 @@ def AElimActor():
 def AModifActor():
     #POST/PUT parameters
     params  = request.get_json()
-    results = [{'label':'/VProducto', 'msg':['Actor actualizado']}, {'label':'/VActor', 'msg':['Error al modificar actor']}, ]
+    results = [{'label':'/VProducto', 'msg':['Actor actualizado']}, {'label':'/VProducto', 'msg':['Error al modificar actor']}, ]
     res     = results[1]
     
     if 'usuario' not in session:

@@ -13,7 +13,7 @@ from model                  import *
 class TestActorsUserHistory(unittest.TestCase):
     
     #############################################      
-    #   Suite de Pruebas para insertAccion   #
+    #         Pruebas para insertAccion         #
     #############################################
          
     # Caso Inicial
@@ -585,7 +585,7 @@ class TestActorsUserHistory(unittest.TestCase):
         aBacklog.deleteProduct('hhJJkkk') 
           
     #########################################################      
-    #   Suite de Pruebas para idActorsAsociatedToUserHistory   #
+    #       Pruebas para idActorsAsociatedToUserHistory     #
     #########################################################     
         
     # Caso Inicial 
@@ -925,7 +925,7 @@ class TestActorsUserHistory(unittest.TestCase):
         aBacklog.deleteProduct('hhJJkkk') 
        
     #########################################################      
-    #   Suite de Pruebas para searchidUserHistoryIdActors   #
+    #        Pruebas para searchidUserHistoryIdActors       #
     #########################################################     
         
     # Caso Inicial 
@@ -1193,7 +1193,7 @@ class TestActorsUserHistory(unittest.TestCase):
         aBacklog.deleteProduct('hhJJkkk')   
         
     ###############################################################      
-    #   Suite de Pruebas para deleteActorAsociatedInUserHistory   #
+    #        Pruebas para deleteActorAsociatedInUserHistory       #
     ###############################################################
     
     # Caso Inicial     

@@ -14,11 +14,13 @@ CONST_MAX_EMAIL    = 30
 CONST_MIN_LONG     = 1
 CONST_MIN_PASSWORD = 1
 
+
 class user(object):
     '''Clase que permite manejar usuarios de manera persistente'''
     
     def searchUser(self,username):
         '''Permite buscar un usuario por su nombre'''
+        
         if (type(username) != str):
             return []
         else:
@@ -29,9 +31,10 @@ class user(object):
                 auser = clsUser.query.filter_by(U_username = username).all()
                 return auser
  
+ 
     def insertUser(self, fullname, username, password, email, idActor):
         '''Permite insertar un usuario en la tabla'''
-
+        
         checkName     = type(fullname) == str
         checkUserName = type(username) == str
         checkPassword = type(password) == str
@@ -86,6 +89,7 @@ class user(object):
      
     def deleteUser(self,username):
         '''Permite eliminar un usuario de la tabla'''
+        
         checkUsername = type(username) == str  
         
         if checkUsername:
@@ -102,14 +106,15 @@ class user(object):
 
     def findEmail(self,email):
         '''Permite saber si un email esta en la base de datos'''
+        
         aemail = clsUser.query.filter_by(U_email=email).all()
         return aemail != []
         
  
     def isFound(self,username):
         '''Permite saber si un usuario esta en la base de datos'''
+        
         auser = clsUser.query.filter_by(U_username = username).all()
         return auser != []
-        
         
 # Fin Clase user

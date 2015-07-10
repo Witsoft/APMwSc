@@ -18,11 +18,13 @@ CONST_MAX_SCALE  = 20
 arrayType = [1,2]
 options   = {1:'podria ',2:'puede '}
 
+
 class userHistory(object):
     '''Clase que permite manejar las historias de manera persistente'''
     
     def getAllUserHistoryId(self, idBacklog):
         '''Permite obtener todas las historias de usuario asocidas a un producto'''
+        
         checkIdBacklog = type(idBacklog) == int
         
         if checkIdBacklog:
@@ -39,7 +41,9 @@ class userHistory(object):
         
     def isEpic(self, idUserHistory):
         '''Clase que permite reconocer las épicas'''
+        
         checkId = type(idUserHistory) == int and CONST_MIN_ID <= idUserHistory
+        
         if checkId:
             existId = clsUserHistory.query.filter_by(UH_idSuperHistory = idUserHistory).all()
             
@@ -50,8 +54,9 @@ class userHistory(object):
     
     def succesors(self,idUserHistory,succ = [],visit = []):
         '''Permite encontrar los sucesores de una historia de usuario'''
-        if (idUserHistory!= 0):
-            result = clsUserHistory.query.filter_by(UH_idSuperHistory = idUserHistory).all()
+        
+        if idUserHistory != 0:
+            result      = clsUserHistory.query.filter_by(UH_idSuperHistory = idUserHistory).all()
             idHistories = []
             for elem in result:
                 idHistories.append(elem.UH_idUserHistory)
@@ -66,7 +71,8 @@ class userHistory(object):
     
     def historySuccesors(self, idUserHistory):
         '''Permite saber las subhistorias que componen a una historia mas general'''
-        succ = []
+         
+        succ           = []
         checkIdHistory = type(idUserHistory) == int
         
         if checkIdHistory:
@@ -82,6 +88,7 @@ class userHistory(object):
                 
     def insertUserHistory(self,codeUserHistory,idSuperHistory,accionType,idAccion,idBacklog, priority):
         '''Permite insertar una Historia de usuario'''
+        
         checkCodUserHistory = type(codeUserHistory) == str
         checkIdSuperHistory = type(idSuperHistory) == int
         checkTypeAccion     = accionType in arrayType
@@ -116,6 +123,7 @@ class userHistory(object):
         
     def searchUserHistory(self,codeUserHistory, idBacklog):
         '''Permite encontrar una historia de usuario por codigo'''
+        
         typecod = type(codeUserHistory) == str
         typeId  = type(idBacklog) == int
         
@@ -131,6 +139,7 @@ class userHistory(object):
     
     def searchIdUserHistory(self,idUserHistory):
         '''Permite encontrar una historia de usuario por su id'''
+        
         checkTypeId = type(idUserHistory) == int
         
         if checkTypeId:
@@ -144,6 +153,7 @@ class userHistory(object):
 
     def updateUserHistory(self,idUserHist,newCodeUserHistory,newIdSuperHistory,newAccionType,newIdAccion,newScale):
         '''Permite modificar una Historia de usuario'''
+        
         checkCodUserHistory = type(newCodeUserHistory) == str
         checkIdSuperHistory = type(newIdSuperHistory) == int
         checkTypeAccion     = newAccionType in arrayType
@@ -172,7 +182,7 @@ class userHistory(object):
                             result[0].UH_idAccion        = newIdAccion
                             result[0].UH_scale           = newScale
                              
-                            # Consideramosel caso en que una historia deje de ser epica y se le asigna un valor
+                            # Consideramos el caso en que una historia deje de ser epica y se le asigna un valor
                             # arbitrario a la escala
                             if result[0].UH_idSuperHistory != 0 and (checkSuperHistory == [] or newIdSuperHistory == 0):
                                 # Almacenamos el valor de la super historia
@@ -194,8 +204,10 @@ class userHistory(object):
                         return True
         return False
     
+    
     def updatePriority(self,idHistory,priority):
         '''Permite actualizar la prioridad de una historia de usuario'''
+        
         checkIdHistory  = type(idHistory) == int 
         checkPriority   = type(priority) == int 
 
@@ -215,9 +227,11 @@ class userHistory(object):
                     db.session.commit()
                     return True
         return False
+    
 
     def accionsAsociatedToUserHistory(self,userHistoryId):
         ''' Permite obtener una lista de los Acciones asociados a una historia de usuario'''
+        
         checkTypeId = type(userHistoryId) == int
         
         if checkTypeId:
@@ -231,6 +245,7 @@ class userHistory(object):
     
     def searchidUserHistoryIdAccion(self, idAccion):
         '''Permite obtener los ids de las historias de usuario que contiene el idAccion'''
+        
         checkIdAccion = type(idAccion) == int
  
         if checkIdAccion:
@@ -244,6 +259,7 @@ class userHistory(object):
     
     def deleteUserHistory(self,idUserHistory):
         '''Permite eliminar una historia segun su ID'''
+        
         checkTypeIdHistory = type(idUserHistory) == int
         
         if checkTypeIdHistory:
@@ -258,6 +274,7 @@ class userHistory(object):
                         db.session.delete(i)          
                     db.session.commit()
                     succesor = self.historySuccesors(idSuperHistory)
+                    
                     if (idSuperHistory != 0 and succesor == []):
                         self.updatePriority(idSuperHistory,1)
                     return True
@@ -266,6 +283,7 @@ class userHistory(object):
 
     def transformUserHistory(self,idUserHistory):
         '''Permite construir una estructura para representar una historia de usuario'''
+        
         historyDict = {}
         checkTypeId = type(idUserHistory) == int
         
